@@ -1,0 +1,5 @@
+build/
+results/*/system.log
+results/*/.windows-baseline
+results/*/.windows-raw
+results/*/run.out

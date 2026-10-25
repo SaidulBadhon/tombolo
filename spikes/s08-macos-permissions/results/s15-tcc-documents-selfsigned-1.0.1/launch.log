@@ -1,0 +1,4 @@
+launch: 2026-10-26 01:27:52 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app" --args --run "info;docwrite:/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/s15-tcc-documents-selfsigned-1.0.1/docwrite.txt;sleep:6"
+open exit: 0
+probe pids after 10s: 20144
+windows 2 s after quitting the probe: (see windows.log; non-alert windows not recorded)

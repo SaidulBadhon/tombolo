@@ -1,0 +1,3 @@
+01:29:53 peer: tcp-client 10.59.232.41:52011 connected in 0.3ms, reply b'pong from adhoc 1.0.1\n'
+01:29:56 peer: tcp-client 127.0.0.1:52011 connected in 0.2ms, reply b'pong from adhoc 1.0.1\n'
+01:29:59 peer: tcp-client 10.59.232.41:52011 connected in 0.5ms, reply b'pong from adhoc 1.0.1\n'
