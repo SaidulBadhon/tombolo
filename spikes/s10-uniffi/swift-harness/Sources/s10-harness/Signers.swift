@@ -47,7 +47,10 @@ final class SecureEnclaveSigner: Signer, @unchecked Sendable {
                     } catch let e as LAError where [.userCancel, .appCancel, .systemCancel].contains(e.code) {
                         cont.resume(throwing: SignerError.UserCancelled)
                     } catch {
-                        cont.resume(throwing: SignerError.Failed(reason: String(describing: error)))
+                        // Domain/code/description only: the full userInfo of LAError carries a
+                        // BiometryDatabaseHash identifying this Mac's enrolment.
+                        let ns = error as NSError
+                        cont.resume(throwing: SignerError.Failed(reason: "\(ns.domain) \(ns.code): \(ns.localizedDescription)"))
                     }
                 }
             }
