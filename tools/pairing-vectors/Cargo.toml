@@ -1,0 +1,22 @@
+[package]
+name = "pairing-vectors"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+publish = false
+description = "Deterministic test-vector generator for docs/security/pairing-and-session.md"
+
+# Exact versions: the vectors are a cross-implementation contract, so the generator must not drift silently.
+# Cargo.lock is committed as well.
+[dependencies]
+p256 = { version = "=0.13.2", features = ["ecdsa", "arithmetic", "pkcs8"] }
+sha2 = "=0.10.9"
+hmac = "=0.12.1"
+hkdf = "=0.12.4"
+num-bigint = "0.4"
+base64 = "=0.22.1"
+hex = "=0.4.3"
+serde_json = { version = "1", features = ["preserve_order"] }
+
+# Standalone: not part of any future repository workspace (core/ will have its own).
+[workspace]
