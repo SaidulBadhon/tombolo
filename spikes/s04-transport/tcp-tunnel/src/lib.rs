@@ -61,6 +61,20 @@ pub struct TunnelConfig {
     pub send_queue_packets: usize,
     /// `TCP_NOTSENT_LOWAT` in bytes (0 = leave the OS default).
     pub notsent_lowat: u32,
+    /// User-space write buffer in front of the socket.
+    pub write_buf: usize,
+}
+
+impl TunnelConfig {
+    /// Small FIFOs under QUIC, so its congestion controller sees drops early and its
+    /// stream priorities decide what waits (USB-tuned variant measured in S4).
+    pub fn lean() -> Self {
+        Self {
+            send_queue_packets: 32,
+            notsent_lowat: 16 * 1024,
+            write_buf: 16 * 1024,
+        }
+    }
 }
 
 impl Default for TunnelConfig {
@@ -68,6 +82,7 @@ impl Default for TunnelConfig {
         Self {
             send_queue_packets: 128,
             notsent_lowat: 128 * 1024,
+            write_buf: 256 * 1024,
         }
     }
 }
@@ -95,7 +110,7 @@ impl TcpTunnelTransport {
 
         // Writer: drain the queue, batch into one buffered write, flush when idle.
         tokio::spawn(async move {
-            let mut w = BufWriter::with_capacity(256 * 1024, wr);
+            let mut w = BufWriter::with_capacity(cfg.write_buf, wr);
             while let Some(pkt) = rx_out.recv().await {
                 if write_frame(&mut w, &pkt).await.is_err() {
                     return;
