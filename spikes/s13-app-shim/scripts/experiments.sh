@@ -43,7 +43,7 @@ stop_all() {
 }
 start_host() { open -g "$HOST_APP" --args "$@"; }
 cpu_s() { ps -o time= -p "$1" 2>/dev/null | awk -F: '{ if (NF==3) print $1*3600+$2*60+$3; else print $1*60+$2 }'; }
-winid() { "$ROOT/out/winlist" "$1" | grep -m1 -v 'layer=[1-9]' | sed -E 's/^window ([0-9]+).*/\1/'; }
+winid() { "$ROOT/out/winlist" "$1" | grep -m1 'layer=0 ' | sed -E 's/^window ([0-9]+).*/\1/'; }
 capture() { # capture PID NAME — window screenshot (needs Screen Recording for the calling terminal; checked first)
   local id; id=$(winid "$1"); [ -n "$id" ] || { echo "no window for pid $1"; return; }
   screencapture -x -o -l"$id" "/tmp/s13-$2.png" && sips -Z 360 "/tmp/s13-$2.png" --out "$RES/$2.png" >/dev/null && echo "captured window $id → results/$2.png"
@@ -196,22 +196,26 @@ update() {
 # ---------------------------------------------------------------------------------------------------------
 integration() {
   stop_all
-  local out="$RES/integration.txt" NID=io.github.saidulbadhon.Tombolo.shim.com.example.notes t0 found c m
+  local out="$RES/integration.txt" NID=io.github.saidulbadhon.Tombolo.shim.com.example.spotlight NAME="S13 Spotlight Test" t0 found md c m
   : > "$out"
   note() { echo "$*" | tee -a "$out"; }
-  note "=== Spotlight: brand-new shim, no mdimport"
+  note "=== Spotlight: brand-new shim (package never generated before), no mdimport"
   note "mdutil: $(mdutil -s / 2>&1 | tr '\n' ' ')"
-  t0=$(date +%s); open -g -W "$HOST_APP" --args --generate-only --apps "com.example.notes:S13 Notes"
-  found=""
-  for i in $(seq 1 60); do
-    found=$(mdfind "kMDItemCFBundleIdentifier == '$NID'"); [ -n "$found" ] && break; sleep 1
+  note "before: mdfind '$(mdfind "kMDItemCFBundleIdentifier == '$NID'")'"
+  t0=$(now_ms); open -g -W "$HOST_APP" --args --generate-only --apps "com.example.spotlight:$NAME"
+  note "generated at +$(dt "$t0" "$(now_ms)")"
+  found=""; md=""
+  for i in $(seq 1 120); do
+    [ -z "$found" ] && found=$(mdfind "kMDItemCFBundleIdentifier == '$NID'") && [ -n "$found" ] && note "mdfind by bundle ID found '$found' at +$(dt "$t0" "$(now_ms)") (no mdimport)"
+    [ -z "$md" ] && md=$(mdls -raw -name kMDItemCFBundleIdentifier "$SHIMS_DIR/$NAME.app" 2>/dev/null | grep -v '(null)') && [ -n "$md" ] && note "mdls has kMDItemCFBundleIdentifier=$md at +$(dt "$t0" "$(now_ms)")"
+    [ -n "$found" ] && [ -n "$md" ] && break; sleep 0.5
   done
-  note "mdfind after $(( $(date +%s) - t0 )) s without mdimport: '${found}'"
-  mdimport "$SHIMS_DIR/S13 Notes.app" 2>&1 | head -2 | tee -a "$out"
-  note "mdfind after mdimport: '$(mdfind "kMDItemCFBundleIdentifier == '$NID'")'"
-  note "mdfind Chat: '$(mdfind "kMDItemCFBundleIdentifier == '$CHAT_ID'")'"
-  note "mdfind by name (what Spotlight's UI matches): '$(mdfind -onlyin "$SHIMS_DIR" 'kMDItemDisplayName == "S13 Notes*"c')'"
-  mdls -name kMDItemCFBundleIdentifier -name kMDItemContentType -name kMDItemDisplayName -name kMDItemVersion "$SHIMS_DIR/S13 Notes.app" | tee -a "$out"
+  [ -z "$found" ] && note "NOT indexed by bundle ID within 60 s without mdimport"
+  mdimport "$SHIMS_DIR/$NAME.app" 2>&1 | head -2 | tee -a "$out"
+  note "after mdimport: mdfind '$(mdfind "kMDItemCFBundleIdentifier == '$NID'")'"
+  note "by display name (what the Spotlight UI matches): '$(mdfind 'kMDItemDisplayName == "S13 Spotlight*"cd')'"
+  note "Chat by bundle ID: '$(mdfind "kMDItemCFBundleIdentifier == '$CHAT_ID'")'"
+  mdls -name kMDItemCFBundleIdentifier -name kMDItemContentType -name kMDItemDisplayName -name kMDItemVersion -name kMDItemKind "$SHIMS_DIR/$NAME.app" | tee -a "$out"
 
   note "=== running shims: Dock / ⌘-Tab class (lsappinfo), windows (CGWindowList)"
   c=$(lines "$CF"); m=$(lines "$MF"); start_host
@@ -222,9 +226,10 @@ integration() {
   done
   note "lsappinfo list entries for shims:"; lsappinfo list | grep -E 'shim\.(com|org)\.example' -A3 | tee -a "$out"
   "$ROOT/out/winlist" "$(shim_pid Chat)" "$(shim_pid Maps)" "$(host_pid)" | tee -a "$out"
+  note "(onscreen=0 = the window is on another Space, e.g. while the user is in a full-screen app)"
   note "$(capture "$(shim_pid Maps)" maps-connected)"
   note "=== Gatekeeper / quarantine / signature"
-  for a in Chat Maps "S13 Notes"; do
+  for a in Chat Maps "S13 Spotlight Test"; do
     note "-- $a.app"; xattr -l "$SHIMS_DIR/$a.app" "$SHIMS_DIR/$a.app/Contents/MacOS/TomboloShim" 2>&1 | tee -a "$out"
     codesign --verify --strict --deep -v "$SHIMS_DIR/$a.app" 2>&1 | tee -a "$out"
     codesign -dvvv "$SHIMS_DIR/$a.app" 2>&1 | grep -E '^(Identifier|CodeDirectory|CDHash|Signature|TeamIdentifier|Runtime)' | tee -a "$out"
@@ -233,7 +238,7 @@ integration() {
   note "Dock pinned items mentioning Tombolo Apps (read-only): $(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -c 'Tombolo%20Apps')"
   stop_all
   lsregister=/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister
-  "$lsregister" -u "$SHIMS_DIR/S13 Notes.app" 2>/dev/null; rm -rf "$SHIMS_DIR/S13 Notes.app"
+  "$lsregister" -u "$SHIMS_DIR/S13 Spotlight Test.app" 2>/dev/null; rm -rf "$SHIMS_DIR/S13 Spotlight Test.app"
 }
 
 # ---------------------------------------------------------------------------------------------------------

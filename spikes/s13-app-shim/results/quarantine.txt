@@ -1,0 +1,6 @@
+template inside a 'downloaded' host: com.apple.provenance:  com.apple.quarantine: 0083;6ade76c0;Safari; 
+plain cp of the template keeps it: com.apple.provenance:  com.apple.quarantine: 0083;6ade76c0;; 
+generated shim (bytes copied, not the file):
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 QTest.app: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 QTest.app/Contents/MacOS/TomboloShim: com.apple.provenance: 
+quarantine on generated shim: xattr: /Users/saidulbadhon/Applications/Tombolo Apps/S13 QTest.app/Contents/MacOS/TomboloShim: No such xattr: com.apple.quarantine
