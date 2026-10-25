@@ -27,6 +27,9 @@ Evidence: [`research/03`](../research/03-macos-feasibility.md#8-distribution-wit
   never a user cost). Two flavours — `foss` (GitHub Releases + F-Droid, full features) and `play`
   (policy-adjusted, optional, from 1.0).
 - **Users never pay and never create an account.**
+- **Funding timing (maintainer decision, 2026-10-26):** ship free self-signed Mac builds and limited Android
+  distribution first; pay Apple's $99/yr Developer ID and Android's one-time $25 full-distribution fee **once
+  there are real users** — at the latest before Android developer verification reaches users' regions (2027).
 
 ## Consequences
 - Install friction on macOS until a Developer ID is funded (documented, illustrated install guide).

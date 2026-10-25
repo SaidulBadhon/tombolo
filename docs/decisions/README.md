@@ -1,7 +1,8 @@
 # Architecture decision records
 
 Short, dated records of the decisions that shape Tombolo. Status is one of *Proposed*, *Accepted*,
-*Superseded*. Everything is *Proposed* until the maintainer approves the plan.
+*Superseded*. Technical ADRs stay *Proposed* until Phase 0 evidence confirms them; maintainer decisions are
+marked *Accepted* when made.
 
 | # | Decision | Status |
 |---|---|---|
@@ -10,5 +11,5 @@ Short, dated records of the decisions that shape Tombolo. Status is one of *Prop
 | [0003](0003-transport.md) | QUIC via a shared Rust core (iroh/noq), TLS-over-TCP fallback | Proposed — gated by spike S4/S5 |
 | [0004](0004-enhanced-helper.md) | Enhanced mode helper forked from scrcpy-server | Proposed |
 | [0005](0005-pairing-and-identity.md) | QR pairing, PAKE fallback, hardware-backed P-256 identity keys | Proposed |
-| [0006](0006-distribution.md) | Distribution without paid services; no Mac App Store | Proposed |
-| [0007](0007-license.md) | Licence | **Open — maintainer decision** |
+| [0006](0006-distribution.md) | Distribution without paid services; no Mac App Store; project fees paid once there are users | Proposed (funding timing accepted 2026-10-26) |
+| [0007](0007-license.md) | Licence: GPL-3.0-or-later; protocol spec Apache-2.0 | **Accepted** (2026-10-26) |

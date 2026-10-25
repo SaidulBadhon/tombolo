@@ -1,5 +1,8 @@
 # Tombolo protocol — draft v0
 
+> Licence: this specification is available under [Apache-2.0](../LICENSES/Apache-2.0.txt) (the apps are
+> GPL-3.0-or-later).
+>
 > Status: **draft for review**. Nothing here is frozen; field numbers and layouts will change during Phase 0
 > and Phase 2. The design rationale is in [`research/04-transport-and-security.md`](research/04-transport-and-security.md)
 > and [ADR-0003](decisions/0003-transport.md) / [ADR-0005](decisions/0005-pairing-and-identity.md).

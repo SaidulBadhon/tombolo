@@ -6,8 +6,8 @@
 >
 > Revision 3 (2026-10-25) incorporates two rounds of independent review — see [§10 Review log](#10-review-log).
 >
-> **What approval means right now:** approve **Phase 0 only** — a bounded investigation (10–14 engineer-weeks,
-> ≈ 6–7 weeks with two developers) that ends with measured spike results, a reviewed security design and a
+> **What approval means right now:** approve **Phase 0 only** — a bounded investigation (12–17 engineer-weeks,
+> ≈ 6–9 weeks with two developers; task plan in [`plans/phase-0.md`](plans/phase-0.md)) that ends with measured spike results, a reviewed security design and a
 > **re-estimate** of Phases 1–4. The later phases below are the current best plan, not a commitment.
 
 ## 0. Planning assumptions
@@ -16,8 +16,7 @@
   engineer-weeks** (ew); treat the upper bound as the planning number until Phase 0 replaces guesses with
   measurements. They assume one Apple-silicon Mac and the device lab in §7.
 - **Order of value:** a fast, native mirror first (hardest, most visible, and every later feature reuses its
-  video/input stack), then connectivity, then the no-developer-options tier, then polish. The order is a
-  recommendation; see [§9 Open decisions](#9-open-decisions-need-the-maintainers-call-before-phase-0).
+  video/input stack), then connectivity, then the no-developer-options tier, then polish — the order the maintainer chose (see [§9](#9-maintainer-decisions)).
 - **Free core, always:** no phase introduces a paid service, a cloud dependency or a user account.
 - **Fail closed:** any session — from 0.1 onwards — must stop capture, release input and restore the phone's
   display when the link drops, the phone is used locally, the Mac locks/sleeps, or access is revoked.
@@ -28,7 +27,7 @@
 
 | Phase | Name | Goal | Estimate | Release |
 |---|---|---|---|---|
-| 0 | Foundations, spikes & security design | Repo, CI, measured answers to risky questions, **reviewed** pairing/session spec | 10–14 ew | — |
+| 0 | Foundations, spikes & security design | Repo, CI, measured answers to risky questions, **reviewed** pairing/session spec | 12–17 ew | — |
 | 1a | **Mirror** | One native mirror window: video, control, audio, clipboard — over ADB, no phone app yet | 10–14 ew | 0.1 (developer preview) |
 | 1b | **App windows** (experimental) | Phone apps as separate Mac windows via virtual displays, with a compatibility list and fallback | 4–7 ew | 0.1.x |
 | 2 | **Connect** | `tombolo-core`, Android app, pairing, notifications, SMS, caller ID, clipboard, files | 26–36 ew | 0.2 |
@@ -36,7 +35,7 @@
 | 4 | **1.0** | Hardening, external security review, distribution, polish, (shims if S13 passed) | 10–15 ew | 1.0 |
 | 5 | Beyond 1.0 | Webcam, remote access, call audio research, interop, multi-device | ongoing | 1.x |
 
-**Total to 1.0: ≈ 72–103 engineer-weeks** (midpoint ≈ 88) → roughly **18–26 months for one developer**, or
+**Total to 1.0: ≈ 74–106 engineer-weeks** (midpoint ≈ 90) → roughly **18–27 months for one developer**, or
 **11–14 months for two** (Mac track + Android/core track; per-track breakdown in §2). This is in line with the
 independent reviewer's 65–100 ew estimate; the scope already trimmed (bundled `adb` instead of a native client,
 SMS text only, MMS read-only, shims gated by a spike) keeps it from growing further, and §8's cuts would save
@@ -44,7 +43,7 @@ roughly another 15–20 ew. **These numbers are re-estimated at the Phase 0 exit
 
 ---
 
-## Phase 0 — Foundations, spikes & security design (10–14 ew)
+## Phase 0 — Foundations, spikes & security design (12–17 ew)
 
 **Goal:** turn the riskiest assumptions into measured facts, freeze a reviewed security design, and set up the
 project so contributions can start.
@@ -236,13 +235,13 @@ Every phase estimate in §1 is the sum of these per-track work packages (enginee
 
 | Phase | Dev A — Mac (`apple/**`) | Dev B — Android + core (`android/**`, `core/**`, `proto/**`) | Phase total |
 |---|---|---|---|
-| 0 | 5–7 (S2, S8 mac, S9, S13, S15, setup) | 5–7 (S3–S7, S10–S12, S14, S16, security spec) | 10–14 |
+| 0 | 6–8 (setup, S1, S2, S4/S5, S8 mac, S9, S10, S13, S15) | 6–9 (security spec, S3, S6, S7, S8 android, S11, S12, S14, S16) | 12–17 |
 | 1a | 8–11 (mirror app) | 2–3 (adb bundling, device matrix, lifecycle) | 10–14 |
 | 1b | 3–5 (windows, launcher) | 1–2 (compatibility list) | 4–7 |
 | 2 | 8–11 (pairing + continuity UI, core integration) | 18–25 (core 8–11, Android app 10–14) | 26–36 |
 | 3 | 2–3 (mode switching) | 10–14 (Standard mode, helper fork) | 12–17 |
 | 4 | 6–9 (security fixes, updates, window polish, shims if S13) | 4–6 (Path C, F-Droid, fuzzing) | 10–15 |
-| **Total** | **32–46** | **40–57** | **72–103** |
+| **Total** | **33–47** | **41–59** | **74–106** |
 
 Dev B's track is longer, so in practice Dev A takes over parts of it (e.g. the Android-side helper protocol or
 core file transfer) once the Mac work is ahead. Illustrative calendar at midpoints, before that rebalancing:
@@ -268,8 +267,8 @@ gantt
   4 Android 1.0 work             :b6, after b5, 5
 ```
 
-Unbalanced, Dev B finishes around week 49; rebalanced, both tracks land around weeks 44–48 (≈ 11 months).
-Solo, the phases run sequentially: ≈ 88 ew at midpoints.
+Unbalanced, Dev B finishes around week 50; rebalanced, both tracks land around weeks 45–49 (≈ 11 months).
+Solo, the phases run sequentially: ≈ 90 ew at midpoints.
 
 | Track | Owns | Depends on |
 |---|---|---|
@@ -350,11 +349,15 @@ fail-closed behaviour covered where the task touches sessions.
 4. Play flavour → F-Droid/GitHub only.
 5. Phase 1b app windows move after 1.0 (if S3/S14 results are poor).
 
-## 9. Open decisions (need the maintainer's call before Phase 0)
+## 9. Maintainer decisions
 
-1. **Licence** — GPL-3.0-or-later vs Apache-2.0 ([ADR-0007](decisions/0007-license.md), *Proposed*).
-2. **First milestone** — Mirror-first (this plan) vs Connect-first vs Standard-mode-first.
-3. **Project costs** — whether/when to fund Apple Developer ID ($99/yr) and Android full distribution ($25 once).
+| Decision | Outcome (2026-10-26) |
+|---|---|
+| Licence | **GPL-3.0-or-later**; protocol spec and `proto/` schemas Apache-2.0 ([ADR-0007](decisions/0007-license.md)) |
+| First milestone | **Mirror first** — the phase order in this plan |
+| Project costs | **Pay once there are users** — Apple Developer ID ($99/yr) and Android full distribution ($25 once); free self-signed / limited distribution until then ([ADR-0006](decisions/0006-distribution.md)) |
+
+Still pending: approval to start Phase 0 (task plan: [`plans/phase-0.md`](plans/phase-0.md)).
 
 ## 10. Review log
 
@@ -387,7 +390,7 @@ downstream schedule.* 4 resolved, 13 partially resolved, 4 remaining high issues
 | 0.2 trust boundary contradictory (mirroring still via ADB) | Explicit 0.2 trust-boundary statement; "no plaintext" scoped to Tombolo channels; Phase 3 retires the ADB bridge |
 | Fail-closed has no enforcement owner | S7 now requires a **phone-side lease** + independent cleanup process; S7 must pass before any input-injecting release |
 | At-most-once overclaimed | Protocol §8 defines durable operation states and an explicit "unknown" outcome; "exactly once" removed |
-| Schedule doesn't reconcile | Per-track work-package table that sums to the phase totals (72–103 ew); Mac Phase 3 work allocated; approval limited to Phase 0 |
+| Schedule doesn't reconcile | Per-track work-package table that sums to the phase totals (72–103 ew, later 74–106 after the Phase 0 task breakdown); Mac Phase 3 work allocated; approval limited to Phase 0 |
 | Smaller partials | Keyboard-mode fallback; BLE + CDM presence as the candidate wake mechanism; S16 call-control gate; `subscription_id` on SMS; pre-auth budgets and buffer limits; discovery-correlation wording; telemetry wording; sustained thermal/energy criterion; ADR-0006 sandbox wording |
 
 **Still open after review (by design, resolved in Phase 0):** the security design document and its external

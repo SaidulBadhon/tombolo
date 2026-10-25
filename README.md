@@ -97,7 +97,7 @@ All screens and the design principles: [`docs/design/ui-concepts.md`](docs/desig
 | **1.0** | Polish | Per-app Dock icons, Touch ID gate, auto-updates, F-Droid, security review |
 | 1.x | Beyond | Webcam, remote access via self-hosted relay, interop with LocalSend/KDE Connect |
 
-Estimated effort to 1.0: **≈ 72–103 engineer-weeks** — about 11–14 months with two developers, 18–26 solo —
+Estimated effort to 1.0: **≈ 74–106 engineer-weeks** — about 11–14 months with two developers, 18–27 solo —
 after two rounds of independent review. Approval is requested for **Phase 0 only** (spikes + security design),
 which re-estimates everything after it.
 Full roadmap with feasibility ratings: [`docs/roadmap.md`](docs/roadmap.md) ·
@@ -117,6 +117,7 @@ Phase-by-phase plan: [`docs/implementation-plan.md`](docs/implementation-plan.md
 | [Architecture](docs/architecture.md) | Components, capability tiers, video/input paths, security model, tech stack |
 | [Protocol draft](docs/protocol.md) | Channels, messages, media framing, pairing, versioning |
 | [Implementation plan](docs/implementation-plan.md) | Phases, spikes and decision gates, acceptance criteria, risks, testing |
+| [Phase 0 task plan](docs/plans/phase-0.md) | The 18 tasks of Phase 0 with file ownership, dependencies and acceptance criteria |
 | [Roadmap](docs/roadmap.md) | Features by release, with feasibility ratings |
 | [Decisions (ADRs)](docs/decisions/README.md) | Why each major technical choice was made |
 | [UI concepts](docs/design/ui-concepts.md) | Mockups for macOS and Android, interaction model |
@@ -138,8 +139,10 @@ with questions, corrections or device-specific knowledge.
 
 ## Licence
 
-**To be decided** before the first line of code — see [ADR-0007](docs/decisions/0007-license.md)
-(recommended: GPL-3.0-or-later for the apps, with the protocol specification under a permissive licence).
+Tombolo is free software under the **[GNU GPL v3.0 or later](LICENSE)** — every fork stays free and open.
+The [protocol specification](docs/protocol.md) (and the `proto/` schemas, once they exist) is licensed under
+**[Apache-2.0](LICENSES/Apache-2.0.txt)**, so anyone can build compatible software. See
+[ADR-0007](docs/decisions/0007-license.md).
 
 ## Acknowledgements
 

@@ -59,7 +59,7 @@ verified, reported or unverified, and lists its sources.
 ## Unverified items carried into Phase 0
 
 Every report ends with an explicit unverified list. The ones that change architecture are turned into Phase 0
-spikes in the [implementation plan](../implementation-plan.md#phase-0--foundations-spikes--security-design-1014-ew)
+spikes in the [implementation plan](../implementation-plan.md#phase-0--foundations-spikes--security-design-1217-ew)
 (S1–S15): an optical latency harness, the Mac video pipeline, concurrent virtual displays, transport choice per
 path, the iroh API surface, Standard-mode control quality, fail-closed session lifecycle, local-network
 permissions, keyboard modes, UniFFI integration, background survival per OEM, the helper ↔ app relay, app-shim

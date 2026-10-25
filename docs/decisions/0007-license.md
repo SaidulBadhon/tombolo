@@ -1,7 +1,7 @@
 # ADR-0007: Licence
 
-- **Status:** **Open — needs the maintainer's decision** (no LICENSE file is committed until then)
-- **Date:** 2026-10-25
+- **Status:** **Accepted** (maintainer decision, 2026-10-26)
+- **Date:** 2026-10-25 (proposed) · 2026-10-26 (accepted)
 
 ## Context
 Every planned dependency is permissive: scrcpy (Apache-2.0), droidMirroring-mac (Apache-2.0), iroh/noq
@@ -28,4 +28,10 @@ Evidence: [`research/01` §11](../research/01-existing-solutions.md#11-reusable-
 can never be turned into a paywalled closed fork while keeping the protocol open for interop.
 
 ## Decision
-_Pending._
+- **Tombolo is licensed under GPL-3.0-or-later** — full text in [`LICENSE`](../../LICENSE).
+- **The protocol specification** ([`docs/protocol.md`](../protocol.md)) **and the schemas in `proto/`** (once
+  they exist) are licensed under **Apache-2.0** — text in [`LICENSES/Apache-2.0.txt`](../../LICENSES/Apache-2.0.txt) —
+  so anyone can build a compatible client or server under any licence.
+- Third-party code keeps its own licence and notices (e.g. scrcpy's Apache-2.0 `NOTICE` once the helper is
+  forked); every dependency must be GPL-3.0-compatible.
+- Contributions are accepted under the same terms (inbound = outbound); no CLA.
