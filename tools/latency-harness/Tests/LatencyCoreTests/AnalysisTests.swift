@@ -92,37 +92,38 @@ import Testing
     }
 }
 
+/// One synthetic optical clip shared by the optical tests (rendering is the expensive part).
+/// 0.6 s at a true 240 fps; no blur here — scripts/optical-synthetic.sh covers blur + H.264.
+enum SharedOpticalClip {
+    static let latencyMs = 52.0
+    static let frames: [OpticalFrame] = {
+        var scene = SyntheticOpticalScene()
+        scene.latencyMs = latencyMs
+        scene.blurRadius = 0
+        let dec = CodeDecoder(options: DecoderOptions(expectedSymbols: 3))
+        return (0..<144).map { k in OpticalFrame(index: k, symbols: scene.frame(k).withView { dec.decode($0) }.map(DecodedSymbol.init)) }
+    }()
+}
+
 @Suite struct OpticalAnalysisTests {
     @Test func syntheticSceneRecoversLatencyWithinOneFrame() throws {
-        var scene = SyntheticOpticalScene()
-        scene.width = 640
-        scene.height = 360
-        scene.latencyMs = 52
-        let dec = CodeDecoder(options: DecoderOptions(expectedSymbols: 3))
-        var frames: [OpticalFrame] = []
-        for k in 0..<240 {  // 1 s at 240 fps
-            let syms = scene.frame(k).withView { dec.decode($0) }.map(DecodedSymbol.init)
-            frames.append(OpticalFrame(index: k, symbols: syms))
-        }
+        let frames = SharedOpticalClip.frames
         let (report, samples) = OpticalAnalysis.run(frames: frames, nominalFps: 240)
-        #expect(report.framesWithPhone > 200, "phone decoded in \(report.framesWithPhone) frames")
-        #expect(report.framesWithMirror > 200, "mirror decoded in \(report.framesWithMirror) frames")
-        #expect(report.samplesClean >= 40, "clean samples \(report.samplesClean)")
+        #expect(report.framesWithPhone > 130, "phone decoded in \(report.framesWithPhone) frames")
+        #expect(report.framesWithMirror > 130, "mirror decoded in \(report.framesWithMirror) frames")
+        #expect(report.samplesClean >= 20, "clean samples \(report.samplesClean)")
         let l = try #require(report.latencyMs)
         let frame = 1000.0 / 240
-        #expect(abs(l.p50 - 52) <= frame + 0.01, "p50 \(l.p50)")
-        for s in samples where s.clean { #expect(abs(s.latencyMs - 52) <= frame + 0.01) }
+        #expect(abs(l.p50 - SharedOpticalClip.latencyMs) <= frame + 0.01, "p50 \(l.p50)")
+        for s in samples where s.clean { #expect(abs(s.latencyMs - SharedOpticalClip.latencyMs) <= frame + 0.01) }
         let fps = try #require(report.macReferenceMeasuredFps)
         #expect(abs(fps - 240) < 2.4, "measured fps \(fps)")
     }
 
     @Test func wrongNominalFpsIsFlagged() {
-        var scene = SyntheticOpticalScene()
-        scene.cameraFps = 240
-        scene.noiseSigma = 0
-        let dec = CodeDecoder(options: DecoderOptions(expectedSymbols: 3))
-        let frames = (0..<200).map { k in OpticalFrame(index: k, symbols: scene.frame(k).withView { dec.decode($0) }.map(DecodedSymbol.init)) }
-        let (report, _) = OpticalAnalysis.run(frames: frames, nominalFps: 30)  // slow-motion metadata mistake
+        // Slow-motion files often carry playback-rate metadata (e.g. 30 fps) instead of 240.
+        let frames = SharedOpticalClip.frames
+        let (report, _) = OpticalAnalysis.run(frames: frames, nominalFps: 30)
         #expect(report.notes.contains { $0.contains("WARNING") })
         let (fixed, _) = OpticalAnalysis.run(frames: frames, nominalFps: 30, useMacReferenceFps: true)
         #expect(abs(fixed.fpsUsed - 240) < 2.4)

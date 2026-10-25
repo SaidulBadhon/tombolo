@@ -45,9 +45,6 @@ public struct SyntheticOpticalScene: Sendable {
         return Shown(value: epoch + j * period, previous: epoch + (j - 1) * period, blend: blend)
     }
 
-    /// Phone-clock value first shown on the phone glass at or after camera time `t`.
-    public func expectedLatencyMs() -> Double { latencyMs }
-
     public func frame(_ k: Int) -> GrayImage {
         let t = Double(k) / cameraFps * 1000
         var img = GrayImage(width: width, height: height)

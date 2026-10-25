@@ -120,28 +120,38 @@ public struct GrayImage: Sendable {
     }
 
     /// Separable box blur with the given radius, applied `passes` times (3 passes ≈ Gaussian).
+    /// Running sums with edge clamping; integer arithmetic.
     public func blurred(radius: Int, passes: Int = 3) -> GrayImage {
-        guard radius > 0 else { return self }
-        var cur = pixels.map { Double($0) }
+        guard radius > 0, width > 0, height > 0 else { return self }
+        var cur = pixels.map { Int32($0) }
         var tmp = cur
-        let n = Double(2 * radius + 1)
-        for _ in 0..<passes {
-            for y in 0..<height {
-                for x in 0..<width {
-                    var s = 0.0
-                    for d in -radius...radius { s += cur[y * width + min(max(x + d, 0), width - 1)] }
-                    tmp[y * width + x] = s / n
-                }
-            }
-            for y in 0..<height {
-                for x in 0..<width {
-                    var s = 0.0
-                    for d in -radius...radius { s += tmp[min(max(y + d, 0), height - 1) * width + x] }
-                    cur[y * width + x] = s / n
+        let n = Int32(2 * radius + 1)
+        cur.withUnsafeMutableBufferPointer { a in
+            tmp.withUnsafeMutableBufferPointer { b in
+                for _ in 0..<passes {
+                    // Horizontal: a → b.
+                    for y in 0..<height {
+                        let o = y * width
+                        var sum: Int32 = 0
+                        for d in -radius...radius { sum += a[o + min(max(d, 0), width - 1)] }
+                        for x in 0..<width {
+                            b[o + x] = (sum + n / 2) / n
+                            sum += a[o + min(x + radius + 1, width - 1)] - a[o + max(x - radius, 0)]
+                        }
+                    }
+                    // Vertical: b → a.
+                    for x in 0..<width {
+                        var sum: Int32 = 0
+                        for d in -radius...radius { sum += b[min(max(d, 0), height - 1) * width + x] }
+                        for y in 0..<height {
+                            a[y * width + x] = (sum + n / 2) / n
+                            sum += b[min(y + radius + 1, height - 1) * width + x] - b[max(y - radius, 0) * width + x]
+                        }
+                    }
                 }
             }
         }
-        return GrayImage(width: width, height: height, pixels: cur.map { UInt8(clamping: Int($0.rounded())) })
+        return GrayImage(width: width, height: height, pixels: cur.map { UInt8(clamping: $0) })
     }
 
     /// Adds zero-mean Gaussian noise with standard deviation `sigma` (grey levels).
