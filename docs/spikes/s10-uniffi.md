@@ -63,7 +63,7 @@ comparable — and `Drop` guards record whether a future was dropped before or a
   | `vec-async` (a) | `async next_vec_async()` → same record | UniFFI future: new + poll(s) + complete + free |
   | `vec-callback` (b) | Rust thread calls Swift `FrameSink.on_frame(VecFrame)` | 1 callback + RustBuffer free |
   | `handle-pull` (c) | blocking `next_handle()` returns `FrameRef { handle: Arc<FrameHandle>, ptr, len, … }`; Swift wraps `ptr` in `Data(bytesNoCopy:…, deallocator: .custom)` that retains the handle | 2 + RustBuffer free + handle free |
-  | `ring-pull` (c) | shared-memory SPSC ring: blocking `ring_wait(next) -> u64` returns the head; Swift reads 64-byte slot descriptors and payload straight from Rust's memory, then `ring_release(seq)` | ≈ 2 per batch + 2 per frame, scalars only |
+  | `ring-pull` (c) | shared-memory SPSC ring: blocking `ring_wait(next) -> u64` returns the head; Swift reads 128-byte slot descriptors and payload straight from Rust's memory, then `ring_release(seq)` | ≈ 2 per batch + 2 per frame, scalars only |
   | `ring-async` (c) | same, `async ring_wait_async(next)` | UniFFI future per batch + 2 per frame |
   | `ring-callback` (c) | Rust thread calls Swift `SlotSink.on_slots(from, to)` (scalars); Swift releases from inside the callback (re-entrant) | 1 callback per batch + 2 per frame |
 

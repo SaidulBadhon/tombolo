@@ -12,10 +12,14 @@ func designName(_ d: Delivery) -> String { allDesigns.first { $0.1 == d }!.0 }
 /// Per-frame bookkeeping. Every design ends in `frame(...)`, which does the same work: validate the
 /// header/trailer, compare the payload address with the Rust buffer address stamped in the header
 /// (equal => Swift is reading Rust's memory, i.e. zero copies), touch one byte per 4 KiB page, and
-/// record `now - produced_ns`.
+/// record `now - produced_ns`, split at `delivered_ns` (Rust's hand-off stamp) into
+/// wake = delivered - produced (thread wake-up / async machinery) and
+/// crossing = now - delivered (lowering, FFI return or callback, lifting, Swift access).
 final class FrameRecorder: @unchecked Sendable {
     let capacity: Int
     let lat: UnsafeMutablePointer<UInt64>
+    let wake: UnsafeMutablePointer<UInt64>
+    let cross: UnsafeMutablePointer<UInt64>
     let magic: UInt64
     let sampleMemory: Bool
     var count = 0
@@ -35,13 +39,19 @@ final class FrameRecorder: @unchecked Sendable {
         self.magic = magic
         self.sampleMemory = sampleMemory
         lat = .allocate(capacity: max(capacity, 1))
+        wake = .allocate(capacity: max(capacity, 1))
+        cross = .allocate(capacity: max(capacity, 1))
         memSamples.reserveCapacity(capacity / 60 + 16)
     }
 
-    deinit { lat.deallocate() }
+    deinit {
+        lat.deallocate()
+        wake.deallocate()
+        cross.deallocate()
+    }
 
     @inline(__always)
-    func frame(_ p: UnsafeRawPointer, _ len: Int, seq: UInt64, producedNs: UInt64) {
+    func frame(_ p: UnsafeRawPointer, _ len: Int, seq: UInt64, producedNs: UInt64, deliveredNs: UInt64) {
         if count == 0 {
             consumerThread = swiftThread()
             firstNs = nowNs()
@@ -60,7 +70,11 @@ final class FrameRecorder: @unchecked Sendable {
         if seq != expectedSeq { gaps &+= seq &- expectedSeq }
         expectedSeq = seq &+ 1
         let now = nowNs()
-        if count < capacity { lat[count] = now &- producedNs }
+        if count < capacity {
+            lat[count] = now &- producedNs
+            wake[count] = deliveredNs &- producedNs
+            cross[count] = now &- deliveredNs
+        }
         count += 1
         lastNs = now
         if sampleMemory && count % 60 == 0 { memSamples.append(physFootprintBytes()) }
@@ -71,7 +85,7 @@ final class VecSinkSwift: FrameSink, @unchecked Sendable {
     let rec: FrameRecorder
     init(_ rec: FrameRecorder) { self.rec = rec }
     func onFrame(frame: VecFrame) {
-        frame.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: frame.seq, producedNs: frame.producedNs) }
+        frame.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: frame.seq, producedNs: frame.producedNs, deliveredNs: frame.deliveredNs) }
     }
     func onEnd() { rec.done.signal() }
 }
@@ -96,8 +110,9 @@ struct RingView: @unchecked Sendable {
         let offset = d.load(fromByteOffset: 24, as: UInt64.self)
         let len = d.load(fromByteOffset: 32, as: UInt64.self)
         let check = d.load(fromByteOffset: 56, as: UInt64.self)
+        let delivered = d.load(fromByteOffset: 64, as: UInt64.self)
         if check != seq { rec.integrityFailures += 1 }
-        rec.frame(data + Int(offset), Int(len), seq: frameSeq, producedNs: produced)
+        rec.frame(data + Int(offset), Int(len), seq: frameSeq, producedNs: produced, deliveredNs: delivered)
     }
 }
 
@@ -136,13 +151,13 @@ func consume(_ design: Delivery, _ stream: MediaStream, _ rec: FrameRecorder) as
     case .vecPull:
         await onThread("s10-consumer") {
             while let f = stream.nextVec() {
-                f.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: f.seq, producedNs: f.producedNs) }
+                f.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: f.seq, producedNs: f.producedNs, deliveredNs: f.deliveredNs) }
             }
         }
     case .vecAsync:
         await Task.detached {
             while let f = await stream.nextVecAsync() {
-                f.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: f.seq, producedNs: f.producedNs) }
+                f.data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: f.seq, producedNs: f.producedNs, deliveredNs: f.deliveredNs) }
             }
         }.value
     case .handlePull:
@@ -153,7 +168,7 @@ func consume(_ design: Delivery, _ stream: MediaStream, _ rec: FrameRecorder) as
                 let handle = r.handle
                 let data = Data(bytesNoCopy: UnsafeMutableRawPointer(bitPattern: UInt(r.ptr))!, count: Int(r.len),
                                 deallocator: .custom { _, _ in withExtendedLifetime(handle) {} })
-                data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: r.seq, producedNs: r.producedNs) }
+                data.withUnsafeBytes { rec.frame($0.baseAddress!, $0.count, seq: r.seq, producedNs: r.producedNs, deliveredNs: r.deliveredNs) }
             }
         }
     case .ringPull:
@@ -203,6 +218,8 @@ struct MediaResult: Codable {
     var zeroCopyFrames: Int
     var payloadMB: Double
     var latencyUs: Percentiles
+    var wakeUs: Percentiles
+    var crossingUs: Percentiles
     var framesOver1ms: Int
     var framesOver16_7ms: Int
     var cpuSeconds: Double
@@ -250,6 +267,8 @@ func runMedia(_ design: Delivery, _ cfg: StreamConfig, mode: String, sampleMemor
 
     let n = min(rec.count, rec.capacity)
     let lat = UnsafeBufferPointer(start: rec.lat, count: n)
+    let wakeP = percentilesUs(UnsafeBufferPointer(start: rec.wake, count: n))
+    let crossP = percentilesUs(UnsafeBufferPointer(start: rec.cross, count: n))
     var over1 = 0, over16 = 0
     for v in lat { if v > 1_000_000 { over1 += 1 }; if v > 16_700_000 { over16 += 1 } }
     let wall = Double(t1 - t0) / 1e9
@@ -259,7 +278,8 @@ func runMedia(_ design: Delivery, _ cfg: StreamConfig, mode: String, sampleMemor
         design: designName(design), mode: mode, fps: cfg.fps, configuredFrames: cfg.frameCount, wallSeconds: wall,
         framesConsumed: rec.count, produced: st.produced, droppedByProducer: st.droppedFull, seqGaps: rec.gaps,
         integrityFailures: rec.integrityFailures, zeroCopyFrames: rec.zeroCopyFrames,
-        payloadMB: Double(st.payloadBytes) / 1e6, latencyUs: percentilesUs(lat), framesOver1ms: over1,
+        payloadMB: Double(st.payloadBytes) / 1e6, latencyUs: percentilesUs(lat), wakeUs: wakeP, crossingUs: crossP,
+        framesOver1ms: over1,
         framesOver16_7ms: over16, cpuSeconds: cpu1 - cpu0, cpuPercentOfOneCore: (cpu1 - cpu0) / wall * 100,
         producerBusyUsPerFrame: st.produced == 0 ? 0 : Double(st.producerBusyNs) / Double(st.produced) / 1000,
         drainNsPerFrame: rec.count == 0 ? 0 : Double(rec.lastNs - t0) / Double(rec.count),
@@ -276,6 +296,9 @@ func printMedia(_ r: MediaResult) {
     let l = r.latencyUs
     print("  \(r.design.padding(toLength: 13, withPad: " ", startingAt: 0)) frames=\(r.framesConsumed)/\(r.configuredFrames) drops=\(r.droppedByProducer) gaps=\(r.seqGaps) bad=\(r.integrityFailures) zero-copy=\(r.zeroCopyFrames)/\(r.framesConsumed)")
     print("                latency µs p50=\(f1(l.p50)) p95=\(f1(l.p95)) p99=\(f1(l.p99)) p99.9=\(f1(l.p999)) max=\(f1(l.max)) | >1ms=\(r.framesOver1ms) >16.7ms=\(r.framesOver16_7ms)")
+    let w = r.wakeUs, c = r.crossingUs
+    print("                  wake µs   p50=\(f1(w.p50)) p95=\(f1(w.p95)) p99=\(f1(w.p99)) p99.9=\(f1(w.p999)) max=\(f1(w.max))")
+    print("                  crossing  p50=\(f1(c.p50)) p95=\(f1(c.p95)) p99=\(f1(c.p99)) p99.9=\(f1(c.p999)) max=\(f1(c.max))")
     print("                cpu=\(f2(r.cpuPercentOfOneCore))% of a core (\(f2(r.cpuSeconds)) s / \(f1(r.wallSeconds)) s) producer=\(f1(r.producerBusyUsPerFrame))µs/frame mem warm=\(r.memAfterWarmupMB.map(f2) ?? "-")MB end=\(r.memEndMB.map(f2) ?? "-")MB max=\(r.memMaxMB.map(f2) ?? "-")MB growth=\(r.memGrowthKB.map(f1) ?? "-")KB handles=\(r.liveFrameHandlesAtEnd) futures=\(r.foreignFutureHandlesAtEnd)")
     print("                consumer: \(r.consumerThread) | load \(r.loadAvgStart) -> \(r.loadAvgEnd)")
 }

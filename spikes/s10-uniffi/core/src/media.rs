@@ -35,7 +35,7 @@ use crate::util::now_ns;
 
 pub const HEADER_LEN: u64 = 32;
 pub const MAGIC: u64 = 0x5331_305f_4652_414d; // "S10_FRAM"
-const DESC_STRIDE: u32 = 64;
+const DESC_STRIDE: u32 = 128;
 
 static LIVE_HANDLES: AtomicI64 = AtomicI64::new(0);
 
@@ -85,6 +85,8 @@ pub fn frame_format() -> FrameFormat {
 pub struct VecFrame {
     pub seq: u64,
     pub produced_ns: u64,
+    /// Stamped by Rust at hand-off to Swift (after the consumer woke up, before lowering).
+    pub delivered_ns: u64,
     pub is_key: bool,
     pub data: Vec<u8>,
 }
@@ -122,6 +124,7 @@ pub struct FrameRef {
     pub handle: Arc<FrameHandle>,
     pub seq: u64,
     pub produced_ns: u64,
+    pub delivered_ns: u64,
     pub is_key: bool,
     pub ptr: u64,
     pub len: u64,
@@ -227,6 +230,9 @@ struct SlotDesc {
     flags: u64,
     end_pos: u64,
     seq_check: u64,
+    /// Offset 64: stamped by the consumer side of Rust when the slot is handed to Swift.
+    delivered_ns: u64,
+    _pad: [u64; 7],
 }
 const _: () = assert!(std::mem::size_of::<SlotDesc>() == DESC_STRIDE as usize);
 
@@ -307,12 +313,25 @@ impl Ring {
                 flags: key as u64,
                 end_pos: end,
                 seq_check: seq,
+                delivered_ns: 0,
+                _pad: [0; 7],
             };
             self.descs.as_ptr().add((seq % self.desc_count) as usize).write(d);
         }
         self.write_pos.store(end, Ordering::Relaxed);
         self.head.store(seq + 1, Ordering::Release);
         true
+    }
+
+    /// Marks slots `[from, to)` as handed to the consumer now (latency split: wake vs crossing).
+    fn stamp_delivered(&self, from: u64, to: u64) {
+        let t = now_ns();
+        for s in from..to {
+            unsafe {
+                let d = self.descs.as_ptr().add((s % self.desc_count) as usize);
+                std::ptr::addr_of_mut!((*d).delivered_ns).write(t);
+            }
+        }
     }
 
     fn release(&self, seq: u64) -> bool {
@@ -426,6 +445,7 @@ impl Inner {
         let ring = self.ring.as_ref().expect("ring");
         let h = ring.head.load(Ordering::Acquire);
         if h > next {
+            ring.stamp_delivered(next, h);
             return h;
         }
         let deadline = Instant::now() + timeout;
@@ -433,6 +453,8 @@ impl Inner {
         loop {
             let h = ring.head.load(Ordering::Acquire);
             if h > next {
+                drop(g);
+                ring.stamp_delivered(next, h);
                 return h;
             }
             if self.done() {
@@ -471,7 +493,7 @@ impl Inner {
                 Delivery::VecPull | Delivery::VecCallback | Delivery::VecAsync => {
                     let mut v = src.to_vec(); // the reassembly copy
                     stamp(&mut v, seq);
-                    let f = VecFrame { seq, produced_ns: now_ns(), is_key: key, data: v };
+                    let f = VecFrame { seq, produced_ns: now_ns(), delivered_ns: 0, is_key: key, data: v };
                     if self.delivery == Delivery::VecAsync {
                         let tx = tx.as_ref().expect("tx");
                         if backpressure { tx.blocking_send(f).is_ok() } else { tx.try_send(f).is_ok() }
@@ -485,7 +507,7 @@ impl Inner {
                     let ptr = b.as_ptr() as u64;
                     LIVE_HANDLES.fetch_add(1, Ordering::Relaxed);
                     let handle = Arc::new(FrameHandle { buf: b });
-                    let r = FrameRef { handle, seq, produced_ns: now_ns(), is_key: key, ptr, len: len as u64 };
+                    let r = FrameRef { handle, seq, produced_ns: now_ns(), delivered_ns: 0, is_key: key, ptr, len: len as u64 };
                     self.push(Item::Handle(r), backpressure)
                 }
                 Delivery::RingPull | Delivery::RingAsync | Delivery::RingCallback => {
@@ -589,7 +611,8 @@ impl MediaStream {
                         .spawn(move || {
                             i.wait_started();
                             while let Some(item) = i.pop() {
-                                if let Item::Vec(f) = item {
+                                if let Item::Vec(mut f) = item {
+                                    f.delivered_ns = now_ns();
                                     sink.on_frame(f);
                                 }
                             }
@@ -657,7 +680,10 @@ impl MediaStream {
     /// Design VecPull: blocks the calling thread; None = end of stream.
     pub fn next_vec(&self) -> Option<VecFrame> {
         match self.inner.pop()? {
-            Item::Vec(f) => Some(f),
+            Item::Vec(mut f) => {
+                f.delivered_ns = now_ns();
+                Some(f)
+            }
             Item::Handle(_) => None,
         }
     }
@@ -665,13 +691,18 @@ impl MediaStream {
     /// Design VecAsync.
     pub async fn next_vec_async(&self) -> Option<VecFrame> {
         let mut rx = self.inner.async_rx.lock().await;
-        rx.recv().await
+        let mut f = rx.recv().await?;
+        f.delivered_ns = now_ns(); // stamped in the poll that runs on Swift's executor after the wake
+        Some(f)
     }
 
     /// Design HandlePull: blocks; None = end of stream.
     pub fn next_handle(&self) -> Option<FrameRef> {
         match self.inner.pop()? {
-            Item::Handle(r) => Some(r),
+            Item::Handle(mut r) => {
+                r.delivered_ns = now_ns();
+                Some(r)
+            }
             Item::Vec(_) => None,
         }
     }
@@ -701,6 +732,7 @@ impl MediaStream {
             notified.as_mut().enable();
             let h = ring.head.load(Ordering::Acquire);
             if h > next {
+                ring.stamp_delivered(next, h);
                 return h;
             }
             if self.inner.done() {
