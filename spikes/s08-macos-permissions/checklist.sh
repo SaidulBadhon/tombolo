@@ -35,9 +35,9 @@ wait_rule() { # wait_rule <identifier> <state> <seconds>
 lan() { eval "$(python3 -I lan-target.py)"; echo "LAN: self=$SELF unused=$UNUSED gateway=$GATEWAY"; }
 measure() { # measure <variant> <version> <label>  - Local Network failure modes, no clicks needed
   WATCH=30 ./s15-update.sh "$1" "$2" "$3" \
-    "browse:_tombolo-test._tcp:5;bsdconnect:$UNUSED:9:4;nwconnect:$UNUSED:9:5;udpconnect:$UNUSED:9;quit" >/dev/null
+    "browse:_tombolo-test._tcp:5;bsdconnect:$UNUSED:9:4;nwconnect:$UNUSED:9:5;udpconnect-nosigpipe:$UNUSED:9;udpconnect:$UNUSED:9;quit" >/dev/null
   rules "tombolo.spike.s15" >"results/$3/lnp-rules.txt"
-  echo "--- $3"; grep -v -E '^\s' "results/$3/probe.log" | grep -E 'browse .*(state|end)|connect\(\)|completed|still connecting|state=waiting|end after|send\(\)' | cut -c26- | cut -c1-200
+  echo "--- $3"; grep -v -E '^\s' "results/$3/probe.log" | grep -E 'browse .*(state|end)|connect\(\)|completed|still connecting|state=waiting|end after|send\(\)|SIGPIPE' | cut -c26- | cut -c1-200
   cat "results/$3/windows.log"
 }
 

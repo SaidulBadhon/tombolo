@@ -22,10 +22,12 @@
 //   browse:TYPE[:SECS]      NWBrowser for TYPE (e.g. _tombolo-test._tcp)
 //   nwconnect:HOST:PORT[:SECS]   NWConnection (TCP), sends "ping", reads reply
 //   bsdconnect:HOST:PORT[:SECS]  BSD socket TCP connect(), sends "ping", reads reply
-//   udpconnect:HOST:PORT    BSD UDP socket connect() + send()
+//   udpconnect:HOST:PORT    BSD UDP socket connect() + send() (SIGPIPE, if raised, is logged)
+//   udpconnect-nosigpipe:HOST:PORT   same with SO_NOSIGPIPE set (records errno without dying)
 //   udpecho:PORT[:SECS]     BSD UDP socket bound to PORT; replies to each datagram
 //   docwrite:PATH           append a line to PATH (e.g. under ~/Documents) and time it:
 //                           exercises a TCC file-access grant (Documents folder) for S15
+//   selftest-sigpipe        proves the SIGPIPE logger works (kills the probe, no network)
 //   sleep:SECS              keep the process alive (FB16131937: no alert for short-lived processes)
 //   ax | ax-prompt          AXIsProcessTrusted / ...WithOptions(prompt: true)
 //   ax-wait:SECS            poll AXIsProcessTrusted every second; log changes; stop early once true
@@ -88,6 +90,20 @@ final class Log {
 }
 
 let log = Log.shared
+
+/// SIGPIPE evidence: an EPIPE from send() also raises SIGPIPE, which kills a process that doesn't
+/// ignore it. The handler records that it happened (write(2) is async-signal-safe), then re-raises
+/// with the default action so behaviour is unchanged.
+var sigpipeLogFD: Int32 = -1
+func installSigpipeLogger() {
+    sigpipeLogFD = open(log.url.path, O_WRONLY | O_APPEND | O_CREAT, 0o644)
+    signal(SIGPIPE) { _ in
+        let msg = "!!! SIGPIPE received - process will be terminated by the default action\n"
+        _ = msg.withCString { write(sigpipeLogFD, $0, strlen($0)) }
+        signal(SIGPIPE, SIG_DFL)
+        raise(SIGPIPE)
+    }
+}
 
 func argValue(_ name: String) -> String? {
     let a = ProcessInfo.processInfo.arguments
@@ -379,14 +395,18 @@ func bsdConnect(host: String, port: UInt16, seconds: Double, done: @escaping () 
     }
 }
 
-func udpConnect(host: String, port: UInt16, done: @escaping () -> Void) {
+func udpConnect(host: String, port: UInt16, noSigpipe: Bool = false, done: @escaping () -> Void) {
     DispatchQueue.global().async {
         defer { DispatchQueue.main.async(execute: done) }
-        let tag = "udpconnect \(host):\(port)"
+        let tag = "udpconnect\(noSigpipe ? "-nosigpipe" : "") \(host):\(port)"
         guard let addr = makeSockaddr(host, port) else { log("\(tag) bad IPv4 address"); return }
         let fd = socket(AF_INET, SOCK_DGRAM, 0)
         guard fd >= 0 else { log("\(tag) socket(): \(errnoString(errno))"); return }
         defer { close(fd) }
+        if noSigpipe {
+            var one: Int32 = 1
+            setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &one, socklen_t(MemoryLayout<Int32>.size))
+        }
         let r = withSockaddr(addr) { connect(fd, $0, $1) }
         log("\(tag) connect() = \(r)\(r < 0 ? " " + errnoString(errno) : "")")
         let s = "udp ping from \(BuildInfo.variant)".withCString { send(fd, $0, strlen($0), 0) }
@@ -462,9 +482,9 @@ func runStep(_ step: String, done: @escaping () -> Void) {
     case "bsdconnect":
         guard let (h, p, s) = parseHostPort(parts) else { log("bad step \(step)"); return done() }
         bsdConnect(host: h, port: p, seconds: s ?? 8, done: done)
-    case "udpconnect":
+    case "udpconnect", "udpconnect-nosigpipe":
         guard let (h, p, _) = parseHostPort(parts) else { log("bad step \(step)"); return done() }
-        udpConnect(host: h, port: p, done: done)
+        udpConnect(host: h, port: p, noSigpipe: name == "udpconnect-nosigpipe", done: done)
     case "udpecho":
         guard parts.count >= 2, let port = UInt16(parts[1]) else { log("bad step \(step)"); return done() }
         udpEcho(port: port, seconds: parts.count > 2 ? Double(parts[2]) ?? 60 : 60, ready: done)
@@ -484,6 +504,16 @@ func runStep(_ step: String, done: @escaping () -> Void) {
             }
             DispatchQueue.main.async(execute: done)
         }
+    case "selftest-sigpipe":
+        // No network: send() on a loopback-connected UDP socket after shutdown(SHUT_WR) -> EPIPE + SIGPIPE.
+        let fd = socket(AF_INET, SOCK_DGRAM, 0)
+        if let lo = makeSockaddr("127.0.0.1", 9) { _ = withSockaddr(lo) { connect(fd, $0, $1) } }
+        shutdown(fd, SHUT_WR)
+        log("selftest-sigpipe: calling send() on a write-shut-down UDP socket")
+        let n = "x".withCString { send(fd, $0, 1, 0) }
+        log("selftest-sigpipe: send() = \(n) \(errnoString(errno)) (only reached if SIGPIPE is ignored)")
+        close(fd)
+        done()
     case "sleep":
         let s = parts.count > 1 ? Double(parts[1]) ?? 1 : 1
         DispatchQueue.main.asyncAfter(deadline: .now() + s, execute: done)
@@ -547,6 +577,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusItem.button?.title = "S08 \(BuildInfo.variant) \(BuildInfo.version)"
         buildMenu()
+        installSigpipeLogger()
         log("launched; args=\(Array(ProcessInfo.processInfo.arguments.dropFirst())) log=\(log.url.path)")
         log("info\n    \(signingInfo())\n    \(grantSummary())")
         if let script = argValue("--run") {

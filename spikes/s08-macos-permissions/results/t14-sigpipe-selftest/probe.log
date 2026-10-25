@@ -1,0 +1,13 @@
+2026-10-25T22:01:28.262Z +67.5ms [adhoc 1.0.0 pid 50443] launched; args=["--run", "selftest-sigpipe;sleep:3;quit", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t14-sigpipe-selftest/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t14-sigpipe-selftest/probe.log
+2026-10-25T22:01:28.270Z +75.1ms [adhoc 1.0.0 pid 50443] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=81E479FD-242F-3D9F-BE85-467624206348
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=d179d968e7c0963672e5c9696064b0577558183a
+    designated=cdhash H"d179d968e7c0963672e5c9696064b0577558183a"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T22:01:28.270Z +75.2ms [adhoc 1.0.0 pid 50443] STEP selftest-sigpipe
+2026-10-25T22:01:28.270Z +75.3ms [adhoc 1.0.0 pid 50443] selftest-sigpipe: calling send() on a write-shut-down UDP socket
+!!! SIGPIPE received - process will be terminated by the default action
