@@ -1,0 +1,69 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Settings</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .settings { left: 170px; top: 80px; width: 900px; height: 760px; }
+  .settings .main { position: absolute; left: 240px; top: 0; right: 0; bottom: 0; padding: 18px 28px; overflow: hidden; }
+  .settings h2 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin: 4px 0 14px; display: flex; align-items: center; gap: 10px; }
+  .settings .gl { font-size: 11.5px; font-weight: 600; color: var(--text-2); margin: 16px 4px 6px; }
+  .devcard { display: flex; align-items: center; gap: 14px; padding: 14px 16px; }
+  .devcard .pic { width: 48px; height: 48px; border-radius: 14px; background: var(--brand-grad); color: #fff; display: grid; place-items: center; }
+  .spark { display: flex; align-items: flex-end; gap: 2px; height: 26px; }
+  .spark i { width: 4px; border-radius: 2px; background: rgba(10,132,255,.55); display: block; }
+</style></head>
+<body>
+<div class="desktop calm">
+  <div class="menubar"><b>Tombolo</b><span>File</span><span>Edit</span><span>View</span><span>Phone</span><span>Window</span><span>Help</span>
+    <div class="right"><span class="status-item"><i data-i="smartphone"></i></span><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  10:40 AM</span></div></div>
+
+  <div class="win settings">
+    <div class="sidebar">
+      <div class="traffic"><span></span><span></span><span></span></div>
+      <div class="item"><span class="ico" style="background:#8e8e93"><i data-i="sliders"></i></span>General</div>
+      <div class="item"><span class="ico" style="background:#0a84ff"><i data-i="smartphone"></i></span>Devices</div>
+      <div class="item sel"><span class="ico" style="background:#5e5ce6"><i data-i="cast"></i></span>Mirroring</div>
+      <div class="item"><span class="ico" style="background:#ff9f0a"><i data-i="grid"></i></span>App Windows</div>
+      <div class="item"><span class="ico" style="background:#ff453a"><i data-i="bell"></i></span>Notifications</div>
+      <div class="item"><span class="ico" style="background:#30d158"><i data-i="chat"></i></span>Messages &amp; Calls</div>
+      <div class="item"><span class="ico" style="background:#64d2ff"><i data-i="clipboard"></i></span>Clipboard &amp; Files</div>
+      <div class="item"><span class="ico" style="background:#1d1d1f"><i data-i="keyboard"></i></span>Input</div>
+      <div class="grp">ADVANCED</div>
+      <div class="item"><span class="ico" style="background:#34c759"><i data-i="shield"></i></span>Privacy &amp; Security</div>
+      <div class="item"><span class="ico" style="background:var(--brand-c)"><i data-i="zap"></i></span>Enhanced Mode</div>
+      <div class="item"><span class="ico" style="background:#636366"><i data-i="terminal"></i></span>Diagnostics</div>
+      <div class="item"><span class="ico" style="background:#aeaeb2"><i data-i="info"></i></span>About</div>
+    </div>
+    <div class="main">
+      <h2>Mirroring</h2>
+      <div class="card devcard">
+        <div class="pic"><i data-i="smartphone" class="lg"></i></div>
+        <div style="flex:1"><div style="font-weight:600;font-size:14px">Pixel 9 Pro <span class="pill green" style="margin-left:6px"><span class="dot"></span>Connected · Wi-Fi</span></div>
+          <div style="font-size:12px;color:var(--text-2);margin-top:3px">Android 16 · Enhanced mode · HEVC hardware encoder · 1080×2424</div></div>
+        <div style="text-align:right"><div class="spark"><i style="height:10px"></i><i style="height:14px"></i><i style="height:9px"></i><i style="height:12px"></i><i style="height:22px"></i><i style="height:11px"></i><i style="height:10px"></i><i style="height:13px"></i><i style="height:9px"></i><i style="height:12px"></i><i style="height:10px"></i><i style="height:11px"></i></div><div style="font-size:11px;color:var(--text-2);margin-top:3px">38 ms median latency</div></div>
+      </div>
+
+      <div class="gl">VIDEO</div>
+      <div class="card">
+        <div class="row"><div class="lbl"><div class="t">Quality</div><div class="s">Auto adapts bitrate to your network. Fixed values never change mid-session.</div></div><div class="seg"><span class="on">Auto</span><span>Balanced</span><span>Max</span></div></div>
+        <div class="row"><div class="lbl"><div class="t">Resolution</div></div><div class="select">Match window (up to 1080p)</div></div>
+        <div class="row"><div class="lbl"><div class="t">Frame rate</div></div><div class="seg"><span>30</span><span class="on">60</span><span>90</span><span>120</span></div></div>
+        <div class="row"><div class="lbl"><div class="t">Codec</div><div class="s">Picked from what both devices decode in hardware.</div></div><div class="select">Auto (HEVC)</div></div>
+        <div class="row"><div class="lbl"><div class="t">Max bitrate</div></div><div class="slider"><div class="fill" style="width:45%"></div><div class="knob" style="left:45%"></div></div><span style="width:62px;text-align:right;font-size:12px;color:var(--text-2)">24 Mb/s</span></div>
+      </div>
+
+      <div class="gl">BEHAVIOR</div>
+      <div class="card">
+        <div class="row"><div class="lbl"><div class="t">Keep phone screen off while mirroring</div><div class="s">The phone stays dark; content is rendered to a virtual display. Requires Enhanced mode.</div></div><span class="toggle on"></span></div>
+        <div class="row"><div class="lbl"><div class="t">Play phone audio on this Mac</div><div class="s">Apps can opt out of audio capture; those stay on the phone.</div></div><span class="toggle on"></span></div>
+        <div class="row"><div class="lbl"><div class="t">Require Touch ID to start mirroring</div><div class="s">Asks for your Mac password or Touch ID before showing the phone screen.</div></div><span class="toggle on"></span></div>
+        <div class="row"><div class="lbl"><div class="t">Show touches on phone</div></div><span class="toggle"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" style="left:1100px;top:120px;max-width:300px"><span class="n">1</span><b>Native Settings layout.</b> SwiftUI Settings scene with a sidebar, like System Settings.</div>
+  <div class="note" style="left:1100px;top:230px;max-width:300px"><span class="n">2</span><b>Codec negotiation.</b> The Mac advertises hardware decoders (H.264 / HEVC / AV1 on newer Macs); the phone picks the best encoder it has.</div>
+  <div class="note" style="left:1100px;top:370px;max-width:300px"><span class="n">3</span><b>Security defaults on.</b> Touch ID gate before mirroring mirrors Apple’s own behaviour; per-device trust can be revoked from either side.</div>
+  <div class="note" style="left:1100px;top:500px;max-width:300px"><span class="n">4</span><b>Diagnostics</b> exposes a live latency breakdown (capture → encode → network → decode → display) to make performance bugs reportable.</div>
+</div>
+</body></html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Notifications, clipboard &amp; files</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .mirror { position: absolute; left: 400px; top: 96px; width: 340px; height: 734px; border-radius: 40px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.5), 0 0 0 5px rgba(20,20,22,.92), 0 40px 90px rgba(0,0,0,.45); }
+  .mirror .phone-screen { position: absolute; inset: 0; }
+  .drop { position: absolute; inset: 0; z-index: 10; background: rgba(10,30,40,.55); backdrop-filter: blur(6px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: #fff; text-align: center; }
+  .drop .ring { position: absolute; inset: 14px; border-radius: 30px; border: 3px dashed rgba(127,240,198,.95); }
+  .drop .big { width: 84px; height: 84px; border-radius: 26px; background: var(--brand-grad); display: grid; place-items: center; box-shadow: 0 12px 30px rgba(31,184,201,.5); }
+  .drop .big svg.i { width: 40px; height: 40px; stroke-width: 2.2; }
+  .drop b { font-size: 19px; } .drop span { font-size: 13px; opacity: .9; }
+  .ghost { position: absolute; left: 600px; top: 590px; z-index: 30; }
+  .ghost .f { position: absolute; width: 78px; height: 96px; border-radius: 10px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.35); display: grid; place-items: center; }
+  .ghost .badge { position: absolute; left: 66px; top: -10px; width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,.3); z-index: 2; }
+  .ghost .lbl { position: absolute; top: 104px; left: -10px; width: 110px; text-align: center; font-size: 11px; color: #fff; background: rgba(10,132,255,.9); border-radius: 5px; padding: 2px 4px; }
+  /* notifications */
+  .nstack { position: absolute; right: 18px; top: 42px; width: 380px; display: grid; gap: 10px; z-index: 40; }
+  .ntf { border-radius: 22px; padding: 14px; background: rgba(245,245,250,.82); backdrop-filter: blur(40px) saturate(1.8);
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.18), 0 12px 32px rgba(0,0,0,.25); }
+  .ntf .h { display: flex; gap: 12px; }
+  .ntf .ai { position: relative; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: #fff; flex: none; }
+  .ntf .ai .sb { position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 6px; background: var(--brand-grad); box-shadow: 0 0 0 2px #f5f5fa; display: grid; place-items: center; }
+  .ntf .ai .sb svg { width: 12px; height: 12px; }
+  .ntf .meta { font-size: 11.5px; color: var(--text-2); display: flex; justify-content: space-between; }
+  .ntf .tt { font-weight: 600; font-size: 13.5px; margin-top: 2px; }
+  .ntf .bd { font-size: 13px; color: #2c2c2e; margin-top: 2px; line-height: 1.35; }
+  .ntf .reply { display: flex; gap: 8px; margin-top: 12px; }
+  .ntf .reply .fld { flex: 1; height: 34px; border-radius: 999px; background: #fff; display: flex; align-items: center; padding: 0 14px; font-size: 13px; box-shadow: inset 0 0 0 .5px rgba(0,0,0,.15); }
+  .ntf .reply .go { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; }
+  .ntf .acts { display: grid; grid-auto-flow: column; gap: 8px; margin-top: 12px; }
+  .ntf .acts span { height: 32px; border-radius: 999px; background: rgba(0,0,0,.07); display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12.5px; font-weight: 600; }
+  .ntf .acts span.red { background: var(--red); color: #fff; }
+  .ntf .acts span.grn { background: var(--green); color: #fff; }
+  .caret { width: 2px; height: 16px; background: var(--accent); display: inline-block; margin-left: 1px; }
+  /* transfer HUD */
+  .hud { position: absolute; left: 790px; bottom: 34px; width: 420px; border-radius: 20px; padding: 14px 16px; z-index: 40;
+    background: rgba(245,245,250,.86); backdrop-filter: blur(40px) saturate(1.8); box-shadow: 0 0 0 .5px rgba(0,0,0,.18), 0 12px 32px rgba(0,0,0,.25); }
+  .bar { height: 6px; border-radius: 6px; background: rgba(0,0,0,.1); margin-top: 10px; overflow: hidden; }
+  .bar div { height: 100%; width: 43%; background: var(--brand-grad); border-radius: 6px; }
+  .clip { position: absolute; left: 790px; top: 640px; width: 420px; border-radius: 18px; padding: 12px 14px; z-index: 40; display: flex; gap: 12px; align-items: center;
+    background: rgba(245,245,250,.86); backdrop-filter: blur(40px) saturate(1.8); box-shadow: 0 0 0 .5px rgba(0,0,0,.18), 0 12px 32px rgba(0,0,0,.25); }
+</style></head>
+<body>
+<div class="desktop">
+  <div class="menubar"><b>Finder</b><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span>
+    <div class="right"><span class="status-item active"><i data-i="smartphone"></i><span style="font-size:12px">↑</span></span><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  6:52 PM</span></div></div>
+
+  <div class="mirror"><div class="phone-screen" data-home></div>
+    <div class="drop"><div class="ring"></div><div class="big"><i data-i="download"></i></div><b>Drop to send to Pixel 9 Pro</b><span>Saves to Downloads · opens in Files</span></div></div>
+
+  <div class="ghost">
+    <div class="f" style="transform:rotate(-8deg);left:-10px;top:6px"><i data-i="image" class="xl" style="color:#ec4899"></i></div>
+    <div class="f" style="transform:rotate(5deg);left:8px;top:2px"><i data-i="file" class="xl" style="color:#ef4444"></i></div>
+    <div class="f" style="left:0;top:0"><i data-i="file" class="xl" style="color:#3b82f6"></i></div>
+    <div class="badge">3</div>
+    <div class="lbl">Trip-itinerary.pdf</div>
+  </div>
+
+  <div class="nstack">
+    <div class="ntf">
+      <div class="h"><div class="ai c-msg"><i data-i="chat"></i><span class="sb"><svg viewBox="0 0 48 48" fill="none"><rect x="5" y="12" width="28" height="21" rx="4.5" stroke="#fff" stroke-width="4"/><rect x="25" y="8" width="17" height="31" rx="5" fill="#fff"/></svg></span></div>
+        <div style="flex:1"><div class="meta"><span>MESSAGES · PIXEL 9 PRO</span><span>now</span></div>
+          <div class="tt">Ayesha Rahman</div><div class="bd">No worries! I’ll order the starters — anything you don’t eat?</div></div></div>
+      <div class="reply"><div class="fld">Anything but mushrooms 🙂<span class="caret"></span></div><div class="go"><i data-i="send" class="sm"></i></div></div>
+    </div>
+    <div class="ntf">
+      <div class="h"><div class="ai c-phone"><i data-i="phone"></i><span class="sb"><svg viewBox="0 0 48 48" fill="none"><rect x="5" y="12" width="28" height="21" rx="4.5" stroke="#fff" stroke-width="4"/><rect x="25" y="8" width="17" height="31" rx="5" fill="#fff"/></svg></span></div>
+        <div style="flex:1"><div class="meta"><span>INCOMING CALL · PIXEL 9 PRO</span><span>now</span></div>
+          <div class="tt">Mom</div><div class="bd">Mobile · +1 (555) 010-2233</div></div></div>
+      <div class="acts"><span class="red"><i data-i="x" class="sm"></i>Decline</span><span><i data-i="chat" class="sm"></i>Text reply</span><span class="grn"><i data-i="phone" class="sm"></i>Answer</span></div>
+    </div>
+    <div class="ntf">
+      <div class="h"><div class="ai c-bank"><i data-i="shield"></i><span class="sb"><svg viewBox="0 0 48 48" fill="none"><rect x="5" y="12" width="28" height="21" rx="4.5" stroke="#fff" stroke-width="4"/><rect x="25" y="8" width="17" height="31" rx="5" fill="#fff"/></svg></span></div>
+        <div style="flex:1"><div class="meta"><span>BANK · PIXEL 9 PRO</span><span>2m ago</span></div>
+          <div class="tt">Sign-in code</div><div class="bd">Your verification code is <b>••••••</b>. Hidden by Android — open the phone to view.</div></div></div>
+    </div>
+  </div>
+
+  <div class="clip"><div style="width:36px;height:36px;border-radius:10px;background:rgba(10,132,255,.12);color:var(--accent);display:grid;place-items:center"><i data-i="clipboard"></i></div>
+    <div style="flex:1;min-width:0"><div style="font-size:11.5px;color:var(--text-2)">Copied on Pixel 9 Pro · ready to paste</div><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">https://saffronkitchen.example/menu?table=12</div></div><span class="kbd">⌘V</span></div>
+
+  <div class="hud">
+    <div style="display:flex;align-items:center;gap:10px"><i data-i="upload" style="color:var(--accent)"></i><b style="font-size:13px">Sending 3 items to Pixel 9 Pro</b><span style="margin-left:auto;font-size:12px;color:var(--text-2)">41 MB/s</span></div>
+    <div class="bar"><div></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11.5px;color:var(--text-2)"><span>48.2 MB of 112 MB · about 2 s left</span><span style="color:var(--accent);font-weight:600">Cancel</span></div>
+  </div>
+
+  <div class="note" style="left:40px;top:110px;max-width:320px"><span class="n">1</span><b>Notifications become real macOS notifications</b> with inline reply, actions and dismiss-sync. A small badge shows they came from the phone.</div>
+  <div class="note" style="left:40px;top:250px;max-width:320px"><span class="n">2</span><b>Calls:</b> see who’s calling, decline or text-reply from the Mac. Moving call <i>audio</i> to the Mac is a later research item — see the plan.</div>
+  <div class="note" style="left:40px;top:390px;max-width:320px"><span class="n">3</span><b>Honest about Android’s protections.</b> On Android 15+, one-time codes are redacted for notification listeners; we show that instead of pretending.</div>
+  <div class="note" style="left:40px;top:530px;max-width:320px"><span class="n">4</span><b>Drag files onto the phone window</b> to send them; drag photos <i>out</i> of the phone’s Gallery into Finder to receive. Clipboard syncs both ways.</div>
+</div>
+</body></html>

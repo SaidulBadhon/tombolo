@@ -1,0 +1,98 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Pairing</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .pair { left: 110px; top: 150px; width: 800px; height: 590px; }
+  .pair .body { display: flex; gap: 36px; padding: 18px 40px 0; }
+  .qrbox { position: relative; width: 290px; height: 290px; border-radius: 22px; background: #fff; display: grid; place-items: center;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.08); }
+  .qrbox svg { opacity: .22; filter: blur(.5px); }
+  .qrbox .ok { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .qrbox .ok .c { width: 64px; height: 64px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(48,209,88,.4); }
+  .qrbox .ok .c svg.i { width: 34px; height: 34px; stroke-width: 3; opacity: 1; filter: none; }
+  .qrbox .ok b { font-size: 15px; }
+  .qrbox .ok span { font-size: 12px; color: var(--text-2); }
+  .steps { flex: 1; }
+  .step { display: flex; gap: 12px; padding: 10px 0; color: var(--text-3); }
+  .step .k { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; background: rgba(0,0,0,.06); flex: none; }
+  .step.done { color: var(--text-2); } .step.done .k { background: var(--green); color: #fff; }
+  .step.cur { color: var(--text); } .step.cur .k { background: var(--accent); color: #fff; }
+  .step .t { font-size: 13.5px; font-weight: 600; } .step .s { font-size: 12px; margin-top: 2px; line-height: 1.4; }
+  .sas { margin-top: 14px; padding: 18px; border-radius: 18px; background: rgba(10,132,255,.07); box-shadow: inset 0 0 0 1px rgba(10,132,255,.18); }
+  .sas .lbl { font-size: 12px; color: var(--text-2); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .sas .code { display: flex; gap: 8px; margin-top: 10px; }
+  .sas .code span { width: 42px; height: 52px; border-radius: 12px; background: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 28px; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .sas .code i { width: 10px; }
+  .req { margin-top: 10px; padding: 14px 16px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 4px 14px rgba(0,0,0,.05); }
+  .req .hd { display: flex; gap: 12px; align-items: center; }
+  .req .pic { width: 40px; height: 40px; border-radius: 11px; background: var(--brand-grad); color: #fff; display: grid; place-items: center; }
+  .req .scope { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 12.5px; }
+  .req .scope .toggle { margin-left: auto; transform: scale(.85); }
+  .req .fp { font-family: var(--mono); font-size: 10.5px; color: var(--text-2); }
+  .devline { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 12.5px; color: var(--text-2); }
+  .footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 40px; display: flex; align-items: center; gap: 10px; border-top: .5px solid var(--sep); background: rgba(255,255,255,.5); }
+  .footer .hint { font-size: 12px; color: var(--text-2); }
+  .phone-wrap { position: absolute; left: 990px; top: 60px; transform: scale(.98); transform-origin: top left; }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--m-surface); border-radius: 30px 30px 0 0; padding: 12px 22px 26px; box-shadow: 0 -10px 40px rgba(0,0,0,.2); }
+  .sheet .handle { width: 36px; height: 4px; border-radius: 4px; background: var(--m-outline-v); margin: 0 auto 18px; }
+  .scan-bg { position: absolute; inset: 0; background: linear-gradient(180deg,#2c3236,#14181a); }
+  .vf { position: absolute; left: 60px; top: 120px; width: 232px; height: 232px; }
+  .vf::before, .vf::after { content: ""; position: absolute; inset: 0; border-radius: 26px; }
+  .vf::before { border: 4px solid #7ff0c6; clip-path: polygon(0 0,30% 0,30% 4px,4px 4px,4px 30%,0 30%, 0 70%,4px 70%,4px calc(100% - 4px),30% calc(100% - 4px),30% 100%,0 100%,0 0, 70% 0,100% 0,100% 30%,calc(100% - 4px) 30%,calc(100% - 4px) 4px,70% 4px, 100% 70%,100% 100%,70% 100%,70% calc(100% - 4px),calc(100% - 4px) calc(100% - 4px),calc(100% - 4px) 70%); }
+</style></head>
+<body>
+<div class="desktop calm">
+  <div class="menubar"><b>Tombolo</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span>
+    <div class="right"><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  10:25 AM</span></div></div>
+
+  <div class="win pair">
+    <div class="titlebar"><div class="traffic"><span></span><span></span><span></span></div><div class="title center">Pair a Phone</div></div>
+    <div class="body">
+      <div>
+        <div class="qrbox"><div data-qr="250" data-seed="11"></div>
+          <div class="ok"><div class="c"><i data-i="check"></i></div><b>Scanned by Pixel 9 Pro</b><span>192.168.1.42 · Android 16</span></div></div>
+        <div class="devline"><i data-i="laptop" class="sm"></i>This Mac: <b style="color:var(--text)">Saidul’s MacBook Pro</b></div>
+        <div class="devline" style="margin-top:6px"><i data-i="lock" class="sm"></i>Code is single-use and expires in 4:52</div>
+      </div>
+      <div class="steps">
+        <div class="step done"><span class="k">1</span><div><div class="t">Open Tombolo on your phone</div><div class="s">Install it from F-Droid, GitHub or Google Play.</div></div></div>
+        <div class="step done"><span class="k">2</span><div><div class="t">Tap “Pair with a Mac” and scan</div><div class="s">The code carries this Mac’s addresses, its certificate fingerprint and a one-time secret.</div></div></div>
+        <div class="step cur"><span class="k">3</span><div><div class="t">Approve on both devices</div><div class="s">The phone proved it scanned this code and its key is now pinned. You choose what to share on the phone; confirm here with Touch ID.</div></div></div>
+        <div class="req">
+          <div class="hd"><div class="pic"><i data-i="smartphone"></i></div><div style="flex:1"><div style="font-weight:600;font-size:14px">Pixel 9 Pro wants to pair</div><div class="fp">key 7F2A 91C4 … 36A4 7B19</div></div><span class="pill green"><i data-i="check" class="sm"></i>Verified</span></div>
+          <div style="margin-top:10px;border-top:.5px solid var(--sep);padding-top:10px;font-size:12px;color:var(--text-2);line-height:1.45">Sharing chosen on the phone: <b style="color:var(--text)">screen &amp; control, notifications, messages, clipboard, files</b>. The phone enforces these and can change them at any time.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span class="hint">Can’t scan? On your phone tap <b>Enter code</b> and type <span class="kbd">482 913</span></span>
+      <span style="margin-left:auto" class="btn">Decline</span><span class="btn primary lg"><i data-i="fingerprint"></i>Pair with Touch ID</span></div>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="device"><div class="cam"></div><div class="screen">
+      <div class="scan-bg"></div>
+      <div class="and-status light" style="position:relative">10:25<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div style="position:relative;color:#fff;text-align:center;margin-top:24px;font-size:15px;font-weight:500">Scan the code on your Mac</div>
+      <div class="vf"><div style="position:absolute;inset:22px;background:#fff;border-radius:12px;display:grid;place-items:center" data-qr="186" data-seed="11"></div></div>
+      <div class="sheet">
+        <div class="handle"></div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--m-primary-container);display:grid;place-items:center;color:var(--m-on-primary-container)"><i data-i="laptop"></i></div>
+          <div><div style="font-size:17px;font-weight:600">Pair with Saidul’s MacBook Pro?</div><div style="font-size:12.5px;color:var(--m-text-2);margin-top:2px">macOS 27 · 192.168.1.20</div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:12.5px;color:#12643c"><i data-i="shield" class="sm"></i><b>Verified</b>&nbsp;— key matches the code you scanned</div>
+        <div style="font-size:13px;font-weight:600;margin-top:12px">Allow this Mac to:</div>
+        <div style="display:grid;gap:2px;margin-top:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px">See &amp; control the screen<span class="m-switch on" style="margin-left:auto;transform:scale(.8)"></span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px">Notifications &amp; replies<span class="m-switch on" style="margin-left:auto;transform:scale(.8)"></span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px">Messages &amp; calls<span class="m-switch on" style="margin-left:auto;transform:scale(.8)"></span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px">Clipboard &amp; files<span class="m-switch on" style="margin-left:auto;transform:scale(.8)"></span></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:18px"><span class="m-btn tonal" style="flex:1">Cancel</span><span class="m-btn" style="flex:1">Pair</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="note" style="left:600px;top:775px;max-width:380px"><span class="n">1</span><b>QR bootstrap, no code-comparison step.</b> The QR carries the Mac’s key fingerprint and a one-time secret, so both sides are authenticated before anything is shown. The phone owner grants scopes on the phone; the Mac confirms with Touch ID. Device keys live in the Secure Enclave and Android Keystore.</div>
+</div>
+</body></html>

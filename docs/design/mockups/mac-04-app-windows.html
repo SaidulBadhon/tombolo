@@ -1,0 +1,133 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Phone apps as windows</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .appwin { position: absolute; border-radius: 22px; overflow: hidden; background: #fff;
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.3), 0 30px 80px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.2); }
+  .appwin .tbar { height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: rgba(246,246,248,.96); border-bottom: .5px solid var(--sep); }
+  .appwin .tbar .aic { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; color: #fff; margin-left: 6px; }
+  .appwin .tbar .aic svg.i { width: 12px; height: 12px; stroke-width: 2.4; }
+  .appwin .tbar .nm { font-weight: 600; font-size: 13px; }
+  .appwin .tbar .on { color: var(--text-3); font-size: 12px; }
+  .appwin .tbar .acts { margin-left: auto; display: flex; gap: 2px; color: var(--text-2); }
+  .appwin .tbar .acts span { width: 28px; height: 26px; border-radius: 7px; display: grid; place-items: center; }
+  .appwin .tbar .acts svg.i { width: 16px; height: 16px; }
+  .appwin .content { position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow: hidden; }
+  /* messages app */
+  .msg { background: #f8fafd; height: 100%; display: flex; flex-direction: column; }
+  .msg .hd { display: flex; align-items: center; gap: 12px; padding: 12px 16px; }
+  .av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 14px; flex: none; }
+  .bub { max-width: 74%; padding: 10px 14px; border-radius: 20px; font-size: 14px; line-height: 1.38; margin: 3px 14px; }
+  .bub.in { background: #e3e8ef; color: #1b1f24; align-self: flex-start; border-bottom-left-radius: 6px; }
+  .bub.out { background: #c7dcff; color: #0b1f3f; align-self: flex-end; border-bottom-right-radius: 6px; }
+  .ts { font-size: 11px; color: #6b7280; text-align: center; margin: 10px 0 4px; }
+  .compose { margin: auto 12px 14px; display: flex; align-items: center; gap: 10px; }
+  .compose .field { flex: 1; height: 46px; border-radius: 999px; background: #e7ecf3; display: flex; align-items: center; padding: 0 16px; font-size: 14px; color: #1b1f24; gap: 2px; }
+  .caret { width: 2px; height: 18px; background: #0a84ff; display: inline-block; }
+  .compose .snd { width: 46px; height: 46px; border-radius: 50%; background: #1a73e8; color: #fff; display: grid; place-items: center; }
+  /* maps */
+  .mapc { position: absolute; inset: 0; background: #eaf0e6; }
+  .mapc svg.map { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .mp-panel { position: absolute; left: 14px; top: 14px; bottom: 14px; width: 230px; background: #fff; border-radius: 18px; box-shadow: 0 4px 18px rgba(0,0,0,.12); padding: 14px; }
+  .mp-panel .q { height: 40px; border-radius: 999px; background: #eef1f5; display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 13px; color: #374151; }
+  .mp-panel .eta { font-size: 22px; font-weight: 700; color: #188038; margin-top: 16px; }
+  .mp-panel .sub { font-size: 12.5px; color: #4b5563; margin-top: 4px; }
+  .mp-panel .go { margin-top: 16px; height: 38px; border-radius: 999px; background: #1a73e8; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; font-size: 13.5px; }
+  .mp-panel .alt { margin-top: 14px; border-top: 1px solid #eef0f3; padding-top: 12px; font-size: 12px; color: #4b5563; display: grid; gap: 8px; }
+  /* launcher */
+  .launcher { position: absolute; left: 520px; top: 60px; width: 470px; padding: 16px; border-radius: 26px; z-index: 30;
+    background: rgba(248,248,252,.84); backdrop-filter: blur(40px) saturate(1.8);
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.25), 0 30px 80px rgba(0,0,0,.4); }
+  .launcher .sf { height: 44px; border-radius: 14px; background: rgba(255,255,255,.9); display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 16px; color: var(--text); box-shadow: 0 0 0 .5px rgba(0,0,0,.08); }
+  .launcher .sf .ph { color: var(--text-3); }
+  .launcher h4 { font-size: 11px; font-weight: 600; color: var(--text-3); margin: 14px 4px 8px; letter-spacing: .3px; }
+  .launcher .g { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px 4px; }
+  .launcher .app { color: var(--text); font-size: 10.5px; }
+  .launcher .app .ic { width: 46px; height: 46px; }
+  .launcher .app .ic svg.i { width: 22px; height: 22px; }
+  .launcher .app.sel .ic { box-shadow: 0 0 0 3px #fff, 0 0 0 5.5px var(--accent); }
+  .launcher .ft { display: flex; justify-content: space-between; margin-top: 14px; font-size: 11.5px; color: var(--text-2); padding: 0 4px; }
+</style></head>
+<body>
+<div class="desktop">
+  <div class="menubar"><b>Tombolo</b><span>File</span><span>Edit</span><span>View</span><span>Phone</span><span>Window</span><span>Help</span>
+    <div class="right"><span class="status-item"><i data-i="smartphone"></i><span style="font-size:12px">86%</span></span><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  10:36 AM</span></div></div>
+
+  <!-- Messages app window -->
+  <div class="appwin" style="left:56px;top:58px;width:400px;height:800px">
+    <div class="tbar"><div class="traffic"><span></span><span></span><span></span></div>
+      <div class="aic c-msg"><i data-i="chat"></i></div><span class="nm">Messages</span><span class="on">Pixel 9 Pro</span>
+      <div class="acts"><span><i data-i="back"></i></span><span><i data-i="rotate"></i></span></div></div>
+    <div class="content"><div class="msg">
+      <div class="hd"><i data-i="back"></i><div class="av" style="background:#e8710a">A</div><div style="flex:1"><div style="font-weight:600;font-size:15px">Ayesha Rahman</div><div style="font-size:11.5px;color:#6b7280">RCS · Online</div></div><i data-i="phone"></i></div>
+      <div class="ts">Today · 9:58 AM</div>
+      <div class="bub in">Are we still on for dinner tonight?</div>
+      <div class="bub out">Yes! Booked a table at Saffron Kitchen for 7</div>
+      <div class="bub in">Perfect. Can you send me the address? I’ll head over straight from work</div>
+      <div class="bub out">42 Elm Street — the one next to the bookshop</div>
+      <div class="bub out" style="padding:0;overflow:hidden;width:230px"><div style="height:96px;background:linear-gradient(135deg,#d8ead2,#c4ddf2)"></div><div style="padding:8px 12px;font-size:12.5px"><b>Saffron Kitchen</b><br><span style="color:#465a7a">4.2 km · 12 min</span></div></div>
+      <div class="ts">10:35 AM</div>
+      <div class="bub in">See you there!</div>
+      <div class="compose"><div style="width:40px;height:40px;border-radius:50%;background:#e7ecf3;display:grid;place-items:center"><i data-i="plus"></i></div>
+        <div class="field">Running 5 min late, save me a seat<span class="caret"></span></div><div class="snd"><i data-i="send"></i></div></div>
+    </div></div>
+  </div>
+
+  <!-- Maps app window (landscape — resizable) -->
+  <div class="appwin" style="left:510px;top:450px;width:640px;height:410px">
+    <div class="tbar"><div class="traffic"><span></span><span></span><span></span></div>
+      <div class="aic c-map"><i data-i="map"></i></div><span class="nm">Maps</span><span class="on">Pixel 9 Pro</span>
+      <div class="acts"><span><i data-i="back"></i></span><span><i data-i="rotate"></i></span></div></div>
+    <div class="content"><div class="mapc">
+      <svg class="map" viewBox="0 0 640 366" preserveAspectRatio="none">
+        <path d="M430 0 L640 0 L640 140 C590 120 540 160 500 130 C470 105 450 60 430 0Z" fill="#aad3f2"/>
+        <rect x="300" y="210" width="140" height="90" rx="12" fill="#c8e6b9"/>
+        <g stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"><path d="M250 330 L640 250"/><path d="M260 40 L620 330"/><path d="M380 0 L330 366"/><path d="M250 150 L640 110"/></g>
+        <g stroke="#fde68a" stroke-width="12" fill="none"><path d="M250 260 C380 250 470 230 640 200"/></g>
+        <path d="M300 320 C330 260 360 230 380 200 C400 170 450 160 520 120" stroke="#1a73e8" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <circle cx="300" cy="320" r="9" fill="#fff" stroke="#1a73e8" stroke-width="4"/>
+        <path d="M520 98 a14 14 0 0 1 14 14 c0 11 -14 24 -14 24 s-14 -13 -14 -24 a14 14 0 0 1 14 -14z" fill="#ea4335"/><circle cx="520" cy="112" r="5" fill="#fff"/>
+      </svg>
+      <div class="mp-panel"><div class="q"><i data-i="search" class="sm"></i>Saffron Kitchen</div>
+        <div class="eta">12 min</div><div class="sub">4.2 km · Fastest route, light traffic</div>
+        <div class="go"><i data-i="nav" class="sm"></i>Start</div>
+        <div class="alt"><div>Via Harbor Rd · 14 min</div><div>Transit · 22 min</div></div></div>
+    </div></div>
+  </div>
+
+  <!-- App launcher palette -->
+  <div class="launcher">
+    <div class="sf"><i data-i="search"></i><span>ma</span><span class="caret" style="height:20px;margin-left:-8px"></span><span class="ph" style="margin-left:auto;font-size:12px">Phone apps</span></div>
+    <h4>SUGGESTED</h4>
+    <div class="g">
+      <div class="app sel"><div class="ic c-map"><i data-i="map"></i></div>Maps</div>
+      <div class="app"><div class="ic c-mail"><i data-i="mail"></i></div>Mail</div>
+      <div class="app"><div class="ic c-msg"><i data-i="chat"></i></div>Messages</div>
+      <div class="app"><div class="ic c-bank"><i data-i="wallet"></i></div>Bank</div>
+      <div class="app"><div class="ic c-fit"><i data-i="heart"></i></div>Fitness</div>
+      <div class="app"><div class="ic c-music"><i data-i="music"></i></div>Music</div>
+    </div>
+    <h4>ALL APPS</h4>
+    <div class="g">
+      <div class="app"><div class="ic c-cal"><i data-i="calendar"></i></div>Calendar</div>
+      <div class="app"><div class="ic c-cam"><i data-i="camera"></i></div>Camera</div>
+      <div class="app"><div class="ic c-chat"><i data-i="chat"></i></div>Chat</div>
+      <div class="app"><div class="ic c-files"><i data-i="folder"></i></div>Files</div>
+      <div class="app"><div class="ic c-photo"><i data-i="image"></i></div>Gallery</div>
+      <div class="app"><div class="ic c-note"><i data-i="note"></i></div>Notes</div>
+      <div class="app"><div class="ic c-pod"><i data-i="headphones"></i></div>Podcasts</div>
+      <div class="app"><div class="ic c-web"><i data-i="globe"></i></div>Browser</div>
+      <div class="app"><div class="ic c-weather"><i data-i="cloud"></i></div>Weather</div>
+      <div class="app"><div class="ic c-wallet"><i data-i="wallet"></i></div>Wallet</div>
+      <div class="app"><div class="ic c-set"><i data-i="sliders"></i></div>Settings</div>
+      <div class="app"><div class="ic c-phone"><i data-i="phone"></i></div>Phone</div>
+    </div>
+    <div class="ft"><span><span class="kbd">↩</span> Open in new window</span><span><span class="kbd">⌥↩</span> Open in mirror</span><span><span class="kbd">⇧⌘A</span> Show launcher</span></div>
+  </div>
+
+  <div class="note" style="left:1180px;top:80px"><span class="n">1</span><b>One app, one window.</b> Each window is backed by its own Android virtual display, so you can run Messages and Maps side by side — and resize or rotate them independently.</div>
+  <div class="note" style="left:1180px;top:240px"><span class="n">2</span><b>Launcher palette</b> (<span class="kbd" style="color:#fff;background:rgba(255,255,255,.15)">⇧⌘A</span>) lists phone apps with their real icons. Pin favorites to open at login.</div>
+  <div class="note" style="left:1180px;top:375px"><span class="n">3</span><b>Requires Enhanced mode</b> (ADB-level helper). In Standard mode, apps open inside the single mirror window instead.</div>
+  <div class="note" style="left:1180px;top:500px"><span class="n">4</span><b>Type and paste naturally.</b> The Mac keyboard and clipboard work in every app window.</div>
+</div>
+</body></html>

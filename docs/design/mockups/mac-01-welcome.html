@@ -1,0 +1,93 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Welcome</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .welcome { left: 290px; top: 150px; width: 860px; height: 560px; display: flex; }
+  .hero { width: 330px; position: relative; padding: 70px 34px 30px; color: #fff;
+    background: radial-gradient(400px 300px at 0% 0%, rgba(255,255,255,.25), transparent 60%), var(--brand-grad); }
+  .hero .traffic { position: absolute; top: 20px; left: 20px; }
+  .hero h1 { font-family: var(--font-display); font-size: 34px; font-weight: 700; letter-spacing: -0.8px; margin-top: 22px; }
+  .hero p.tag { font-size: 16px; opacity: .95; margin-top: 6px; line-height: 1.35; }
+  .hero ul { list-style: none; margin-top: 30px; display: grid; gap: 14px; }
+  .hero li { display: flex; gap: 12px; align-items: center; font-size: 13.5px; font-weight: 500; }
+  .hero li .b { width: 30px; height: 30px; border-radius: 9px; background: rgba(255,255,255,.22); display: grid; place-items: center; }
+  .hero .foot { position: absolute; bottom: 26px; left: 34px; right: 30px; font-size: 11.5px; opacity: .9; line-height: 1.45; }
+  .hero .logo { background: rgba(255,255,255,.18); box-shadow: inset 0 0 0 1px rgba(255,255,255,.35); }
+  .pane { flex: 1; padding: 54px 40px 28px; display: flex; flex-direction: column; }
+  .pane h2 { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.4px; }
+  .pane .lead { color: var(--text-2); font-size: 13.5px; margin-top: 6px; line-height: 1.45; }
+  .opt { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 16px; background: #fff; margin-top: 12px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04); }
+  .opt.sel { box-shadow: 0 0 0 2px var(--accent), 0 6px 18px rgba(10,132,255,.14); }
+  .opt .oi { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; color: #fff; flex: none; }
+  .opt .t { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .opt .s { color: var(--text-2); font-size: 12.5px; margin-top: 3px; line-height: 1.4; }
+  .opt .radio { width: 18px; height: 18px; border-radius: 50%; margin-left: auto; flex: none; box-shadow: inset 0 0 0 1.5px #c7c7cc; }
+  .opt.sel .radio { box-shadow: inset 0 0 0 5px var(--accent); }
+  .get { display: flex; gap: 14px; align-items: center; margin-top: 18px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.035); }
+  .get .qr { width: 64px; height: 64px; background: #fff; border-radius: 8px; padding: 4px; }
+  .get .qr svg { width: 56px; height: 56px; }
+  .get .t { font-weight: 600; font-size: 12.5px; }
+  .get .s { color: var(--text-2); font-size: 11.5px; margin-top: 2px; }
+  .get .stores { display: flex; gap: 6px; margin-top: 6px; }
+  .actions { margin-top: auto; display: flex; align-items: center; gap: 10px; }
+  .steps { display: flex; gap: 6px; }
+  .steps span { width: 7px; height: 7px; border-radius: 50%; background: #d1d1d6; }
+  .steps span.on { width: 20px; border-radius: 4px; background: var(--accent); }
+</style></head>
+<body>
+<div class="desktop calm">
+  <div class="menubar"><b>Tombolo</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span>
+    <div class="right"><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  10:24 AM</span></div></div>
+
+  <div class="win welcome">
+    <div class="hero">
+      <div class="traffic"><span></span><span></span><span></span></div>
+      <div class="logo"></div>
+      <h1>Tombolo</h1>
+      <p class="tag">Your Android phone,<br>right on your Mac.</p>
+      <ul>
+        <li><span class="b"><i data-i="cast"></i></span>Mirror and control your phone</li>
+        <li><span class="b"><i data-i="grid"></i></span>Open phone apps as Mac windows</li>
+        <li><span class="b"><i data-i="bell"></i></span>Notifications, messages &amp; calls</li>
+        <li><span class="b"><i data-i="clipboard"></i></span>Shared clipboard and file drop</li>
+      </ul>
+      <div class="foot">Free and open source. No account, no cloud — your devices talk to each other directly, end-to-end encrypted.</div>
+    </div>
+    <div class="pane">
+      <h2>Connect your phone</h2>
+      <p class="lead">Choose how Tombolo reaches your phone. You can add another connection type later in Settings.</p>
+
+      <div class="opt sel">
+        <div class="oi" style="background:linear-gradient(135deg,#0a84ff,#5e5ce6)"><i data-i="wifi" class="lg"></i></div>
+        <div><div class="t">Wi-Fi <span class="pill blue">Recommended</span></div>
+          <div class="s">Pair once by scanning a QR code with the Tombolo app on your phone. Reconnects automatically whenever both are on the same network.</div></div>
+        <div class="radio"></div>
+      </div>
+      <div class="opt">
+        <div class="oi" style="background:linear-gradient(135deg,#30d158,#20a37a)"><i data-i="usb" class="lg"></i></div>
+        <div><div class="t">USB cable <span class="pill gray">Lowest latency</span></div>
+          <div class="s">Plug in your phone and allow USB debugging. Works without Wi-Fi and unlocks Enhanced mode features.</div></div>
+        <div class="radio"></div>
+      </div>
+
+      <div class="get">
+        <div class="qr" data-qr="56" data-seed="3"></div>
+        <div><div class="t">Don’t have the phone app yet?</div>
+          <div class="s">Scan to download Tombolo for Android — Android 10 or later.</div>
+          <div class="stores"><span class="pill gray">F-Droid</span><span class="pill gray">GitHub Releases</span><span class="pill gray">Google Play</span></div></div>
+      </div>
+
+      <div class="actions">
+        <div class="steps"><span class="on"></span><span></span><span></span></div>
+        <span style="margin-left:auto" class="btn">Not now</span>
+        <span class="btn primary lg">Continue</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" style="left:1170px;top:190px"><span class="n">1</span><b>No account required.</b> Pairing is device-to-device (QR → mutual TLS). There is no server to sign up for.</div>
+  <div class="note" style="left:1170px;top:330px"><span class="n">2</span><b>Two transports, one app.</b> Wi-Fi uses the companion app; USB uses ADB and is also the on-ramp to Enhanced mode.</div>
+  <div class="note" style="left:40px;top:560px;max-width:230px"><span class="n">3</span><b>Distribution stays free:</b> F-Droid and GitHub Releases first; Play Store is optional.</div>
+</div>
+</body></html>

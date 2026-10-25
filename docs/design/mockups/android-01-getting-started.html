@@ -1,0 +1,74 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Android · Getting started</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .hero-art { margin: 40px auto 0; width: 230px; height: 230px; border-radius: 50%; position: relative;
+    background: radial-gradient(circle at 30% 25%, #d6fbe9, transparent 60%), radial-gradient(circle at 75% 80%, #d8e4ff, transparent 60%), #e7f6f7; }
+  .hero-art .lap { position: absolute; left: 30px; top: 70px; width: 140px; height: 92px; border-radius: 12px; border: 6px solid #12343a; background: #fff; }
+  .hero-art .lap::after { content: ""; position: absolute; left: -22px; right: -22px; bottom: -20px; height: 8px; border-radius: 0 0 8px 8px; background: #12343a; }
+  .hero-art .ph { position: absolute; left: 132px; top: 52px; width: 66px; height: 128px; border-radius: 16px; background: #12343a; padding: 6px; }
+  .hero-art .ph div { width: 100%; height: 100%; border-radius: 11px; background: var(--brand-grad); }
+  .hero-art .beam { position: absolute; left: 92px; top: 108px; width: 46px; height: 6px; border-radius: 6px; background: repeating-linear-gradient(90deg, #2fd38f 0 8px, transparent 8px 13px); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 22px 0; }
+  .bottom { position: absolute; left: 0; right: 0; bottom: 30px; padding: 0 22px; display: grid; gap: 8px; }
+  .cambg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, #3b4448, #121618 70%); }
+  .vf2 { position: absolute; left: 66px; top: 196px; width: 220px; height: 220px; border-radius: 28px; box-shadow: 0 0 0 999px rgba(0,0,0,.45); }
+  .vf2 .c { position: absolute; width: 46px; height: 46px; border-color: #7ff0c6; border-style: solid; border-width: 0; }
+  .perm .li .tx .s { font-size: 12px; }
+  .perm .ab { font-size: 12.5px; font-weight: 600; height: 32px; padding: 0 14px; border-radius: 999px; background: var(--m-secondary-container); color: #0d2e33; display: inline-flex; align-items: center; }
+  .perm .tag { font-size: 11px; font-weight: 600; color: var(--m-text-2); background: var(--m-surface-ch); border-radius: 8px; padding: 4px 8px; white-space: nowrap; }
+</style></head>
+<body>
+<div class="board">
+  <h1>Android app — getting started <small>Material 3 · Android 10+</small></h1>
+  <div class="devices">
+
+    <!-- 1. Welcome -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen">
+      <div class="and-status">10:20<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div class="hero-art"><div class="lap"></div><div class="ph"><div></div></div><div class="beam"></div></div>
+      <div class="m-title" style="text-align:center;margin-top:22px">Your phone,<br>on your Mac</div>
+      <div class="m-sub" style="text-align:center">Tombolo links this phone to your Mac over Wi-Fi or USB. Mirror the screen, use your apps and answer notifications from the Mac.</div>
+      <div class="chips" style="justify-content:center"><span class="m-chip on"><i data-i="heart" class="sm"></i>Free &amp; open source</span><span class="m-chip"><i data-i="user" class="sm"></i>No account</span><span class="m-chip"><i data-i="lock" class="sm"></i>End-to-end encrypted</span></div>
+      <div class="bottom"><span class="m-btn block">Pair with a Mac</span><span class="m-btn text block">I have a pairing code</span></div>
+      <div class="gesture-bar"></div>
+    </div></div><div class="cap"><b>1 · Welcome</b>One clear action. Sets expectations: free, private, no sign-up.</div></div>
+
+    <!-- 2. Scan -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen" style="background:#121618">
+      <div class="cambg"></div>
+      <div class="and-status light" style="position:relative">10:21<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div style="position:relative;display:flex;align-items:center;gap:14px;padding:8px 18px;color:#fff"><i data-i="x"></i><span style="font-size:18px;font-weight:500">Pair with a Mac</span></div>
+      <div style="position:relative;color:#e6eef0;text-align:center;font-size:14px;margin-top:22px;padding:0 30px;line-height:1.45">Open <b>Tombolo</b> on your Mac and point the camera at the code</div>
+      <div class="vf2"><div style="position:absolute;inset:16px;border-radius:14px;background:#fff;display:grid;place-items:center;opacity:.92" data-qr="188" data-seed="11"></div>
+        <div style="position:absolute;inset:-3px;border-radius:30px;border:3px solid #7ff0c6"></div>
+        <div style="position:absolute;left:10px;right:10px;top:46%;height:2px;background:linear-gradient(90deg,transparent,#7ff0c6,transparent);box-shadow:0 0 12px #7ff0c6"></div></div>
+      <div style="position:absolute;left:0;right:0;top:450px;text-align:center;color:#9fb1b5;font-size:12.5px">Looking for a code…</div>
+      <div style="position:absolute;left:22px;right:22px;bottom:34px;display:grid;gap:10px">
+        <div style="background:rgba(255,255,255,.1);border-radius:20px;padding:14px;color:#e6eef0;display:flex;gap:12px;align-items:center"><i data-i="keyboard"></i><div style="flex:1"><div style="font-weight:600;font-size:14px">Enter code instead</div><div style="font-size:12px;color:#9fb1b5">6 digits shown under the QR code</div></div><i data-i="chevron"></i></div>
+        <div style="background:rgba(255,255,255,.1);border-radius:20px;padding:14px;color:#e6eef0;display:flex;gap:12px;align-items:center"><i data-i="usb"></i><div style="flex:1"><div style="font-weight:600;font-size:14px">Connect with a USB cable</div><div style="font-size:12px;color:#9fb1b5">Needs USB debugging</div></div><i data-i="chevron"></i></div>
+      </div>
+      <div class="gesture-bar light"></div>
+    </div></div><div class="cap"><b>2 · Scan to pair</b>QR carries the Mac’s addresses, certificate fingerprint and a one-time secret. Manual code and USB as fallbacks.</div></div>
+
+    <!-- 3. Permissions -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen">
+      <div class="and-status">10:22<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div class="m-top"><i data-i="back"></i><span style="margin-left:auto;font-size:13px;color:var(--m-text-2)">Step 2 of 3</span></div>
+      <div class="m-title" style="font-size:24px;padding-bottom:4px">Choose what to share</div>
+      <div class="m-sub" style="font-size:13px">Everything is optional and can be changed later.</div>
+      <div class="m-list perm" style="margin-top:6px">
+        <div class="li"><div class="ic"><i data-i="bell"></i></div><div class="tx"><div class="t">Notifications</div><div class="s">See and reply to them on your Mac</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic"><i data-i="wifi"></i></div><div class="tx"><div class="t">Nearby devices</div><div class="s">Find your Mac on this network</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic"><i data-i="cast"></i></div><div class="tx"><div class="t">Screen mirroring</div><div class="s">Android asks each time you start</div></div><span class="tag">Per session</span></div>
+        <div class="li"><div class="ic"><i data-i="keyboard"></i></div><div class="tx"><div class="t">Remote control</div><div class="s">Tap &amp; type from the Mac (Accessibility)</div></div><span class="ab">Allow</span></div>
+        <div class="li"><div class="ic"><i data-i="chat"></i></div><div class="tx"><div class="t">Messages &amp; calls</div><div class="s">Texts and caller ID on your Mac</div></div><div class="m-switch"></div></div>
+        <div class="li"><div class="ic"><i data-i="zap"></i></div><div class="tx"><div class="t">Stay connected</div><div class="s">Allow running in the background</div></div><span class="ab">Allow</span></div>
+      </div>
+      <div class="bottom"><span class="m-btn block">Continue</span></div>
+      <div class="gesture-bar"></div>
+    </div></div><div class="cap"><b>3 · Permissions, explained</b>Each Android permission is asked in context with a one-line reason; nothing is required up-front.</div></div>
+
+  </div>
+</div>
+</body></html>

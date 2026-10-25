@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Mac · Mirroring window</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  /* the mirror window: just the phone screen with rounded corners, like iPhone Mirroring */
+  .mirror { position: absolute; left: 470px; top: 118px; width: 352px; height: 760px; border-radius: 40px; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.5), 0 0 0 5px rgba(20,20,22,.92), 0 40px 90px rgba(0,0,0,.45); }
+  .mirror .phone-screen { position: absolute; inset: 0; }
+  /* hover toolbar floating above the window */
+  .mbar { position: absolute; left: 470px; top: 58px; width: 352px; display: flex; align-items: center; justify-content: space-between; }
+  .mbar .glass-capsule .tb { color: #1d1d1f; }
+  .devtag { position: absolute; left: 470px; top: 885px; width: 352px; text-align: center; color: rgba(255,255,255,.9); font-size: 12px; text-shadow: 0 1px 3px rgba(0,0,0,.4); }
+  /* menu bar extra dropdown */
+  .mbx { position: absolute; top: 34px; right: 150px; width: 330px; padding: 14px; border-radius: 22px; z-index: 55;
+    background: rgba(246,246,250,.86); backdrop-filter: blur(40px) saturate(1.8);
+    box-shadow: 0 0 0 .5px rgba(0,0,0,.2), 0 20px 50px rgba(0,0,0,.3); }
+  .mbx .dev { display: flex; gap: 12px; align-items: center; padding: 4px 4px 12px; }
+  .mbx .dev .pic { width: 44px; height: 44px; border-radius: 12px; background: var(--brand-grad); display: grid; place-items: center; color: #fff; }
+  .mbx .dev .n { font-weight: 600; font-size: 14px; }
+  .mbx .dev .s { font-size: 11.5px; color: var(--text-2); margin-top: 2px; display: flex; gap: 8px; align-items: center; }
+  .mbx .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .mbx .tile { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 10.5px; color: var(--text-2); text-align: center; }
+  .mbx .tile .b { width: 54px; height: 54px; border-radius: 16px; background: rgba(255,255,255,.85); display: grid; place-items: center; color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .mbx .tile .b.on { background: var(--accent); color: #fff; }
+  .mbx .sect { font-size: 11px; font-weight: 600; color: var(--text-3); margin: 14px 4px 6px; }
+  .mbx .mi { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 9px; font-size: 13px; }
+  .mbx .mi .r { margin-left: auto; color: var(--text-3); font-size: 12px; }
+  .mbx .mi.hl { background: rgba(10,132,255,.12); }
+  .stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+  .stat div { background: rgba(255,255,255,.7); border-radius: 10px; padding: 7px 8px; }
+  .stat b { display: block; font-size: 13px; } .stat span { font-size: 10px; color: var(--text-2); }
+  /* touch indicator */
+  .touch { position: absolute; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.35); box-shadow: 0 0 0 2px rgba(255,255,255,.9); z-index: 5; }
+  .cursor { position: absolute; z-index: 6; width: 22px; height: 30px; }
+</style></head>
+<body>
+<div class="desktop">
+  <div class="menubar"><b>Tombolo</b><span>File</span><span>Edit</span><span>View</span><span>Phone</span><span>Window</span><span>Help</span>
+    <div class="right"><span class="status-item active"><i data-i="smartphone"></i><span style="font-size:12px">87%</span></span><i data-i="wifi"></i><i data-i="battery"></i><span>Sun Oct 25  10:31 AM</span></div></div>
+
+  <!-- floating window controls (appear on hover) -->
+  <div class="mbar">
+    <div class="glass-capsule"><span class="tb"><i data-i="back"></i></span><span class="tb on"><i data-i="home"></i></span><span class="tb"><i data-i="recents"></i></span></div>
+    <div class="glass-capsule"><span class="tb"><i data-i="camera"></i></span><span class="tb"><i data-i="rotate"></i></span><span class="tb"><i data-i="volume"></i></span><span class="div"></span><span class="tb"><i data-i="more"></i></span></div>
+  </div>
+
+  <div class="mirror"><div class="phone-screen" data-home></div>
+    <div class="touch" style="left:211px;top:449px"></div>
+  </div>
+  <svg class="cursor" style="left:705px;top:585px" viewBox="0 0 22 30"><path d="M2 2v22l6-6 4 9 4-2-4-9h8z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  <div class="devtag">Pixel 9 Pro · Wi-Fi · 38 ms</div>
+
+  <!-- menu bar extra -->
+  <div class="mbx">
+    <div class="dev"><div class="pic"><i data-i="smartphone" class="lg"></i></div>
+      <div style="flex:1"><div class="n">Pixel 9 Pro</div><div class="s"><span class="pill green" style="height:18px"><span class="dot"></span>Connected</span>Wi-Fi · 87% · Enhanced</div></div></div>
+    <div class="tiles">
+      <div class="tile"><div class="b on"><i data-i="cast" class="lg"></i></div>Mirror</div>
+      <div class="tile"><div class="b"><i data-i="grid" class="lg"></i></div>Apps</div>
+      <div class="tile"><div class="b"><i data-i="upload" class="lg"></i></div>Send File</div>
+      <div class="tile"><div class="b"><i data-i="volume" class="lg"></i></div>Ring Phone</div>
+    </div>
+    <div class="stat"><div><b>38 ms</b><span>latency</span></div><div><b>60 fps</b><span>HEVC 1080p</span></div><div><b>14 Mb/s</b><span>bitrate</span></div></div>
+    <div class="sect">RECENT</div>
+    <div class="mi"><i data-i="clipboard" class="sm"></i>Copied on phone: “Gate B42, seat 17A”<span class="r">⌘V</span></div>
+    <div class="mi"><i data-i="image" class="sm"></i>IMG_20261025_0912.jpg received<span class="r">2m</span></div>
+    <div class="mi"><i data-i="chat" class="sm"></i>3 unread messages<span class="r">›</span></div>
+    <div class="sect">PHONE</div>
+    <div class="mi hl"><i data-i="moon" class="sm"></i>Mirror Do Not Disturb to phone<span class="r"><span class="toggle on" style="transform:scale(.8)"></span></span></div>
+    <div class="mi"><i data-i="sliders" class="sm"></i>Settings…<span class="r">⌘,</span></div>
+  </div>
+
+
+  <div class="note" style="left:60px;top:130px"><span class="n">1</span><b>Phone-shaped window, no chrome.</b> Controls float above it on hover, like iPhone Mirroring. Back / Home / Recents map to Android’s navigation.</div>
+  <div class="note" style="left:60px;top:260px"><span class="n">2</span><b>Mac-native input.</b> Click = tap, drag = swipe, two-finger scroll = fling, pinch = pinch, the keyboard types directly into the focused field (any language, via the Mac’s input method).</div>
+  <div class="note" style="left:60px;top:410px"><span class="n">3</span><b>Phone screen stays dark (Enhanced mode).</b> The helper turns the phone’s display off while you mirror; using the phone directly ends the session. Standard mode keeps the screen on — Android stops capture when the phone locks.</div>
+  <div class="note" style="left:950px;top:640px;max-width:330px"><span class="n">4</span><b>Menu bar extra</b> is the always-on home: connection status, quick actions, recent clipboard &amp; files, and live stream stats.</div>
+</div>
+</body></html>

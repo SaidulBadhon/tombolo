@@ -1,0 +1,81 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Tombolo — Android · Enhanced mode &amp; privacy</title>
+<link rel="stylesheet" href="assets/base.css"><script src="assets/ui.js"></script>
+<style>
+  .status { margin: 4px 14px 0; border-radius: 26px; padding: 16px; background: #d7f5e5; color: #06321f; }
+  .status .h { display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: 15px; }
+  .status .s { font-size: 12.5px; margin-top: 6px; line-height: 1.45; color: #22513b; }
+  .vstep { display: flex; gap: 14px; padding: 10px 22px; }
+  .vstep .k { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; flex: none; background: var(--m-primary); color: #fff; }
+  .vstep .k.todo { background: var(--m-surface-chh); color: var(--m-text-2); }
+  .vstep .t { font-size: 14.5px; font-weight: 600; }
+  .vstep .s { font-size: 12.5px; color: var(--m-text-2); margin-top: 3px; line-height: 1.45; }
+  .sec { font-size: 13px; font-weight: 600; color: var(--m-primary); padding: 14px 22px 2px; }
+  .applist .li { padding: 9px 18px; }
+  .applist .li .ic { width: 38px; height: 38px; color: #fff; }
+  .fp { font-family: var(--mono); font-size: 11px; color: var(--m-text-2); background: var(--m-surface-c); border-radius: 12px; padding: 10px 12px; margin: 6px 18px; line-height: 1.5; word-break: break-all; }
+</style></head>
+<body>
+<div class="board">
+  <h1>Android app — Enhanced mode &amp; privacy <small>power features with clear consent</small></h1>
+  <div class="devices">
+
+    <!-- 1. Enhanced mode -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen">
+      <div class="and-status">10:44<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div class="m-top"><i data-i="back"></i></div>
+      <div class="m-title" style="font-size:26px">Enhanced mode</div>
+      <div class="m-sub" style="font-size:13px">A helper with Android’s developer (shell) permissions enables app windows, a dark-screen mirror and full keyboard control. No root.</div>
+      <div class="status" style="margin-top:14px"><div class="h"><span class="dot" style="color:#12a35a;width:9px;height:9px"></span>Helper running</div>
+        <div class="s">Started 10:44 by Saidul’s MacBook Pro via Wireless debugging. Stops when you disconnect or restart.</div></div>
+      <div style="margin-top:8px">
+        <div class="vstep"><span class="k"><i data-i="check" class="sm"></i></span><div><div class="t">Developer options</div><div class="s">Enabled</div></div></div>
+        <div class="vstep"><span class="k"><i data-i="check" class="sm"></i></span><div><div class="t">Wireless debugging</div><div class="s">On · HomeNet-5G</div></div></div>
+        <div class="vstep"><span class="k"><i data-i="check" class="sm"></i></span><div><div class="t">Mac paired for debugging</div><div class="s">Code entered on the Mac</div></div></div>
+      </div>
+      <div style="position:absolute;left:22px;right:22px;bottom:34px;display:grid;gap:8px"><span class="m-btn tonal block"><i data-i="sliders" class="sm"></i>Open Wireless debugging</span><span class="m-btn text block" style="color:#b3261e">Stop helper</span></div>
+      <div class="gesture-bar"></div>
+    </div></div><div class="cap"><b>7 · Enhanced mode, on the phone</b>Always shows whether the privileged helper is running, who started it, and a one-tap Stop.</div></div>
+
+    <!-- 2. Notifications filter -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen">
+      <div class="and-status">10:46<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div class="m-top"><i data-i="back"></i></div>
+      <div class="m-title" style="font-size:26px">Notifications</div>
+      <div class="m-list"><div class="li" style="padding:6px 22px"><div class="tx"><div class="t">Forward to Mac</div><div class="s">Only while the Mac is unlocked and in use</div></div><div class="m-switch on"></div></div></div>
+      <div class="sec">Apps</div>
+      <div class="m-list applist">
+        <div class="li"><div class="ic c-msg"><i data-i="chat"></i></div><div class="tx"><div class="t">Messages</div><div class="s">Reply from Mac</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic c-chat"><i data-i="chat"></i></div><div class="tx"><div class="t">Chat</div><div class="s">Reply from Mac</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic c-mail"><i data-i="mail"></i></div><div class="tx"><div class="t">Mail</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic c-cal"><i data-i="calendar"></i></div><div class="tx"><div class="t">Calendar</div></div><div class="m-switch on"></div></div>
+        <div class="li"><div class="ic c-bank"><i data-i="shield"></i></div><div class="tx"><div class="t">Bank</div><div class="s">Sensitive · off by default</div></div><div class="m-switch"></div></div>
+        <div class="li"><div class="ic c-fit"><i data-i="heart"></i></div><div class="tx"><div class="t">Fitness</div></div><div class="m-switch"></div></div>
+        <div class="li"><div class="ic c-pod"><i data-i="headphones"></i></div><div class="tx"><div class="t">Podcasts</div></div><div class="m-switch"></div></div>
+      </div>
+      <div class="gesture-bar"></div>
+    </div></div><div class="cap"><b>8 · Per-app notification control</b>Finance and health apps default to off. Silent and ongoing notifications are never forwarded.</div></div>
+
+    <!-- 3. Security -->
+    <div class="col"><div class="device"><div class="cam"></div><div class="screen">
+      <div class="and-status">10:47<div class="r"><i data-i="wifi"></i><i data-i="battery"></i></div></div>
+      <div class="m-top"><i data-i="back"></i></div>
+      <div class="m-title" style="font-size:26px">Paired Macs</div>
+      <div class="m-list">
+        <div class="li"><div class="ic"><i data-i="laptop"></i></div><div class="tx"><div class="t">Saidul’s MacBook Pro</div><div class="s">Connected · paired Oct 25 · Wi-Fi &amp; USB</div></div><i data-i="chevron"></i></div>
+        <div class="li"><div class="ic" style="background:var(--m-surface-ch);color:var(--m-text-2)"><i data-i="laptop"></i></div><div class="tx"><div class="t">Studio iMac</div><div class="s">Last seen 3 days ago</div></div><span style="font-size:13px;font-weight:600;color:#b3261e">Remove</span></div>
+      </div>
+      <div class="sec">Security</div>
+      <div class="m-list">
+        <div class="li" style="padding:9px 22px"><div class="tx"><div class="t">Mac must be unlocked</div><div class="s">Mirroring stops when the Mac locks or sleeps</div></div><div class="m-switch on"></div></div>
+        <div class="li" style="padding:9px 22px"><div class="tx"><div class="t">Turn screen off while mirroring</div><div class="s">Enhanced mode · touching the phone ends the session</div></div><div class="m-switch on"></div></div>
+        <div class="li" style="padding:9px 22px"><div class="tx"><div class="t">Ask before each mirroring session</div></div><div class="m-switch"></div></div>
+      </div>
+      <div class="sec">This phone’s identity</div>
+      <div class="fp">SHA-256 7F:2A:91:C4:0E:5B:3D:88:A1:47:F2:6C:19:BE:03:D5 :E8:72:4F:A9:60:1C:93:2E:B7:55:0D:C1:8F:36:A4:7B</div>
+      <div class="gesture-bar"></div>
+    </div></div><div class="cap"><b>9 · Trust is revocable from both sides</b>Remove a Mac and its certificate is forgotten instantly; fingerprints are visible for verification.</div></div>
+
+  </div>
+</div>
+</body></html>
