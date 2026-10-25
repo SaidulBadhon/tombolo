@@ -418,3 +418,66 @@
  55.1 <other-process>
  21.6 <other-process>
  20.9 <other-process>
+== 2026-10-26 04:24:31 burst3 quic bbr3 seed=1
+ 4:24  up 4 days, 21:08, 2 users, load averages: 12.36 8.23 9.09
+231.8 <other-process>
+220.8 <other-process>
+ 44.9 <other-process>
+ 18.7 <other-process>
+  8.7 <other-process>
+== 2026-10-26 04:24:55 burst3 tcp cubic seed=1
+ 4:24  up 4 days, 21:08, 2 users, load averages: 16.58 9.39 9.47
+257.4 <other-process>
+223.7 <other-process>
+ 64.5 <other-process>
+ 45.4 <other-process>
+ 20.1 <other-process>
+== 2026-10-26 04:25:18 burst3 quic cubic seed=1
+ 4:25  up 4 days, 21:09, 2 users, load averages: 15.82 9.70 9.58
+233.5 <other-process>
+209.4 <other-process>
+ 44.9 <other-process>
+ 28.1 <other-process>
+ 18.4 <other-process>
+== 2026-10-26 04:25:41 burst3 tcp cubic seed=2
+ 4:25  up 4 days, 21:09, 2 users, load averages: 13.66 9.68 9.57
+308.5 <other-process>
+216.2 <other-process>
+ 45.8 <other-process>
+ 32.0 <other-process>
+ 19.2 <other-process>
+== 2026-10-26 04:26:04 burst3 quic cubic seed=2
+ 4:26  up 4 days, 21:10, 2 users, load averages: 13.44 9.93 9.67
+284.4 <other-process>
+252.7 <other-process>
+ 45.5 <other-process>
+ 20.6 <other-process>
+ 15.4 <other-process>
+== 2026-10-26 04:26:28 burst3 quic bbr3 seed=2
+ 4:26  up 4 days, 21:10, 2 users, load averages: 12.15 9.87 9.65
+245.1 <other-process>
+241.1 <other-process>
+ 96.1 <other-process>
+ 45.6 <other-process>
+ 13.4 <other-process>
+== 2026-10-26 04:26:51 burst3 quic cubic seed=3
+ 4:26  up 4 days, 21:10, 2 users, load averages: 12.41 10.10 9.74
+446.7 <other-process>
+223.3 <other-process>
+ 46.9 <other-process>
+ 21.8 <other-process>
+ 21.3 <other-process>
+== 2026-10-26 04:27:14 burst3 quic bbr3 seed=3
+ 4:27  up 4 days, 21:11, 2 users, load averages: 11.03 9.97 9.70
+393.6 <other-process>
+201.0 <other-process>
+ 42.1 <other-process>
+ 38.2 <other-process>
+ 14.6 <other-process>
+== 2026-10-26 04:27:37 burst3 tcp cubic seed=3
+ 4:27  up 4 days, 21:11, 2 users, load averages: 9.74 9.74 9.63
+293.5 <other-process>
+ 40.3 <other-process>
+ 37.2 <other-process>
+ 37.0 <other-process>
+ 17.5 <other-process>
