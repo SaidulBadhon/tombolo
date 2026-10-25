@@ -1,0 +1,55 @@
+preset=n0 pid=22047 (snapshot at ~10s of a 20s hold)
+--- lsof -i -n -P -a -p 22047
+COMMAND     PID         USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+iroh-prob 22047 saidulbadhon    9u  IPv4 0x731f3820f3da662c      0t0  UDP *:54569
+iroh-prob 22047 saidulbadhon   10u  IPv6 0x5b3aa5e3fa9fc48f      0t0  UDP *:61660
+iroh-prob 22047 saidulbadhon   13u  IPv4 0xfc00eb8258e6028c      0t0  UDP *:59827
+iroh-prob 22047 saidulbadhon   14u  IPv6 0x9fb35b1a0545d962      0t0  UDP *:54523
+iroh-prob 22047 saidulbadhon   17u  IPv4 0xbcf16cfc975396e0      0t0  TCP 10.59.232.41:51995->49.13.207.244:443 (ESTABLISHED)
+iroh-prob 22047 saidulbadhon   18u  IPv4 0xff2ba6d3b283d7a5      0t0  TCP 10.59.232.41:51996->49.13.207.244:443 (ESTABLISHED)
+iroh-prob 22047 saidulbadhon   19u  IPv4 0xb6413210343513bc      0t0  TCP 10.59.232.41:51997->49.13.207.244:443 (ESTABLISHED)
+iroh-prob 22047 saidulbadhon   21u  IPv4 0x5531310208150122      0t0  TCP 10.59.232.41:52036->5.223.65.62:443 (ESTABLISHED)
+iroh-prob 22047 saidulbadhon   22u  IPv4 0x67c7dbec84aa799c      0t0  TCP 10.59.232.41:52037->5.223.65.62:443 (ESTABLISHED)
+--- nettop -m tcp
+time,,interface,state,bytes_in,bytes_out,rx_dupe,rx_ooo,re-tx,rtt_avg,rcvsize,tx_win,tc_class,tc_mgt,cc_algo,P,C,R,W,arch,
+01:31:10.046549,iroh-probe.22047,,,21269,4096,0,0,240,,,,,,,,,,,,
+01:31:10.045391,tcp4 10.59.232.41:52037<->5.223.65.62:443,en0,Established,4464,797,0,0,0,89.94 ms,131072,64640,BE,-,cubic,-,-,-,-,so,
+01:31:10.045372,tcp4 10.59.232.41:52036<->5.223.65.62:443,en0,Established,4465,797,0,0,0,83.31 ms,131072,64384,BE,-,cubic,-,-,-,-,so,
+01:31:10.045332,tcp4 10.59.232.41:51997<->49.13.207.244:443,en0,Established,4089,452,0,0,0,263.94 ms,131072,64896,BE,-,cubic,-,-,-,-,so,
+01:31:10.045312,tcp4 10.59.232.41:51996<->49.13.207.244:443,en0,Established,4125,905,0,0,0,255.22 ms,131072,64512,BE,-,cubic,-,-,-,-,so,
+01:31:10.045292,tcp4 10.59.232.41:51995<->49.13.207.244:443,en0,Established,4126,1145,0,0,240,209.66 ms,131072,64512,BE,-,cubic,-,-,-,-,so,
+--- nettop -m udp
+time,,interface,type,bytes_in,bytes_out,rcvsize,tc_class,arch,
+01:31:10.055892,iroh-probe.22047,,,466428,460425,,,,
+01:31:10.055489,udp4 *:54569<->*:*,en0,WiFi,171384,163050,7340032,BE,so,
+01:31:10.055504,udp6 *.61660<->*.*,lo0,Loop,64366,65294,7340032,BE,so,
+01:31:10.055624,udp4 *:59827<->*:*,en0,WiFi,168063,169376,7340032,BE,so,
+01:31:10.055650,udp6 *.54523<->*.*,lo0,Loop,62615,62705,7340032,BE,so,
+--- probe output
+RESULT pid=22047
+RESULT preset=n0
+RESULT bind=any
+RESULT server_bound=[0.0.0.0:54569, [::]:61660]
+RESULT server_id=0973a82e5ea05f3b8794c289b8a07408c1facdfcd68d125f4ab62a33d5c741cf
+RESULT connect_ms=1.19
+RESULT remote_id_matches=true
+RESULT alpn=tombolo/1
+RESULT exporter_client_prefix=b27ec69a886c1a97
+RESULT exporter_match=true
+RESULT stream_priority_roundtrip=true
+RESULT bi_echo_ok=true
+RESULT max_datagram_size=Some(1414)
+RESULT datagram_send_buffer_space=1048544
+RESULT server_saw_reset_code=Some(42)
+RESULT datagram_max_roundtrip_len=1414
+RESULT datagram_oversize=TooLarge
+RESULT datagram_rtt_samples=50
+RESULT datagram_app_rtt_us_p50=176
+RESULT quic_rtt_path0=Some(186.408µs)
+RESULT stats_sent_packets=197
+RESULT stats_lost_packets=0
+RESULT stats_udp_tx_bytes=117189
+RESULT path=id=PathId(0) remote=Ip(127.0.0.1:54569) selected=true rtt=186.408µs cwnd=60379
+RESULT holding_secs=20
+RESULT path_after_hold=remote=Ip([<redacted-ipv6>]:61660) selected=true
+RESULT done=true

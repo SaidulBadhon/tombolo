@@ -1,0 +1,44 @@
+preset=tombolo pid=21847 (snapshot at ~10s of a 20s hold)
+--- lsof -i -n -P -a -p 21847
+COMMAND     PID         USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+iroh-prob 21847 saidulbadhon    9u  IPv4 0x697dd7f226639831      0t0  UDP *:63064
+iroh-prob 21847 saidulbadhon   10u  IPv6 0x85f42c9baa68378d      0t0  UDP *:52664
+iroh-prob 21847 saidulbadhon   12u  IPv4 0xc951f6b0f48fb017      0t0  UDP *:60673
+iroh-prob 21847 saidulbadhon   13u  IPv6 0xabcc63f25586670a      0t0  UDP *:59088
+--- nettop -m tcp
+time,,interface,state,bytes_in,bytes_out,rx_dupe,rx_ooo,re-tx,rtt_avg,rcvsize,tx_win,tc_class,tc_mgt,cc_algo,P,C,R,W,arch,
+--- nettop -m udp
+time,,interface,type,bytes_in,bytes_out,rcvsize,tc_class,arch,
+01:30:49.923662,iroh-probe.21847,,,306243,306243,,,,
+01:30:49.923245,udp4 *:63064<->*:*,lo0,Loop,131238,130055,7340032,BE,so,
+01:30:49.923261,udp6 *.52664<->*.*,lo0,Loop,23640,21310,7340032,BE,so,
+01:30:49.923528,udp4 *:60673<->*:*,lo0,Loop,130055,131238,7340032,BE,so,
+01:30:49.923559,udp6 *.59088<->*.*,lo0,Loop,21310,23640,7340032,BE,so,
+--- probe output
+RESULT pid=21847
+RESULT preset=tombolo
+RESULT bind=any
+RESULT server_bound=[0.0.0.0:63064, [::]:52664]
+RESULT server_id=12d341263cde11a5eb9df759740309872d89bb642b030b3d14c0a2bca1b22700
+RESULT connect_ms=0.95
+RESULT remote_id_matches=true
+RESULT alpn=tombolo/1
+RESULT exporter_client_prefix=1bf00d1426a26b7d
+RESULT exporter_match=true
+RESULT stream_priority_roundtrip=true
+RESULT bi_echo_ok=true
+RESULT max_datagram_size=Some(1414)
+RESULT datagram_send_buffer_space=1048544
+RESULT server_saw_reset_code=Some(42)
+RESULT datagram_max_roundtrip_len=1414
+RESULT datagram_oversize=TooLarge
+RESULT datagram_rtt_samples=50
+RESULT datagram_app_rtt_us_p50=105
+RESULT quic_rtt_path0=Some(79.677µs)
+RESULT stats_sent_packets=203
+RESULT stats_lost_packets=0
+RESULT stats_udp_tx_bytes=122377
+RESULT path=id=PathId(0) remote=Ip(127.0.0.1:63064) selected=true rtt=79.677µs cwnd=63082
+RESULT holding_secs=20
+RESULT path_after_hold=remote=Ip(127.0.0.1:63064) selected=true
+RESULT done=true

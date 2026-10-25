@@ -1,0 +1,14 @@
+size min 3458448 bytes (3.29 MiB) Mach-O 64-bit executable arm64
+size full 4038752 bytes (3.85 MiB) Mach-O 64-bit executable arm64
+size baseline 370464 bytes (.35 MiB) Mach-O 64-bit executable arm64
+release-strip min 9121824 bytes (8.69 MiB) Mach-O 64-bit executable arm64
+release-strip full 11149376 bytes (10.63 MiB) Mach-O 64-bit executable arm64
+release-strip baseline 554032 bytes (.52 MiB) Mach-O 64-bit executable arm64
+/tmp/sz-size-min:
+	/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration (compatibility version 1.0.0, current version 1446.0.0)
+	/System/Library/Frameworks/Security.framework/Versions/A/Security (compatibility version 1.0.0, current version 62460.1.2)
+	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.0.69)
+	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)
+	/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)
+	/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 5027.0.69)
+	/usr/lib/libiconv.2.dylib (compatibility version 7.0.0, current version 7.0.0)

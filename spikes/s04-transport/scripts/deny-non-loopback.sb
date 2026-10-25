@@ -1,0 +1,7 @@
+;; Spike S5: allow everything except outbound network traffic that is not loopback.
+;; Denied attempts are reported by the kernel as "Sandbox: <proc>(<pid>) deny(1) network-outbound <dest>"
+;; in the unified log (see scripts/s5-egress.sh).
+(version 1)
+(allow default)
+(deny network-outbound)
+(allow network-outbound (remote ip "localhost:*"))

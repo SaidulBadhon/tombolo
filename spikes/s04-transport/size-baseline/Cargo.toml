@@ -1,0 +1,10 @@
+[package]
+name = "size-baseline"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Spike S5 Q6: tokio-only UDP echo, the baseline subtracted from size-min"
+
+[dependencies]
+tokio = { version = "1", features = ["rt", "macros", "time", "net"] }
