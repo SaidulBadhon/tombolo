@@ -1,0 +1,25 @@
+start: 46726388.535 [shim com.example.chat 24788] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 24781 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+start: 46726456.841 [shim org.example.maps 24794] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 24781 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+no window for pid 24788
+no window for pid 24788
+--- A. graceful host quit (SIGTERM), then relaunch
+chat: 46729599.724 [shim com.example.chat 24788] disconnected: host quit (frames this session: 194)  [+30.0 ms after SIGTERM]
+maps: 46729599.758 [shim org.example.maps 24794] disconnected: host quit (frames this session: 190)  [+30.0 ms]
+no window for pid 24788
+shims still running: chat=24788 maps=24794; host=24891
+host: TIMEOUT waiting for /claimed dynamic bootstrap name/ in host.log [+-46730818.3 ms after open]
+chat: TIMEOUT waiting for /connected: session/ in shim-com.example.chat.log  [+0.0 ms after host claimed name]
+maps: TIMEOUT waiting for /connected: session/ in shim-org.example.maps.log  [+0.0 ms]
+--- B. host crash (SIGKILL), then relaunch
+chat: 46765640.055 [shim com.example.chat 24788] disconnected: host went away (frames this session: 2093)  [+24.4 ms after SIGKILL]
+maps: 46765640.046 [shim org.example.maps 24794] disconnected: host went away (frames this session: 2093)  [+24.4 ms]
+launchd name after crash: 0 entries (0 = removed with the receive right)
+host: 46765818.788 [host 26439] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38663); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready [+117.6 ms after open]
+chat: 46765831.299 [shim com.example.chat 24788] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 191.9 ms after disconnect  [+12.5 ms after host claimed name]
+maps: 46765828.337 [shim org.example.maps 24794] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 188.9 ms after disconnect  [+9.5 ms]
+--- C. shim crash (SIGKILL Chat), host notices; relaunch Chat via LaunchServices (like a Dock click)
+host: 46767963.738 [host 26439] session 2 (com.example.chat) ended: shim process died (dead-name notification); recv n=9 p50=0.038 p95=0.046 p99=0.046 max=0.046 mean=0.038 ms; commit n=9 p50=0.148 p95=0.166 p99=0.166 max=0.166 mean=0.148 ms; fps 64.8  [+31.0 ms after SIGKILL]
+chat: 46768157.457 [shim com.example.chat 26573] connected: session 3 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]  [+149.7 ms after open -b]
+maps unaffected: 1 disconnects in its last 3 lines
+--- D. two hosts: second instance cannot claim the name
+second host exit code 3 ; 46768265.494 [host 26605] bootstrap_check_in(io.github.saidulbadhon.Tombolo.spike-s13.ipc) = 1100 Permission denied; retrying
