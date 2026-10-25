@@ -68,14 +68,26 @@ $H cancel        --json results/cancel.json         # cancellation: Swift->Rust 
 $H threads       --json results/threads.json        # thread map, re-entrancy, lock + main-thread deadlock hazards
 $H bench         --json results/bench.json          # FFI call overhead (sync, async, callbacks)
 $H stress        --json results/stress.json         # prefilled drain: ns/frame by payload size, all 7 designs (~10 s)
-$H media --seconds 120 --json results/media-2min.json   # paced 1080p60, 2 min per design (~14 min total)
+$H media --seconds 120 --json results/media-2min-run3.json   # paced 1080p60, 2 min per design (~14 min total)
 $H media --design ring-pull --seconds 30            # one design; names: vec-pull, vec-async, vec-callback,
                                                     #   handle-pull, ring-pull, ring-async, ring-callback
 ```
 
 The media stream is synthetic 1080p60-encoded-video-sized: P-frames uniformly 25–40 KB, a 250 KB
-keyframe every 120 frames (2 s). Run media/stress measurements only when the Mac is otherwise
-quiet; the harness records the load average at the start and end of each design.
+keyframe every 120 frames (2 s). For every frame the harness reports end-to-end added latency and
+its split into *wake* (produced → Rust hands the frame over: thread scheduling, async hops) and
+*crossing* (hand-over → bytes readable in Swift: the FFI itself). Run media/stress measurements only
+when the Mac is otherwise quiet; the harness records the load average at the start and end of each
+design.
+
+## Results in `results/`
+
+| File | Run |
+|---|---|
+| `media-2min-run3.{txt,json,load.txt,env.txt}` | headline 2-min paced run with the wake/crossing split (build of `4f5ae1f`) |
+| `media-2min-run2.*`, `media-2min-run1-loaded.*` | earlier 2-min runs without the split; both overlapped heavy load from other jobs |
+| `stress.{txt,json}`, `bench.{txt,json}` | prefilled drain by payload size; FFI call overhead |
+| `sign`, `touchid-check`, `cancel`, `threads` (`.txt`, `.json`) | functional checks (each `.txt` ends with the exit status) |
 
 ### Manual: Touch ID (needs a person at the Mac)
 
