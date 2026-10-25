@@ -1,0 +1,5 @@
+host running: '' (empty = no); name registered: 0
+chat: 47627879.751 [shim com.example.chat 31917] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app  [+172.1 ms after open -b]
+host: 47627979.226 [host 31928] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--launched-by-shim com.example.chat
+chat: 47627985.525 [shim com.example.chat 31917] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 31928 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]  [+277.9 ms after open -b]
+maps launched too? pid='' (expected empty: a shim-started host launches nothing else)
