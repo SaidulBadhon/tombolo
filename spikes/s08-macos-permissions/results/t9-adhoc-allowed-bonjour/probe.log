@@ -1,0 +1,32 @@
+2026-10-25T19:47:45.321Z +68.5ms [adhoc 1.0.1 pid 31695] launched; args=["--run", "advertise:52013;browse:_tombolo-test._tcp:6;browse:_tombolo._udp:4;bsdconnect:10.59.232.254:9:4;nwconnect:10.59.232.254:9:4;sleep:2", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t9-adhoc-allowed-bonjour/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t9-adhoc-allowed-bonjour/probe.log
+2026-10-25T19:47:45.328Z +75.6ms [adhoc 1.0.1 pid 31695] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:47:45.328Z +75.7ms [adhoc 1.0.1 pid 31695] STEP advertise:52013
+2026-10-25T19:47:45.332Z +79.0ms [adhoc 1.0.1 pid 31695] advertise:52013 state=ready after 3.2ms
+2026-10-25T19:47:45.332Z +79.1ms [adhoc 1.0.1 pid 31695] STEP browse:_tombolo-test._tcp:6
+2026-10-25T19:47:45.353Z +100.8ms [adhoc 1.0.1 pid 31695] browse _tombolo-test._tcp state=ready after 21.7ms
+2026-10-25T19:47:46.031Z +778.8ms [adhoc 1.0.1 pid 31695] advertise:52013 service registration: add(S08-adhoc-31695._tombolo-test._tcp.local.)
+2026-10-25T19:47:46.284Z +1031.2ms [adhoc 1.0.1 pid 31695] browse _tombolo-test._tcp results=1 changes=["added(Network.NWBrowser.Result(nw: Network.UncheckedSendable<__C.OS_nw_browse_result>(rawValue: S08-adhoc-31695._tombolo-test._tcp.local.@[lo0]), endpoint: S08-adhoc-31695._tombolo-test._tcp.local., interfaces: [lo0], metadata: <none>))"]
+2026-10-25T19:47:46.383Z +1130.5ms [adhoc 1.0.1 pid 31695] browse _tombolo-test._tcp results=1 changes=["changed(old: Network.NWBrowser.Result(nw: Network.UncheckedSendable<__C.OS_nw_browse_result>(rawValue: S08-adhoc-31695._tombolo-test._tcp.local.@[lo0]), endpoint: S08-adhoc-31695._tombolo-test._tcp.local., interfaces: [lo0], metadata: <none>), new: Network.NWBrowser.Result(nw: Network.UncheckedSendable<__C.OS_nw_browse_result>(rawValue: S08-adhoc-31695._tombolo-test._tcp.local.@[lo0, en0]), endpoint: S08-adhoc-31695._tombolo-test._tcp.local., interfaces: [lo0, en0], metadata: <none>), flags: Network.NWBrowser.Result.Change.Flags(rawValue: 2))"]
+2026-10-25T19:47:51.650Z +6397.7ms [adhoc 1.0.1 pid 31695] browse _tombolo-test._tcp end after 6318.4ms: state=ready results=1
+2026-10-25T19:47:51.651Z +6398.5ms [adhoc 1.0.1 pid 31695] STEP browse:_tombolo._udp:4
+2026-10-25T19:47:51.662Z +6409.2ms [adhoc 1.0.1 pid 31695] browse _tombolo-test._tcp state=cancelled after 6330.0ms
+2026-10-25T19:47:51.662Z +6409.5ms [adhoc 1.0.1 pid 31695] browse _tombolo._udp state=ready after 10.7ms
+2026-10-25T19:47:55.859Z +10606.0ms [adhoc 1.0.1 pid 31695] browse _tombolo._udp end after 4207.1ms: state=ready results=0
+2026-10-25T19:47:55.859Z +10606.5ms [adhoc 1.0.1 pid 31695] STEP bsdconnect:10.59.232.254:9:4
+2026-10-25T19:47:55.859Z +10606.9ms [adhoc 1.0.1 pid 31695] browse _tombolo._udp state=cancelled after 4208.2ms
+2026-10-25T19:47:55.860Z +10607.2ms [adhoc 1.0.1 pid 31695] bsdconnect 10.59.232.254:9 connect() returned -1 errno 36 Operation now in progress after 0.3ms
+2026-10-25T19:47:59.861Z +14608.6ms [adhoc 1.0.1 pid 31695] bsdconnect 10.59.232.254:9 still connecting after 4001.6ms (timeout)
+2026-10-25T19:47:59.862Z +14609.2ms [adhoc 1.0.1 pid 31695] STEP nwconnect:10.59.232.254:9:4
+2026-10-25T19:47:59.864Z +14611.1ms [adhoc 1.0.1 pid 31695] nwconnect 10.59.232.254:9 state=preparing after 1.4ms path.status=satisfied via=en0 remote=10.59.232.254:9
+2026-10-25T19:48:04.062Z +18809.6ms [adhoc 1.0.1 pid 31695] nwconnect 10.59.232.254:9 end after 4200.1ms: state=preparing path.status=satisfied via=en0 local=172.20.10.14:61251 remote=10.59.232.254:9
+2026-10-25T19:48:04.062Z +18809.9ms [adhoc 1.0.1 pid 31695] STEP sleep:2
+2026-10-25T19:48:04.063Z +18810.7ms [adhoc 1.0.1 pid 31695] nwconnect 10.59.232.254:9 state=cancelled after 4201.2ms path=nil
+2026-10-25T19:48:06.162Z +20909.5ms [adhoc 1.0.1 pid 31695] script finished

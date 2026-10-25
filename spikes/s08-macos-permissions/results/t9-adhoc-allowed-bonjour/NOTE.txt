@@ -1,0 +1,13 @@
+T9 (2026-10-26 01:47, S08 AdHoc 1.0.1, Local Network = allowed by a person at 01:32:22 in T8)
+
+Valid evidence:
+  - advertise:52013 -> listener ready, Bonjour registration add(S08-adhoc-31695._tombolo-test._tcp.local.)
+  - browse _tombolo-test._tcp -> state ready, 1 result (own advertisement, via lo0)
+  - browse _tombolo._udp -> state ready, 0 results (nothing advertises it)
+  - no alert window during 25 s
+
+NOT valid as LAN evidence:
+  - bsdconnect/nwconnect to 10.59.232.254:9. Between T8 and T9 the Mac moved from
+    10.59.232.0/24 to 172.20.10.0/28 (local address 172.20.10.14 in the nwconnect line),
+    so 10.59.232.254 was off-subnet and routed via the gateway: not a local-network
+    destination. Those lines only show an ordinary unreachable-host timeout.
