@@ -34,13 +34,15 @@ for b in "$SHIMS_DIR"/*.app "$SHIMS_DIR"/.*.app; do
   fi
 done
 rmdir "$SHIMS_DIR" 2>/dev/null && echo "   removed $SHIMS_DIR"
+# The built host is a real .app, so Spotlight indexes it even inside the repo; scripts/build.sh recreates it.
+[ -d "out/Tombolo Host.app" ] && rm -rf "out/Tombolo Host.app" && echo "   removed out/Tombolo Host.app"
 
 echo "4. state + logs"
 if [ -d "$STATE" ]; then
   arch="out/logs-$(date +%Y%m%d-%H%M%S)"; mkdir -p "$arch"; cp -R "$STATE/" "$arch/" && echo "   archived logs to $arch"
   rm -rf "$STATE" && echo "   removed $STATE"
 fi
-rm -rf /tmp/s13probe /tmp/s13-*.png /tmp/s13-evil /tmp/s13-quarantine /tmp/s13-squat.log
+rm -rf /tmp/s13probe /tmp/s13-*
 
 echo "5. verify"
 [ -e "$SHIMS_DIR" ] && { echo "   FAIL: $SHIMS_DIR still exists"; fail=1; } || echo "   ok: no $SHIMS_DIR"

@@ -83,7 +83,8 @@ scripts/cleanup.sh
 ```
 
 Stops every host/shim process, unregisters every shim and host path from LaunchServices (`lsregister -u`), deletes
-the shims in `~/Applications/Tombolo Apps` (only bundles marked `TomboloSpike = s13`) and the state directory
+the shims in `~/Applications/Tombolo Apps` (only bundles marked `TomboloSpike = s13`), the built
+`out/Tombolo Host.app` (Spotlight indexes it even inside the repo) and the state directory
 (logs are archived to `out/logs-<timestamp>/` first), removes `/tmp` leftovers, then verifies: no directory, no
 process, no launchd entry, no LaunchServices record, and Spotlight returns nothing for `io.github.saidulbadhon.Tombolo.*`.
 The spike registers **no launchd jobs**; the script also boots out the probe's temporary LaunchAgent in case a probe
