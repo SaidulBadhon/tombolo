@@ -45,6 +45,9 @@ sandbox-exec -f scripts/deny-non-loopback.sb ./target/release/iroh-probe tunnel 
 cargo build --profile size -p size-min && cargo build --profile size -p size-baseline
 cargo build --profile size -p size-min --features full     # iroh default features
 ls -l target/size/size-min target/size/size-baseline
+#   Android arm64: same crates through the NDK (env as in scripts/build-android.sh), e.g.
+#   CARGO_TARGET_DIR=target/android cargo build --profile size --target aarch64-linux-android -p size-min
+#   -> results/s5/size/android.txt
 ```
 
 ## S4 commands

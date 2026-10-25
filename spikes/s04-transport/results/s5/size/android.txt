@@ -1,0 +1,8 @@
+NDK 29.0.14206865, target aarch64-linux-android (API 26), profile size
+android size min 4362224 bytes (4.16 MiB) ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamica
+android size full 4981880 bytes (4.75 MiB) ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamica
+android size baseline 375568 bytes (.35 MiB) ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamica
+--- NEEDED (bench, release)
+  0x0000000000000001 (NEEDED)     Shared library: [libdl.so]
+  0x0000000000000001 (NEEDED)     Shared library: [libm.so]
+  0x0000000000000001 (NEEDED)     Shared library: [libc.so]
