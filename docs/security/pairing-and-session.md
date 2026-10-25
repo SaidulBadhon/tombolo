@@ -1147,6 +1147,15 @@ exporter, fixed nonces), every intermediate transcript in hex, and the outputs.
 Signatures use RFC 6979 deterministic nonces (cross-checked against RFC 6979 §A.2.5); real hardware signatures
 differ and implementations test them by verification.
 
+```sh
+cd tools/pairing-vectors
+cargo run --release               # regenerate the JSON files
+cargo run --release -- --check    # exit 1 if the committed files differ from the generator, 2 if a self-test fails
+```
+
+Every run first reproduces the RFC 9382 Appendix B vectors (and regenerates `M`/`N` per Appendix A) and the
+RFC 6979 vectors, and refuses to write anything if one differs.
+
 ## 19. Differences from the existing documents
 
 These are deliberate and are proposed as follow-up edits to the documents named (not made here, because this task
