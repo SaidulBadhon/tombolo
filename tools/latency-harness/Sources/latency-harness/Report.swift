@@ -71,13 +71,16 @@ enum Report {
         if let m = r.macReferenceMeasuredFps {
             s += "camera fps measured against the Mac clock: \(f(m, 3)) (residual \(f(r.macReferenceResidualMs ?? .nan)) ms)\n"
         }
-        s += "samples: clean \(r.samplesClean), all \(r.samplesAll); per-sample uncertainty ±\(f(r.perSampleUncertaintyMs)) ms\n"
+        s += "samples: used \(r.samplesUsed) (strict \(r.samplesStrict)), all \(r.samplesAll); per-sample uncertainty ±\(f(r.perSampleUncertaintyMs)) ms\n"
         if let l = r.latencyMs {
-            s += "latency ms (clean): p50 \(f(l.p50))  p95 \(f(l.p95))  p99 \(f(l.p99))   (min \(f(l.min)), max \(f(l.max)), mean \(f(l.mean)) ± sd \(f(l.sd)), n \(l.n))\n"
+            s += "latency ms (used): p50 \(f(l.p50))  p95 \(f(l.p95))  p99 \(f(l.p99))   (min \(f(l.min)), max \(f(l.max)), mean \(f(l.mean)) ± sd \(f(l.sd)), n \(l.n))\n"
             s += "  95% bootstrap CI: p50 [\(f(l.p50CI[0])), \(f(l.p50CI[1]))]  p95 [\(f(l.p95CI[0])), \(f(l.p95CI[1]))]  p99 [\(f(l.p99CI[0])), \(f(l.p99CI[1]))]\n"
         }
+        if let l = r.latencyStrictMs {
+            s += "latency ms (strict): p50 \(f(l.p50))  p95 \(f(l.p95))  p99 \(f(l.p99))  n \(l.n)\n"
+        }
         if let l = r.latencyAllMs {
-            s += "latency ms (all):   p50 \(f(l.p50))  p95 \(f(l.p95))  p99 \(f(l.p99))  n \(l.n)\n"
+            s += "latency ms (all, uncorrected): p50 \(f(l.p50))  p95 \(f(l.p95))  p99 \(f(l.p99))  n \(l.n)\n"
         }
         if let d = r.displayedDifferenceMs {
             s += "displayed-value difference phone − mirror (coarse): p50 \(f(d.p50))  p95 \(f(d.p95))  n \(d.n)\n"

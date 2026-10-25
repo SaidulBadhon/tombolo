@@ -324,10 +324,16 @@ public struct OpticalReport: Sendable, Codable {
     /// Camera fps measured against the Mac reference clock (first appearances of Mac values).
     public var macReferenceMeasuredFps: Double?
     public var macReferenceResidualMs: Double?
-    public var samplesClean: Int
+    /// Both first appearances directly follow a frame that decoded with an older value.
+    public var samplesStrict: Int
+    /// Strict samples plus those where one undecodable transition frame preceded a first
+    /// appearance (that frame is taken as the first appearance).
+    public var samplesUsed: Int
+    /// Every value seen on both tracks, first decoded frame, no correction.
     public var samplesAll: Int
-    /// Glass-to-glass latency from first appearances, using only "clean" first appearances.
+    /// Glass-to-glass latency from the used samples (the headline numbers).
     public var latencyMs: PercentileSummary?
+    public var latencyStrictMs: PercentileSummary?
     public var latencyAllMs: PercentileSummary?
     /// Per-frame (phone − mirror) displayed-value difference: coarse cross-check, quantised to the
     /// phone frame interval.
@@ -338,10 +344,19 @@ public struct OpticalReport: Sendable, Codable {
 
 public struct OpticalSample: Sendable, Equatable {
     public var ticks: UInt32
+    /// Estimated first-appearance frames (after the transition-frame rule).
     public var phoneFrame: Int
     public var mirrorFrame: Int
-    public var clean: Bool
+    /// Undecodable frames between the last older value and the first decode of this value
+    /// (−1 = no older value seen before it).
+    public var phoneGap: Int
+    public var mirrorGap: Int
     public var latencyMs: Double
+    /// Latency from the first *decoded* frames, without the transition-frame rule.
+    public var rawLatencyMs: Double
+
+    public var strict: Bool { phoneGap == 0 && mirrorGap == 0 }
+    public var used: Bool { (0...1).contains(phoneGap) && (0...1).contains(mirrorGap) }
 }
 
 public enum OpticalAnalysis {
@@ -434,15 +449,26 @@ public enum OpticalAnalysis {
         }
         let fps = (useMacReferenceFps ? measuredFps : nil) ?? nominalFps
 
-        // 3. First appearances.
-        func firsts(_ t: [Int: Double]) -> [Double: (frame: Int, clean: Bool)] {
-            var out: [Double: (Int, Bool)] = [:]
+        // 3. First appearances. A display changes value over a few milliseconds (pixel response),
+        // so the camera frame exposed during the change often decodes as neither value. When
+        // exactly one undecodable frame separates the last older value from the first decode of a
+        // new value, that frame is the first (partial) appearance. Without this rule a camera
+        // whose rate is a multiple of the display refresh can phase-lock and bias one track by a
+        // whole frame.
+        func firsts(_ t: [Int: Double]) -> [Double: (frame: Int, decoded: Int, gap: Int)] {
+            var out: [Double: (Int, Int, Int)] = [:]
+            var last: (index: Int, value: Double)?
             for i in t.keys.sorted() {
                 let v = t[i]!
-                if out[v] != nil { continue }
-                // Clean: the previous camera frame decoded in this track and showed an older value.
-                let clean = (t[i - 1].map { $0 < v }) ?? false
-                out[v] = (i, clean)
+                if out[v] == nil {
+                    if let l = last, l.value < v {
+                        let gap = i - l.index - 1
+                        out[v] = (gap == 1 ? i - 1 : i, i, gap)
+                    } else {
+                        out[v] = (i, i, -1)
+                    }
+                }
+                if last == nil || v >= last!.value { last = (i, v) }
             }
             return out
         }
@@ -451,22 +477,25 @@ public enum OpticalAnalysis {
         for (v, m) in fm {
             guard let p = fp[v], m.frame >= p.frame else { continue }
             samples.append(OpticalSample(ticks: UInt32(truncatingIfNeeded: Int64(v)), phoneFrame: p.frame, mirrorFrame: m.frame,
-                                         clean: p.clean && m.clean, latencyMs: Double(m.frame - p.frame) / fps * 1000))
+                                         phoneGap: p.gap, mirrorGap: m.gap,
+                                         latencyMs: Double(m.frame - p.frame) / fps * 1000,
+                                         rawLatencyMs: Double(m.decoded - p.decoded) / fps * 1000))
         }
         samples.sort { $0.phoneFrame < $1.phoneFrame }
         var diffs: [Double] = []
         for (i, a) in track[0] { if let b = track[1][i] { diffs.append((a - b) / 10) } }
         notes.append(String(format: "each sample is quantised to camera frames: ±%.2f ms (one frame at %.2f fps)", 1000 / fps, fps))
-        notes.append("first appearances need a decodable frame; 'clean' = the previous camera frame decoded with an older value")
+        notes.append("used = strict samples + samples where one undecodable transition frame preceded a first appearance (counted as the appearance); strict = no such frame on either track; all = first decoded frames, uncorrected")
         let report = OpticalReport(
             frames: frames.count, nominalFps: nominalFps, fpsUsed: fps,
             framesWithPhone: track[0].count, framesWithMirror: track[1].count, framesWithMacReference: macFrames,
             phoneTrackCentre: centres.count == 2 ? [centres[0].0, centres[0].1] : nil,
             mirrorTrackCentre: centres.count == 2 ? [centres[1].0, centres[1].1] : nil,
             macReferenceMeasuredFps: measuredFps, macReferenceResidualMs: macResidual,
-            samplesClean: samples.filter(\.clean).count, samplesAll: samples.count,
-            latencyMs: Stats.summarize(samples.filter(\.clean).map(\.latencyMs)),
-            latencyAllMs: Stats.summarize(samples.map(\.latencyMs)),
+            samplesStrict: samples.filter(\.strict).count, samplesUsed: samples.filter(\.used).count, samplesAll: samples.count,
+            latencyMs: Stats.summarize(samples.filter(\.used).map(\.latencyMs)),
+            latencyStrictMs: Stats.summarize(samples.filter(\.strict).map(\.latencyMs)),
+            latencyAllMs: Stats.summarize(samples.map(\.rawLatencyMs)),
             displayedDifferenceMs: Stats.summarize(diffs),
             perSampleUncertaintyMs: 1000 / fps, notes: notes)
         return (report, samples)

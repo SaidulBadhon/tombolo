@@ -149,8 +149,11 @@ enum Optical {
         try csv.write(to: outDir.appendingPathComponent("frames.csv"), atomically: true, encoding: .utf8)
 
         let (report, samples) = OpticalAnalysis.run(frames: frames, nominalFps: fps, useMacReferenceFps: o.useMacFps)
-        var sc = "ticks,phone_frame,mirror_frame,clean,latency_ms\n"
-        for s in samples { sc += "\(s.ticks),\(s.phoneFrame),\(s.mirrorFrame),\(s.clean ? 1 : 0),\(String(format: "%.3f", s.latencyMs))\n" }
+        var sc = "ticks,phone_frame,mirror_frame,phone_gap,mirror_gap,used,strict,latency_ms,raw_latency_ms\n"
+        for s in samples {
+            sc += "\(s.ticks),\(s.phoneFrame),\(s.mirrorFrame),\(s.phoneGap),\(s.mirrorGap),\(s.used ? 1 : 0),\(s.strict ? 1 : 0),"
+            sc += String(format: "%.3f,%.3f\n", s.latencyMs, s.rawLatencyMs)
+        }
         try sc.write(to: outDir.appendingPathComponent("latency.csv"), atomically: true, encoding: .utf8)
         try Report.encoder().encode(report).write(to: outDir.appendingPathComponent("summary.json"))
         let text = Report.render(report)

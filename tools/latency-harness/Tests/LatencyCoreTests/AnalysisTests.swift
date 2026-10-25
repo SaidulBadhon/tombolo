@@ -111,13 +111,39 @@ enum SharedOpticalClip {
         let (report, samples) = OpticalAnalysis.run(frames: frames, nominalFps: 240)
         #expect(report.framesWithPhone > 130, "phone decoded in \(report.framesWithPhone) frames")
         #expect(report.framesWithMirror > 130, "mirror decoded in \(report.framesWithMirror) frames")
-        #expect(report.samplesClean >= 20, "clean samples \(report.samplesClean)")
+        #expect(report.samplesUsed >= 25, "used samples \(report.samplesUsed)")
         let l = try #require(report.latencyMs)
         let frame = 1000.0 / 240
         #expect(abs(l.p50 - SharedOpticalClip.latencyMs) <= frame + 0.01, "p50 \(l.p50)")
-        for s in samples where s.clean { #expect(abs(s.latencyMs - SharedOpticalClip.latencyMs) <= frame + 0.01) }
+        for s in samples where s.used { #expect(abs(s.latencyMs - SharedOpticalClip.latencyMs) <= frame + 0.01) }
         let fps = try #require(report.macReferenceMeasuredFps)
         #expect(abs(fps - 240) < 2.4, "measured fps \(fps)")
+    }
+
+    @Test func transitionFrameRuleRemovesPhaseLockBias() throws {
+        // Display at 60 Hz filmed at exactly 240 fps: the phone's transition frame (k ≡ 1 mod 4)
+        // never decodes, the mirror's always does. True latency: 12 camera frames.
+        var frames: [OpticalFrame] = []
+        for k in 0..<400 {
+            var syms: [DecodedSymbol] = []
+            let phoneValue = (k - 1) / 4  // value j first (partially) visible at k = 4j + 1
+            if k % 4 != 1, k >= 1 {
+                syms.append(DecodedSymbol(kindRaw: 0, session: 1, ticks: UInt32(1000 + phoneValue * 167), centreX: 100, centreY: 100, moduleSize: 5, confidence: 0.4))
+            }
+            let mirrorValue = (k - 13) / 4
+            if k >= 13 {
+                syms.append(DecodedSymbol(kindRaw: 0, session: 1, ticks: UInt32(1000 + mirrorValue * 167), centreX: 400, centreY: 100, moduleSize: 4, confidence: 0.4))
+            }
+            frames.append(OpticalFrame(index: k, symbols: syms))
+        }
+        let (report, samples) = OpticalAnalysis.run(frames: frames, nominalFps: 240)
+        let l = try #require(report.latencyMs)
+        #expect(abs(l.p50 - 50) < 0.01, "used p50 \(l.p50)")
+        #expect(report.samplesUsed > 80)
+        #expect(report.samplesStrict == 0)
+        let raw = try #require(report.latencyAllMs)
+        #expect(abs(raw.p50 - 1000.0 / 240 * 11) < 0.01, "uncorrected p50 \(raw.p50) shows the one-frame bias")
+        #expect(samples.allSatisfy { $0.phoneGap == 1 || $0.phoneGap == -1 })
     }
 
     @Test func wrongNominalFpsIsFlagged() {
