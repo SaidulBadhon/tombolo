@@ -1,40 +1,280 @@
-preset=n0 pid=22047 (snapshot at ~10s of a 20s hold)
---- lsof -i -n -P -a -p 22047
+preset=n0 pid=16358 (snapshot at ~10s of a 20s hold)
+--- lsof -i -n -P -a -p 16358
 COMMAND     PID         USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
-iroh-prob 22047 saidulbadhon    9u  IPv4 0x731f3820f3da662c      0t0  UDP *:54569
-iroh-prob 22047 saidulbadhon   10u  IPv6 0x5b3aa5e3fa9fc48f      0t0  UDP *:61660
-iroh-prob 22047 saidulbadhon   13u  IPv4 0xfc00eb8258e6028c      0t0  UDP *:59827
-iroh-prob 22047 saidulbadhon   14u  IPv6 0x9fb35b1a0545d962      0t0  UDP *:54523
-iroh-prob 22047 saidulbadhon   17u  IPv4 0xbcf16cfc975396e0      0t0  TCP 10.59.232.41:51995->49.13.207.244:443 (ESTABLISHED)
-iroh-prob 22047 saidulbadhon   18u  IPv4 0xff2ba6d3b283d7a5      0t0  TCP 10.59.232.41:51996->49.13.207.244:443 (ESTABLISHED)
-iroh-prob 22047 saidulbadhon   19u  IPv4 0xb6413210343513bc      0t0  TCP 10.59.232.41:51997->49.13.207.244:443 (ESTABLISHED)
-iroh-prob 22047 saidulbadhon   21u  IPv4 0x5531310208150122      0t0  TCP 10.59.232.41:52036->5.223.65.62:443 (ESTABLISHED)
-iroh-prob 22047 saidulbadhon   22u  IPv4 0x67c7dbec84aa799c      0t0  TCP 10.59.232.41:52037->5.223.65.62:443 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon    9u  IPv4 0x4d731bfeac6f0514      0t0  UDP *:52063
+iroh-prob 16358 saidulbadhon   10u  IPv6 0xc2a08775c63cd80e      0t0  UDP *:56558
+iroh-prob 16358 saidulbadhon   13u  IPv4 0x322317aef457b79f      0t0  UDP *:57628
+iroh-prob 16358 saidulbadhon   14u  IPv6 0x62831db3068c634c      0t0  UDP *:55566
+iroh-prob 16358 saidulbadhon   15u  IPv4  0x9a24a9ee90c1275      0t0  UDP *:50035
+iroh-prob 16358 saidulbadhon   16u  IPv4 0x10a3bb0d550a0fd2      0t0  UDP *:56897
+iroh-prob 16358 saidulbadhon   17u  IPv4 0xf2d16ceb511bd801      0t0  UDP *:54897
+iroh-prob 16358 saidulbadhon   18u  IPv4 0x7ac24d174fa5f771      0t0  UDP *:57982
+iroh-prob 16358 saidulbadhon   19u  IPv4 0x17f1690b19278372      0t0  UDP *:51423
+iroh-prob 16358 saidulbadhon   20u  IPv4 0xeb770563a3b37b89      0t0  UDP *:59180
+iroh-prob 16358 saidulbadhon   21u  IPv4 0xbec726a561c7a2bb      0t0  UDP *:58640
+iroh-prob 16358 saidulbadhon   22u  IPv4 0x42456bb514bb925a      0t0  UDP *:50580
+iroh-prob 16358 saidulbadhon   23u  IPv4  0xc62044c7f2f8607      0t0  UDP *:59255
+iroh-prob 16358 saidulbadhon   24u  IPv4 0x9f70dd2f7f73cef9      0t0  UDP *:60384
+iroh-prob 16358 saidulbadhon   25u  IPv4 0xf62badf7082e6aae      0t0  UDP *:55539
+iroh-prob 16358 saidulbadhon   26u  IPv4 0x7fbe15b7ef63086e      0t0  UDP *:49587
+iroh-prob 16358 saidulbadhon   28u  IPv4 0xfe5423fb58a8d3fe      0t0  UDP *:52807
+iroh-prob 16358 saidulbadhon   29u  IPv4 0x83f796a4ebc4fea2      0t0  UDP *:51822
+iroh-prob 16358 saidulbadhon   30u  IPv4 0x16439bb5936fbeec      0t0  UDP *:61859
+iroh-prob 16358 saidulbadhon   31u  IPv4 0x7fddf22cff719b10      0t0  UDP *:54032
+iroh-prob 16358 saidulbadhon   32u  IPv4 0x84c1b25d20bb3316      0t0  UDP *:56091
+iroh-prob 16358 saidulbadhon   33u  IPv4 0x5140e47481419aa7      0t0  UDP *:64043
+iroh-prob 16358 saidulbadhon   34u  IPv4 0x891849c5c93380f8      0t0  UDP *:51301
+iroh-prob 16358 saidulbadhon   35u  IPv4 0x96dac11135da2fd7      0t0  UDP *:55819
+iroh-prob 16358 saidulbadhon   36u  IPv4 0xdf883f6371f7391b      0t0  UDP *:53947
+iroh-prob 16358 saidulbadhon   37u  IPv4 0xaaec23aa3f5132fd      0t0  UDP *:49647
+iroh-prob 16358 saidulbadhon   38u  IPv4 0x909d81c2fb8fa03f      0t0  UDP *:60009
+iroh-prob 16358 saidulbadhon   39u  IPv4 0x9d66b7fef22c1e3f      0t0  UDP *:52583
+iroh-prob 16358 saidulbadhon   40u  IPv4 0x6943db6b2e6937f8      0t0  UDP *:63590
+iroh-prob 16358 saidulbadhon   41u  IPv4 0x6240f3b873d32604      0t0  UDP *:53288
+iroh-prob 16358 saidulbadhon   42u  IPv4 0xd6ab76371d466712      0t0  UDP *:64480
+iroh-prob 16358 saidulbadhon   43u  IPv4 0xff9f6dcf78e77859      0t0  UDP *:56276
+iroh-prob 16358 saidulbadhon   44u  IPv4 0xab0643f9f49f2732      0t0  UDP *:56497
+iroh-prob 16358 saidulbadhon   45u  IPv4 0x24eba2b306c5245e      0t0  UDP *:60771
+iroh-prob 16358 saidulbadhon   46u  IPv4 0xbcd5eb8933d2075f      0t0  UDP *:62481
+iroh-prob 16358 saidulbadhon   47u  IPv4 0xd10726c0692c7d1a      0t0  UDP *:58362
+iroh-prob 16358 saidulbadhon   48u  IPv4 0xd165f4787b565850      0t0  UDP *:56175
+iroh-prob 16358 saidulbadhon   49u  IPv4 0x75bee483b995af89      0t0  UDP *:49308
+iroh-prob 16358 saidulbadhon   50u  IPv4 0x92e822ca37636b30      0t0  UDP *:58848
+iroh-prob 16358 saidulbadhon   51u  IPv4 0x76843902ec6e4a6d      0t0  UDP *:53314
+iroh-prob 16358 saidulbadhon   52u  IPv4 0x55ae553aa8024976      0t0  UDP *:51166
+iroh-prob 16358 saidulbadhon   53u  IPv4 0xaa63aa50caa2ffcd      0t0  UDP *:63931
+iroh-prob 16358 saidulbadhon   54u  IPv4 0xfcfbb72293c00d75      0t0  UDP *:52024
+iroh-prob 16358 saidulbadhon   55u  IPv4 0x64cf961765251b2a      0t0  UDP *:60390
+iroh-prob 16358 saidulbadhon   56u  IPv4 0x3a04d0fc0ae1a9aa      0t0  TCP 172.20.10.14:58304->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   57u  IPv4 0xdb174f7bf45ecc10      0t0  TCP 172.20.10.14:58305->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   58u  IPv4 0x7439f158d80934b4      0t0  UDP *:55974
+iroh-prob 16358 saidulbadhon   59u  IPv4 0x6ab98da0693fe086      0t0  UDP *:54284
+iroh-prob 16358 saidulbadhon   60u  IPv4 0xecbb7de3d3df2229      0t0  TCP 172.20.10.14:58306->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   61u  IPv4 0x1a7a4d87d545712c      0t0  TCP 172.20.10.14:58307->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   62u  IPv4 0x9695596d6368a1d2      0t0  UDP *:56858
+iroh-prob 16358 saidulbadhon   63u  IPv4  0xce9d383ee741a7b      0t0  UDP *:53477
+iroh-prob 16358 saidulbadhon   64u  IPv4 0xc680f399d8eb5b62      0t0  UDP *:49583
+iroh-prob 16358 saidulbadhon   65u  IPv4 0xb12634dd580041cd      0t0  UDP *:64005
+iroh-prob 16358 saidulbadhon   66u  IPv4 0x56a4f43cd840b7e6      0t0  UDP *:49776
+iroh-prob 16358 saidulbadhon   67u  IPv4 0x653dd5f8ca681933      0t0  UDP *:52189
+iroh-prob 16358 saidulbadhon   68u  IPv4 0x1f11dde229997b7f      0t0  TCP 172.20.10.14:58308->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   69u  IPv4 0x51b6d507662e4c0c      0t0  TCP 172.20.10.14:58309->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   70u  IPv4 0x6a712aa2616e1f53      0t0  UDP *:59284
+iroh-prob 16358 saidulbadhon   71u  IPv4 0x257c00ac0e25e0b5      0t0  UDP *:54405
+iroh-prob 16358 saidulbadhon   72u  IPv4  0xf9c765c4ad695d7      0t0  TCP 172.20.10.14:58310->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   73u  IPv4 0x818bb56b0d12a0b0      0t0  TCP 172.20.10.14:58311->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   74u  IPv4  0x3e135f323ca27ac      0t0  TCP 172.20.10.14:58312->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   75u  IPv4 0x5146c28c7fa94ae0      0t0  TCP 172.20.10.14:58313->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   76u  IPv4 0x641a3f441bee2516      0t0  UDP *:53901
+iroh-prob 16358 saidulbadhon   77u  IPv4 0x194a4eca84d7c73d      0t0  UDP *:51937
+iroh-prob 16358 saidulbadhon   78u  IPv4 0xc6d5351e71723dc3      0t0  TCP 172.20.10.14:58314->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   79u  IPv4 0x1ef09df3c7243b18      0t0  TCP 172.20.10.14:58315->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   80u  IPv4 0xbc6372148f490c33      0t0  UDP *:55971
+iroh-prob 16358 saidulbadhon   81u  IPv4 0x66601a492dc41e5e      0t0  UDP *:55112
+iroh-prob 16358 saidulbadhon   82u  IPv4 0xab80ee5fbc1e7296      0t0  UDP *:54826
+iroh-prob 16358 saidulbadhon   83u  IPv4 0xa9c5adb23b442f71      0t0  UDP *:56925
+iroh-prob 16358 saidulbadhon   84u  IPv4 0x8f0e9c56ee0eadab      0t0  UDP *:60557
+iroh-prob 16358 saidulbadhon   85u  IPv4 0x2272fb6bd8cf2a11      0t0  UDP *:64973
+iroh-prob 16358 saidulbadhon   86u  IPv4 0x8f8094df964217f2      0t0  UDP *:62863
+iroh-prob 16358 saidulbadhon   87u  IPv4 0xd03655af3386b935      0t0  UDP *:49714
+iroh-prob 16358 saidulbadhon   88u  IPv4  0xd978507027fb4ba      0t0  UDP *:49830
+iroh-prob 16358 saidulbadhon   89u  IPv4 0x662fb976e8cfeb7a      0t0  UDP *:58911
+iroh-prob 16358 saidulbadhon   90u  IPv4 0x311127045ed25b10      0t0  TCP 172.20.10.14:58316->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   91u  IPv4 0xc521ef856cb51372      0t0  TCP 172.20.10.14:58317->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   92u  IPv4 0x11816a8f1fa43e0a      0t0  UDP *:58491
+iroh-prob 16358 saidulbadhon   93u  IPv4 0xda11c80b01482ff1      0t0  UDP *:54993
+iroh-prob 16358 saidulbadhon   94u  IPv4 0x9e8227d6af06d6af      0t0  UDP *:64428
+iroh-prob 16358 saidulbadhon   95u  IPv4 0xdc6a0c6021ded5f5      0t0  UDP *:49169
+iroh-prob 16358 saidulbadhon   96u  IPv4 0xb495dfe7c25a1e3d      0t0  UDP *:50581
+iroh-prob 16358 saidulbadhon   97u  IPv4 0x5fd2dd52388aeeb5      0t0  UDP *:57025
+iroh-prob 16358 saidulbadhon   98u  IPv4 0x31be73911071d60c      0t0  TCP 172.20.10.14:58318->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon   99u  IPv4 0x9741de4a063ace3c      0t0  TCP 172.20.10.14:58319->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon  100u  IPv4 0x13667ab9c989ef5c      0t0  UDP *:59336
+iroh-prob 16358 saidulbadhon  101u  IPv4 0xb0bd3e65ce9a8e2f      0t0  UDP *:64316
+iroh-prob 16358 saidulbadhon  102u  IPv4 0xe44af12a8c26f046      0t0  UDP *:49775
+iroh-prob 16358 saidulbadhon  103u  IPv4 0x7688b6c6d0415fbe      0t0  UDP *:56317
+iroh-prob 16358 saidulbadhon  104u  IPv4 0xe2a5ddc098e5c3b7      0t0  UDP *:61555
+iroh-prob 16358 saidulbadhon  105u  IPv4  0x2402a4a5566c5ef      0t0  UDP *:55721
+iroh-prob 16358 saidulbadhon  106u  IPv4 0xd80c85915fba5839      0t0  UDP *:64136
+iroh-prob 16358 saidulbadhon  107u  IPv4 0xa02d3ab8cecc0057      0t0  UDP *:54152
+iroh-prob 16358 saidulbadhon  108u  IPv4 0xe2af0c4d0444ccfd      0t0  UDP *:54354
+iroh-prob 16358 saidulbadhon  109u  IPv4 0x2e5b559fe97e5aee      0t0  UDP *:59181
+iroh-prob 16358 saidulbadhon  110u  IPv4 0xf66b22014268ad29      0t0  TCP 172.20.10.14:58324->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon  111u  IPv4 0xdf0fafbee134b370      0t0  TCP 172.20.10.14:58325->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon  112u  IPv4 0x27b2054040a698d6      0t0  TCP 172.20.10.14:58326->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon  113u  IPv4 0xa3968ee628d060da      0t0  TCP 172.20.10.14:58327->172.20.10.1:53 (ESTABLISHED)
+iroh-prob 16358 saidulbadhon  114u  IPv4 0x5ab381f7310ede6c      0t0  UDP *:63134
+iroh-prob 16358 saidulbadhon  115u  IPv4 0xb948a15194227098      0t0  UDP *:61325
+iroh-prob 16358 saidulbadhon  116u  IPv4 0x99d193432561905b      0t0  UDP *:54304
+iroh-prob 16358 saidulbadhon  117u  IPv4 0x1776dd9c546b766f      0t0  UDP *:63963
+iroh-prob 16358 saidulbadhon  118u  IPv4 0x5f0c73bfcfad101a      0t0  UDP *:55124
+iroh-prob 16358 saidulbadhon  119u  IPv4 0xe1e4cb54dbfcb10f      0t0  UDP *:52935
+iroh-prob 16358 saidulbadhon  120u  IPv4 0x7dc8a02278212129      0t0  UDP *:49571
+iroh-prob 16358 saidulbadhon  121u  IPv4 0xf65647069e5b177c      0t0  UDP *:62901
+iroh-prob 16358 saidulbadhon  122u  IPv4 0x83d1dc72ddcd55f5      0t0  UDP *:57682
+iroh-prob 16358 saidulbadhon  123u  IPv4 0x4411c3e9a64403ea      0t0  UDP *:57683
+iroh-prob 16358 saidulbadhon  124u  IPv4 0x5c4cef9b28d2a983      0t0  UDP *:60670
+iroh-prob 16358 saidulbadhon  125u  IPv4 0xb5153bae6cccea4a      0t0  UDP *:61349
+iroh-prob 16358 saidulbadhon  126u  IPv4 0x204df27bec7ca8d6      0t0  UDP *:59069
+iroh-prob 16358 saidulbadhon  127u  IPv4 0x8dbadddf6880d5ee      0t0  UDP *:52793
+iroh-prob 16358 saidulbadhon  128u  IPv4 0xa54ef6a9609d3f13      0t0  UDP *:51363
+iroh-prob 16358 saidulbadhon  129u  IPv4 0x35f05fc314bdcbf4      0t0  UDP *:63858
+iroh-prob 16358 saidulbadhon  130u  IPv4 0x77756042708acccd      0t0  UDP *:52794
+iroh-prob 16358 saidulbadhon  131u  IPv4 0x82df173e1ed0cdb6      0t0  UDP *:54132
 --- nettop -m tcp
 time,,interface,state,bytes_in,bytes_out,rx_dupe,rx_ooo,re-tx,rtt_avg,rcvsize,tx_win,tc_class,tc_mgt,cc_algo,P,C,R,W,arch,
-01:31:10.046549,iroh-probe.22047,,,21269,4096,0,0,240,,,,,,,,,,,,
-01:31:10.045391,tcp4 10.59.232.41:52037<->5.223.65.62:443,en0,Established,4464,797,0,0,0,89.94 ms,131072,64640,BE,-,cubic,-,-,-,-,so,
-01:31:10.045372,tcp4 10.59.232.41:52036<->5.223.65.62:443,en0,Established,4465,797,0,0,0,83.31 ms,131072,64384,BE,-,cubic,-,-,-,-,so,
-01:31:10.045332,tcp4 10.59.232.41:51997<->49.13.207.244:443,en0,Established,4089,452,0,0,0,263.94 ms,131072,64896,BE,-,cubic,-,-,-,-,so,
-01:31:10.045312,tcp4 10.59.232.41:51996<->49.13.207.244:443,en0,Established,4125,905,0,0,0,255.22 ms,131072,64512,BE,-,cubic,-,-,-,-,so,
-01:31:10.045292,tcp4 10.59.232.41:51995<->49.13.207.244:443,en0,Established,4126,1145,0,0,240,209.66 ms,131072,64512,BE,-,cubic,-,-,-,-,so,
+04:32:40.598868,iroh-probe.16358,,,0,1526,0,0,0,,,,,,,,,,,,
+04:32:40.598847,tcp4 172.20.10.14:58327<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598828,tcp4 172.20.10.14:58326<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598807,tcp4 172.20.10.14:58325<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.22 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598789,tcp4 172.20.10.14:58324<->172.20.10.1:53,en0,Established,0,44,0,0,0,3.47 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598734,tcp4 172.20.10.14:58319<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.88 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598715,tcp4 172.20.10.14:58318<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.09 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598697,tcp4 172.20.10.14:58317<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.75 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598678,tcp4 172.20.10.14:58316<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598659,tcp4 172.20.10.14:58315<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.00 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598641,tcp4 172.20.10.14:58314<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.34 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598622,tcp4 172.20.10.14:58313<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.88 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598604,tcp4 172.20.10.14:58312<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598586,tcp4 172.20.10.14:58311<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.66 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598567,tcp4 172.20.10.14:58310<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.66 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598548,tcp4 172.20.10.14:58309<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.91 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598527,tcp4 172.20.10.14:58308<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.12 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598509,tcp4 172.20.10.14:58307<->172.20.10.1:53,en0,Established,0,44,0,0,0,5.78 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598490,tcp4 172.20.10.14:58306<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598469,tcp4 172.20.10.14:58305<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.34 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.598447,tcp4 172.20.10.14:58304<->172.20.10.1:53,en0,Established,0,44,0,0,0,4.34 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.591440,tcp4 172.20.10.14:58151<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,5.12 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.591575,tcp4 172.20.10.14:58152<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,4.03 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.591722,tcp4 172.20.10.14:58157<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,5.03 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.591871,tcp4 172.20.10.14:58158<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,4.09 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.592023,tcp4 172.20.10.14:58159<->172.20.10.1:53,en0,FinWait2,0,103,0,0,0,4.22 ms,131412,131392,BE,-,cubic,1,-,-,-,so,
+04:32:40.592183,tcp4 172.20.10.14:58160<->172.20.10.1:53,en0,FinWait2,0,103,0,0,0,4.12 ms,131412,131392,BE,-,cubic,1,-,-,-,so,
+04:32:40.592346,tcp4 172.20.10.14:58165<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,4.25 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.592514,tcp4 172.20.10.14:58166<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,5.81 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.592686,tcp4 172.20.10.14:58167<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,4.12 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.592865,tcp4 172.20.10.14:58168<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,5.66 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.593052,tcp4 172.20.10.14:58169<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,3.81 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
+04:32:40.593245,tcp4 172.20.10.14:58170<->172.20.10.1:53,en0,FinWait2,0,44,0,0,0,5.56 ms,131412,131456,BE,-,cubic,1,-,-,-,so,
 --- nettop -m udp
 time,,interface,type,bytes_in,bytes_out,rcvsize,tc_class,arch,
-01:31:10.055892,iroh-probe.22047,,,466428,460425,,,,
-01:31:10.055489,udp4 *:54569<->*:*,en0,WiFi,171384,163050,7340032,BE,so,
-01:31:10.055504,udp6 *.61660<->*.*,lo0,Loop,64366,65294,7340032,BE,so,
-01:31:10.055624,udp4 *:59827<->*:*,en0,WiFi,168063,169376,7340032,BE,so,
-01:31:10.055650,udp6 *.54523<->*.*,lo0,Loop,62615,62705,7340032,BE,so,
+04:32:40.651377,iroh-probe.16358,,,320094,324378,,,,
+04:32:40.651365,udp4 *:52080<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651353,udp4 *:53745<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651301,udp4 *:56005<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651289,udp4 *:64965<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651277,udp4 *:49591<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651265,udp4 *:60942<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651216,udp4 *:54132<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651204,udp4 *:52794<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651192,udp4 *:63858<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651180,udp4 *:51363<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651168,udp4 *:52793<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651157,udp4 *:59069<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651145,udp4 *:61349<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651133,udp4 *:60670<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651121,udp4 *:57683<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651109,udp4 *:57682<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651097,udp4 *:62901<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651086,udp4 *:49571<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651074,udp4 *:52935<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651062,udp4 *:55124<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651050,udp4 *:63963<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651038,udp4 *:54304<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651026,udp4 *:61325<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651015,udp4 *:63134<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.651003,udp4 *:59181<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650991,udp4 *:54354<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650978,udp4 *:54152<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650966,udp4 *:64136<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650954,udp4 *:55721<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650942,udp4 *:61555<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650930,udp4 *:56317<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650918,udp4 *:49775<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650906,udp4 *:64316<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650895,udp4 *:59336<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650882,udp4 *:57025<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650871,udp4 *:50581<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650859,udp4 *:49169<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650847,udp4 *:64428<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650835,udp4 *:54993<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650823,udp4 *:58491<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650811,udp4 *:58911<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650800,udp4 *:49830<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650788,udp4 *:49714<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650776,udp4 *:62863<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650764,udp4 *:64973<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650752,udp4 *:60557<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650740,udp4 *:56925<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650728,udp4 *:54826<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650715,udp4 *:55112<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.632505,udp4 *:52063<->*:*,lo0,Loop,135785,133269,7340032,BE,so,
+04:32:40.632689,udp6 *.56558<->*.*,lo0,Loop,27331,23709,7340032,BE,so,
+04:32:40.632878,udp4 *:57628<->*:*,lo0,Loop,133269,135785,7340032,BE,so,
+04:32:40.633070,udp6 *.55566<->*.*,lo0,Loop,23709,27331,7340032,BE,so,
+04:32:40.634654,udp4 *:50035<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.634853,udp4 *:56897<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.635054,udp4 *:54897<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.635260,udp4 *:57982<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.635470,udp4 *:51423<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.635683,udp4 *:59180<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.635899,udp4 *:58640<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.636120,udp4 *:50580<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.636344,udp4 *:59255<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.636575,udp4 *:60384<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.636804,udp4 *:55539<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.637038,udp4 *:49587<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.637994,udp4 *:52807<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.638234,udp4 *:51822<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.638478,udp4 *:61859<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.638726,udp4 *:54032<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.638977,udp4 *:56091<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.639230,udp4 *:64043<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.639487,udp4 *:51301<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.639748,udp4 *:55819<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.640012,udp4 *:53947<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.640281,udp4 *:49647<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.640552,udp4 *:60009<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.640835,udp4 *:52583<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.641114,udp4 *:63590<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.641395,udp4 *:53288<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.641681,udp4 *:64480<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.641974,udp4 *:56276<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.642266,udp4 *:56497<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.642563,udp4 *:60771<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.642862,udp4 *:62481<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.643164,udp4 *:58362<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.643469,udp4 *:56175<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.643777,udp4 *:49308<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.644095,udp4 *:58848<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.644416,udp4 *:53314<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.644738,udp4 *:51166<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.645062,udp4 *:63931<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.645393,udp4 *:52024<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.645725,udp4 *:60390<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.646059,udp4 *:55974<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.646397,udp4 *:54284<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.646737,udp4 *:56858<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.647078,udp4 *:53477<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.647423,udp4 *:49583<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.647782,udp4 *:64005<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.648135,udp4 *:49776<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.648492,udp4 *:52189<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.648856,udp4 *:59284<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.649221,udp4 *:54405<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.649588,udp4 *:53901<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.649958,udp4 *:51937<->*:*,en0,ExWiFi,0,42,786896,BE,so,
+04:32:40.650332,udp4 *:55971<->*:*,en0,ExWiFi,0,42,786896,BE,so,
 --- probe output
-RESULT pid=22047
+RESULT pid=16358
 RESULT preset=n0
 RESULT bind=any
-RESULT server_bound=[0.0.0.0:54569, [::]:61660]
-RESULT server_id=0973a82e5ea05f3b8794c289b8a07408c1facdfcd68d125f4ab62a33d5c741cf
-RESULT connect_ms=1.19
+RESULT server_bound=[0.0.0.0:52063, [::]:56558]
+RESULT server_id=e679e8d52152312e825dabe24d48437f7c5fd17b74e941a9843caa03706b817f
+RESULT connect_ms=0.98
 RESULT remote_id_matches=true
 RESULT alpn=tombolo/1
-RESULT exporter_client_prefix=b27ec69a886c1a97
+RESULT exporter_client_prefix=9eb47b4db52ef2ca
 RESULT exporter_match=true
 RESULT stream_priority_roundtrip=true
 RESULT bi_echo_ok=true
@@ -44,12 +284,12 @@ RESULT server_saw_reset_code=Some(42)
 RESULT datagram_max_roundtrip_len=1414
 RESULT datagram_oversize=TooLarge
 RESULT datagram_rtt_samples=50
-RESULT datagram_app_rtt_us_p50=176
-RESULT quic_rtt_path0=Some(186.408µs)
-RESULT stats_sent_packets=197
-RESULT stats_lost_packets=0
-RESULT stats_udp_tx_bytes=117189
-RESULT path=id=PathId(0) remote=Ip(127.0.0.1:54569) selected=true rtt=186.408µs cwnd=60379
+RESULT datagram_app_rtt_us_p50=112
+RESULT quic_rtt_path0=Some(107.774µs)
+RESULT stats_sent_packets=216
+RESULT stats_lost_packets=1
+RESULT stats_udp_tx_bytes=127901
+RESULT path=id=PathId(0) remote=Ip(127.0.0.1:52063) selected=true rtt=107.774µs cwnd=60298
 RESULT holding_secs=20
-RESULT path_after_hold=remote=Ip([<redacted-ipv6>]:61660) selected=true
+RESULT path_after_hold=remote=Ip(127.0.0.1:52063) selected=true
 RESULT done=true

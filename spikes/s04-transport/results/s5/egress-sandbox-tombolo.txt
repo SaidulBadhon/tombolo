@@ -1,17 +1,17 @@
-preset=tombolo pid=21408 exit_code=0 hold=20s
-denied_outbound_attempts=3
---- distinct denied destinations
-   2 remote:*:1
+preset=tombolo pid=15853 exit_code=0 hold=20s
+denied_outbound_attempts=7
+--- denied attempts per destination (reports + duplicates)
+      7 remote:*:1
 --- probe output
-RESULT pid=21408
+RESULT pid=15853
 RESULT preset=tombolo
 RESULT bind=any
-RESULT server_bound=[0.0.0.0:63723, [::]:60943]
-RESULT server_id=f2204a6d5242565f37480aae158c6ab3ab9af8cd7dd81d69d06204a2b885e859
-RESULT connect_ms=2.11
+RESULT server_bound=[0.0.0.0:62363, [::]:50843]
+RESULT server_id=7639729fbb8071832b194fddf94e0f0b4917b1aaac20cfc6b56290abad70425b
+RESULT connect_ms=1.85
 RESULT remote_id_matches=true
 RESULT alpn=tombolo/1
-RESULT exporter_client_prefix=7857138c169e8841
+RESULT exporter_client_prefix=e07cdcc1bcb6f921
 RESULT exporter_match=true
 RESULT stream_priority_roundtrip=true
 RESULT bi_echo_ok=true
@@ -21,12 +21,12 @@ RESULT server_saw_reset_code=Some(42)
 RESULT datagram_max_roundtrip_len=1414
 RESULT datagram_oversize=TooLarge
 RESULT datagram_rtt_samples=50
-RESULT datagram_app_rtt_us_p50=148
-RESULT quic_rtt_path0=Some(121.853µs)
+RESULT datagram_app_rtt_us_p50=135
+RESULT quic_rtt_path0=Some(136.708µs)
 RESULT stats_sent_packets=196
 RESULT stats_lost_packets=0
-RESULT stats_udp_tx_bytes=122198
-RESULT path=id=PathId(0) remote=Ip(127.0.0.1:63723) selected=true rtt=121.853µs cwnd=66401
+RESULT stats_udp_tx_bytes=117182
+RESULT path=id=PathId(0) remote=Ip(127.0.0.1:62363) selected=true rtt=136.708µs cwnd=60593
 RESULT holding_secs=20
-RESULT path_after_hold=remote=Ip(127.0.0.1:63723) selected=true
+RESULT path_after_hold=remote=Ip(127.0.0.1:62363) selected=true
 RESULT done=true

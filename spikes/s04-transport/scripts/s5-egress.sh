@@ -25,19 +25,25 @@ run_sandboxed() { # preset
   sleep 3 # let the log subsystem flush
   /usr/bin/log show --start "$start" --style compact \
     --predicate "eventMessage CONTAINS \"deny(1) network-outbound\" AND eventMessage CONTAINS \"iroh-probe($pid)\"" \
-    | grep -v '^Timestamp' > "$log.denials" || true
+    | grep -v '^Timestamp' | grep -v 'log run noninteractively' > "$log.denials" || true
+  # The kernel rate-limits identical reports into "N duplicate report(s) for ..." lines:
+  # count 1 per plain report plus N per duplicate line, per destination.
+  local count
+  count=$(awk '/duplicate report/ { for (i = 1; i <= NF; i++) if ($i ~ /^duplicate$/) n += $(i-1); next }
+               /deny\(1\)/ { n += 1 } END { print n + 0 }' "$log.denials")
   {
     echo "preset=$preset pid=$pid exit_code=$rc hold=${HOLD}s"
-    echo "denied_outbound_attempts=$(grep -c 'deny(1)' "$log.denials" || true)"
-    echo "--- distinct denied destinations"
-    sed -n 's/.*network-outbound //p' "$log.denials" | sort | uniq -c | sort -rn | head -40
+    echo "denied_outbound_attempts=$count"
+    echo "--- denied attempts per destination (reports + duplicates)"
+    awk '/deny\(1\)/ { d = $NF; m = 1; for (i = 1; i <= NF; i++) if ($i ~ /^duplicate$/) m = $(i-1); c[d] += m }
+         END { for (d in c) printf "%7d %s\n", c[d], d }' "$log.denials" | sort -rn | head -40
     echo "--- probe output"
     cat "$log.stdout"
   } > "$log"
   rm -f "$log.stdout"
   # keep the evidence file small: first 200 kernel reports are plenty
   head -200 "$log.denials" > "$log.denials.tmp" && mv "$log.denials.tmp" "$log.denials"
-  echo "== sandboxed $preset: exit=$rc denials=$(grep -c 'deny(1)' "$log.denials" || true)"
+  echo "== sandboxed $preset: exit=$rc denied_outbound_attempts=$count"
 }
 
 run_observed() { # preset — unsandboxed, snapshot sockets mid-run

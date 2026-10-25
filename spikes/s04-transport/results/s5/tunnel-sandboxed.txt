@@ -1,0 +1,27 @@
+RESULT pid=11244
+RESULT mtu=0
+RESULT tcp_peer=127.0.0.1:56024
+RESULT ip_sockets_bound=[]
+RESULT tunnel_connect_ms=2.68
+RESULT tunnel_path=remote=Custom(CustomAddr { id: 1953459554, data: [00] }) selected=true
+RESULT tunnel_exporter_match=true
+RESULT tunnel_max_datagram_size=Some(1382)
+RESULT tunnel_idle_stream_rtt_us=p50=121 p95=166 p99=190 max=289
+RESULT tunnel_idle_datagram_rtt_us=p50=71 p95=103 p99=137 max=240
+RESULT listener_bulk_bytes=1073741824
+RESULT tunnel_loaded_ping_samples=481
+RESULT tunnel_bulk_mb=1024
+RESULT tunnel_bulk_secs=0.987
+RESULT tunnel_bulk_mbit_s=8700
+RESULT tunnel_loaded_stream_rtt_us=p50=362 p95=888 p99=1305 max=3038
+RESULT tunnel_quic_lost_packets=941
+RESULT tunnel_quic_sent_packets=758015
+RESULT tunnel_tx_dropped=941
+RESULT tunnel_tx_packets=757073
+RESULT listener_tunnel_rx_packets=757076
+RESULT done=true
+exit=0
+sandbox_denied_outbound_reports=2 (log show since 2026-10-26 04:30:18, pid 11244)
+iroh-probe(11244) deny(1) network-outbound remote:*:1
+2026-10-26 04:30:23.682 Df log[11747:2e2fb6] [com.apple.log:] log run noninteractively, parent: 11746 (zsh), args: '/usr/bin/log' 'show' '--start' '2026-10-26 04:30:18' '--style' 'compact' '--predicate' 'eventMessage CONTAINS "deny(1) network-outbound" AND eventMessage CONTAINS "iroh-probe(11244)"'
+2026-10-26 04:30:43.737 Df log[12328:2e369b] [com.apple.log:] log run noninteractively, parent: 12327 (zsh), args: '/usr/bin/log' 'show' '--start' '2026-10-26 04:30:18' '--style' 'compact' '--predicate' 'eventMessage CONTAINS "deny(1) network-outbound" AND eventMessage CONTAINS "iroh-probe(11244)"'

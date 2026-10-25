@@ -1,200 +1,200 @@
-2026-10-26 01:30:15.715 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.715 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.715 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1900
-2026-10-26 01:30:15.717 E  kernel[0:2262ca] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.720 E  kernel[0:2262cd] (Sandbox) 5 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.720 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1900
-2026-10-26 01:30:15.721 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.721 E  kernel[0:2262ce] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.721 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1900
-2026-10-26 01:30:15.722 E  kernel[0:2262ca] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.722 E  kernel[0:2262cd] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.722 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.724 E  kernel[0:2262ca] (Sandbox) 87 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.724 E  kernel[0:2262ca] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.724 E  kernel[0:2262cc] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.724 E  kernel[0:2262cc] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cd] (Sandbox) 80 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.726 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cd] (Sandbox) 5 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:15.726 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cc] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.726 E  kernel[0:2262cc] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:1900
-2026-10-26 01:30:15.726 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d3] (Sandbox) 49 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d4] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d0] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d2] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262cf] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d2] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d1] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.727 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.727 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.728 E  kernel[0:2262d0] (Sandbox) 124 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.728 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262cb] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262cc] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262cc] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d5] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262cb] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262cf] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) 5 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d1] (Sandbox) 25 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d1] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.729 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.729 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.730 E  kernel[0:2262d1] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.730 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.730 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.734 E  kernel[0:2262d6] (Sandbox) 301 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.734 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.734 E  kernel[0:2262cd] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.734 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.734 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.734 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.734 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.734 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262cb] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d4] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cb] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d1] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d5] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262d6] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.735 E  kernel[0:2262ce] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.735 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.737 E  kernel[0:2262d4] (Sandbox) 141 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.737 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.737 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.737 E  kernel[0:2262d4] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.737 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.737 E  kernel[0:2262cf] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.738 E  kernel[0:2262d4] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.738 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.738 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.760 E  kernel[0:2262d2] (Sandbox) 1171 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.760 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.761 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.776 E  kernel[0:2262d5] (Sandbox) 179 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.776 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.891 E  kernel[0:2262d5] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.891 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.894 E  kernel[0:2262d1] (Sandbox) 29 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.894 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.894 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.894 E  kernel[0:2262d1] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.894 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.894 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) 16 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.895 E  kernel[0:2262cb] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.895 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.895 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.895 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.897 E  kernel[0:2262d1] (Sandbox) 67 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.897 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.897 E  kernel[0:2262d2] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.912 E  kernel[0:2262d4] (Sandbox) 743 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.912 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.912 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.912 E  kernel[0:2262d4] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.912 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.912 E  kernel[0:2262cc] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.914 E  kernel[0:2262d1] (Sandbox) 54 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.914 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.914 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.914 E  kernel[0:2262d1] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.914 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.914 E  kernel[0:2262d5] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.914 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d4] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d4] (Sandbox) 6 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d4] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d5] (Sandbox) 55 duplicate reports for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d0] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262cd] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262cd] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d3] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d3] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d5] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
-2026-10-26 01:30:15.915 E  kernel[0:2262d5] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:443
-2026-10-26 01:30:15.915 E  kernel[0:2262d1] (Sandbox) Sandbox: iroh-probe(21662) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.435 E  kernel[0:2e5d74] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.439 E  kernel[0:2e5d72] (Sandbox) 6 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.442 E  kernel[0:2e5d6d] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.442 E  kernel[0:2e5d6d] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.443 E  kernel[0:2e5d6b] (Sandbox) 73 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.443 E  kernel[0:2e5d6b] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6e] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) 12 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.444 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) 8 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1
+2026-10-26 04:31:44.444 E  kernel[0:2e5d75] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:1900
+2026-10-26 04:31:44.444 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d74] (Sandbox) 89 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d76] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6d] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6d] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6c] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d73] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6d] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d72] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d73] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d74] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6c] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6c] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d70] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d72] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d70] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d75] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.446 E  kernel[0:2e5d75] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.446 E  kernel[0:2e5d6d] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) 31 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) 6 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) 14 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.447 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.447 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d72] (Sandbox) 253 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6e] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d76] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d70] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6c] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d74] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6c] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d71] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d73] (Sandbox) 6 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d74] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d73] (Sandbox) 5 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d75] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6f] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d71] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.451 E  kernel[0:2e5d6f] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.451 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) 20 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d75] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) 5 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d72] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d6e] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d6e] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.452 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.452 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) 46 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d75] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) 4 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) 7 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.453 E  kernel[0:2e5d74] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.453 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.454 E  kernel[0:2e5d73] (Sandbox) 33 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.454 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.454 E  kernel[0:2e5d6c] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.454 E  kernel[0:2e5d73] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.454 E  kernel[0:2e5d73] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.454 E  kernel[0:2e5d70] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.454 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.604 E  kernel[0:2e5d77] (Sandbox) 1407 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.604 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.604 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.604 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.604 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.604 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.604 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.608 E  kernel[0:2e5d70] (Sandbox) 75 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.608 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.608 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.608 E  kernel[0:2e5d70] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.608 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.608 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.608 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.608 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.622 E  kernel[0:2e5d72] (Sandbox) 401 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.622 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.622 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.623 E  kernel[0:2e5d72] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.623 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.623 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.623 E  kernel[0:2e5d72] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.623 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.623 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.627 E  kernel[0:2e5d72] (Sandbox) 77 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.627 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.627 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.627 E  kernel[0:2e5d72] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.627 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.627 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.627 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.627 E  kernel[0:2e5d70] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.628 E  kernel[0:2e5d76] (Sandbox) 39 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.628 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.628 E  kernel[0:2e5d6e] (Sandbox) 3 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.628 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.628 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.628 E  kernel[0:2e5d6e] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.628 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.630 E  kernel[0:2e5d77] (Sandbox) 12 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.630 E  kernel[0:2e5d77] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.631 E  kernel[0:2e5d6e] (Sandbox) 2 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.631 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.633 E  kernel[0:2e5d6e] (Sandbox) 13 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.633 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.634 E  kernel[0:2e5d76] (Sandbox) 1 duplicate report for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.634 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.634 E  kernel[0:2e5d6e] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.634 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.638 E  kernel[0:2e5d76] (Sandbox) 73 duplicate reports for Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53
+2026-10-26 04:31:44.638 E  kernel[0:2e5d76] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:443
+2026-10-26 04:31:44.638 E  kernel[0:2e5d72] (Sandbox) Sandbox: iroh-probe(16214) deny(1) network-outbound remote:*:53

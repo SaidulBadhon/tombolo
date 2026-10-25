@@ -1,3 +1,1 @@
-2026-10-26 01:29:51.596 E  kernel[0:225918] (Sandbox) Sandbox: iroh-probe(21408) deny(1) network-outbound remote:*:1
-2026-10-26 01:29:51.649 E  kernel[0:225555] (Sandbox) 7 duplicate reports for Sandbox: iroh-probe(21408) deny(1) network-outbound remote:*:1
-2026-10-26 01:30:14.730 Df log[21630:226286] [com.apple.log:] log run noninteractively, parent: 21403 (bash), args: '/usr/bin/log' 'show' '--start' '2026-10-26 01:29:50' '--style' 'compact' '--predicate' 'eventMessage CONTAINS "deny(1) network-outbound" AND eventMessage CONTAINS "iroh-probe(21408)"'
+2026-10-26 04:31:20.798 E  kernel[0:2e52c7] (Sandbox) 7 duplicate reports for Sandbox: iroh-probe(15853) deny(1) network-outbound remote:*:1
