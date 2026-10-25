@@ -1,0 +1,31 @@
+# Docs CI: checks every relative Markdown link and #anchor in the repository.
+#
+# Language builds are deliberately NOT here yet: apple/, android/ and core/ contain no buildable code. The
+# Swift (macOS runner), Android and Rust (Linux runner) jobs from the implementation plan (Phase 0.A) are
+# added in separate workflows once those directories have buildable output.
+name: Docs
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: Markdown links and anchors
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      # The runner image ships Python 3; the checker uses only the standard library.
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Test the link checker
+        run: python3 -m unittest discover -s tools/check-links -v
+
+      - name: Check links and anchors
+        run: python3 tools/check-links/check_links.py
