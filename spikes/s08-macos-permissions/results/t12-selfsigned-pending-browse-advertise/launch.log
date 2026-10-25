@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:38:37 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app" --args --run "browse:_tombolo-test._tcp:10;advertise:52023;sleep:12"
+open exit: 0
+probe pids after 26s: 77279
+alert windows 2 s after quitting the probe: none

@@ -32,7 +32,7 @@ exe="$app/Contents/MacOS/TomboloProbe"
 
 "$here/build/windows" --baseline "$dir/.windows-baseline"
 /usr/bin/log stream --style compact --info \
-  --predicate 'process IN {"nehelper","UserNotificationCenter","TomboloProbe","mDNSResponder","kernel","tccd","runningboardd","launchd","amfid","syspolicyd","CoreServicesUIAgent","backgroundtaskmanagementd","smd"}' \
+  --predicate 'process IN {"nehelper","UserNotificationCenter","TomboloProbe","mDNSResponder","kernel","tccd","runningboardd","launchd","amfid","syspolicyd","CoreServicesUIAgent","backgroundtaskmanagementd","smd","socketfilterfw","sharedfilelistd"}' \
   >"$dir/system.log" 2>&1 &
 logpid=$!
 sleep 1

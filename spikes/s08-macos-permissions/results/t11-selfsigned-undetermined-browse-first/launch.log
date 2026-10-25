@@ -1,0 +1,3 @@
+launch: 2026-10-26 03:37:05 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app" --args --run "browse:_tombolo-test._tcp:8;bsdconnect:172.20.10.13:9:3;nwconnect:172.20.10.13:9:8;udpconnect:172.20.10.13:9;sleep:15"
+open exit: 0
+probe pids after 40s: none
