@@ -1,48 +1,48 @@
 [
   {
-    "achievedFps" : 59.98132138161526,
+    "achievedFps" : 59.9887176236086,
     "ackRoundTripMs" : {
-      "count" : 1073,
-      "max" : 0.535666,
-      "mean" : 0.243427020503262,
-      "p50" : 0.232042,
-      "p95" : 0.33525,
-      "p99" : 0.402542
+      "count" : 1074,
+      "max" : 0.826209,
+      "mean" : 0.25072020577281157,
+      "p50" : 0.229666,
+      "p95" : 0.354541,
+      "p99" : 0.404459
     },
     "commitMs" : {
-      "count" : 1073,
-      "max" : 0.490125,
-      "mean" : 0.20032865237651465,
-      "p50" : 0.192083,
-      "p95" : 0.26925,
-      "p99" : 0.325959
+      "count" : 1074,
+      "max" : 0.753875,
+      "mean" : 0.20343520670391066,
+      "p50" : 0.189167,
+      "p95" : 0.284791,
+      "p99" : 0.321875
     },
     "droppedNoFreeSlot" : 0,
     "endReason" : "host quit",
     "events" : 0,
     "fpsTarget" : 60,
-    "framesAcked" : 1193,
-    "framesSent" : 1194,
+    "framesAcked" : 1194,
+    "framesSent" : 1195,
     "height" : 2400,
     "hostVersion" : "1",
-    "launchToFirstCommitMs" : 169.904084,
-    "launchToHelloMs" : 154.412292,
+    "launchToFirstCommitMs" : 135.968208,
+    "launchToHelloMs" : 127.123708,
     "mode" : "ring",
     "package" : "com.example.chat",
     "reclaimedSlots" : 0,
     "recvMs" : {
-      "count" : 1073,
-      "max" : 0.150084,
-      "mean" : 0.04794124137931031,
-      "p50" : 0.045583,
-      "p95" : 0.06625,
-      "p99" : 0.083458
+      "count" : 1074,
+      "max" : 0.6075,
+      "mean" : 0.05619006424581,
+      "p50" : 0.052333,
+      "p95" : 0.081958,
+      "p99" : 0.092708
     },
     "sendErrors" : 0,
     "sessionID" : 1,
-    "shimPID" : 23322,
-    "shimVersion" : "1",
+    "shimPID" : 79488,
+    "shimVersion" : "1-7fab2eb47a76",
     "width" : 1080,
-    "windowSeconds" : 17.888902333
+    "windowSeconds" : 17.903366542
   }
 ]

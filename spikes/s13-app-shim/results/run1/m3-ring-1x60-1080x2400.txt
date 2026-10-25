@@ -1,0 +1,18 @@
+## m3-ring-1x60-1080x2400: host args: --mode ring --size 1080x2400 --apps com.example.chat:Chat  duration=20s
+uptime:  1:31  up 4 days, 18:15, 2 users, load averages: 28.70 14.16 10.26
+top CPU before run:
+PID    COMMAND          %CPU
+99148  VTEncoderXPCServ 0.0 
+98959  Google Chrome He 0.0 
+98932  Google Chrome He 0.0 
+98754  Google Chrome He 0.0 
+98556  Google Chrome He 0.0 
+97606  SpeechSynthesisS 0.0 
+CPU over 11044.1 ms (100% = one core):
+  pid 23320  TomboloHost              18.0 %
+  pid 23322  TomboloShim               1.4 %
+  pid 429    WindowServer             46.3 %
+  com.example.chat     ring      1080x2400@60 achieved 60.0 fps sent 1194 acked 1193 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.046  p95 0.066  p99 0.083  max 0.150 ms (n=1073)
+      host→layer commit  p50 0.192  p95 0.269  p99 0.326  max 0.490 ms
+      ack round trip     p50 0.232  p95 0.335  p99 0.403  max 0.536 ms

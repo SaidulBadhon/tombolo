@@ -290,7 +290,7 @@ tcc_and_policy_logs() { # since START (date string)
   local out="$RES/tcc-gatekeeper-logs.txt"
   { echo "log show --start '$1' (TCC + syspolicyd), lines mentioning our bundle IDs / paths:"
     log show --start "$1" --style compact --predicate 'subsystem == "com.apple.TCC" OR process == "tccd" OR process == "syspolicyd"' 2>/dev/null \
-      | grep -i -E 'Tombolo|spike-s13|example\.(chat|maps|notes|music|qtest)' | cut -c1-260 | head -60
+      | grep -i -E 'shim\.(com|org)\.example|spike-s13|spike\.s13|Tombolo Apps|TomboloShim|TomboloHost|s13-app-shim' | cut -c1-260 | head -60
     echo "(end; empty = no TCC request and no Gatekeeper assessment logged for our code)"; } | tee "$out"
 }
 

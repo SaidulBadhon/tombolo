@@ -1,21 +1,67 @@
 [
   {
-    "achievedFps" : 59.99300095435438,
+    "achievedFps" : 60.03754952021549,
+    "ackRoundTripMs" : {
+      "count" : 1060,
+      "max" : 7.810792,
+      "mean" : 0.25028306792452815,
+      "p50" : 0.223209,
+      "p95" : 0.375333,
+      "p99" : 0.47175
+    },
+    "commitMs" : {
+      "count" : 1060,
+      "max" : 7.765542,
+      "mean" : 0.20401061509433918,
+      "p50" : 0.183041,
+      "p95" : 0.287833,
+      "p99" : 0.38875
+    },
+    "droppedNoFreeSlot" : 0,
+    "endReason" : "host quit",
+    "events" : 0,
+    "fpsTarget" : 60,
+    "framesAcked" : 1180,
+    "framesSent" : 1180,
+    "height" : 1560,
+    "hostVersion" : "1",
+    "launchToFirstCommitMs" : 392.807459,
+    "launchToHelloMs" : 379.523917,
+    "mode" : "ring",
+    "package" : "org.example.maps",
+    "reclaimedSlots" : 0,
+    "recvMs" : {
+      "count" : 1060,
+      "max" : 7.643417,
+      "mean" : 0.059818159433962216,
+      "p50" : 0.049208,
+      "p95" : 0.079125,
+      "p99" : 0.092833
+    },
+    "sendErrors" : 0,
+    "sessionID" : 2,
+    "shimPID" : 78123,
+    "shimVersion" : "1-7fab2eb47a76",
+    "width" : 720,
+    "windowSeconds" : 17.655617334
+  },
+  {
+    "achievedFps" : 59.99357449995592,
     "ackRoundTripMs" : {
       "count" : 1071,
-      "max" : 2.606125,
-      "mean" : 0.24191017647058824,
-      "p50" : 0.221125,
-      "p95" : 0.361291,
-      "p99" : 0.433542
+      "max" : 6.291833,
+      "mean" : 0.25098429411764683,
+      "p50" : 0.233792,
+      "p95" : 0.338208,
+      "p99" : 0.41
     },
     "commitMs" : {
       "count" : 1071,
-      "max" : 2.568375,
-      "mean" : 0.19882022502334262,
-      "p50" : 0.182,
-      "p95" : 0.290833,
-      "p99" : 0.365
+      "max" : 6.246708,
+      "mean" : 0.20223939215686276,
+      "p50" : 0.189875,
+      "p95" : 0.260625,
+      "p99" : 0.3175
     },
     "droppedNoFreeSlot" : 0,
     "endReason" : "host quit",
@@ -25,70 +71,24 @@
     "framesSent" : 1192,
     "height" : 1560,
     "hostVersion" : "1",
-    "launchToFirstCommitMs" : 199.594416,
-    "launchToHelloMs" : 189.569666,
+    "launchToFirstCommitMs" : 357.643709,
+    "launchToHelloMs" : 347.003584,
     "mode" : "ring",
     "package" : "com.example.chat",
     "reclaimedSlots" : 0,
     "recvMs" : {
       "count" : 1071,
-      "max" : 2.463042,
-      "mean" : 0.052026572362278235,
-      "p50" : 0.045625,
-      "p95" : 0.072041,
-      "p99" : 0.109292
+      "max" : 6.1215,
+      "mean" : 0.06090353221288509,
+      "p50" : 0.053625,
+      "p95" : 0.075791,
+      "p99" : 0.088834
     },
     "sendErrors" : 0,
     "sessionID" : 1,
-    "shimPID" : 22160,
-    "shimVersion" : "1",
+    "shimPID" : 78102,
+    "shimVersion" : "1-7fab2eb47a76",
     "width" : 720,
-    "windowSeconds" : 17.852082459
-  },
-  {
-    "achievedFps" : 60.00554474965764,
-    "ackRoundTripMs" : {
-      "count" : 1067,
-      "max" : 10.579083,
-      "mean" : 0.26217806935332666,
-      "p50" : 0.240333,
-      "p95" : 0.352666,
-      "p99" : 0.4265
-    },
-    "commitMs" : {
-      "count" : 1067,
-      "max" : 10.536958,
-      "mean" : 0.2152743626991567,
-      "p50" : 0.196041,
-      "p95" : 0.286125,
-      "p99" : 0.362791
-    },
-    "droppedNoFreeSlot" : 0,
-    "endReason" : "host quit",
-    "events" : 0,
-    "fpsTarget" : 60,
-    "framesAcked" : 1187,
-    "framesSent" : 1187,
-    "height" : 1560,
-    "hostVersion" : "1",
-    "launchToFirstCommitMs" : 272.959875,
-    "launchToHelloMs" : 259.54075,
-    "mode" : "ring",
-    "package" : "org.example.maps",
-    "reclaimedSlots" : 0,
-    "recvMs" : {
-      "count" : 1067,
-      "max" : 10.429208,
-      "mean" : 0.059785877225866896,
-      "p50" : 0.046542,
-      "p95" : 0.070167,
-      "p99" : 0.089541
-    },
-    "sendErrors" : 0,
-    "sessionID" : 2,
-    "shimPID" : 22162,
-    "shimVersion" : "1",
-    "width" : 720,
-    "windowSeconds" : 17.781690083
+    "windowSeconds" : 17.851911791
   }
 ]
