@@ -374,7 +374,7 @@ clock), `attempts_left` (3), `state`, `holder` (connection ID), and for QR the p
 | `ACTIVE` | QR: `PairRequest` with **valid** proof (§7.5) | holder := this connection | `CONSUMED` |
 | `ACTIVE` | QR: `PairRequest` with invalid proof | `attempts_left -= 1`; reply `BAD_PROOF`, close | `ACTIVE`, or `DEAD(LIMIT)` at 0 |
 | `ACTIVE` | CODE: `PakeA` received | `attempts_left -= 1` **first**; holder := this connection | `IN_USE` |
-| `ACTIVE`, `IN_USE`, `CONSUMED` | another connection wants the ticket | CODE: reply `BUSY` before reading `PakeA` (no attempt is charged). QR: see `CONSUMED` row below | unchanged |
+| `IN_USE`, `CONSUMED` | another connection wants the ticket | CODE: reply `BUSY` before reading `PakeA` (no attempt is charged). QR: see the `CONSUMED` (QR) rows below | unchanged |
 | `IN_USE` | valid `cA` | — | `CONSUMED` |
 | `IN_USE` | invalid `cA`, step timeout, or disconnect before a valid `cA` | reply `BAD_CONFIRMATION` if possible, close | `ACTIVE` if `attempts_left > 0` and not expired, else `DEAD(LIMIT)` |
 | `CONSUMED` | binding committed after a valid `PairComplete` | send `PairDone` | ticket deleted (`DONE`) |
@@ -1119,7 +1119,7 @@ Threats as defined in [research 04 §5.4](../research/04-transport-and-security.
 | T7 | Stolen / borrowed unlocked Mac | Presence-gated elevation verified by the phone (§9.3); idle timeout; phone-side revocation (§15); session log and Stop (§10 rule 8) | Attacker who knows the Mac password (`.userPresence` allows it; §20 Q6); continuity data until revoked |
 | T8 | Same-user malware on the Mac | Non-exportable SE keys; presence key cannot be used without the user (§4.1); presence rotation needs phone approval (§13.2) | Malware with TCC grants can watch or drive our window; acknowledged out of scope |
 | T9 | Stolen phone | Mac-side removal (§15); per-binding keys; Mac accepts files only from an unlocked phone | Low |
-| T10 | Replay (incl. 0-RTT) | 0-RTT disabled on both ALPNs, resumption disabled (§8.5); exporter + per-side nonces in every transcript (§6); single-use tickets (§7.2), elevation nonces (§9.3), `op_id` journal (§11), monotonic lease `seq` (§10) | — |
+| T10 | Replay (incl. 0-RTT) | 0-RTT disabled on both ALPNs, resumption disabled (§8.5); exporter + per-side nonces in every transcript (§6); single-use tickets (§7.2), elevation nonces (§9.3), `op_id` journal with UUIDv7 acceptance window (§11), phone-paced lease challenges measured from their issue time (§10 rule 2) | — |
 | T11 | Online brute force of the code | SPAKE2 (no offline test), 3 attempts per code counted across connections with reserve-then-verify, 120 s TTL, one ticket per Mac, global back-off (§7.2, §7.6) | ≤ 3 × 10⁻⁶ per pairing |
 | T12 | QR / secret leakage | One-time use with CAS consumption, 120 s TTL, Touch ID confirmation showing the phone's name, **second valid proof ⇒ `COMPROMISED`** (§7.2), phone-owner scope choice, discovery key not derivable from the QR (§12) | An attacker who uses a leaked QR *before* the real phone and whose name the Mac user accepts; §20 Q8 |
 | T13 | Downgrade | §16: TLS 1.3 only, single-ALPN offers, no fallback retries, ALPN in `T_auth`, versioned labels, no security switches in `proto_minor` | — |
