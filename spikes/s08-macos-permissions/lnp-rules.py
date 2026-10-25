@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Print macOS Local Network privacy rules (read-only) for matching signing identifiers.
 
-usage: python3 -I lnp-rules.py [substring...]     (default: "tombolo")
+usage: python3 -I lnp-rules.py [substring | =suffix ...]   (default: "tombolo")
+       "=suffix" matches identifiers that end with suffix (e.g. "=.spike.s15")
 
 Reads /Library/Preferences/com.apple.networkextension.plist (world-readable, owned by
 root; this script never writes it). On macOS 27.0.1 nehelper stores each app's Local
@@ -42,7 +43,8 @@ for o in objs:
     if not isinstance(o, dict) or classname(o) != "NEPathRule":
         continue
     ident = deref(o.get("SigningIdentifier"))
-    if not isinstance(ident, str) or not any(n in ident.lower() for n in needles):
+    if not isinstance(ident, str) or not any(
+            ident.lower().endswith(n[1:]) if n.startswith("=") else n in ident.lower() for n in needles):
         continue
     dr = deref(o.get("DesignatedRequirement"))
     dr = "null" if dr in (None, "$null") else (dr.hex() if isinstance(dr, bytes) else dr)

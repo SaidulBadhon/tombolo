@@ -1,36 +1,36 @@
-S15 DR check - 2026-10-26 03:45:52 +0600 - 27.0.1 (26A434)
+S15 DR check - 2026-10-26 03:53:13 +0600 - 27.0.1 (26A434)
 
 Bundles
   selfsigned-1.0.0/S15 Probe.app
     Identifier=io.github.saidulbadhon.tombolo.spike.s15
-    CodeDirectory v=20500 size=681 flags=0x10000(runtime) hashes=14+3 location=embedded
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
     Authority=Tombolo Development (self-signed)
     TeamIdentifier=not set
-    CDHash=0fb926d4bb518b1389b0e7845aa07e07fe4093c8
-    MachO-UUID=86A29B4E-D640-3A6F-9BF4-3110B143C84A
+    CDHash=8496a50f972df660fd47a5a16268c1afda1f585f
+    MachO-UUID=94BE6AB0-5910-3579-B636-EE22DE6A8811
     DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
   selfsigned-1.0.1/S15 Probe.app
     Identifier=io.github.saidulbadhon.tombolo.spike.s15
-    CodeDirectory v=20500 size=681 flags=0x10000(runtime) hashes=14+3 location=embedded
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
     Authority=Tombolo Development (self-signed)
     TeamIdentifier=not set
-    CDHash=f80f5ce9f7c3f28bbfe4e8926f79a41b35fc0b1e
-    MachO-UUID=B6C52F2B-FCD3-31D0-A03E-43495BE1358A
+    CDHash=c1190a9d6d9695707003e0eb3597743ce1ffca69
+    MachO-UUID=C5247246-E268-314E-A93C-9AE089E82F88
     DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
   adhoc-1.0.0/S15 AdHoc Probe.app
     Identifier=io.github.saidulbadhon.tombolo.spike.s15adhoc
-    CodeDirectory v=20500 size=686 flags=0x10002(adhoc,runtime) hashes=14+3 location=embedded
+    CodeDirectory v=20500 size=718 flags=0x10002(adhoc,runtime) hashes=15+3 location=embedded
     TeamIdentifier=not set
-    CDHash=297c025d9808e80c65e86f0cedda323ab0e8eaec
-    MachO-UUID=C9383098-2FD7-307D-80CF-CF434DE779EC
-    DR: cdhash H"297c025d9808e80c65e86f0cedda323ab0e8eaec"
+    CDHash=12ae6991b8f4d23165f5ecfe56c3edaddb23d59f
+    MachO-UUID=BFC75114-B3CC-3D42-8EF1-B677FCF40FFA
+    DR: cdhash H"12ae6991b8f4d23165f5ecfe56c3edaddb23d59f"
   adhoc-1.0.1/S15 AdHoc Probe.app
     Identifier=io.github.saidulbadhon.tombolo.spike.s15adhoc
-    CodeDirectory v=20500 size=686 flags=0x10002(adhoc,runtime) hashes=14+3 location=embedded
+    CodeDirectory v=20500 size=718 flags=0x10002(adhoc,runtime) hashes=15+3 location=embedded
     TeamIdentifier=not set
-    CDHash=f693bf536d095e14b8196e3d38495ec145a75e73
-    MachO-UUID=FC2FAADC-56E8-3B8B-B4BF-7727CE3BEB58
-    DR: cdhash H"f693bf536d095e14b8196e3d38495ec145a75e73"
+    CDHash=1f31a32f2a601f22791c6f75b32aeed598bc0c0c
+    MachO-UUID=E8DF5A60-FB51-3BEE-8A05-C6FD8FA0B735
+    DR: cdhash H"1f31a32f2a601f22791c6f75b32aeed598bc0c0c"
 
 Does the update satisfy the DR of the version the user granted?
   self-signed: 1.0.1 against 1.0.0's DR (update)             S15 Probe.app: explicit requirement satisfied
@@ -42,11 +42,11 @@ Does the update satisfy the DR of the version the user granted?
 Impostor: same identifier, different self-signed certificate
   impostor copy of 1.0.1
     Identifier=io.github.saidulbadhon.tombolo.spike.s15
-    CodeDirectory v=20500 size=681 flags=0x10000(runtime) hashes=14+3 location=embedded
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
     Authority=S15 Impostor (self-signed)
     TeamIdentifier=not set
-    CDHash=8e2314a5c8241286baeec59d498f2e08e144ce75
-    MachO-UUID=B6C52F2B-FCD3-31D0-A03E-43495BE1358A
-    DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"db66cd4f9edc47370708374762175e1b8f1194bb"
+    CDHash=33471029e94c8ed9abfd86a7d4934b97b64f3bb1
+    MachO-UUID=C5247246-E268-314E-A93C-9AE089E82F88
+    DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"361835127a2c7f4151d394bb49d860fe2844d229"
   impostor 1.0.1 against genuine 1.0.0's DR                  test-requirement: code failed to satisfy specified code requirement(s)
   (impostor keychain and its login-keychain password item deleted)

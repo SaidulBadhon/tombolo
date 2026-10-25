@@ -28,6 +28,7 @@
 //                           exercises a TCC file-access grant (Documents folder) for S15
 //   sleep:SECS              keep the process alive (FB16131937: no alert for short-lived processes)
 //   ax | ax-prompt          AXIsProcessTrusted / ...WithOptions(prompt: true)
+//   ax-wait:SECS            poll AXIsProcessTrusted every second; log changes; stop early once true
 //   login-status | login-register | login-unregister   SMAppService.mainApp
 //   quit
 
@@ -493,6 +494,23 @@ func runStep(_ step: String, done: @escaping () -> Void) {
         let opts = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
         log("AXIsProcessTrustedWithOptions(prompt: true) = \(AXIsProcessTrustedWithOptions(opts))")
         done()
+    case "ax-wait":
+        let secs = parts.count > 1 ? Int(parts[1]) ?? 120 : 120
+        var last = AXIsProcessTrusted()
+        log("ax-wait: AXIsProcessTrusted=\(last); polling for \(secs) s")
+        var remaining = secs
+        func tick() {
+            let now = AXIsProcessTrusted()
+            if now != last {
+                log("ax-wait: AXIsProcessTrusted changed to \(now)")
+                last = now
+                if now { done(); return } // granted: stop waiting
+            }
+            remaining -= 1
+            if remaining <= 0 { log("ax-wait: end, AXIsProcessTrusted=\(now)"); done(); return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: tick)
+        }
+        tick()
     case "login-status":
         log("loginItem(mainApp)=\(loginItemStatus())")
         done()

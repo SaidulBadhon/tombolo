@@ -56,11 +56,16 @@ for ((i = 1; i <= watch; i++)); do
       [[ -e "$dir/window-$wid.png" ]] || /usr/sbin/screencapture -x -o -l "$wid" "$dir/window-$wid.png" 2>/dev/null || true
     done
   fi
+  # Stop watching once the probe has exited (e.g. a script ending in "quit").
+  if (( i >= 3 )) && ! pgrep -f "$exe" >/dev/null; then
+    echo "probe exited by t+${i}s" >>"$dir/launch.log"
+    break
+  fi
 done
 [[ -s "$dir/.windows-raw" ]] || echo "no new windows during ${watch}s" >"$dir/.windows-raw"
 
 pids="$(pgrep -f "$exe" || true)"
-echo "probe pids after ${watch}s: ${pids:-none}" | tee -a "$dir/launch.log"
+echo "probe pids at end of watch: ${pids:-none}" | tee -a "$dir/launch.log"
 if [[ -n "$pids" && "$keep" != "--keep" ]]; then
   kill $pids 2>/dev/null || true
   sleep 2
