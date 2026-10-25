@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:48:56 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/selfsigned/S15 Probe.app" --args --run "login-status;login-register;login-status;sleep:3"
+open exit: 0
+probe pids after 10s: 1924
+alert windows 2 s after quitting the probe: NEW owner=Notification Center pid=1263 layer=21 size=1800x1169 id=35 title=Notification Center

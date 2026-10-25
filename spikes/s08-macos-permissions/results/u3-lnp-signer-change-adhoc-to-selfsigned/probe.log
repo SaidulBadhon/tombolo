@@ -1,0 +1,20 @@
+2026-10-25T21:47:20.884Z +77.7ms [adhoc 1.0.2 pid 98199] launched; args=["--run", "bsdconnect:172.20.10.13:9:4;nwconnect:172.20.10.13:9:4;sleep:2", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u3-lnp-signer-change-adhoc-to-selfsigned/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u3-lnp-signer-change-adhoc-to-selfsigned/probe.log
+2026-10-25T21:47:20.899Z +92.6ms [adhoc 1.0.2 pid 98199] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.2 (1.0.2) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E1995F60-F7E6-3C8B-8A95-C2E8FE3E6C53
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10000
+    cdhash=29f112a283fe924b611ccaafd50a59411e4edee3
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.adhoc" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:47:20.899Z +92.7ms [adhoc 1.0.2 pid 98199] STEP bsdconnect:172.20.10.13:9:4
+2026-10-25T21:47:20.899Z +92.9ms [adhoc 1.0.2 pid 98199] bsdconnect 172.20.10.13:9 connect() returned -1 errno 36 Operation now in progress after 0.2ms
+2026-10-25T21:47:24.900Z +4094.0ms [adhoc 1.0.2 pid 98199] bsdconnect 172.20.10.13:9 still connecting after 4001.1ms (timeout)
+2026-10-25T21:47:24.901Z +4094.7ms [adhoc 1.0.2 pid 98199] STEP nwconnect:172.20.10.13:9:4
+2026-10-25T21:47:24.906Z +4099.5ms [adhoc 1.0.2 pid 98199] nwconnect 172.20.10.13:9 state=preparing after 3.6ms path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:47:29.091Z +8284.3ms [adhoc 1.0.2 pid 98199] nwconnect 172.20.10.13:9 end after 4188.6ms: state=preparing path.status=satisfied via=en0 local=172.20.10.14:61272 remote=172.20.10.13:9
+2026-10-25T21:47:29.091Z +8284.7ms [adhoc 1.0.2 pid 98199] STEP sleep:2
+2026-10-25T21:47:29.093Z +8286.3ms [adhoc 1.0.2 pid 98199] nwconnect 172.20.10.13:9 state=cancelled after 4191.0ms path=nil
+2026-10-25T21:47:31.188Z +10381.4ms [adhoc 1.0.2 pid 98199] script finished

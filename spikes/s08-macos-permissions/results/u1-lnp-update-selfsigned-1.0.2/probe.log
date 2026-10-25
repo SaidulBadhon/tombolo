@@ -1,0 +1,23 @@
+2026-10-25T21:46:40.803Z +81.3ms [selfsigned 1.0.2 pid 96769] launched; args=["--run", "bsdconnect:172.20.10.13:9:4;nwconnect:172.20.10.13:9:4;udpconnect:172.20.10.13:9;sleep:2", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u1-lnp-update-selfsigned-1.0.2/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u1-lnp-update-selfsigned-1.0.2/probe.log
+2026-10-25T21:46:40.814Z +92.9ms [selfsigned 1.0.2 pid 96769] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.2 (1.0.2) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=324C2FC2-F3FD-3A3B-9CB6-00B3875B6CD4
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=0e90ff33780fae038a1c84e43ad99a9b5f37f14d
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:46:40.815Z +93.0ms [selfsigned 1.0.2 pid 96769] STEP bsdconnect:172.20.10.13:9:4
+2026-10-25T21:46:40.815Z +93.3ms [selfsigned 1.0.2 pid 96769] bsdconnect 172.20.10.13:9 connect() returned -1 errno 64 Host is down after 0.1ms
+2026-10-25T21:46:40.818Z +96.2ms [selfsigned 1.0.2 pid 96769] STEP nwconnect:172.20.10.13:9:4
+2026-10-25T21:46:40.819Z +97.3ms [selfsigned 1.0.2 pid 96769] nwconnect 172.20.10.13:9 state=preparing after 0.8ms path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:46:40.819Z +97.7ms [selfsigned 1.0.2 pid 96769] nwconnect 172.20.10.13:9 state=waiting(posix(64 Host is down)) after 1.3ms path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:46:45.018Z +4296.4ms [selfsigned 1.0.2 pid 96769] nwconnect 172.20.10.13:9 end after 4199.8ms: state=waiting(posix(64 Host is down)) path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:46:45.018Z +4296.8ms [selfsigned 1.0.2 pid 96769] STEP udpconnect:172.20.10.13:9
+2026-10-25T21:46:45.019Z +4297.0ms [selfsigned 1.0.2 pid 96769] nwconnect 172.20.10.13:9 state=cancelled after 4200.7ms path=nil
+2026-10-25T21:46:45.019Z +4297.3ms [selfsigned 1.0.2 pid 96769] udpconnect 172.20.10.13:9 connect() = 0
+2026-10-25T21:46:45.019Z +4297.5ms [selfsigned 1.0.2 pid 96769] udpconnect 172.20.10.13:9 send() = -1 errno 64 Host is down
+2026-10-25T21:46:45.019Z +4297.7ms [selfsigned 1.0.2 pid 96769] STEP sleep:2
+2026-10-25T21:46:47.117Z +6395.6ms [selfsigned 1.0.2 pid 96769] script finished

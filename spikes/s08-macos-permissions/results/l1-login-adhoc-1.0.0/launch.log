@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:49:24 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/adhoc/S15 AdHoc Probe.app" --args --run "login-status;login-register;login-status;sleep:3"
+open exit: 0
+probe pids after 10s: 2620
+alert windows 2 s after quitting the probe: none

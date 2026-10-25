@@ -1,0 +1,4 @@
+1 : /Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app/Contents/MacOS/TomboloProbe 
+             (Allow incoming connections)
+2 : /Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app/Contents/MacOS/TomboloProbe 
+             (Allow incoming connections)

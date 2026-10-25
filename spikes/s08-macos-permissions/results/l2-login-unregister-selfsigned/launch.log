@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:50:19 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/selfsigned/S15 Probe.app" --args --run "login-status;login-unregister;login-status;sleep:2"
+open exit: 0
+probe pids after 6s: 5075
+alert windows 2 s after quitting the probe: none
