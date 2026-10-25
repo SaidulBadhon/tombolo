@@ -1,0 +1,98 @@
+name: Device report
+description: Report how a specific phone, OEM skin or Mac behaves — with Tombolo, a spike, scrcpy or the OS itself.
+title: "[Device]: "
+labels: ["device-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Android behaviour differs by manufacturer, OEM skin and OS version, so device-specific findings are
+        valuable — even negative ones. One device's result is evidence for that device only, so please be exact
+        about what you used. **Remove personal data** (notifications, messages, phone numbers, contact names,
+        Wi-Fi network names, serial numbers) from logs and screenshots before posting.
+  - type: input
+    id: phone-model
+    attributes:
+      label: Phone model
+      placeholder: "e.g. Samsung Galaxy A55 (SM-A556B)"
+    validations:
+      required: true
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      description: Version, and the build number or security patch level if you can (Settings → About phone).
+      placeholder: "e.g. Android 16, security patch 2026-09-01"
+    validations:
+      required: true
+  - type: input
+    id: oem-skin
+    attributes:
+      label: OEM skin and version
+      placeholder: "e.g. One UI 8.0, HyperOS 2, Hello UI, stock Pixel"
+    validations:
+      required: true
+  - type: input
+    id: mac-model
+    attributes:
+      label: Mac model
+      description: Write "not involved" if the finding is phone-only.
+      placeholder: "e.g. MacBook Air (M2, 2022)"
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      placeholder: "e.g. macOS 27.0.1"
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: Connection type
+      options:
+        - USB cable (USB debugging)
+        - Wireless debugging (adb over Wi-Fi)
+        - Same Wi-Fi network (Tombolo app)
+        - Not applicable
+        - Other (describe below)
+    validations:
+      required: true
+  - type: input
+    id: software
+    attributes:
+      label: What you ran
+      description: Spike and commit, scrcpy version, test app, or "OS behaviour only".
+      placeholder: "e.g. spikes/s07-lifecycle at commit abc1234; scrcpy 3.x"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you observed, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include physical steps (locking the phone, pressing power, changing networks) and any settings you changed.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or measurements
+      description: logcat excerpts, adb output, measured numbers. Remove personal data first.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed personal data from everything I pasted or attached.
+          required: true
