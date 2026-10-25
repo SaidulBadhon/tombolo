@@ -1,0 +1,82 @@
+name: Bug report
+description: Something in Tombolo's docs, tooling, CI or spike code is wrong or broken.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Tombolo has no released app yet, so most bugs today are in the
+        documentation, the tooling, CI or spike code.
+
+        **Security problems don't belong here** — report them privately as described in SECURITY.md.
+        For behaviour of a specific phone or Mac, the **Device report** form asks the right questions.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Documentation
+        - Tooling or CI (tools/, .github/)
+        - Spike code (spikes/)
+        - Mac app (apple/)
+        - Android app (android/)
+        - Core or protocol (core/, proto/)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem. Quote the exact error message or output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Check out commit ...
+        2. Run ...
+        3. See ...
+    validations:
+      required: false
+  - type: input
+    id: commit
+    attributes:
+      label: Commit, version or document
+      description: The commit SHA, release, or document path and section you were looking at.
+      placeholder: "e.g. a66a1a1, or docs/protocol.md §3"
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, tool versions (Python, Swift, Rust, JDK), devices — whatever is relevant.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or output
+      description: Paste relevant output. Remove personal data first.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and this hasn't been reported.
+          required: true
+        - label: I removed personal data (messages, phone numbers, contact names, serial numbers) from what I pasted.
+          required: true
