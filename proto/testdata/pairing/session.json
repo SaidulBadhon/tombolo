@@ -457,6 +457,119 @@
       "sig_auth (identity key)": "dccd94fb05b409918e6f0b0b28e55f669660878143aa720a1c502e724f74e030845c2961c45108944d9493e5cc42f673fb4cbfa5d699e8c258d1f69a36207db9",
       "sig_new (new presence key)": "a1e67ee257f6bc0034167a544b69f8b8a1bfc83b32f8ac49fc3f9ca91ea855e6c6c614166793ea1a1785c538094f49d209e684e2630deaae9baa548f0a5c82cd",
       "note": "the phone commits only after the phone owner approves"
+    },
+    "retry_after_lost_ack": {
+      "session": "phone_dials_mac",
+      "description": "Exact retries in the next session: same rotation_id, kind, old_pub and new_pub as the receipt; fresh signatures over that session's T_rot. Y replies RotateKeyDone without changing state or asking for approval again.",
+      "identity": {
+        "T_rot": {
+          "label": "tombolo/session/v1/rotate-key",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "02"
+            },
+            {
+              "name": "kind",
+              "hex": "01"
+            },
+            {
+              "name": "rotation_id",
+              "hex": "fd4a72ef88557125d20261d8995b5e7d"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "90ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d41"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12"
+            },
+            {
+              "name": "n_listener",
+              "hex": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            },
+            {
+              "name": "old_pub",
+              "hex": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8"
+            },
+            {
+              "name": "new_pub",
+              "hex": "0471b951e5e683b65b8cfce8194852b74d1050e5708c0c9f8dbb19063fdd85916f146afd7395c9dc14487e16813de11704c81f9449c7884d1e01f7e822e7002468"
+            }
+          ],
+          "encoded": "0000001d746f6d626f6c6f2f73657373696f6e2f76312f726f746174652d6b65790000000b0000000102000000010100000010fd4a72ef88557125d20261d8995b5e7d0000002090ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d4100000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2000000209bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef1200000020980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce0000001080d9d86aa6e493ead075e2688ca31917000000410455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8000000410471b951e5e683b65b8cfce8194852b74d1050e5708c0c9f8dbb19063fdd85916f146afd7395c9dc14487e16813de11704c81f9449c7884d1e01f7e822e7002468"
+        },
+        "sig_auth (old identity key, accepted as previous)": "91394950662704f53151198fc3e68ea8102334bb0f25fb0ec100c98a2b830567d6eae5d15699ca9bbe62d5ecfefcc5d25e689db07ca95fe17d3dd0489e4a822e",
+        "sig_new (new identity key)": "bd1febe652d6ba2cbb51dd0d97d08804a276f4dd820e4e82a32060f7346cd708ea914a744f817c99fc5a2bb3cba746dbc210312f3fc10b727e1679b2db422e28"
+      },
+      "presence": {
+        "T_rot": {
+          "label": "tombolo/session/v1/rotate-key",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "02"
+            },
+            {
+              "name": "kind",
+              "hex": "02"
+            },
+            {
+              "name": "rotation_id",
+              "hex": "b8682c05cf94f411733ee863e7d806bd"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "90ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d41"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12"
+            },
+            {
+              "name": "n_listener",
+              "hex": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            },
+            {
+              "name": "old_pub",
+              "hex": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753"
+            },
+            {
+              "name": "new_pub",
+              "hex": "04005678a83ca56334171e2a3419647e0dae012a5256985ce32f2167f7223a17298263e3acf9e9d7d910370a9c26fa6711380fcac913a7bfdfd77133d162f8d826"
+            }
+          ],
+          "encoded": "0000001d746f6d626f6c6f2f73657373696f6e2f76312f726f746174652d6b65790000000b0000000102000000010200000010b8682c05cf94f411733ee863e7d806bd0000002090ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d4100000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2000000209bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef1200000020980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce0000001080d9d86aa6e493ead075e2688ca319170000004104e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb77530000004104005678a83ca56334171e2a3419647e0dae012a5256985ce32f2167f7223a17298263e3acf9e9d7d910370a9c26fa6711380fcac913a7bfdfd77133d162f8d826"
+        },
+        "sig_auth (identity key)": "5784f8ef8495b9daac919cd88b43a9d5dc4d6f0662f8ba026b1691bc1370ece18ae49ad66bf322430d91a12bd055916154512e1e66b62e6aa354ed4fbce87b46",
+        "sig_new (new presence key)": "5cac2c644bfaaa4a0ef1831e6a3c29925531f75282c11607a36b5e67fb67fa126d9e92e2108f22d88d4a70b6c3a5bb77cc67d5531e2a30fc18a0831f84b0f1d1"
+      },
+      "first_session_sig_auth_verifies_over_retry_T_rot": false
     }
   }
 }

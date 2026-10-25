@@ -69,9 +69,9 @@ transcripts and signatures and by checking their own signatures verify.
 | `ecdsa-rfc6979.json` | RFC 6979 cross-check report |
 | `qr-pairing.json` | QR payload and URI, pairing key schedule, `T_req`/`T_acc`/`T_cmp`, proofs, signatures, `pair_id`, discovery key; MITM and `k`-mismatch negatives |
 | `code-pairing.json` | SPAKE2 run with fixed scalars, identity exchange; wrong code, invalid points, leading-zero `w` |
-| `session.json` | `SessionAuth` in both dial directions, session keys, channel binding, elevation, key rotation; negatives |
+| `session.json` | `SessionAuth` in both dial directions, session keys, channel binding, elevation, key rotation and lost-ack retries; negatives |
 | `discovery.json` | epochs, tokens, fillers, TXT `t=` values |
-| `op-payload.json` | `op_hash` for each side-effect kind, UUIDv7 `op_id`, acceptance window |
+| `op-payload.json` | `op_hash` for each side-effect kind, UUIDv7 `op_id`, acceptance window and pruning boundaries |
 
 Each transcript is given as its label, its named fields and the full `enc()` encoding in hex, so a mismatch can be
 traced to a single field.

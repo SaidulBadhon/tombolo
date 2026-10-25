@@ -181,14 +181,14 @@ transport key, the peer's identity key(s) and — on the phone — the scopes.
 | `screen_paused` | bool | Set by **Stop**; cleared only by the phone owner (§10 rule 4) |
 | `discovery_key` | 32 bytes, secret | Encrypted at rest |
 | `peer_name` | UTF-8, ≤ 64 bytes | From `PairAccept`; the owner may rename it locally |
-| `generation` | u32 | Incremented on every key change |
+| `generation` | u32 | Incremented on every change of keys, scopes or elevation policy |
 | `pending_rotation` | `{rotation_id, kind, old alias, new alias}` or null | Initiator side of a key rotation (§13.2) |
-| `last_rotation_id` | 16 bytes or null | Receiver side of the last committed rotation (§13.2) |
+| `last_rotation` | `{rotation_id, kind, old_pub, new_pub}` or null | Receipt of the last rotation this side committed as receiver (§13.2) |
 | `created_at`, `last_session_at`, `revoked_at` | timestamps | Session log and UI |
 
 **Mac-side binding**: `pair_id`, `status`, `peer_endpoint_id` (+ pending), `peer_identity_pub` (+ previous),
 `own_identity_key_tag` and `own_presence_key_tag` (Secure Enclave key references), `scopes_hint`,
-`elevation_hint`, `discovery_key`, `peer_name`/`model`/`os`, `generation`, `pending_rotation`, `last_rotation_id`,
+`elevation_hint`, `discovery_key`, `peer_name`/`model`/`os`, `generation`, `pending_rotation`, `last_rotation`,
 cached addresses, timestamps. **`scopes_hint` is a UI hint only and MUST NOT be used for any access decision.**
 
 ### 4.3 Binding invariants and atomic updates
@@ -395,8 +395,9 @@ ticket is gone and the user needs a new QR.
 
 ### 7.3 `PairHello`
 
-Immediately after the handshake, the dialer sends `PairHello`; the listener replies with its own. Then the
-method messages start, **always with the phone**.
+Immediately after the handshake, the dialer opens the pairing stream and sends `PairHello`; the listener replies
+with its own. Then the method messages start, **always with the phone**, whichever side dialed. The state tables
+in §7.5 and §7.6 state each action conditionally on the connection role where it matters.
 
 ```
 PairHello { version: u32 = 1, role: PHONE|MAC, method: QR|CODE, nonce: bytes[32],
@@ -466,8 +467,8 @@ flow `qr_k = k`).
 
 | State | Event | Checks | Action | Next |
 |---|---|---|---|---|
-| `HANDSHAKE` | TLS done, ALPN `tombolo-pair/1` | live QR ticket exists | — | `AWAIT_HELLO` |
-| `AWAIT_HELLO` | `PairHello` | §7.3 | send `PairHello`; derive keys | `AWAIT_REQUEST` |
+| `HANDSHAKE` | TLS done, ALPN `tombolo-pair/1` | live QR ticket exists | if the Mac dialed: open the pairing stream, send `PairHello` | `AWAIT_HELLO` |
+| `AWAIT_HELLO` | `PairHello` | §7.3 | if the Mac is the listener: send `PairHello`; derive keys | `AWAIT_REQUEST` |
 | `AWAIT_REQUEST` | `PairRequest` | proof (`CT-EQ`), then ticket CAS `ACTIVE → CONSUMED` (§7.2), then `sig_P`, key and string validity | show confirmation | `CONFIRM` |
 | `CONFIRM` | user approves with Touch ID | `P_M` signs `T_acc` (this signature *is* the confirmation) | `I_M` signs; send `PairAccept` | `AWAIT_COMPLETE` |
 | `CONFIRM` | user declines / 60 s | — | `PairError{DECLINED|TIMEOUT}`; ticket `DEAD` | `CLOSED` |
@@ -479,8 +480,8 @@ flow `qr_k = k`).
 | State | Event | Checks | Action | Next |
 |---|---|---|---|---|
 | `SCANNED` | QR parsed | §7.5 payload rules | dial addresses in parallel (or accept the Mac's USB dial) | `HANDSHAKE` |
-| `HANDSHAKE` | TLS done | Mac transport key `== id`; ALPN | send `PairHello` | `AWAIT_HELLO` |
-| `AWAIT_HELLO` | `PairHello` | §7.3 | derive keys; generate `I_P`; send `PairRequest` | `AWAIT_ACCEPT` |
+| `HANDSHAKE` | TLS done | Mac transport key `== id`; ALPN | if the phone dialed: open the pairing stream, send `PairHello` | `AWAIT_HELLO` |
+| `AWAIT_HELLO` | `PairHello` | §7.3 | if the phone is the listener: send `PairHello`; then derive keys, generate `I_P`, send `PairRequest` | `AWAIT_ACCEPT` |
 | `AWAIT_ACCEPT` | `PairAccept` | `H(SPKI(I_M.pub)) == k`; `proof_M`; `sig_M`; `sig_PM`; key/string validity | show scope chooser (phone must be unlocked) | `SCOPES` |
 | `SCOPES` | owner confirms | at least one scope chosen | commit phone binding as `UNCONFIRMED`; sign; send `PairComplete` | `AWAIT_DONE` |
 | `SCOPES` | owner cancels / 120 s | — | `PairError{DECLINED|TIMEOUT}`; delete `I_P` | `CLOSED` |
@@ -745,7 +746,7 @@ its parent session leaves `ACTIVE`.
 | `HANDSHAKE` | TLS done | ALPN `tombolo/1`; peer key pinned (§8.1) | dialer: open control stream, send `Hello` (or `ChannelBind` for an extra connection, §8.3) | `AWAIT_HELLO` |
 | `AWAIT_HELLO` | `ChannelBind` (listener) | §8.3 extra-connection branch | attach to the parent session | `CHANNEL` (ends with its channel or parent) |
 | `AWAIT_HELLO` | `Hello` | nonce ≠ own; fields valid | listener: send `Hello` then `SessionAuth`; dialer: send `SessionAuth` | `AWAIT_AUTH` |
-| `AWAIT_AUTH` | `SessionAuth` | `Verify` (§8.2) | phone: promote `UNCONFIRMED` binding to `ACTIVE`; supersede an older session of the same binding (§8.6) | `AUTHENTICATED` |
+| `AWAIT_AUTH` | `SessionAuth` | `Verify` (§8.2) | phone: promote `UNCONFIRMED` binding to `ACTIVE`; both: supersede an older session of the same binding (§8.6) | `AUTHENTICATED` |
 | `AUTHENTICATED` | Mac: `SessionStart{scopes_requested}` | — | phone computes the grant (§9), starts only allowed channels, replies `SessionStarted` | `ACTIVE` |
 | `ACTIVE` | commands, subscriptions | §9 on every one | — | `ACTIVE` |
 | `ACTIVE` | elevation, lease events | §9.3, §10 | — | `ACTIVE` |
@@ -766,8 +767,9 @@ cheap, so v1 disables resumption.
 
 ### 8.6 Concurrent sessions
 
-- At most one session per binding. When a new session of the same binding authenticates, the phone ends the older
-  one (its lease is released first). This is safe because only an authenticated peer can trigger it.
+- At most one session per binding. When a new session of the same binding authenticates, **both** endpoints end the
+  older one (on the phone its lease is released first). This is safe because only an authenticated peer can trigger
+  it. A committed key rotation also ends every other session of the binding on both endpoints (§13.2).
 - A phone MAY have sessions with several Macs at once, but at most **one** session at a time may hold
   `screen.control`; a second Mac's control request is refused with `BUSY` unless the phone owner switches.
 
@@ -846,7 +848,8 @@ If `binding.elevation_required` is true (default), scopes in `binding.elevation_
 
 ```
 Mac → ElevationBegin{scopes}            (when the user opens the mirror window, or starts control)
-Phone → ElevationChallenge{n_E}         (fresh 32-byte phone nonce; one outstanding; valid 60 s)
+Phone → ElevationChallenge{n_E}         (fresh 32-byte phone nonce; one outstanding; valid 60 s;
+                                         the phone records binding.generation with it)
 Mac: Touch ID / password prompt "Control <phone name>?" → Secure Enclave signs with P_M
 T_elev = enc("tombolo/session/v1/elevate";
              exporter_session, dialer_endpoint_id, listener_endpoint_id, n_dialer, n_listener,
@@ -854,6 +857,11 @@ T_elev = enc("tombolo/session/v1/elevate";
 Mac → ElevationProof{sig = Sign(P_M, T_elev)}
 Phone: Verify with binding.peer_presence_pub; n_E single-use → ElevationGranted{scopes}
 ```
+
+An outstanding challenge is **cancelled** whenever `binding.generation` changes (any change of scopes, elevation
+policy or keys) or the session leaves `ACTIVE`; a proof for a cancelled or expired challenge, or one whose recorded
+generation differs from the binding's current `generation`, is rejected. Otherwise a proof signed before an
+owner's policy change could arrive afterwards and re-elevate without fresh user presence.
 
 The phone sets `session.elevated_scopes := binding.scopes ∩ binding.elevation_scopes ∩ scopes` (replacing, not
 adding to, any earlier value) and reports it in `ElevationGranted`. `session.elevated_scopes` becomes empty on
@@ -949,12 +957,19 @@ Including the kind label prevents an `op_id` reused across kinds from matching.
 "older than the retention window" — but a random UUID carries no age, so once its record is deleted an accidental
 resubmission would look new. Therefore:
 
-- `op_id` MUST be a **UUIDv7** (RFC 9562), whose first 48 bits are the Mac's Unix time in milliseconds.
-- The phone MUST NOT execute an operation whose embedded time is more than **6 days** in the past or more than
-  **1 day** in the future by the phone's clock; it replies `EXPIRED` instead.
-- Journal records are kept for at least **7 days** after insertion. Because acceptance (≤ 6 days old, ≤ 1 day ahead)
-  is strictly inside retention, any `op_id` the phone could still accept is still in the journal, so a duplicate is
-  always recognised.
+- `op_id` MUST be a **UUIDv7** (RFC 9562), whose first 48 bits are the Mac's Unix time in milliseconds (`op_time`).
+- The phone keeps a persisted, **non-decreasing acceptance clock**: `acc_now = max(wall clock, last acc_now)`,
+  written back with every journal update, so setting the phone's clock back never reopens the window.
+- The phone executes an operation only if `acc_now − 6 days < op_time < acc_now + 1 day` (strict inequalities);
+  otherwise it replies `EXPIRED` and executes nothing.
+- A journal record may be deleted only once `op_time ≤ acc_now − 7 days` — pruning is by the operation's own
+  time, not by insertion time.
+
+Proof sketch: if a record was pruned at some moment with clock `a`, then `op_time ≤ a − 7 days`; the clock never
+decreases, so at any later moment `op_time ≤ acc_now − 7 days < acc_now − 6 days`, and the operation can no longer be
+accepted. Any `op_id` the phone could still accept therefore still has its record, so a duplicate is always
+recognised — with a one-day margin between acceptance (6 days) and pruning (7 days, protocol §8). A wall clock that
+jumps forward only makes the phone stricter.
 
 The embedded time is supplied by the Mac and is not authenticated as a time; that is sufficient, because the rule
 guards against accidental replays by the authenticated, paired Mac — a malicious paired Mac holding `sms.send` can
@@ -1016,23 +1031,32 @@ RotateKey{kind, rotation_id, old_pub, new_pub,
 - **Initiator state (X).** Before sending, X creates the new hardware key and durably records
   `pending_rotation = {rotation_id (16 random bytes), kind, old alias, new alias}` in its binding. At most one
   rotation per binding is pending on either side; X does not start another until the pending one is resolved.
-- **Identity key (Y).** Y verifies `sig_auth` with the key that verified this session's `SessionAuth` and `sig_new`
-  with `new_pub`, checks `old_pub` equals that key, and then — in one transaction — sets
-  `peer_identity_pub := new_pub`, `peer_previous_identity_pub := old_pub`, records `last_rotation_id := rotation_id`,
-  increments `generation`, and replies `RotateKeyDone{rotation_id}`. Y keeps accepting the previous key in
-  `SessionAuth` until the first session that verifies with the new one, then clears it.
-- **Retry after a lost acknowledgement.** If X never received `RotateKeyDone`, it still holds `pending_rotation`,
-  signs its next `SessionAuth` with the **old** key (which Y accepts as `peer_previous_identity_pub`), and re-sends
-  `RotateKey` with the **same** `rotation_id`, `old_pub` and `new_pub` and fresh signatures over the new session's
-  `T_rot`. If Y's `last_rotation_id`, previous key and current key already equal that rotation, Y changes nothing and
-  replies `RotateKeyDone` (idempotent). A `RotateKey` with a different `rotation_id` while Y still holds a previous
-  key is refused with `BUSY`.
-- **Completion (X).** On `RotateKeyDone{rotation_id}` X, in one transaction, makes the new key current and clears
-  `pending_rotation`, then deletes the old key.
-- **Presence key (Mac).** Same messages with `kind = 2`; `K_auth` is still the Mac's identity key. Before committing,
-  the phone additionally requires the **phone owner's approval on the phone** ("The Touch ID key of <Mac> changed —
-  allow?"). Without this, Mac malware able to use the identity key could swap in a presence key it controls and
-  bypass elevation. The phone does not keep a previous presence key.
+- **Receiver state (Y).** Y keeps a durable **receipt** of the last rotation it committed for the binding:
+  `last_rotation = {rotation_id, kind, old_pub, new_pub}`.
+- **Fresh rotation** (`rotation_id` differs from the receipt's). Y accepts it only if **all** hold: this session's
+  `SessionAuth` verified with Y's **current** `peer_identity_pub` (not the previous one), and the binding's
+  `generation` is unchanged since this session authenticated; `sig_auth` verifies with that current key; `old_pub`
+  equals the current key of that `kind` (`peer_identity_pub` or `peer_presence_pub`); `sig_new` verifies with
+  `new_pub`; and, for `kind = 2`, the **phone owner approved on the phone** ("The Touch ID key of <Mac> changed —
+  allow?" — without this, Mac malware able to use the identity key could swap in a presence key it controls and
+  bypass elevation). Y then, in one transaction, installs `new_pub` (identity: `peer_identity_pub := new_pub`,
+  `peer_previous_identity_pub := old_pub`; presence: `peer_presence_pub := new_pub`, no previous presence key is
+  kept), writes the receipt, increments `generation`, ends every **other** session of this binding, and replies
+  `RotateKeyDone{rotation_id}`. Otherwise Y replies `REJECTED` and changes nothing.
+- **Exact retry after a lost acknowledgement.** If X never received `RotateKeyDone`, it still holds
+  `pending_rotation`, authenticates its next session with its **old** identity key (Y accepts it as
+  `peer_previous_identity_pub` after an identity rotation; after a presence rotation the identity key is unchanged),
+  and re-sends `RotateKey` with the **same** `rotation_id`, `kind`, `old_pub` and `new_pub` and fresh signatures over
+  the new session's `T_rot`. If these four values equal Y's receipt, and `sig_auth` verifies with the key that
+  authenticated this session (current, or — only for this exact retry of an identity rotation — the previous key)
+  and `sig_new` with `new_pub`, Y changes nothing, asks for no new approval, and replies `RotateKeyDone`. A session
+  authenticated with the previous key can trigger nothing else in §13.
+- **Previous identity key lifetime.** Y keeps accepting `peer_previous_identity_pub` in `SessionAuth` until the first
+  session that verifies with the new key, then clears it; while a previous key is held, a fresh rotation is refused
+  with `BUSY`.
+- **Completion (X).** On `RotateKeyDone{rotation_id}` X, in one transaction, makes the new key current, clears
+  `pending_rotation` and increments `generation`, then deletes the old key and ends every other session of this
+  binding.
 - Triggers: the Secure Enclave invalidated a key (e.g. a presence key created with `.biometryCurrentSet` after a
   fingerprint change), a user-requested key refresh, a policy change. A device that has lost an identity key
   outright (hardware reset, app reinstall) cannot rotate and must re-pair.
@@ -1140,9 +1164,9 @@ exporter, fixed nonces), every intermediate transcript in hex, and the outputs.
 | `ecdsa-rfc6979.json` | RFC 6979 §A.2.5 P-256/SHA-256 signatures reproduced by the signing code used for every other vector; DER ↔ `r ‖ s` conversion |
 | `qr-pairing.json` | QR payload, pairing key schedule, `T_req`/`T_acc`/`T_cmp`, proofs, signatures, `pair_id`, discovery key |
 | `code-pairing.json` | `pw`, `w`, SPAKE2 messages, `TT`, `Ke`/`Ka`/`KcA`/`KcB`, `cA`/`cB` from fixed scalars; the identity exchange; wrong-code and invalid-point negative cases |
-| `session.json` | `T_auth` both directions, `SessionAuth` signatures, session key schedule, channel binding, elevation, key rotation; negative cases |
+| `session.json` | `T_auth` both directions, `SessionAuth` signatures, session key schedule, channel binding, elevation, key rotation and exact retries after a lost acknowledgement; negative cases |
 | `discovery.json` | epochs, tokens, fillers and the TXT value |
-| `op-payload.json` | `op_hash` for every side-effect kind |
+| `op-payload.json` | `op_hash` for every side-effect kind; UUIDv7 `op_id`; acceptance-window and pruning boundaries |
 
 Signatures use RFC 6979 deterministic nonces (cross-checked against RFC 6979 §A.2.5); real hardware signatures
 differ and implementations test them by verification.
@@ -1173,7 +1197,7 @@ owns only `docs/security/**`).
 | D8 | [protocol §2](../protocol.md#2-session-establishment) | 0-RTT disabled "for the control stream" | Disabled for both ALPNs entirely; resumption disabled (§8.5) | Simpler and removes replayable data from every channel |
 | D9 | [protocol §3](../protocol.md#3-control-messages-sketch) | `Dial{number}` has no `op_id`; §8 lists `Dial` as a side effect | `Dial` carries `op_id` (§11) | Consistency with protocol §8 |
 | D10 | [protocol §6](../protocol.md#6-pairing-messages) | Two-message pairing (`PairRequest`, `PairAccept`) | Adds `PairHello`, `PairComplete`, `PairDone` | Nonce exchange before any proof; the phone owner's scope choice and both commits need explicit messages |
-| D11 | [protocol §8](../protocol.md#8-robustness-rules) side effects | `op_id` is a UUID; ops older than the 7-day retention are rejected | `op_id` is a UUIDv7; acceptance window 6 days back / 1 day ahead, strictly inside retention (§11) | A random UUID carries no age, so the protocol §8 rule could not be enforced after a record expires |
+| D11 | [protocol §8](../protocol.md#8-robustness-rules) side effects | `op_id` is a UUID; ops older than the 7-day retention are rejected | `op_id` is a UUIDv7; strict acceptance window (6 days back, 1 day ahead) on a non-decreasing clock; records pruned by `op_time` after 7 days (§11) | A random UUID carries no age, so the protocol §8 rule could not be enforced after a record expires |
 | D12 | [architecture §8](../architecture.md#8-security-model) | Fail-closed via a lease the Mac renews | The phone paces renewals with `LeaseTick` challenges and measures the lease from its own issue time (§10 rule 2) | A Mac-paced renewal can be delayed and replayed in order by the network, stretching the lease past its bound |
 
 ## 20. Open questions for the reviewer

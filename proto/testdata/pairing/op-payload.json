@@ -3,7 +3,8 @@
   "spec": "docs/security/pairing-and-session.md section 11",
   "generator": "tools/pairing-vectors (cargo run --release)",
   "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
-  "op_id_format": "UUIDv7 (RFC 9562): first 48 bits = Unix time in ms",
+  "op_id_format": "UUIDv7 (RFC 9562): first 48 bits = Unix time in ms (op_time)",
+  "acceptance_clock": "acc_now = max(wall clock, last persisted acc_now), never decreases",
   "op_id_time_ms": 1793000000000,
   "ops": [
     {
@@ -229,34 +230,48 @@
   ],
   "acceptance_window": [
     {
-      "op_id_time_ms": 1793000000000,
-      "phone_now_ms": 1793432000000,
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793432000000,
       "case": "5 days old",
       "execute": true
     },
     {
-      "op_id_time_ms": 1793000000000,
-      "phone_now_ms": 1793518400000,
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793518399999,
+      "case": "6 days - 1 ms old",
+      "execute": true
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793518400000,
       "case": "exactly 6 days old",
-      "execute": true
-    },
-    {
-      "op_id_time_ms": 1793000000000,
-      "phone_now_ms": 1793518400001,
-      "case": "6 days + 1 ms old",
       "execute": false
     },
     {
-      "op_id_time_ms": 1793000000000,
-      "phone_now_ms": 1792913600000,
-      "case": "1 day in the future",
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1792913600001,
+      "case": "1 day - 1 ms in the future",
       "execute": true
     },
     {
-      "op_id_time_ms": 1793000000000,
-      "phone_now_ms": 1792913599999,
-      "case": "1 day + 1 ms in the future",
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1792913600000,
+      "case": "exactly 1 day in the future",
       "execute": false
+    }
+  ],
+  "pruning": [
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793604799999,
+      "case": "7 days - 1 ms after op_time",
+      "may_prune": false
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793604800000,
+      "case": "exactly 7 days after op_time",
+      "may_prune": true
     }
   ]
 }

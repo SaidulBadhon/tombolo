@@ -768,6 +768,35 @@ pub fn session_json(dev: &Devices, b: &Binding) -> Value {
     assert!(verify(&b.mac_key.pub65, &t_rot1.bytes(), &auth1) && verify(&new_id.pub65, &t_rot1.bytes(), &new1));
     assert!(verify(&b.mac_key.pub65, &t_rot2.bytes(), &auth2) && verify(&new_pres.pub65, &t_rot2.bytes(), &new2));
 
+    // Exact retries after a lost RotateKeyDone, in the next session (phone_dials_mac): same rotation_id, kind,
+    // old_pub, new_pub; fresh T_rot. For the identity rotation the Mac authenticated that session with its OLD
+    // identity key (accepted as previous), so sig_auth is by the old key; the presence rotation's sig_auth is by the
+    // (unchanged) identity key.
+    let c2 = &cases[1];
+    let rot2 = |kind: u8, rid: &[u8], old: &[u8], new: &[u8]| {
+        Tr::new("tombolo/session/v1/rotate-key")
+            .f("signer_role", u8b(ROLE_MAC))
+            .f("kind", u8b(kind))
+            .f("rotation_id", rid)
+            .f("exporter_session", &c2.exporter)
+            .f("dialer_endpoint_id", &c2.dialer)
+            .f("listener_endpoint_id", &c2.listener)
+            .f("n_dialer", &c2.nd)
+            .f("n_listener", &c2.nl)
+            .f("pair_id", &b.pair_id)
+            .f("old_pub", old)
+            .f("new_pub", new)
+    };
+    let t_retry1 = rot2(1, &rid1, &b.mac_key.pub65, &new_id.pub65);
+    let (rauth1, rnew1) = (b.mac_key.sign(&t_retry1.bytes()), new_id.sign(&t_retry1.bytes()));
+    let t_retry2 = rot2(2, &rid2, &b.presence_key.pub65, &new_pres.pub65);
+    let (rauth2, rnew2) = (b.mac_key.sign(&t_retry2.bytes()), new_pres.sign(&t_retry2.bytes()));
+    assert!(verify(&b.mac_key.pub65, &t_retry1.bytes(), &rauth1) && verify(&new_id.pub65, &t_retry1.bytes(), &rnew1));
+    assert!(verify(&b.mac_key.pub65, &t_retry2.bytes(), &rauth2) && verify(&new_pres.pub65, &t_retry2.bytes(), &rnew2));
+    // The first session's signatures do not verify over the retry session's transcript.
+    let stale = verify(&b.mac_key.pub65, &t_retry1.bytes(), &auth1);
+    assert!(!stale);
+
     let body = json!({
         "binding": {
             "source": "qr-pairing.json",
@@ -816,6 +845,21 @@ pub fn session_json(dev: &Devices, b: &Binding) -> Value {
                 "sig_auth (identity key)": h(&auth2),
                 "sig_new (new presence key)": h(&new2),
                 "note": "the phone commits only after the phone owner approves",
+            },
+            "retry_after_lost_ack": {
+                "session": "phone_dials_mac",
+                "description": "Exact retries in the next session: same rotation_id, kind, old_pub and new_pub as the receipt; fresh signatures over that session's T_rot. Y replies RotateKeyDone without changing state or asking for approval again.",
+                "identity": {
+                    "T_rot": t_retry1.json(),
+                    "sig_auth (old identity key, accepted as previous)": h(&rauth1),
+                    "sig_new (new identity key)": h(&rnew1),
+                },
+                "presence": {
+                    "T_rot": t_retry2.json(),
+                    "sig_auth (identity key)": h(&rauth2),
+                    "sig_new (new presence key)": h(&rnew2),
+                },
+                "first_session_sig_auth_verifies_over_retry_T_rot": stale,
             },
         },
     });
@@ -991,22 +1035,29 @@ pub fn op_json() -> Value {
             }),
         ),
     ];
-    let accept = |now: u64| now <= ms + 6 * day && now + day >= ms;
+    // §11: execute only if acc_now - 6 days < op_time < acc_now + 1 day (strict); prune once op_time <= acc_now - 7 days.
+    let accept = |now: u64| now < ms + 6 * day && ms < now + day;
     let window: Vec<Value> = [
         (ms + 5 * day, "5 days old"),
+        (ms + 6 * day - 1, "6 days - 1 ms old"),
         (ms + 6 * day, "exactly 6 days old"),
-        (ms + 6 * day + 1, "6 days + 1 ms old"),
-        (ms - day, "1 day in the future"),
-        (ms - day - 1, "1 day + 1 ms in the future"),
+        (ms - day + 1, "1 day - 1 ms in the future"),
+        (ms - day, "exactly 1 day in the future"),
     ]
     .iter()
-    .map(|(now, what)| json!({ "op_id_time_ms": ms, "phone_now_ms": now, "case": what, "execute": accept(*now) }))
+    .map(|(now, what)| json!({ "op_time_ms": ms, "acc_now_ms": now, "case": what, "execute": accept(*now) }))
     .collect();
+    let prune: Vec<Value> = [(ms + 7 * day - 1, "7 days - 1 ms after op_time"), (ms + 7 * day, "exactly 7 days after op_time")]
+        .iter()
+        .map(|(now, what)| json!({ "op_time_ms": ms, "acc_now_ms": now, "case": what, "may_prune": ms + 7 * day <= *now }))
+        .collect();
     let body = json!({
-        "op_id_format": "UUIDv7 (RFC 9562): first 48 bits = Unix time in ms",
+        "op_id_format": "UUIDv7 (RFC 9562): first 48 bits = Unix time in ms (op_time)",
+        "acceptance_clock": "acc_now = max(wall clock, last persisted acc_now), never decreases",
         "op_id_time_ms": ms,
         "ops": ops,
         "acceptance_window": window,
+        "pruning": prune,
     });
     obj(header("Side-effect payload hashes (op_hash) for every op kind, UUIDv7 op_id layout and the acceptance window.", "section 11"), body)
 }
