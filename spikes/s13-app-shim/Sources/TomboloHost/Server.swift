@@ -240,8 +240,8 @@ final class Server {
         let (ok, peer) = CodeSign.check(audit: m.audit, requirement: requirement)
         guard ok else { return reject("code requirement failed: \(peer)") }
 
-        if shimVersion != hostVersion, cfg.updateShims {
-            log("shim \(package) pid \(pid) is v\(shimVersion), host is v\(hostVersion): asking it to restart for update")
+        if shimVersion != gen.shimBuild, cfg.updateShims {
+            log("shim \(package) pid \(pid) is v\(shimVersion), host installs v\(gen.shimBuild): asking it to restart for update")
             IPC.send(reply, .restartForUpdate, timeoutMs: 50)
             sipc_release(reply)
             let cb = onRestartForUpdate

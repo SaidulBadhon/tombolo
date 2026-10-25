@@ -55,6 +55,7 @@ final class HostDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ n: Notification) {
         let selfCode = CodeSign.cdhash(ofBundle: Bundle.main.bundleURL) ?? "-"
         log("host v\(hostVersion) starting; bundle=\(Bundle.main.bundlePath) cdhash=\(selfCode) args=\(CommandLine.arguments.dropFirst().joined(separator: " "))")
+        log("shim build this host installs: \(gen.shimBuild)") // also forces the lazy value on the main thread
         if cfg.generateOnly {
             for app in cfg.apps { generateIfNeeded(app, force: cfg.forceRegenerate) }
             exit(0)

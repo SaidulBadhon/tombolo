@@ -132,11 +132,11 @@ restart() {
   sleep 2
 
   note "--- C. shim crash (SIGKILL Chat), host notices; relaunch Chat via LaunchServices (like a Dock click)"
-  h=$(lines "$HF"); tk=$(now_ms); kill -KILL "$(shim_pid Chat)"
+  m=$(lines "$MF"); h=$(lines "$HF"); tk=$(now_ms); kill -KILL "$(shim_pid Chat)"
   l=$(wait_log "$HF" "$h" 'shim process died' 5); note "host: $l  [+$(dt "$tk" "$(t_of "$l")") after SIGKILL]"
   c=$(lines "$CF"); tl=$(now_ms); open -g -b "$CHAT_ID"
   l=$(wait_log "$CF" "$c" 'connected: session' 15); note "chat: $l  [+$(dt "$tl" "$(t_of "$l")") after open -b]"
-  note "maps unaffected: $(tail -n 3 "$MF" | grep -c disconnected) disconnects in its last 3 lines"
+  note "maps unaffected: $(tail -n +$((m + 1)) "$MF" | grep -c disconnected) disconnects logged by Maps during step C"
   note "--- D. two hosts: second instance cannot claim the name"
   h=$(lines "$HF"); "$HOST_EXE" --no-launch --duration 5 >/dev/null 2>&1; note "second host exit code $? ; $(wait_log "$HF" "$h" 'could not claim|bootstrap_check_in' 2)"
   stop_all
@@ -178,7 +178,7 @@ update() {
   note "$(wait_log "$CF" "$c" 'restart for an update' 15)"
   note "$(wait_log "$HF" "$h" 'com.example.chat: old shim pid' 15)"
   note "$(wait_log "$HF" "$h" 'generated .*Chat.app' 15)"
-  note "$(wait_log "$CF" "$c" 'shim v2 starting' 15)"
+  note "$(wait_log "$CF" "$c" 'shim v2-[0-9a-f]+ starting' 15)"
   note "$(wait_log "$CF" "$c" 'connected: session.*host v2' 15)"
   note "$(wait_log "$MF" "$m" 'connected: session.*host v2' 20)"
   sleep 1
@@ -258,7 +258,7 @@ security() {
   "$ROOT/out/probe_ipc" bs-checkin "$SVC" > /tmp/s13-squat.log 2>&1 &
   local sq=$!; sleep 3; kill "$sq" 2>/dev/null; wait "$sq" 2>/dev/null
   note "squatter: $(tr '\n' ' ' < /tmp/s13-squat.log)"
-  note "(mach_msg receive = 0 means the waiting shim's hello reached the squatter; payload carries only package/version/pid — the shim sends no input until it has verified CONFIG)"
+  note "(mach_msg receive 0 or 268451844 = 0x10004004 MACH_RCV_TOO_LARGE means the waiting shim's hello reached the squatter — the probe's buffer is smaller than a hello; 0x10004003 = timed out = nothing arrived. The hello carries package/version/pid and a send right to the shim's port; the shim sends no input until a CONFIG passes its host check)"
   stop_all; rm -rf "$E" /tmp/s13-squat.log
 }
 

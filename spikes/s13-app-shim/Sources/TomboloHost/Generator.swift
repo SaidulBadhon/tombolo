@@ -2,6 +2,7 @@
 // Spike S13: generates per-Android-app .app shims in ~/Applications/Tombolo Apps.
 import AppKit
 import CoreServices
+import CryptoKit
 import ImageIO
 import ShimCommon
 import UniformTypeIdentifiers
@@ -48,6 +49,13 @@ final class Generator {
     let store = ShimStore()
     init(log: Log, hostVersion: String) { self.log = log; self.hostVersion = hostVersion }
 
+    /// Identity of the shim *code* this host would install: host version + hash of the template binary.
+    /// Keying regeneration on the marketing version alone missed rebuilt templates during this spike.
+    lazy var shimBuild: String = {
+        guard let t = templateURL, let d = try? Data(contentsOf: t) else { return hostVersion }
+        return hostVersion + "-" + SHA256.hash(data: d).prefix(6).map { String(format: "%02x", $0) }.joined()
+    }()
+
     var templateURL: URL? {
         // Contents/Helpers/tombolo-shim inside the host bundle; next to the binary for `swift run`.
         let candidates = [
@@ -71,7 +79,7 @@ final class Generator {
         let url = bundleURL(for: app)
         guard FileManager.default.fileExists(atPath: url.path) else { return "missing" }
         guard let rec = store[app.package] else { return "no record" }
-        if rec.shimVersion != hostVersion { return "outdated (\(rec.shimVersion) → \(hostVersion))" }
+        if rec.shimVersion != shimBuild { return "outdated (\(rec.shimVersion) → \(shimBuild))" }
         if CodeSign.cdhash(ofBundle: url) != rec.cdhash { return "cdhash changed on disk" }
         return nil
     }
@@ -113,7 +121,7 @@ final class Generator {
             "TomboloPackage": app.package,
             "TomboloHostBundleID": S13.hostBundleID,
             "TomboloServiceName": S13.serviceName,
-            "TomboloShimVersion": hostVersion,
+            "TomboloShimVersion": shimBuild,
             "TomboloSpike": "s13",
         ]
         try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)
@@ -133,7 +141,7 @@ final class Generator {
         guard let cdhash = CodeSign.cdhash(ofBundle: final) else { throw GenError.sign }
         let ms = Double(nowNs() - t0) / 1e6
         let rec = ShimRecord(package: app.package, name: app.name, bundleID: bundleID, bundlePath: final.path,
-                             cdhash: cdhash, shimVersion: hostVersion, generatedAt: Date(), generateMs: ms)
+                             cdhash: cdhash, shimVersion: shimBuild, generatedAt: Date(), generateMs: ms)
         store[app.package] = rec
         log(String(format: "generated %@ (%@) cdhash=%@ LSRegisterURL=%d in %.1f ms", final.path, bundleID, cdhash, lsStatus, ms))
         return rec
