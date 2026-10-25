@@ -44,10 +44,21 @@ fn main() -> Result<()> {
         .with_writer(std::io::stderr)
         .init();
     let args: Vec<String> = std::env::args().collect();
+    // `--cc` is passed explicitly to the children: `adb shell` does not forward the environment.
+    if let Some(cc) = arg(&args, "--cc") {
+        // SAFETY: single-threaded at this point (no runtime started yet).
+        unsafe { std::env::set_var("S4_CC", cc) };
+    }
     match args.get(1).map(String::as_str) {
         Some("run") => driver(&args),
         Some("phone") => tokio_main(phone(args)),
         Some("mac") => tokio_main(mac(args)),
+        // For phone runs: write the test certificate locally, then `adb push` it.
+        Some("gen-cert") => {
+            let d = PathBuf::from(args.get(2).context("usage: bench gen-cert <dir>")?);
+            std::fs::create_dir_all(&d)?;
+            session::write_test_cert(&d)
+        }
         _ => bail!("usage: bench run --transport quic|tcp|tunnel --cond <name> [--seed N] [--out DIR]"),
     }
 }
@@ -69,16 +80,27 @@ async fn phone(args: Vec<String>) -> Result<()> {
     let cond = cond_of(&args)?;
     let seed: u64 = need(&args, "--seed")?.parse()?;
     let cert_dir = PathBuf::from(need(&args, "--cert-dir")?);
-    let (listener, addr) = session::PhoneListener::bind(&transport, &cert_dir).await?;
+    let bind_any = arg(&args, "--bind").as_deref() == Some("any");
+    let port: u16 = arg(&args, "--port").unwrap_or_else(|| "0".into()).parse()?;
+    let (listener, addr) =
+        session::PhoneListener::bind(&transport, &cert_dir, bind_any, port).await?;
     println!("READY {addr}");
     std::io::stdout().flush()?;
     let mut line = String::new();
-    std::io::stdin().read_line(&mut line)?;
-    let t0: u64 = line
-        .strip_prefix("GO ")
-        .context("expected GO <t0>")?
-        .trim()
-        .parse()?;
+    if std::io::stdin().read_line(&mut line)? == 0 {
+        // stdin not forwarded (old adb): start 3 s from now.
+        line = "GOIN 3000".into();
+    }
+    // "GO <t0>": absolute start time on the shared clock (loopback runs).
+    // "GOIN <ms>": start this many ms from now on our own clock (phone runs).
+    let t0: u64 = if let Some(v) = line.strip_prefix("GOIN ") {
+        now_ns() + v.trim().parse::<u64>()? * 1_000_000
+    } else {
+        line.strip_prefix("GO ")
+            .context("expected GO <t0> or GOIN <ms>")?
+            .trim()
+            .parse()?
+    };
     let ch = listener.accept().await?;
     let setup_done = now_ns();
     let mut r = work::phone_run(ch, &cond, t0, seed).await?;
@@ -93,8 +115,9 @@ async fn mac(args: Vec<String>) -> Result<()> {
     let addr = need(&args, "--connect")?.parse()?;
     let t0: u64 = need(&args, "--t0")?.parse()?;
     let cert_dir = PathBuf::from(need(&args, "--cert-dir")?);
+    let bind_any = arg(&args, "--bind").as_deref() == Some("any");
     let t = now_ns();
-    let ch = session::mac_connect(&transport, addr, &cert_dir).await?;
+    let ch = session::mac_connect(&transport, addr, &cert_dir, bind_any).await?;
     let connect_ms = (now_ns() - t) as f64 / 1e6;
     let mut r = work::mac_run(ch, &cond, t0).await?;
     r["connect_ms"] = connect_ms.into();
@@ -116,18 +139,45 @@ fn driver(args: &[String]) -> Result<()> {
     };
     let out_dir = PathBuf::from(arg(args, "--out").unwrap_or_else(|| "results/s4/raw".into()));
     std::fs::create_dir_all(&out_dir)?;
-    let cert_dir = std::env::temp_dir().join(format!("tombolo-s4-{}", std::process::id()));
-    std::fs::create_dir_all(&cert_dir)?;
-    session::write_test_cert(&cert_dir)?;
+    // `--cert-dir`: reuse a certificate made with `bench gen-cert` (phone runs push the same
+    // files to the phone); otherwise a throwaway one per run.
+    let own_cert = arg(args, "--cert-dir").is_none();
+    let cert_dir = match arg(args, "--cert-dir") {
+        Some(d) => PathBuf::from(d),
+        None => {
+            let d = std::env::temp_dir().join(format!("tombolo-s4-{}", std::process::id()));
+            std::fs::create_dir_all(&d)?;
+            session::write_test_cert(&d)?;
+            d
+        }
+    };
     let exe = std::env::current_exe()?;
     let wall = Instant::now();
     let cpu0 = clock::cpu_us();
 
-    let mut phone = Command::new(&exe)
+    // Where the phone side runs and how the Mac reaches it:
+    //   proxy (default): phone is a local child process, reached through the impairment proxy;
+    //   direct:          phone runs elsewhere (e.g. `--phone-cmd "adb shell /data/local/tmp/bench"`)
+    //                    and is reached at --phone-host:<port> (Wi-Fi runs);
+    //   adb-forward:     as direct, but reached through `adb forward` (USB runs; TCP only).
+    let path = arg(args, "--path").unwrap_or_else(|| "proxy".into());
+    let remote = path != "proxy";
+    let phone_cmd: Vec<String> = match arg(args, "--phone-cmd") {
+        Some(c) => c.split_whitespace().map(String::from).collect(),
+        None => vec![exe.to_string_lossy().into_owned()],
+    };
+    let phone_cert_dir =
+        arg(args, "--phone-cert-dir").unwrap_or_else(|| cert_dir.to_string_lossy().into_owned());
+    let phone_port = arg(args, "--phone-port").unwrap_or_else(|| "0".into());
+    if path == "adb-forward" && transport == "quic" {
+        bail!("adb forward carries TCP only; use tcp, rawtcp, tunnel or tunnel-lean");
+    }
+    let mut phone = Command::new(&phone_cmd[0])
+        .args(&phone_cmd[1..])
         .args(["phone", "--transport", &transport, "--cond", cond.name])
-        .args(["--seed", &seed.to_string()])
-        .arg("--cert-dir")
-        .arg(&cert_dir)
+        .args(["--seed", &seed.to_string(), "--port", &phone_port])
+        .args(["--bind", if remote { "any" } else { "loopback" }])
+        .args(["--cert-dir", &phone_cert_dir, "--cc", &cc])
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::inherit())
@@ -141,18 +191,52 @@ fn driver(args: &[String]) -> Result<()> {
         .trim()
         .parse()?;
 
-    let proxy = match transport.as_str() {
-        "quic" => proxy::udp_proxy(&cond, phone_addr, seed)?,
-        "tcp" | "rawtcp" | "tunnel" | "tunnel-lean" => proxy::tcp_relay(&cond, phone_addr, seed)?,
-        t => bail!("unknown transport {t}"),
+    let mut proxy = None;
+    let mut forward = None;
+    let connect: std::net::SocketAddr = match path.as_str() {
+        "proxy" => {
+            let p = match transport.as_str() {
+                "quic" => proxy::udp_proxy(&cond, phone_addr, seed)?,
+                "tcp" | "rawtcp" | "tunnel" | "tunnel-lean" => {
+                    proxy::tcp_relay(&cond, phone_addr, seed)?
+                }
+                t => bail!("unknown transport {t}"),
+            };
+            let a = p.listen;
+            proxy = Some(p);
+            a
+        }
+        "direct" => {
+            let host: std::net::IpAddr = need(args, "--phone-host")?.parse()?;
+            (host, phone_addr.port()).into()
+        }
+        "adb-forward" => {
+            let adb = arg(args, "--adb").unwrap_or_else(|| "adb".into());
+            let o = Command::new(&adb)
+                .args(["forward", "tcp:0", &format!("tcp:{}", phone_addr.port())])
+                .output()?;
+            let local: u16 = String::from_utf8_lossy(&o.stdout).trim().parse()
+                .with_context(|| format!("adb forward said {:?}", String::from_utf8_lossy(&o.stderr)))?;
+            forward = Some((adb, local));
+            ([127, 0, 0, 1], local).into()
+        }
+        p => bail!("unknown --path {p}"),
     };
-    // 2 s for the handshake(s) through the impaired path before the workload starts.
-    let t0 = now_ns() + 2_000_000_000;
-    writeln!(phone.stdin.as_mut().unwrap(), "GO {t0}")?;
+    // Start the workload after a fixed delay, leaving time for the handshake(s).
+    let start_ms: u64 = if remote { 3000 } else { 2000 };
+    let t0 = now_ns() + start_ms * 1_000_000;
+    if remote {
+        writeln!(phone.stdin.as_mut().unwrap(), "GOIN {start_ms}")?;
+    } else {
+        writeln!(phone.stdin.as_mut().unwrap(), "GO {t0}")?;
+    }
+    phone.stdin.as_mut().unwrap().flush()?;
 
     let mac = Command::new(&exe)
         .args(["mac", "--transport", &transport, "--cond", cond.name])
-        .args(["--connect", &proxy.listen.to_string(), "--t0", &t0.to_string()])
+        .args(["--connect", &connect.to_string(), "--t0", &t0.to_string()])
+        .args(["--bind", if path == "direct" { "any" } else { "loopback" }])
+        .args(["--cc", &cc])
         .arg("--cert-dir")
         .arg(&cert_dir)
         .stdout(Stdio::piped())
@@ -187,13 +271,20 @@ fn driver(args: &[String]) -> Result<()> {
         "t0": t0,
         "phone": parse(&phone_text),
         "mac": parse(&mac_out),
-        "proxy": proxy.json(),
+        "path": path,
+        "bulk_windows": cond.bulk.windows(),
+        "proxy": proxy.as_ref().map(|p| p.json()),
         "proxy_cpu_s": (clock::cpu_us() - cpu0) as f64 / 1e6,
         "wall_s": wall.elapsed().as_secs_f64(),
     });
     let path = out_dir.join(format!("{}-{}-s{}.json", cond.name, label, seed));
     std::fs::write(&path, serde_json::to_string_pretty(&result)?)?;
-    let _ = std::fs::remove_dir_all(&cert_dir);
+    if own_cert {
+        let _ = std::fs::remove_dir_all(&cert_dir);
+    }
+    if let Some((adb, local)) = forward {
+        let _ = Command::new(adb).args(["forward", "--remove", &format!("tcp:{local}")]).status();
+    }
     let f = &result["mac"]["frame_latency_ms"]["all"];
     println!(
         "{:<7} {:<6} seed={} frames p50={} p95={} p99={} | load p95={} | audio lost+late40={}% | ctrl rtt p95={} | bulk {} Mbit/s | -> {}",

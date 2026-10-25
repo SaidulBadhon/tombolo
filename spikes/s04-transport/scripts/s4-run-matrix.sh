@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Spike S4 — run the Mac-only loopback matrix.
 #   SEEDS="1 2 3" ./scripts/s4-run-matrix.sh        (≈ 25 s per run, 20 runs per seed)
+#   WIFI_CONDS=burst3 RUN_USB=0 ./scripts/s4-run-matrix.sh   (a subset)
 # Each run: results/s4/raw/<cond>-<transport>-s<seed>.json; machine load before each run
 # goes to results/s4/load.log (other jobs share this Mac — check it when reading numbers).
 set -euo pipefail
@@ -10,7 +11,8 @@ OUT=results/s4/raw
 mkdir -p "$OUT"
 cargo build --release -p bench >/dev/null 2>&1
 BIN=./target/release/bench
-WIFI_CONDS="clean jitter loss1 burst3 cap100"
+WIFI_CONDS=${WIFI_CONDS:-"clean jitter loss1 burst3 cap100"}
+RUN_USB=${RUN_USB:-1}
 WIFI_T=("quic cubic" "quic bbr3" "tcp cubic")
 USB_T=("tunnel cubic" "tunnel bbr3" "tunnel-lean bbr3" "tcp cubic" "rawtcp cubic")
 
@@ -34,6 +36,7 @@ for seed in $SEEDS; do
       run "$t" "$cc" "$cond" "$seed"
     done
   done
+  [ "$RUN_USB" = 1 ] || continue
   n=${#USB_T[@]}
   for i in $(seq 0 $((n - 1))); do
     read -r t cc <<<"${USB_T[$(((i + seed) % n))]}"

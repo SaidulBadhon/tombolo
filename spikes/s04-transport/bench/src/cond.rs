@@ -7,9 +7,12 @@ pub enum Loss {
     None,
     /// Independent loss with this probability.
     Random(f64),
-    /// Gilbert–Elliott: good→bad with `p_gb`, bad→good with `p_bg`, every packet in the
-    /// bad state is lost. Mean loss = p_gb / (p_gb + p_bg), mean burst = 1 / p_bg.
-    Burst { p_gb: f64, p_bg: f64 },
+    /// Two-state (Gilbert–Elliott) loss in *time*: bad periods with mean `bad_ms`, good
+    /// periods with mean `good_ms` (exponential); every packet sent in a bad period is lost.
+    /// Loss fraction for dense traffic = bad / (bad + good). Time-based on purpose: a
+    /// per-packet chain keeps a quiet sender "in the burst" indefinitely, which turned
+    /// QUIC's probe-timeout back-off into multi-second stalls (see results/s4/trial/).
+    Burst { bad_ms: f64, good_ms: f64 },
 }
 
 #[derive(Clone, Debug)]
@@ -41,6 +44,8 @@ pub struct Cond {
     /// Bottleneck buffer (bytes): drop-tail for UDP, back-pressure limit for the TCP relay.
     pub queue_bytes: usize,
     pub bulk: BulkPlan,
+    /// Stop the bulk transfer after this many bytes (None = run for the whole window).
+    pub bulk_max_bytes: Option<u64>,
     pub secs: f64,
 }
 
@@ -58,6 +63,7 @@ impl Cond {
             rate_mbps: None,
             queue_bytes: 0,
             bulk: window.clone(),
+            bulk_max_bytes: None,
             secs: 20.0,
         };
         // Lossless Wi-Fi-like conditions get an explicit bottleneck (300 Mbit/s, 10 ms
@@ -92,12 +98,12 @@ impl Cond {
                 loss: Loss::Random(0.01),
                 ..wifi
             },
-            // mean loss 0.0077/(0.0077+0.25) = 3.0 %, mean burst length 4 packets
+            // 3 % of time in loss bursts averaging 3 ms (≈ 4 packets of a 16 Mbit/s stream)
             "burst3" => Cond {
                 name: "burst3",
                 loss: Loss::Burst {
-                    p_gb: 0.0077,
-                    p_bg: 0.25,
+                    bad_ms: 3.0,
+                    good_ms: 97.0,
                 },
                 ..wifi
             },
@@ -118,6 +124,18 @@ impl Cond {
                 jitter_ms: 0.0,
                 rate_mbps: Some(320.0),
                 queue_bytes: 256_000,
+                ..base
+            },
+            // Phone runs (no proxy: the real Wi-Fi / USB link is the impairment). 45 s with a
+            // concurrent 1 GiB transfer, as in the S4 acceptance criterion.
+            "real" => Cond {
+                name: "real",
+                bulk: BulkPlan::Window {
+                    start: 6.0,
+                    end: 40.0,
+                },
+                bulk_max_bytes: Some(1 << 30),
+                secs: 45.0,
                 ..base
             },
             _ => return None,
@@ -144,7 +162,9 @@ impl Cond {
         let p = match self.loss {
             Loss::None => return None,
             Loss::Random(p) => p,
-            Loss::Burst { p_gb, p_bg } => p_gb * (p_bg / (p_gb + p_bg)),
+            // ~10 bursts/s; for a ~1450 packet/s flow that is ≈ 0.7 % congestion events per
+            // packet (each burst is one event with SACK).
+            Loss::Burst { bad_ms, good_ms } => (1000.0 / (bad_ms + good_ms)) / 1450.0,
         };
         let w_segs = 1.22 / p.sqrt();
         let rtt_s = self.base_rtt_ms().max(0.1) / 1e3;
@@ -157,6 +177,7 @@ pub struct Link {
     pub cond: Cond,
     rng: Rng,
     bad: bool,
+    state_end_ns: u64,
     link_free_ns: u64,
     prev_deliver_ns: u64,
     slot: u64,
@@ -185,6 +206,7 @@ impl Link {
             cond,
             rng: Rng::new(seed),
             bad: false,
+            state_end_ns: 0,
             link_free_ns: 0,
             prev_deliver_ns: 0,
             slot: u64::MAX,
@@ -194,6 +216,11 @@ impl Link {
             lost: 0,
             queue_dropped: 0,
         }
+    }
+
+    fn exp_ns(&mut self, mean_ms: f64) -> u64 {
+        let u = self.rng.f64().max(1e-12);
+        (-u.ln() * mean_ms * 1e6) as u64
     }
 
     /// Bytes waiting in the bottleneck at time `now` (0 if uncapped).
@@ -221,13 +248,14 @@ impl Link {
         let lost = match self.cond.loss {
             Loss::None => false,
             Loss::Random(p) => self.rng.f64() < p,
-            Loss::Burst { p_gb, p_bg } => {
-                if self.bad {
-                    if self.rng.f64() < p_bg {
-                        self.bad = false;
-                    }
-                } else if self.rng.f64() < p_gb {
-                    self.bad = true;
+            Loss::Burst { bad_ms, good_ms } => {
+                if self.state_end_ns == 0 {
+                    self.state_end_ns = now + self.exp_ns(good_ms);
+                }
+                while now >= self.state_end_ns {
+                    self.bad = !self.bad;
+                    let mean = if self.bad { bad_ms } else { good_ms };
+                    self.state_end_ns += self.exp_ns(mean);
                 }
                 self.bad
             }

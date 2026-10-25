@@ -161,12 +161,25 @@ fn tunnel_cfg(kind: &str) -> TunnelConfig {
 }
 
 impl PhoneListener {
-    pub async fn bind(kind: &str, cert_dir: &Path) -> Result<(Self, SocketAddr)> {
+    /// `bind_any`: listen on all interfaces (phone runs); otherwise loopback only.
+    pub async fn bind(
+        kind: &str,
+        cert_dir: &Path,
+        bind_any: bool,
+        port: u16,
+    ) -> Result<(Self, SocketAddr)> {
+        let tcp_ip = if bind_any { "0.0.0.0" } else { "127.0.0.1" };
         Ok(match kind {
             "quic" => {
-                // IPv6 loopback only (the Mac side is IPv4 only) — see proxy.rs.
+                // Loopback runs: IPv6 loopback only (the Mac side is IPv4 only), so iroh's
+                // hole-punching cannot route around the impairment proxy — see proxy.rs.
+                let a: SocketAddr = if bind_any {
+                    format!("0.0.0.0:{port}").parse()?
+                } else {
+                    format!("[::1]:{port}").parse()?
+                };
                 let ep = tombolo_builder(phone_key())
-                    .bind_addr("[::1]:0")?
+                    .bind_addr(a)?
                     .alpns(vec![ALPN.to_vec()])
                     .bind()
                     .await?;
@@ -174,17 +187,17 @@ impl PhoneListener {
                 (PhoneListener::Quic(ep), a)
             }
             "tunnel" | "tunnel-lean" => {
-                let l = TcpListener::bind("127.0.0.1:0").await?;
+                let l = TcpListener::bind((tcp_ip, port)).await?;
                 let a = l.local_addr()?;
                 (PhoneListener::Tunnel(l, tunnel_cfg(kind)), a)
             }
             "rawtcp" => {
-                let l = TcpListener::bind("127.0.0.1:0").await?;
+                let l = TcpListener::bind((tcp_ip, port)).await?;
                 let a = l.local_addr()?;
                 (PhoneListener::RawTcp(l), a)
             }
             "tcp" => {
-                let l = TcpListener::bind("127.0.0.1:0").await?;
+                let l = TcpListener::bind((tcp_ip, port)).await?;
                 let a = l.local_addr()?;
                 (PhoneListener::Tcp(l, tls_acceptor(cert_dir)?), a)
             }
@@ -291,10 +304,16 @@ async fn quic_phone(ep: Endpoint, tunnel: Option<Arc<TcpTunnelTransport>>) -> Re
 // Mac (connector)
 // ------------------------------------------------------------------------------------
 
-pub async fn mac_connect(kind: &str, addr: SocketAddr, cert_dir: &Path) -> Result<MacCh> {
+pub async fn mac_connect(
+    kind: &str,
+    addr: SocketAddr,
+    cert_dir: &Path,
+    bind_any: bool,
+) -> Result<MacCh> {
     match kind {
         "quic" => {
-            let ep = tombolo_builder(mac_key()).bind_addr("127.0.0.1:0")?.bind().await?;
+            let local: SocketAddr = if bind_any { "0.0.0.0:0" } else { "127.0.0.1:0" }.parse()?;
+            let ep = tombolo_builder(mac_key()).bind_addr(local)?.bind().await?;
             let ea = EndpointAddr::from_parts(phone_key().public(), [TransportAddr::Ip(addr)]);
             let conn = ep.connect(ea, ALPN).await?;
             quic_mac(ep, conn, None).await

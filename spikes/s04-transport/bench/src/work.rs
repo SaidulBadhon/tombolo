@@ -6,7 +6,10 @@
 //! transfer during the condition's bulk windows.
 //! Mac → phone: 16-byte control pings every 10 ms, echoed by the phone (control RTT), and
 //! a 16-byte frame acknowledgement per received video frame (frame-level flow control).
-//! All timestamps come from one system-wide clock (see clock.rs).
+//! On one Mac all timestamps come from one system-wide clock (see clock.rs). Across two
+//! devices (phone runs) the Mac estimates the phone's clock offset from the lowest-RTT
+//! control pings (NTP-style) and maps phone timestamps into its own clock; on loopback the
+//! estimate doubles as a self-check (it must come out ≈ 0).
 
 use std::{
     collections::VecDeque,
@@ -50,6 +53,9 @@ fn max_inflight_frames() -> u64 {
         .and_then(|v| v.parse().ok())
         .unwrap_or(MAX_INFLIGHT_FRAMES_DEFAULT)
 }
+/// Control messages are 24 bytes: type, pad, seq (u32), Mac time or ack count (u64),
+/// phone time (u64, filled in by the phone when it echoes a ping).
+const CTRL_MSG: usize = 24;
 const MSG_PING: u8 = 1;
 const MSG_FRAME_ACK: u8 = 2;
 
@@ -270,7 +276,7 @@ pub async fn phone_run(ch: PhoneCh, cond: &Cond, t0: u64, seed: u64) -> Result<V
 
     // ---- control echo (Mac pings, phone echoes)
     let ctrl = tokio::spawn(async move {
-        let mut b = [0u8; 16];
+        let mut b = [0u8; CTRL_MSG];
         let mut oneway = vec![];
         while ctrl_r.read_exact(&mut b).await.is_ok() {
             let v = u64::from_be_bytes(b[8..16].try_into().unwrap());
@@ -279,7 +285,9 @@ pub async fn phone_run(ch: PhoneCh, cond: &Cond, t0: u64, seed: u64) -> Result<V
                 ack_notify.notify_waiters();
                 continue;
             }
-            oneway.push((v, now_ns().saturating_sub(v)));
+            let now = now_ns();
+            oneway.push((v, now.saturating_sub(v)));
+            b[16..24].copy_from_slice(&now.to_be_bytes());
             if ctrl_w.write_all(&b).await.is_err() {
                 break;
             }
@@ -290,14 +298,17 @@ pub async fn phone_run(ch: PhoneCh, cond: &Cond, t0: u64, seed: u64) -> Result<V
 
     // ---- bulk
     let windows = cond.bulk.windows();
+    let max_total = cond.bulk_max_bytes.unwrap_or(u64::MAX);
     let bulk_task = tokio::spawn(async move {
         let chunk = vec![0x5Au8; BULK_CHUNK];
         let mut per = vec![];
+        let mut total = 0u64;
         for (bi, (s, e)) in windows.iter().enumerate() {
             sleep_until_ns(t0 + secs_ns(*s)).await;
             let end = t0 + secs_ns(*e);
             let mut bytes = 0u64;
-            while now_ns() < end {
+            while now_ns() < end && total < max_total {
+                total += BULK_CHUNK as u64;
                 let mut h = [0u8; 16];
                 h[0..4].copy_from_slice(&(bi as u32).to_be_bytes());
                 h[4..8].copy_from_slice(&(BULK_CHUNK as u32).to_be_bytes());
@@ -337,7 +348,8 @@ pub async fn phone_run(ch: PhoneCh, cond: &Cond, t0: u64, seed: u64) -> Result<V
         "max_inflight_frames": max_inflight,
         "audio": audio_res,
         "bulk": bulk_res,
-        "input_oneway_ms": pct(&input),
+        // valid only when phone and Mac share a clock (loopback); see mac "input_oneway_ms"
+        "input_oneway_same_clock_ms": pct(&input),
         "cpu_samples": cpu,
         "transport": keep.json(),
     });
@@ -363,7 +375,7 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
     let cpu = spawn_cpu_sampler(t0, secs);
 
     // ---- control: one writer task; pings and frame acks are queued to it
-    let (ctx, mut crx) = tokio::sync::mpsc::unbounded_channel::<[u8; 16]>();
+    let (ctx, mut crx) = tokio::sync::mpsc::unbounded_channel::<[u8; CTRL_MSG]>();
     let ctrl_writer = tokio::spawn(async move {
         while let Some(b) = crx.recv().await {
             if ctrl_w.write_all(&b).await.is_err() {
@@ -377,7 +389,7 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
         let mut i = 0u64;
         while t0 + i * PING_NS < end {
             sleep_until_ns(t0 + i * PING_NS).await;
-            let mut b = [0u8; 16];
+            let mut b = [0u8; CTRL_MSG];
             b[0] = MSG_PING;
             b[4..8].copy_from_slice(&(i as u32).to_be_bytes());
             b[8..16].copy_from_slice(&now_ns().to_be_bytes());
@@ -389,11 +401,12 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
         i
     });
     let ctrl_rx = tokio::spawn(async move {
-        let mut b = [0u8; 16];
-        let mut rtt = vec![];
+        let mut b = [0u8; CTRL_MSG];
+        let mut rtt = vec![]; // (mac send, rtt, phone time)
         while ctrl_r.read_exact(&mut b).await.is_ok() {
             let sent = u64::from_be_bytes(b[8..16].try_into().unwrap());
-            rtt.push((sent, now_ns() - sent));
+            let phone = u64::from_be_bytes(b[16..24].try_into().unwrap());
+            rtt.push((sent, now_ns() - sent, phone));
         }
         rtt
     });
@@ -419,7 +432,7 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
                 break;
             }
             frames.push((seq, cap, now_ns(), len, h[1]));
-            let mut b = [0u8; 16];
+            let mut b = [0u8; CTRL_MSG];
             b[0] = MSG_FRAME_ACK;
             b[8..16].copy_from_slice(&(frames.len() as u64).to_be_bytes());
             let _ = ack_tx.send(b);
@@ -512,6 +525,30 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
     keep.close().await;
 
     // ---- metrics
+    // Phone clock → Mac clock: offset = phone − Mac, from the 10 % lowest-RTT pings.
+    let offset_ns: i64 = {
+        let mut v: Vec<(u64, i64)> = rtts
+            .iter()
+            .map(|(s, r, p)| (*r, *p as i64 - *s as i64 - (*r / 2) as i64))
+            .collect();
+        v.sort();
+        let k = (v.len() / 10).max(5).min(v.len());
+        let mut o: Vec<i64> = v[..k].iter().map(|x| x.1).collect();
+        o.sort();
+        if o.is_empty() { 0 } else { o[o.len() / 2] }
+    };
+    let to_mac = |t_phone: u64| -> u64 { (t_phone as i64 - offset_ns) as u64 };
+    let frames: Vec<(u32, u64, u64, usize, u8)> =
+        frames.into_iter().map(|f| (f.0, to_mac(f.1), f.2, f.3, f.4)).collect();
+    let audio_pk: Vec<(u32, u64, u64)> =
+        audio_pk.into_iter().map(|a| (a.0, to_mac(a.1), a.2)).collect();
+    let per_burst: Vec<(u64, u64, u64, u64)> =
+        per_burst.into_iter().map(|b| (to_mac(b.0), b.1, b.2, b.3)).collect();
+    let input: Vec<f64> = rtts
+        .iter()
+        .filter(|r| r.0 >= t0 + WARMUP_NS)
+        .map(|r| (to_mac(r.2) as f64 - r.0 as f64) / 1e6)
+        .collect();
     let warm = t0 + WARMUP_NS;
     // A sample is "under load" if it was produced while bulk data was in flight:
     // from the burst's first send to the receipt of its last byte.
@@ -577,6 +614,8 @@ pub async fn mac_run(ch: MacCh, cond: &Cond, t0: u64) -> Result<Value> {
             "latency_ms": split(&al),
         },
         "control_rtt_ms": split(&rl),
+        "input_oneway_ms": pct(&input),
+        "clock_offset_est_ms": offset_ns as f64 / 1e6,
         "pings_sent": pings_sent,
         "bulk": {"bytes": bulk_bytes, "recv_span_s": bulk_span,
                  "mbit_s": if bulk_span > 0.0 { bulk_bytes as f64 * 8.0 / bulk_span / 1e6 } else { 0.0 },
