@@ -1,0 +1,112 @@
+{
+  "description": "Rotating DNS-SD discovery token: epochs, per-binding tokens, filler slots and the TXT t= value.",
+  "spec": "docs/security/pairing-and-session.md section 12",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "inputs": {
+    "discovery_key_qr_binding": "1cf30b6f98d371fd744ae6e0d9fde4df0f477802d6e96751fbc8da0ca442740e",
+    "discovery_key_code_binding": "9f97364ab24d39b2d0fb11582c621059b3fec72e9d59d4d6a79523f93d4462f1",
+    "discovery_key_source": "qr-pairing.json and code-pairing.json, exchange.key_schedule.discovery_key",
+    "filler_key": "416ac902a635576f9c2c840630a19e9041f9107f87f1b9260f22d2e2ef0c65e4",
+    "epoch_seconds": 900
+  },
+  "token_transcript_example": {
+    "label": "tombolo/discovery/v1/token",
+    "fields": [
+      {
+        "name": "epoch",
+        "hex": "00000000001e661e"
+      }
+    ],
+    "encoded": "0000001a746f6d626f6c6f2f646973636f766572792f76312f746f6b656e000000010000000800000000001e661e"
+  },
+  "filler_transcript_example": {
+    "label": "tombolo/discovery/v1/filler",
+    "fields": [
+      {
+        "name": "epoch",
+        "hex": "00000000001e661e"
+      },
+      {
+        "name": "slot",
+        "hex": "00"
+      }
+    ],
+    "encoded": "0000001b746f6d626f6c6f2f646973636f766572792f76312f66696c6c6572000000020000000800000000001e661e0000000100"
+  },
+  "epochs": [
+    {
+      "unix_seconds": 1793000000,
+      "epoch": 1992222,
+      "token_qr_binding": "d0a6f73412de72af"
+    },
+    {
+      "unix_seconds": 1793000699,
+      "epoch": 1992222,
+      "token_qr_binding": "d0a6f73412de72af"
+    },
+    {
+      "unix_seconds": 1793000700,
+      "epoch": 1992223,
+      "token_qr_binding": "e03f19e5438abdad"
+    }
+  ],
+  "txt_one_binding": {
+    "epoch": 1992222,
+    "slots_sorted": [
+      {
+        "slot": "034e2dfeca1ffa4b",
+        "kind": "filler"
+      },
+      {
+        "slot": "2ae4d11f225013b5",
+        "kind": "filler"
+      },
+      {
+        "slot": "78941a186463f47a",
+        "kind": "filler"
+      },
+      {
+        "slot": "d0a6f73412de72af",
+        "kind": "token"
+      }
+    ],
+    "t": "A04t_sof-ksq5NEfIlATtXiUGhhkY_R60Kb3NBLecq8"
+  },
+  "txt_two_bindings": {
+    "epoch": 1992222,
+    "slots_sorted": [
+      {
+        "slot": "034e2dfeca1ffa4b",
+        "kind": "filler"
+      },
+      {
+        "slot": "67099ffc60e56cad",
+        "kind": "token"
+      },
+      {
+        "slot": "78941a186463f47a",
+        "kind": "filler"
+      },
+      {
+        "slot": "d0a6f73412de72af",
+        "kind": "token"
+      }
+    ],
+    "t": "A04t_sof-ktnCZ_8YOVsrXiUGhhkY_R60Kb3NBLecq8"
+  },
+  "mac_acceptance_window_qr_binding": [
+    {
+      "epoch": 1992221,
+      "token": "969dd0296af4d41a"
+    },
+    {
+      "epoch": 1992222,
+      "token": "d0a6f73412de72af"
+    },
+    {
+      "epoch": 1992223,
+      "token": "e03f19e5438abdad"
+    }
+  ]
+}

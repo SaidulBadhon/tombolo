@@ -1,0 +1,144 @@
+{
+  "description": "Canonical transcript encoding (LP, enc, seq), canonical sets, integer encodings, P-256 key and signature encodings.",
+  "spec": "docs/security/pairing-and-session.md sections 5.1-5.2",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "LP": [
+    {
+      "input_hex": "",
+      "output": "00000000"
+    },
+    {
+      "input_utf8": "abc",
+      "output": "00000003616263"
+    }
+  ],
+  "enc": [
+    {
+      "label": "tombolo/example/v1",
+      "fields_hex": [],
+      "output": "00000012746f6d626f6c6f2f6578616d706c652f763100000000"
+    },
+    {
+      "label": "tombolo/example/v1",
+      "fields_hex": [
+        "",
+        "01",
+        "616263"
+      ],
+      "output": "00000012746f6d626f6c6f2f6578616d706c652f76310000000300000000000000010100000003616263"
+    },
+    {
+      "note": "injectivity: moving a byte between fields changes the encoding",
+      "label": "tombolo/example/v1",
+      "fields_utf8": [
+        "ab",
+        "c"
+      ],
+      "output": "00000012746f6d626f6c6f2f6578616d706c652f7631000000020000000261620000000163"
+    },
+    {
+      "label": "tombolo/example/v1",
+      "fields_utf8": [
+        "a",
+        "bc"
+      ],
+      "output": "00000012746f6d626f6c6f2f6578616d706c652f7631000000020000000161000000026263"
+    }
+  ],
+  "seq": [
+    {
+      "items_utf8": [],
+      "output": "00000000"
+    },
+    {
+      "items_utf8": [
+        "a",
+        "bc"
+      ],
+      "output": "000000020000000161000000026263"
+    },
+    {
+      "note": "nested: seq(seq(\"x\"), \"\")",
+      "output": "000000020000000900000001000000017800000000"
+    },
+    {
+      "note": "optional value absent vs present-but-empty",
+      "absent": "00000000",
+      "present_empty": "0000000100000000"
+    }
+  ],
+  "canonical_sets": {
+    "all_scopes_sorted": {
+      "items": [
+        "calls.control",
+        "calls.state",
+        "clipboard.read",
+        "clipboard.write",
+        "files.receive",
+        "files.send",
+        "notifications.act",
+        "notifications.read",
+        "screen.control",
+        "screen.view",
+        "sms.read",
+        "sms.send"
+      ],
+      "output": "0000000c0000000d63616c6c732e636f6e74726f6c0000000b63616c6c732e73746174650000000e636c6970626f6172642e726561640000000f636c6970626f6172642e77726974650000000d66696c65732e726563656976650000000a66696c65732e73656e64000000116e6f74696669636174696f6e732e616374000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e7265616400000008736d732e73656e64"
+    },
+    "must_reject": [
+      {
+        "items": [
+          "screen.view",
+          "screen.control"
+        ],
+        "reason": "not sorted byte-wise ascending"
+      },
+      {
+        "items": [
+          "sms.read",
+          "sms.read"
+        ],
+        "reason": "duplicate element"
+      }
+    ]
+  },
+  "integers": {
+    "u8(1)": "01",
+    "u32be(1)": "00000001",
+    "u64be(1992222)": "00000000001e661e",
+    "i32be(-1)": "ffffffff",
+    "i32be(2)": "00000002"
+  },
+  "p256_public_key": {
+    "key": {
+      "fixed_input_name": "qr/mac/identity-key",
+      "private_scalar": "b81e9daa232a4d2f20c799bc89ba0aedf4ba1f33071da6bc510ec1d3293dd1e1",
+      "public_sec1_uncompressed": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8"
+    },
+    "spki_prefix": "3059301306072a8648ce3d020106082a8648ce3d030107034200",
+    "SPKI_der": "3059301306072a8648ce3d020106082a8648ce3d0301070342000455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8",
+    "SPKI_matches_pkcs8_encoder": true,
+    "qr_k = H(SPKI)": "5bd48857fe400eb5814ca97aefcecf4ce805694699cfa0add9a290574d4cb9bb",
+    "must_reject": [
+      {
+        "encoding": "0255e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeeb",
+        "reason": "SEC1 compressed form of a valid key: only 65-byte uncompressed is accepted"
+      },
+      {
+        "encoding": "0400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "reason": "not on the curve"
+      },
+      {
+        "encoding": "00",
+        "reason": "identity element"
+      }
+    ]
+  },
+  "ecdsa_signature": {
+    "message_utf8": "tombolo signature encoding example",
+    "r_s": "e9be354bf9262b31d8111d6a401b25fa03dee0c5afddc19427fd254065eea1a92ea101090dd7ab1d0d78af4ebe3f8a90add89840fbd8436e6be615585eb55b6c",
+    "der": "3045022100e9be354bf9262b31d8111d6a401b25fa03dee0c5afddc19427fd254065eea1a902202ea101090dd7ab1d0d78af4ebe3f8a90add89840fbd8436e6be615585eb55b6c",
+    "verifies": true
+  }
+}

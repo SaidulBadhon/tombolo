@@ -9,7 +9,7 @@ use crate::crypto::{hkdf, hmac, sha256};
 use num_bigint::BigUint;
 use p256::elliptic_curve::sec1::{FromEncodedPoint, ToEncodedPoint};
 use p256::elliptic_curve::PrimeField;
-use p256::{AffinePoint, EncodedPoint, FieldBytes, ProjectivePoint, Scalar};
+use p256::{AffinePoint, EncodedPoint, ProjectivePoint, Scalar};
 use serde_json::{json, Value};
 
 /// RFC 9382 §6, P-256 M and N (SEC1 compressed).
@@ -49,12 +49,8 @@ pub fn enc_point(p: &ProjectivePoint) -> Vec<u8> {
 }
 
 pub fn scalar(bytes: &[u8]) -> Scalar {
-    assert_eq!(bytes.len(), 32);
-    Option::from(Scalar::from_repr(*FieldBytes::from_slice(bytes))).expect("scalar < n")
-}
-
-pub fn scalar_bytes(s: &Scalar) -> Vec<u8> {
-    s.to_repr().to_vec()
+    let arr: [u8; 32] = bytes.try_into().expect("32-byte scalar");
+    Option::from(Scalar::from_repr(arr.into())).expect("scalar < n")
 }
 
 /// w = OS2IP(wide) mod n, returned as a 32-byte big-endian scalar (spec §7.6).

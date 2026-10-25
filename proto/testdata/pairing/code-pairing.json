@@ -1,0 +1,326 @@
+{
+  "description": "Code (SPAKE2, RFC 9382 P-256) pairing flow with fixed scalars, followed by the identity exchange; wrong-code and invalid-point negatives; leading-zero w edge case.",
+  "spec": "docs/security/pairing-and-session.md sections 7.4, 7.6, 7.7",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "inputs": {
+    "phone_endpoint_id (SPAKE2 identity A)": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc",
+    "mac_endpoint_id (SPAKE2 identity B)": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2",
+    "code": "048213",
+    "exporter_pair": "7bb84d6903f471c1d8ba0cd6ae613c444abdcf9e46eba4d566ee2508cb3b8527",
+    "exporter_pair_note": "fixed stand-in for TLS-Exporter(\"tombolo/pair/v1\", \"\", 32)",
+    "n_P": "6ed109afa08a5ca220faaed8bdae5af3c45c9b6506e2ef65dc8b6504e8a8c0de",
+    "n_M": "5defa61724cd9cab84fd3381bb9ae4ba26f97f31de752c3b7726ca905b901aa8",
+    "x (phone, fixed instead of random)": "3927d861dc41ada176e5d25f7c0856cdb2a7490f535592590be7655c705dba92",
+    "y (mac, fixed instead of random)": "1f1b8d207dffa83d9246d77a0388fe8f8504917fbc56f6f839807dfe4fba544b",
+    "phone_identity_key": {
+      "fixed_input_name": "code/phone/identity-key",
+      "private_scalar": "9624e77a07c1c5f399675736ae81b3043d5d72e81db180be23b0bcd105014097",
+      "public_sec1_uncompressed": "04fbdfceb7e7c4e629aa03a281f7fdf97f0cfca8593c8dad877f45b0f278cb638ef117c30e3394fcc703b957f19a807e50d22064d7ebde04087de06cb7498ae267"
+    },
+    "mac_identity_key": {
+      "fixed_input_name": "code/mac/identity-key",
+      "private_scalar": "42560fa2f69208a2214bf21873718169956a508d711c5df98fa9ca852ed12131",
+      "public_sec1_uncompressed": "047728304f2d1a2d071c363066a04023fd43cb1334b038d829b6e58dc52a41ac2254b857012d78f4d01550d53720b2eb69c107d61c815686973d84872c074c9969"
+    },
+    "mac_presence_key": {
+      "fixed_input_name": "code/mac/presence-key",
+      "private_scalar": "580501942e73968f4ba6f4a5452e721dab2e8304972e4913c2c79df6cfc8e877",
+      "public_sec1_uncompressed": "0406b8fcb43e20ffb18e856a874eced932caeb802d69ecbdcabf20b4bd12a988eb53b706bccf6e890a82d899cfcada62f8f1f260a8f6c4ff3f2cc228a0a75a14e6"
+    },
+    "session_alpns": [
+      "tombolo/1"
+    ]
+  },
+  "spake2": {
+    "M": "02886e2f97ace46e55ba9dd7242579f2993b64e16ef3dcab95afd497333d8fa12f",
+    "N": "03d8bbd6c639c62937b04d997f38c3770719c629d7014d49a24b4f98baa1292b49",
+    "pw": {
+      "label": "tombolo/pair/v1/pake/password",
+      "fields": [
+        {
+          "name": "code",
+          "hex": "303438323133"
+        },
+        {
+          "name": "exporter_pair",
+          "hex": "7bb84d6903f471c1d8ba0cd6ae613c444abdcf9e46eba4d566ee2508cb3b8527"
+        }
+      ],
+      "encoded": "0000001d746f6d626f6c6f2f706169722f76312f70616b652f70617373776f72640000000200000006303438323133000000207bb84d6903f471c1d8ba0cd6ae613c444abdcf9e46eba4d566ee2508cb3b8527"
+    },
+    "w_wide (HKDF output, 40 bytes)": "805c6b3dc7d15d7a9aa859a0153ad15b122133cdda139a685a80157aa0f938f29aa2e8a51c97d31f",
+    "w (mod n, 32 bytes)": "6279b719cd0d08a333c5ef90b8537d447080c82bc739714a51b6b2c7e8f0b8e7",
+    "AAD": {
+      "label": "tombolo/pair/v1/pake/aad",
+      "fields": [
+        {
+          "name": "n_P",
+          "hex": "6ed109afa08a5ca220faaed8bdae5af3c45c9b6506e2ef65dc8b6504e8a8c0de"
+        },
+        {
+          "name": "n_M",
+          "hex": "5defa61724cd9cab84fd3381bb9ae4ba26f97f31de752c3b7726ca905b901aa8"
+        },
+        {
+          "name": "phone_session_alpns",
+          "hex": "0000000100000009746f6d626f6c6f2f31"
+        },
+        {
+          "name": "mac_session_alpns",
+          "hex": "0000000100000009746f6d626f6c6f2f31"
+        }
+      ],
+      "encoded": "00000018746f6d626f6c6f2f706169722f76312f70616b652f61616400000004000000206ed109afa08a5ca220faaed8bdae5af3c45c9b6506e2ef65dc8b6504e8a8c0de000000205defa61724cd9cab84fd3381bb9ae4ba26f97f31de752c3b7726ca905b901aa8000000110000000100000009746f6d626f6c6f2f31000000110000000100000009746f6d626f6c6f2f31"
+    },
+    "pA": "040706ee5753a12f20a465bbf4c012672193dd2dc5efac51c5f36cf83db7f559a698fc8e1abbf62d7696e565760f700341e1e6ddae45414d0c5c3358f6d680298b",
+    "pB": "04fe2c2d642b4ba941cc23f55a7fca62665e7b8844ad4d9da6c27bb6ef43e1458546b0393bed09499dae71adcd38dde3a5afc9874c57baccc7f6f2016e9ffb1a2c",
+    "K": "04f82305b0e53700cef757f39cccbcd44f9536e2314390312b4b581f9e1670a62d1e487517a779e608e998992f3eee0e43d648301899dce47c93ce77a5e3d099f2",
+    "TT": "2000000000000000866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc20000000000000002b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f24100000000000000040706ee5753a12f20a465bbf4c012672193dd2dc5efac51c5f36cf83db7f559a698fc8e1abbf62d7696e565760f700341e1e6ddae45414d0c5c3358f6d680298b410000000000000004fe2c2d642b4ba941cc23f55a7fca62665e7b8844ad4d9da6c27bb6ef43e1458546b0393bed09499dae71adcd38dde3a5afc9874c57baccc7f6f2016e9ffb1a2c410000000000000004f82305b0e53700cef757f39cccbcd44f9536e2314390312b4b581f9e1670a62d1e487517a779e608e998992f3eee0e43d648301899dce47c93ce77a5e3d099f220000000000000006279b719cd0d08a333c5ef90b8537d447080c82bc739714a51b6b2c7e8f0b8e7",
+    "Hash(TT)": "90b2995521abfd5e5ce735ce242fba22b8f00e4e08cc0b8ea4869e7cc83e9ef4",
+    "Ke": "90b2995521abfd5e5ce735ce242fba22",
+    "Ka": "b8f00e4e08cc0b8ea4869e7cc83e9ef4",
+    "KcA": "451f05c511132ddc609be28ba4974657",
+    "KcB": "f5e5a0fb8d300b30752cf5c150ec6602",
+    "cA": "f9a22260c8dd56f4b2fb71f954b111a8e9e8c74de78a8dcc6f29bd179aff4e7d",
+    "cB": "e44a05d3e250493e2b2ac6cb2b68a813d475e3b9b0173cf76cc13af3f445c79e"
+  },
+  "method_secret (= Ke)": "90b2995521abfd5e5ce735ce242fba22",
+  "exchange": {
+    "key_schedule": {
+      "ikm_pair": {
+        "label": "tombolo/pair/v1/ikm",
+        "fields": [
+          {
+            "name": "method",
+            "hex": "02"
+          },
+          {
+            "name": "method_secret",
+            "hex": "90b2995521abfd5e5ce735ce242fba22"
+          }
+        ],
+        "encoded": "00000013746f6d626f6c6f2f706169722f76312f696b6d0000000200000001020000001090b2995521abfd5e5ce735ce242fba22"
+      },
+      "PRK_pair": "2afd9bc2ca7b6ff4a4831fc555528a55ae482c2a2ac7a20491daada9df3a9608",
+      "K_proof_phone": "24ca14722a5ed5cd38f7041d0e7f2dcf90b56e136d0440cf8b21069a0b2e30a3",
+      "K_proof_mac": "d1b353fd959b05eddcdcb3d4f3725f1ac644df2a9165c1a168d79674d8fa9128",
+      "discovery_key": "9f97364ab24d39b2d0fb11582c621059b3fec72e9d59d4d6a79523f93d4462f1"
+    },
+    "PairRequest": {
+      "fields": {
+        "phone_identity_pub": "04fbdfceb7e7c4e629aa03a281f7fdf97f0cfca8593c8dad877f45b0f278cb638ef117c30e3394fcc703b957f19a807e50d22064d7ebde04087de06cb7498ae267",
+        "name": "Ana’s Pixel",
+        "model": "Pixel 9",
+        "os": "Android 16"
+      },
+      "T_req": {
+        "label": "tombolo/pair/v1/request",
+        "fields": [
+          {
+            "name": "method",
+            "hex": "02"
+          },
+          {
+            "name": "exporter_pair",
+            "hex": "7bb84d6903f471c1d8ba0cd6ae613c444abdcf9e46eba4d566ee2508cb3b8527"
+          },
+          {
+            "name": "phone_endpoint_id",
+            "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+          },
+          {
+            "name": "mac_endpoint_id",
+            "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+          },
+          {
+            "name": "n_P",
+            "hex": "6ed109afa08a5ca220faaed8bdae5af3c45c9b6506e2ef65dc8b6504e8a8c0de"
+          },
+          {
+            "name": "n_M",
+            "hex": "5defa61724cd9cab84fd3381bb9ae4ba26f97f31de752c3b7726ca905b901aa8"
+          },
+          {
+            "name": "qr_k",
+            "hex": ""
+          },
+          {
+            "name": "phone_identity_pub",
+            "hex": "04fbdfceb7e7c4e629aa03a281f7fdf97f0cfca8593c8dad877f45b0f278cb638ef117c30e3394fcc703b957f19a807e50d22064d7ebde04087de06cb7498ae267"
+          },
+          {
+            "name": "name",
+            "hex": "416e61e280997320506978656c"
+          },
+          {
+            "name": "model",
+            "hex": "506978656c2039"
+          },
+          {
+            "name": "os",
+            "hex": "416e64726f6964203136"
+          },
+          {
+            "name": "phone_session_alpns",
+            "hex": "0000000100000009746f6d626f6c6f2f31"
+          }
+        ],
+        "encoded": "00000017746f6d626f6c6f2f706169722f76312f726571756573740000000c0000000102000000207bb84d6903f471c1d8ba0cd6ae613c444abdcf9e46eba4d566ee2508cb3b852700000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2000000206ed109afa08a5ca220faaed8bdae5af3c45c9b6506e2ef65dc8b6504e8a8c0de000000205defa61724cd9cab84fd3381bb9ae4ba26f97f31de752c3b7726ca905b901aa8000000000000004104fbdfceb7e7c4e629aa03a281f7fdf97f0cfca8593c8dad877f45b0f278cb638ef117c30e3394fcc703b957f19a807e50d22064d7ebde04087de06cb7498ae2670000000d416e61e280997320506978656c00000007506978656c20390000000a416e64726f6964203136000000110000000100000009746f6d626f6c6f2f31"
+      },
+      "H(T_req)": "8fefc02695f5e3a9fbb2d2f5b717664b8cfbf827a53f0432c8aad7051f4d7e9e",
+      "proof": "6281233a37a5d7ddc0b0ee88feaac949f33e214b8f56f313d26c4902c2212398",
+      "sig": "edffbb31bc636cff6cb1a0849c2e5e9a5fb1bd9895347830649c6441a41a64d08e43070228198a6a595443b9f5caed894a6de64d5253965f409a055c8cd48b23",
+      "sig_der": "3046022100edffbb31bc636cff6cb1a0849c2e5e9a5fb1bd9895347830649c6441a41a64d00221008e43070228198a6a595443b9f5caed894a6de64d5253965f409a055c8cd48b23",
+      "sig_verifies": true
+    },
+    "PairAccept": {
+      "fields": {
+        "mac_identity_pub": "047728304f2d1a2d071c363066a04023fd43cb1334b038d829b6e58dc52a41ac2254b857012d78f4d01550d53720b2eb69c107d61c815686973d84872c074c9969",
+        "mac_presence_pub": "0406b8fcb43e20ffb18e856a874eced932caeb802d69ecbdcabf20b4bd12a988eb53b706bccf6e890a82d899cfcada62f8f1f260a8f6c4ff3f2cc228a0a75a14e6",
+        "mac_name": "Studio Mac",
+        "scopes_hint": [
+          "clipboard.read",
+          "clipboard.write",
+          "files.receive",
+          "files.send",
+          "notifications.act",
+          "notifications.read",
+          "screen.control",
+          "screen.view",
+          "sms.read",
+          "sms.send"
+        ]
+      },
+      "T_acc": {
+        "label": "tombolo/pair/v1/accept",
+        "fields": [
+          {
+            "name": "H(T_req)",
+            "hex": "8fefc02695f5e3a9fbb2d2f5b717664b8cfbf827a53f0432c8aad7051f4d7e9e"
+          },
+          {
+            "name": "mac_identity_pub",
+            "hex": "047728304f2d1a2d071c363066a04023fd43cb1334b038d829b6e58dc52a41ac2254b857012d78f4d01550d53720b2eb69c107d61c815686973d84872c074c9969"
+          },
+          {
+            "name": "mac_presence_pub",
+            "hex": "0406b8fcb43e20ffb18e856a874eced932caeb802d69ecbdcabf20b4bd12a988eb53b706bccf6e890a82d899cfcada62f8f1f260a8f6c4ff3f2cc228a0a75a14e6"
+          },
+          {
+            "name": "mac_name",
+            "hex": "53747564696f204d6163"
+          },
+          {
+            "name": "scopes_hint",
+            "hex": "0000000a0000000e636c6970626f6172642e726561640000000f636c6970626f6172642e77726974650000000d66696c65732e726563656976650000000a66696c65732e73656e64000000116e6f74696669636174696f6e732e616374000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e7265616400000008736d732e73656e64"
+          },
+          {
+            "name": "mac_session_alpns",
+            "hex": "0000000100000009746f6d626f6c6f2f31"
+          }
+        ],
+        "encoded": "00000016746f6d626f6c6f2f706169722f76312f61636365707400000006000000208fefc02695f5e3a9fbb2d2f5b717664b8cfbf827a53f0432c8aad7051f4d7e9e00000041047728304f2d1a2d071c363066a04023fd43cb1334b038d829b6e58dc52a41ac2254b857012d78f4d01550d53720b2eb69c107d61c815686973d84872c074c9969000000410406b8fcb43e20ffb18e856a874eced932caeb802d69ecbdcabf20b4bd12a988eb53b706bccf6e890a82d899cfcada62f8f1f260a8f6c4ff3f2cc228a0a75a14e60000000a53747564696f204d6163000000ac0000000a0000000e636c6970626f6172642e726561640000000f636c6970626f6172642e77726974650000000d66696c65732e726563656976650000000a66696c65732e73656e64000000116e6f74696669636174696f6e732e616374000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e7265616400000008736d732e73656e64000000110000000100000009746f6d626f6c6f2f31"
+      },
+      "H(T_acc)": "f97674ca1c4405055b6856ad97b038f4127c19b3f769d792ab8c0fe045a55a6f",
+      "proof": "824977d1d6b6754dcafe2d14550e547c71024faed312b066c83de14cf0e39921",
+      "sig": "50da62716ce3bb1606cfe60abea8331821985367c2f649e949775471f8448f1c8c1b0402c1ddfa477cbee950fa9f74fab6627a515e4cb2ab6520e3182ff18416",
+      "presence_sig": "7c623fe2e748b1ec7bef85ea9a6ac09b9c751e855aba3e67f5e132cbff8593358263d6f3e21102359b267f0e6e303be99ffe99f65db427e72c2120f7a909830c",
+      "sig_verifies": true,
+      "presence_sig_verifies": true
+    },
+    "PairComplete": {
+      "fields": {
+        "scopes": [
+          "notifications.read",
+          "screen.control",
+          "screen.view",
+          "sms.read"
+        ],
+        "elevation_required": true,
+        "elevation_scopes": [
+          "screen.control",
+          "screen.view"
+        ]
+      },
+      "T_cmp": {
+        "label": "tombolo/pair/v1/complete",
+        "fields": [
+          {
+            "name": "H(T_acc)",
+            "hex": "f97674ca1c4405055b6856ad97b038f4127c19b3f769d792ab8c0fe045a55a6f"
+          },
+          {
+            "name": "scopes",
+            "hex": "00000004000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e72656164"
+          },
+          {
+            "name": "elevation_required",
+            "hex": "01"
+          },
+          {
+            "name": "elevation_scopes",
+            "hex": "000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+          }
+        ],
+        "encoded": "00000018746f6d626f6c6f2f706169722f76312f636f6d706c6574650000000400000020f97674ca1c4405055b6856ad97b038f4127c19b3f769d792ab8c0fe045a55a6f0000004700000004000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e72656164000000010100000025000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+      },
+      "sig": "668494ae8d6df3fac4805e752224ad2116f78632d1a6db1c93206fbb1ad4070105cb832542fdd5841ed11054be80482405a239d9ff8c36aeac4d319ca9b830b7",
+      "sig_verifies": true
+    },
+    "pair_id": "b19360917402df13e6f32180ccdcb57d"
+  },
+  "negative": {
+    "wrong_code": {
+      "description": "Phone typed 048214, Mac shows 048213: the Mac's expected cA differs from the phone's, so the Mac replies BAD_CONFIRMATION and charges one attempt.",
+      "phone_code": "048214",
+      "phone_w": "a2b2d061b7107cc742528f64d5729ecd21f4d8f897274a0393128936d4e4490d",
+      "phone_pA": "04aa5c58fb94d41da4fcbedab6af1606fd42c465055778f8ea23010cd661159442cb7c60ad188d5fd5858c1c7c5915024d494069c8fe9659536692d0fb697ac398",
+      "mac_pB": "04fe2c2d642b4ba941cc23f55a7fca62665e7b8844ad4d9da6c27bb6ef43e1458546b0393bed09499dae71adcd38dde3a5afc9874c57baccc7f6f2016e9ffb1a2c",
+      "phone_K": "047f4875e0b16608caa2af77bdff3132a4c9bfbd681ddf2b20f3c47e228cf6054e334c4a19db330e467366afd04c2af6cf3266d3b238169c89a46049df32edba87",
+      "mac_K": "042baea4651c2baad37a5f151ef5f7cbc122657f74a08f2916a778f36ea73de088c95f7de0474d8260614b50139f1dcfb80f75eca001e2ed7593857464d715b073",
+      "phone_cA": "3312498738b40a63c0b6641bc217fe6246b5be93c821bcbabd160c1b60b6412c",
+      "mac_expected_cA": "7a25006726ebec4596b0a1fb5a588af6f1587f7c6dbe282192434bed5882e98d"
+    },
+    "invalid_pA_encodings": [
+      {
+        "pA": "040706ee5753a12f20a465bbf4c012672193dd2dc5efac51c5f36cf83db7f559a698fc8e1abbf62d7696e565760f700341e1e6ddae45414d0c5c3358f6d680298a",
+        "reason": "last byte of pA flipped: not on the curve",
+        "rejected_by_reference": true
+      },
+      {
+        "pA": "030706ee5753a12f20a465bbf4c012672193dd2dc5efac51c5f36cf83db7f559a6",
+        "reason": "SEC1 compressed form of a valid pA: only 65-byte uncompressed is accepted",
+        "rejected_by_reference": true
+      },
+      {
+        "pA": "00",
+        "reason": "identity element",
+        "rejected_by_reference": true
+      },
+      {
+        "pA": "0400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "reason": "0x04 || zeros: not on the curve",
+        "rejected_by_reference": true
+      },
+      {
+        "pA": "040706ee5753a12f20a465bbf4c012672193dd2dc5efac51c5f36cf83db7f559a698fc8e1abbf62d7696e565760f700341e1e6ddae45414d0c5c3358f6d68029",
+        "reason": "truncated to 64 bytes",
+        "rejected_by_reference": true
+      }
+    ]
+  },
+  "edge_cases": {
+    "leading_zero_w": {
+      "description": "Raw SPAKE2 run (no HKDF) with a w whose first byte is 0x00: TT must encode w as 32 bytes (len(w) = 32).",
+      "w": "003f2c0ec48f303dc29cb4c298a0a26f285147102ede84b42da2da4770a74245",
+      "pA": "0446fa52d2faacd2f41926ffeb0e002a470fb9d167f513b1f75adf172a876d7271ba031213848a6f5a7a3098bf23fd5a52a3550465e821da5c432401f7714a3fff",
+      "pB": "048ded3752002da7107af5e7d546d5b8d5162a30075fa667390cc3ee3d4d1211514c24c3538a9303c4e49322e852770fc9faa368964dc20562cf71d59a2ca3dca4",
+      "K": "04f82305b0e53700cef757f39cccbcd44f9536e2314390312b4b581f9e1670a62d1e487517a779e608e998992f3eee0e43d648301899dce47c93ce77a5e3d099f2",
+      "TT": "2000000000000000866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc20000000000000002b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f241000000000000000446fa52d2faacd2f41926ffeb0e002a470fb9d167f513b1f75adf172a876d7271ba031213848a6f5a7a3098bf23fd5a52a3550465e821da5c432401f7714a3fff4100000000000000048ded3752002da7107af5e7d546d5b8d5162a30075fa667390cc3ee3d4d1211514c24c3538a9303c4e49322e852770fc9faa368964dc20562cf71d59a2ca3dca4410000000000000004f82305b0e53700cef757f39cccbcd44f9536e2314390312b4b581f9e1670a62d1e487517a779e608e998992f3eee0e43d648301899dce47c93ce77a5e3d099f22000000000000000003f2c0ec48f303dc29cb4c298a0a26f285147102ede84b42da2da4770a74245",
+      "Ke": "9da5f1b5bd95a040c1f13bd447a2467e",
+      "cA": "b19bfadf3ee3c3981ddda890b321957b17555a0b87de3dd55c270c092fc13025",
+      "cB": "357c6c7db57a9b65fe61c3db4fe288a8af2413531463bdeccae4012c33eeca6c"
+    }
+  }
+}

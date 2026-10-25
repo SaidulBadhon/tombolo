@@ -6,9 +6,8 @@ use hkdf::Hkdf;
 use hmac::{Hmac, Mac};
 use p256::ecdsa::signature::{Signer, Verifier};
 use p256::ecdsa::{Signature, SigningKey, VerifyingKey};
-use p256::elliptic_curve::sec1::ToEncodedPoint;
 use p256::pkcs8::EncodePublicKey;
-use p256::{FieldBytes, PublicKey};
+use p256::PublicKey;
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 
@@ -76,7 +75,8 @@ impl Key {
         Key::from_scalar(name, &test_bytes(name, 32))
     }
     pub fn from_scalar(name: &str, scalar: &[u8]) -> Key {
-        let sk = SigningKey::from_bytes(FieldBytes::from_slice(scalar)).expect("scalar in [1, n-1]");
+        let arr: [u8; 32] = scalar.try_into().expect("32-byte scalar");
+        let sk = SigningKey::from_bytes(&arr.into()).expect("scalar in [1, n-1]");
         let pub65 = sk.verifying_key().to_encoded_point(false).as_bytes().to_vec();
         assert_eq!(pub65.len(), 65);
         Key { name: name.to_string(), scalar: scalar.to_vec(), sk, pub65 }

@@ -1,0 +1,242 @@
+{
+  "description": "QR pairing flow: payload, pairing key schedule, identity exchange transcripts, proofs, signatures, pair_id and discovery key.",
+  "spec": "docs/security/pairing-and-session.md sections 7.4, 7.5, 7.7",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "inputs": {
+    "phone_endpoint_id": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc",
+    "mac_endpoint_id": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2",
+    "phone_identity_key": {
+      "fixed_input_name": "qr/phone/identity-key",
+      "private_scalar": "f12b43235613bafd11eaa8134d7139909f47a30824b63eb6541544e7dfa78a0e",
+      "public_sec1_uncompressed": "049cad7dfe08da3df394e920dcd1ef8af05c0a6406e10e4474e2bc057a0ff67e89386c0876326bb87514cdb46f3eed214fcdb1de7186ffa9d795d20aec31e1ac7c"
+    },
+    "mac_identity_key": {
+      "fixed_input_name": "qr/mac/identity-key",
+      "private_scalar": "b81e9daa232a4d2f20c799bc89ba0aedf4ba1f33071da6bc510ec1d3293dd1e1",
+      "public_sec1_uncompressed": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8"
+    },
+    "mac_presence_key": {
+      "fixed_input_name": "qr/mac/presence-key",
+      "private_scalar": "92b0962dd8b865e9c4504ca0e121c52c18beecaa79d4bc697264693f8178192a",
+      "public_sec1_uncompressed": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753"
+    },
+    "s": "1bcd799d42c564f31234c275b48bf18b4e82d7c24c87d2ccc951b777c53ee38b",
+    "exporter_pair": "55ceafd24de3b4a4d647482e5edf296fc6933afda4cc3fb302bafcc2fbe250e7",
+    "exporter_pair_note": "fixed stand-in for TLS-Exporter(\"tombolo/pair/v1\", \"\", 32)",
+    "n_P": "bf00f23c5bad75560d362dccbd805918af98f9c4e92d35c5fb36b3869ae69580",
+    "n_M": "bed5ea3ecbdb901bbc8da787a5bcd17580e65a6f9900ca8f7976ed843722c7be",
+    "ticket_created_unix": 1793000000,
+    "ticket_ttl_s": 120,
+    "addresses": [
+      "192.168.1.20:47100",
+      "[fd00::20]:47100"
+    ],
+    "session_alpns": [
+      "tombolo/1"
+    ]
+  },
+  "qr": {
+    "SPKI_der(mac_identity_pub)": "3059301306072a8648ce3d020106082a8648ce3d0301070342000455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8",
+    "k": "5bd48857fe400eb5814ca97aefcecf4ce805694699cfa0add9a290574d4cb9bb",
+    "uri": "tombolo://pair?v=1&id=K2ksHFFnuX287ehmsqtLnllWGHYwVC-rUgJ5xLQdAPI&a=192.168.1.20:47100,%5Bfd00::20%5D:47100&k=W9SIV_5ADrWBTKl6787PTOgFaUaZz6Ct2aKQV01Mubs&s=G815nULFZPMSNMJ1tIvxi06C18JMh9LMyVG3d8U-44s&exp=1793000120"
+  },
+  "exchange": {
+    "key_schedule": {
+      "ikm_pair": {
+        "label": "tombolo/pair/v1/ikm",
+        "fields": [
+          {
+            "name": "method",
+            "hex": "01"
+          },
+          {
+            "name": "method_secret",
+            "hex": "1bcd799d42c564f31234c275b48bf18b4e82d7c24c87d2ccc951b777c53ee38b"
+          }
+        ],
+        "encoded": "00000013746f6d626f6c6f2f706169722f76312f696b6d000000020000000101000000201bcd799d42c564f31234c275b48bf18b4e82d7c24c87d2ccc951b777c53ee38b"
+      },
+      "PRK_pair": "9fddef92bbd434334b0c7e0bda32f8ac1c3b6ca6f89dfed92f8150e8319c6230",
+      "K_proof_phone": "34163a7960a56c03f5e3bc1c55e586921b8fad81dd3c1ac28be376a6cb4dbe43",
+      "K_proof_mac": "78ab2f8dc0a46f582681402546a437175e931407579c18d0ba5b843ff2b63a4c",
+      "discovery_key": "1cf30b6f98d371fd744ae6e0d9fde4df0f477802d6e96751fbc8da0ca442740e"
+    },
+    "PairRequest": {
+      "fields": {
+        "phone_identity_pub": "049cad7dfe08da3df394e920dcd1ef8af05c0a6406e10e4474e2bc057a0ff67e89386c0876326bb87514cdb46f3eed214fcdb1de7186ffa9d795d20aec31e1ac7c",
+        "name": "Ana’s Pixel",
+        "model": "Pixel 9",
+        "os": "Android 16"
+      },
+      "T_req": {
+        "label": "tombolo/pair/v1/request",
+        "fields": [
+          {
+            "name": "method",
+            "hex": "01"
+          },
+          {
+            "name": "exporter_pair",
+            "hex": "55ceafd24de3b4a4d647482e5edf296fc6933afda4cc3fb302bafcc2fbe250e7"
+          },
+          {
+            "name": "phone_endpoint_id",
+            "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+          },
+          {
+            "name": "mac_endpoint_id",
+            "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+          },
+          {
+            "name": "n_P",
+            "hex": "bf00f23c5bad75560d362dccbd805918af98f9c4e92d35c5fb36b3869ae69580"
+          },
+          {
+            "name": "n_M",
+            "hex": "bed5ea3ecbdb901bbc8da787a5bcd17580e65a6f9900ca8f7976ed843722c7be"
+          },
+          {
+            "name": "qr_k",
+            "hex": "5bd48857fe400eb5814ca97aefcecf4ce805694699cfa0add9a290574d4cb9bb"
+          },
+          {
+            "name": "phone_identity_pub",
+            "hex": "049cad7dfe08da3df394e920dcd1ef8af05c0a6406e10e4474e2bc057a0ff67e89386c0876326bb87514cdb46f3eed214fcdb1de7186ffa9d795d20aec31e1ac7c"
+          },
+          {
+            "name": "name",
+            "hex": "416e61e280997320506978656c"
+          },
+          {
+            "name": "model",
+            "hex": "506978656c2039"
+          },
+          {
+            "name": "os",
+            "hex": "416e64726f6964203136"
+          },
+          {
+            "name": "phone_session_alpns",
+            "hex": "0000000100000009746f6d626f6c6f2f31"
+          }
+        ],
+        "encoded": "00000017746f6d626f6c6f2f706169722f76312f726571756573740000000c00000001010000002055ceafd24de3b4a4d647482e5edf296fc6933afda4cc3fb302bafcc2fbe250e700000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020bf00f23c5bad75560d362dccbd805918af98f9c4e92d35c5fb36b3869ae6958000000020bed5ea3ecbdb901bbc8da787a5bcd17580e65a6f9900ca8f7976ed843722c7be000000205bd48857fe400eb5814ca97aefcecf4ce805694699cfa0add9a290574d4cb9bb00000041049cad7dfe08da3df394e920dcd1ef8af05c0a6406e10e4474e2bc057a0ff67e89386c0876326bb87514cdb46f3eed214fcdb1de7186ffa9d795d20aec31e1ac7c0000000d416e61e280997320506978656c00000007506978656c20390000000a416e64726f6964203136000000110000000100000009746f6d626f6c6f2f31"
+      },
+      "H(T_req)": "03c1d314b82117f699e96bb2c3cd4bafae6b8fad2f6181db0121e65574c1d42e",
+      "proof": "9adfcc800ee962a796d518d5346224bb942d3905f1808e64e86ac51d7e9f08ae",
+      "sig": "6f7caf385af6891d9b721f2e0274aff8bc87b86d30b052980bf03b9430caf771104e4dd9efa8b90cbe86fb47d476a7fc106ea1d0003ffcd2ce967446c20fba4b",
+      "sig_der": "304402206f7caf385af6891d9b721f2e0274aff8bc87b86d30b052980bf03b9430caf7710220104e4dd9efa8b90cbe86fb47d476a7fc106ea1d0003ffcd2ce967446c20fba4b",
+      "sig_verifies": true
+    },
+    "PairAccept": {
+      "fields": {
+        "mac_identity_pub": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8",
+        "mac_presence_pub": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753",
+        "mac_name": "Studio Mac",
+        "scopes_hint": [
+          "clipboard.read",
+          "clipboard.write",
+          "files.receive",
+          "files.send",
+          "notifications.act",
+          "notifications.read",
+          "screen.control",
+          "screen.view",
+          "sms.read",
+          "sms.send"
+        ]
+      },
+      "T_acc": {
+        "label": "tombolo/pair/v1/accept",
+        "fields": [
+          {
+            "name": "H(T_req)",
+            "hex": "03c1d314b82117f699e96bb2c3cd4bafae6b8fad2f6181db0121e65574c1d42e"
+          },
+          {
+            "name": "mac_identity_pub",
+            "hex": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8"
+          },
+          {
+            "name": "mac_presence_pub",
+            "hex": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753"
+          },
+          {
+            "name": "mac_name",
+            "hex": "53747564696f204d6163"
+          },
+          {
+            "name": "scopes_hint",
+            "hex": "0000000a0000000e636c6970626f6172642e726561640000000f636c6970626f6172642e77726974650000000d66696c65732e726563656976650000000a66696c65732e73656e64000000116e6f74696669636174696f6e732e616374000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e7265616400000008736d732e73656e64"
+          },
+          {
+            "name": "mac_session_alpns",
+            "hex": "0000000100000009746f6d626f6c6f2f31"
+          }
+        ],
+        "encoded": "00000016746f6d626f6c6f2f706169722f76312f616363657074000000060000002003c1d314b82117f699e96bb2c3cd4bafae6b8fad2f6181db0121e65574c1d42e000000410455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b80000004104e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb77530000000a53747564696f204d6163000000ac0000000a0000000e636c6970626f6172642e726561640000000f636c6970626f6172642e77726974650000000d66696c65732e726563656976650000000a66696c65732e73656e64000000116e6f74696669636174696f6e732e616374000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e7265616400000008736d732e73656e64000000110000000100000009746f6d626f6c6f2f31"
+      },
+      "H(T_acc)": "f228c291cf0e0dad8b331f1ada4a6a3b46b61a0bd607d6407874e1d327274eec",
+      "proof": "68f5be180e0d0ea429f9609b551eceb718ca5f0a8419200069d278560ed2da3d",
+      "sig": "509e9fb694af29a4019225b32e313f34c8ddb33da11b7cf77827815f789ed8d92378e43d078264571d86390801b4a962d25272911af6a28fadeadf892746417c",
+      "presence_sig": "5bf84717757b5011282f1e3bf6a84ac2f2c4d080087e12450051e2980d5fac68c09624b43cf40225309c259f779ea5dae430964bcdeb41b58ebcfbd0c6ed0a4b",
+      "sig_verifies": true,
+      "presence_sig_verifies": true
+    },
+    "PairComplete": {
+      "fields": {
+        "scopes": [
+          "notifications.read",
+          "screen.control",
+          "screen.view",
+          "sms.read"
+        ],
+        "elevation_required": true,
+        "elevation_scopes": [
+          "screen.control",
+          "screen.view"
+        ]
+      },
+      "T_cmp": {
+        "label": "tombolo/pair/v1/complete",
+        "fields": [
+          {
+            "name": "H(T_acc)",
+            "hex": "f228c291cf0e0dad8b331f1ada4a6a3b46b61a0bd607d6407874e1d327274eec"
+          },
+          {
+            "name": "scopes",
+            "hex": "00000004000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e72656164"
+          },
+          {
+            "name": "elevation_required",
+            "hex": "01"
+          },
+          {
+            "name": "elevation_scopes",
+            "hex": "000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+          }
+        ],
+        "encoded": "00000018746f6d626f6c6f2f706169722f76312f636f6d706c6574650000000400000020f228c291cf0e0dad8b331f1ada4a6a3b46b61a0bd607d6407874e1d327274eec0000004700000004000000126e6f74696669636174696f6e732e726561640000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e7669657700000008736d732e72656164000000010100000025000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+      },
+      "sig": "95a961223201a625ea3b43a925e7e852576d1c85fe29e80292b8d0359edd1b8793072751bdddb4ac31d131aeba7b09556a3866cf765b6202acd8755e61f53128",
+      "sig_verifies": true
+    },
+    "pair_id": "80d9d86aa6e493ead075e2688ca31917"
+  },
+  "negative": {
+    "mitm_exporter_mismatch": {
+      "description": "The Mac's TLS session is with a relay, so its exporter differs; recomputing the phone's proof and signature check with the Mac-side exporter fails (BAD_PROOF).",
+      "mac_side_exporter": "0ecf799c58202c6b414f184c9dea562f48b96c7757e463acfaedbd4e3a92df8f",
+      "proof_sent_by_phone": "9adfcc800ee962a796d518d5346224bb942d3905f1808e64e86ac51d7e9f08ae",
+      "proof_expected_by_mac": "34a32689aa4d7c1da7ccdd77551a55d98516c6ccc57c002afd2332a0f02d122f",
+      "phone_sig_verifies_over_mac_side_T_req": false
+    },
+    "qr_k_mismatch": {
+      "description": "PairAccept carries mac_identity_pub whose SPKI hash differs from k: the phone must abort with KEY_MISMATCH.",
+      "k_from_qr": "5bd48857fe400eb5814ca97aefcecf4ce805694699cfa0add9a290574d4cb9bb",
+      "H(SPKI(other key))": "a15c4d98ea58bccce7cd22c3700e1660e8992ee0b37f4a023ae41c03e65073a1"
+    }
+  }
+}

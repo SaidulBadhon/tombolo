@@ -1,0 +1,462 @@
+{
+  "description": "Session authentication (exporter-bound SessionAuth in both dial directions), session key schedule, channel binding, elevation and key rotation, with negative cases.",
+  "spec": "docs/security/pairing-and-session.md sections 8.2, 8.3, 9.3, 13.2",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "binding": {
+    "source": "qr-pairing.json",
+    "pair_id": "80d9d86aa6e493ead075e2688ca31917",
+    "phone_identity_pub": "049cad7dfe08da3df394e920dcd1ef8af05c0a6406e10e4474e2bc057a0ff67e89386c0876326bb87514cdb46f3eed214fcdb1de7186ffa9d795d20aec31e1ac7c",
+    "mac_identity_pub": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8",
+    "mac_presence_pub": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753"
+  },
+  "cases": [
+    {
+      "name": "mac_dials_phone",
+      "inputs": {
+        "exporter_session": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c",
+        "exporter_session_note": "fixed stand-in for TLS-Exporter(\"tombolo/session/v1\", \"\", 32)",
+        "dialer_endpoint_id": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2",
+        "listener_endpoint_id": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc",
+        "n_dialer": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606",
+        "n_listener": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356",
+        "pair_id": "80d9d86aa6e493ead075e2688ca31917"
+      },
+      "phone_SessionAuth": {
+        "T_auth": {
+          "label": "tombolo/session/v1/auth",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "01"
+            },
+            {
+              "name": "alpn",
+              "hex": "746f6d626f6c6f2f31"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+            },
+            {
+              "name": "n_listener",
+              "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f6175746800000008000000010100000009746f6d626f6c6f2f31000000204a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc0000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f93560000001080d9d86aa6e493ead075e2688ca31917"
+        },
+        "sig": "3f941f720a0d52b73f8dfe989a0250694606c504cf272599dc72ada900e1dff81eba8c5f714fe40b2521d2373a161d05a9bab4baa771462d583c32f28fb8fa41",
+        "verifies_with_phone_identity_pub": true
+      },
+      "mac_SessionAuth": {
+        "T_auth": {
+          "label": "tombolo/session/v1/auth",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "02"
+            },
+            {
+              "name": "alpn",
+              "hex": "746f6d626f6c6f2f31"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+            },
+            {
+              "name": "n_listener",
+              "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f6175746800000008000000010200000009746f6d626f6c6f2f31000000204a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc0000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f93560000001080d9d86aa6e493ead075e2688ca31917"
+        },
+        "sig": "c632ef085a628ab86a081855a8bce0571d707b372a738ad4b4f143df25e757508524590fc250e644307dd5c8b9097a489ea8bc6dbe3e5db80db8ddc024da12b2",
+        "verifies_with_mac_identity_pub": true
+      },
+      "key_schedule": {
+        "salt_s": {
+          "label": "tombolo/session/v1/salt",
+          "fields": [
+            {
+              "name": "n_dialer",
+              "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+            },
+            {
+              "name": "n_listener",
+              "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f73616c74000000020000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+        },
+        "PRK_s": "b2bd00c8d1ebbd37b0b6b759fbb2ccfd1c3fd1e3866fdd17aa45dfe8f186bb99",
+        "session_id": "810aa1c5d67c45ad902aa463cee9a501",
+        "K_bind": "194893c3b453cf995598ec54a74440bcabcbb36c0f3d56ba84a3b97382b6294e"
+      }
+    },
+    {
+      "name": "phone_dials_mac",
+      "inputs": {
+        "exporter_session": "90ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d41",
+        "exporter_session_note": "fixed stand-in for TLS-Exporter(\"tombolo/session/v1\", \"\", 32)",
+        "dialer_endpoint_id": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc",
+        "listener_endpoint_id": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2",
+        "n_dialer": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12",
+        "n_listener": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce",
+        "pair_id": "80d9d86aa6e493ead075e2688ca31917"
+      },
+      "phone_SessionAuth": {
+        "T_auth": {
+          "label": "tombolo/session/v1/auth",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "01"
+            },
+            {
+              "name": "alpn",
+              "hex": "746f6d626f6c6f2f31"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "90ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d41"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12"
+            },
+            {
+              "name": "n_listener",
+              "hex": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f6175746800000008000000010100000009746f6d626f6c6f2f310000002090ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d4100000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2000000209bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef1200000020980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce0000001080d9d86aa6e493ead075e2688ca31917"
+        },
+        "sig": "5c1ec8f49de541403b1ddafcd81e1b3f3af3f2dc4a6d61aa48a406b846919c324dd24381dc59aac73d9be49299b177a3e17a3bce3dd03f9bbb2cab924cafb56b",
+        "verifies_with_phone_identity_pub": true
+      },
+      "mac_SessionAuth": {
+        "T_auth": {
+          "label": "tombolo/session/v1/auth",
+          "fields": [
+            {
+              "name": "signer_role",
+              "hex": "02"
+            },
+            {
+              "name": "alpn",
+              "hex": "746f6d626f6c6f2f31"
+            },
+            {
+              "name": "exporter_session",
+              "hex": "90ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d41"
+            },
+            {
+              "name": "dialer_endpoint_id",
+              "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+            },
+            {
+              "name": "listener_endpoint_id",
+              "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+            },
+            {
+              "name": "n_dialer",
+              "hex": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12"
+            },
+            {
+              "name": "n_listener",
+              "hex": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+            },
+            {
+              "name": "pair_id",
+              "hex": "80d9d86aa6e493ead075e2688ca31917"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f6175746800000008000000010200000009746f6d626f6c6f2f310000002090ff47ca3fb7f95b2c8d69c6b976e5a173eabb7e3393c6d854f1e309a8f44d4100000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2000000209bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef1200000020980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce0000001080d9d86aa6e493ead075e2688ca31917"
+        },
+        "sig": "0275e9b1b8be433ddec20f5f3a04ad0842313006a2b89b2923d0293d4929d093788c7d5384b86686ceb3f64a917866928e6d9a468dd234898002a58e14bd2827",
+        "verifies_with_mac_identity_pub": true
+      },
+      "key_schedule": {
+        "salt_s": {
+          "label": "tombolo/session/v1/salt",
+          "fields": [
+            {
+              "name": "n_dialer",
+              "hex": "9bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef12"
+            },
+            {
+              "name": "n_listener",
+              "hex": "980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+            }
+          ],
+          "encoded": "00000017746f6d626f6c6f2f73657373696f6e2f76312f73616c7400000002000000209bfb7e9ed716331aa561e80b65cc0aae0a1956fb0e3011a79b4f07669222ef1200000020980579c32c952d3563beee13e0cf5ef2807eb994234b089a500012550477b3ce"
+        },
+        "PRK_s": "c46a07944ade3330373a70d38cbb4d491af4ff25b432712705ba353fc0825e45",
+        "session_id": "a6592e53914144bd8d56c2a85fe4ac98",
+        "K_bind": "23e3e0aff69f26e4e6a9f773b244ad2efc12a2249cb01a83d0e3d53852e3da73"
+      }
+    }
+  ],
+  "negative": {
+    "reflection": {
+      "description": "mac_dials_phone: the Mac's signature checked against T_auth with signer_role = PHONE",
+      "verifies": false
+    },
+    "cross_connection_replay": {
+      "description": "the Mac's mac_dials_phone signature checked against the phone_dials_mac T_auth(MAC)",
+      "verifies": false
+    },
+    "wrong_key": {
+      "description": "the phone's signature checked with the Mac identity key",
+      "verifies": false
+    },
+    "presence_key_is_not_identity_key": {
+      "description": "the Mac's SessionAuth signature checked with the presence key",
+      "verifies": false
+    }
+  },
+  "channel_bind": {
+    "session": "mac_dials_phone",
+    "exporter_channel": "ad75d63abff9bad5d67f2e214357443533c02ff348899a6dac1abdd044cedffd",
+    "exporter_channel_note": "fixed stand-in for TLS-Exporter(\"tombolo/channel/v1\", \"\", 32) on the extra connection",
+    "T_bind": {
+      "label": "tombolo/session/v1/channel-bind",
+      "fields": [
+        {
+          "name": "sender_role",
+          "hex": "02"
+        },
+        {
+          "name": "session_id",
+          "hex": "810aa1c5d67c45ad902aa463cee9a501"
+        },
+        {
+          "name": "exporter_channel",
+          "hex": "ad75d63abff9bad5d67f2e214357443533c02ff348899a6dac1abdd044cedffd"
+        },
+        {
+          "name": "channel_index",
+          "hex": "00000001"
+        }
+      ],
+      "encoded": "0000001f746f6d626f6c6f2f73657373696f6e2f76312f6368616e6e656c2d62696e6400000004000000010200000010810aa1c5d67c45ad902aa463cee9a50100000020ad75d63abff9bad5d67f2e214357443533c02ff348899a6dac1abdd044cedffd0000000400000001"
+    },
+    "mac": "55554f3b040dd43ea81836a885070b15b35fa77a4574a05003cb91e083712e53"
+  },
+  "elevation": {
+    "session": "mac_dials_phone",
+    "n_E": "c069b8ee289c3182e9ce0a71eaa6343868221ddec70cf2f9c00766101a43e016",
+    "T_elev": {
+      "label": "tombolo/session/v1/elevate",
+      "fields": [
+        {
+          "name": "exporter_session",
+          "hex": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c"
+        },
+        {
+          "name": "dialer_endpoint_id",
+          "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+        },
+        {
+          "name": "listener_endpoint_id",
+          "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+        },
+        {
+          "name": "n_dialer",
+          "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+        },
+        {
+          "name": "n_listener",
+          "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+        },
+        {
+          "name": "pair_id",
+          "hex": "80d9d86aa6e493ead075e2688ca31917"
+        },
+        {
+          "name": "n_E",
+          "hex": "c069b8ee289c3182e9ce0a71eaa6343868221ddec70cf2f9c00766101a43e016"
+        },
+        {
+          "name": "scopes",
+          "hex": "000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+        }
+      ],
+      "encoded": "0000001a746f6d626f6c6f2f73657373696f6e2f76312f656c657661746500000008000000204a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc0000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f93560000001080d9d86aa6e493ead075e2688ca3191700000020c069b8ee289c3182e9ce0a71eaa6343868221ddec70cf2f9c00766101a43e01600000025000000020000000e73637265656e2e636f6e74726f6c0000000b73637265656e2e76696577"
+    },
+    "sig (presence key)": "11c18ce311c8557dae71754e90b191c38072292ec4c3a9573c947db7104b2df1e95cc9f83ce77e25a6c91b3980aa7e7eca8205647cf0e938ded802b8de33d15d",
+    "negative": {
+      "replay_with_new_challenge_verifies": false,
+      "verifies_with_identity_key": false
+    }
+  },
+  "rotation": {
+    "session": "mac_dials_phone",
+    "identity": {
+      "rotation_id": "fd4a72ef88557125d20261d8995b5e7d",
+      "new_key": {
+        "fixed_input_name": "session/rotate/mac-identity-new",
+        "private_scalar": "8e38736a5477e517adaef77cdcdc9f94247d035dbf5130f78a53fb1e28844d37",
+        "public_sec1_uncompressed": "0471b951e5e683b65b8cfce8194852b74d1050e5708c0c9f8dbb19063fdd85916f146afd7395c9dc14487e16813de11704c81f9449c7884d1e01f7e822e7002468"
+      },
+      "T_rot": {
+        "label": "tombolo/session/v1/rotate-key",
+        "fields": [
+          {
+            "name": "signer_role",
+            "hex": "02"
+          },
+          {
+            "name": "kind",
+            "hex": "01"
+          },
+          {
+            "name": "rotation_id",
+            "hex": "fd4a72ef88557125d20261d8995b5e7d"
+          },
+          {
+            "name": "exporter_session",
+            "hex": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c"
+          },
+          {
+            "name": "dialer_endpoint_id",
+            "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+          },
+          {
+            "name": "listener_endpoint_id",
+            "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+          },
+          {
+            "name": "n_dialer",
+            "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+          },
+          {
+            "name": "n_listener",
+            "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+          },
+          {
+            "name": "pair_id",
+            "hex": "80d9d86aa6e493ead075e2688ca31917"
+          },
+          {
+            "name": "old_pub",
+            "hex": "0455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8"
+          },
+          {
+            "name": "new_pub",
+            "hex": "0471b951e5e683b65b8cfce8194852b74d1050e5708c0c9f8dbb19063fdd85916f146afd7395c9dc14487e16813de11704c81f9449c7884d1e01f7e822e7002468"
+          }
+        ],
+        "encoded": "0000001d746f6d626f6c6f2f73657373696f6e2f76312f726f746174652d6b65790000000b0000000102000000010100000010fd4a72ef88557125d20261d8995b5e7d000000204a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc0000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f93560000001080d9d86aa6e493ead075e2688ca31917000000410455e23c44903fa4248bd62d0c9f4b88210a4afd98fac59364c67bd6b3342dbeebfd5b842ecc4f78599b8314b52082d81bcedc39f684965ae34642772443f523b8000000410471b951e5e683b65b8cfce8194852b74d1050e5708c0c9f8dbb19063fdd85916f146afd7395c9dc14487e16813de11704c81f9449c7884d1e01f7e822e7002468"
+      },
+      "sig_auth (old identity key)": "6c1daee30ba29efc8afb3958fdd59c707e95d2e0f34076f5999a9c1018a39969db88ce7415cd3c3ea45cd4f87793eed37a12344c2f70bcc045c32b95b46847a7",
+      "sig_new (new identity key)": "850045ef5484aaa6d8690ebe44a5924ce6bd0b57ade4a99a3e036d22e0c13df68876db054395f948fa51e77379046ef797a97cbb78dcf47a35676d6218bcd620"
+    },
+    "presence": {
+      "rotation_id": "b8682c05cf94f411733ee863e7d806bd",
+      "new_key": {
+        "fixed_input_name": "session/rotate/mac-presence-new",
+        "private_scalar": "a98a295c6ce5d79f10a983d77f4e891a91870fdb583eaee909becc9b3d81202f",
+        "public_sec1_uncompressed": "04005678a83ca56334171e2a3419647e0dae012a5256985ce32f2167f7223a17298263e3acf9e9d7d910370a9c26fa6711380fcac913a7bfdfd77133d162f8d826"
+      },
+      "T_rot": {
+        "label": "tombolo/session/v1/rotate-key",
+        "fields": [
+          {
+            "name": "signer_role",
+            "hex": "02"
+          },
+          {
+            "name": "kind",
+            "hex": "02"
+          },
+          {
+            "name": "rotation_id",
+            "hex": "b8682c05cf94f411733ee863e7d806bd"
+          },
+          {
+            "name": "exporter_session",
+            "hex": "4a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c"
+          },
+          {
+            "name": "dialer_endpoint_id",
+            "hex": "2b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f2"
+          },
+          {
+            "name": "listener_endpoint_id",
+            "hex": "866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc"
+          },
+          {
+            "name": "n_dialer",
+            "hex": "49e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606"
+          },
+          {
+            "name": "n_listener",
+            "hex": "7e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f9356"
+          },
+          {
+            "name": "pair_id",
+            "hex": "80d9d86aa6e493ead075e2688ca31917"
+          },
+          {
+            "name": "old_pub",
+            "hex": "04e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb7753"
+          },
+          {
+            "name": "new_pub",
+            "hex": "04005678a83ca56334171e2a3419647e0dae012a5256985ce32f2167f7223a17298263e3acf9e9d7d910370a9c26fa6711380fcac913a7bfdfd77133d162f8d826"
+          }
+        ],
+        "encoded": "0000001d746f6d626f6c6f2f73657373696f6e2f76312f726f746174652d6b65790000000b0000000102000000010200000010b8682c05cf94f411733ee863e7d806bd000000204a4a68458a7c928d83891dd187d4f31307d5dfec0b72f4d24f0bfc1dd981465c000000202b692c1c5167b97dbcede866b2ab4b9e5956187630542fab520279c4b41d00f200000020866b851f94f829a532ce79bea33cf5b566c85822a101b635292dfe29ce7e40cc0000002049e8f5b041e0a1f74b4ee1765686ffc634f7b8b3ad76943d3df8d10aa86f1606000000207e22c4d56b092aaeebfc8fdd6ca56e98ed689b8faa8b13832d04a80b091f93560000001080d9d86aa6e493ead075e2688ca319170000004104e52a097728859b5b5dc1271fce4dc618568c4b23a8655f0e33f889f36fd476f0f212fbed98d49e45290dce24f0053a3cb06c1544d8b3988e4025aff66feb77530000004104005678a83ca56334171e2a3419647e0dae012a5256985ce32f2167f7223a17298263e3acf9e9d7d910370a9c26fa6711380fcac913a7bfdfd77133d162f8d826"
+      },
+      "sig_auth (identity key)": "dccd94fb05b409918e6f0b0b28e55f669660878143aa720a1c502e724f74e030845c2961c45108944d9493e5cc42f673fb4cbfa5d699e8c258d1f69a36207db9",
+      "sig_new (new presence key)": "a1e67ee257f6bc0034167a544b69f8b8a1bfc83b32f8ac49fc3f9ca91ea855e6c6c614166793ea1a1785c538094f49d209e684e2630deaae9baa548f0a5c82cd",
+      "note": "the phone commits only after the phone owner approves"
+    }
+  }
+}
