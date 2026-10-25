@@ -57,7 +57,8 @@ cd spikes/s04-transport
 cargo build --release -p bench
 
 # one run (≈ 25 s): transport ∈ quic | tcp | rawtcp | tunnel | tunnel-lean,
-# cond ∈ clean | jitter | loss1 | burst3 | cap100 | usb | clean-uncapped, cc ∈ cubic | bbr3 | newreno
+# cond ∈ clean | jitter | loss1 | burst3 | cap100 | usb, cc ∈ cubic | bbr3
+# (also wired but not exercised in P0-14: cc newreno, cond clean-uncapped)
 ./target/release/bench run --transport quic --cc bbr3 --cond cap100 --seed 1 --out results/s4/raw
 
 # the full Mac-only matrix (20 runs per seed, ≈ 8 min per seed) and the summary
@@ -87,6 +88,16 @@ cd spikes/s04-transport
 ./scripts/build-android.sh       # cross-compiles bench for aarch64-linux-android (NDK clang, API 26)
 TAG=quiet ./scripts/phone-runs.sh      # Wi-Fi (direct) + USB (adb forward), 3 seeds, ≈ 25 min
 TAG=congested ./scripts/phone-runs.sh  # repeat while another device saturates the access point
+```
+
+Without a phone, the same code path (`--path direct`, a wrapper `--phone-cmd`, relative start, clock-offset
+estimate, 1 GiB transfer) was smoke-tested on loopback; results in `results/s4/direct-path-smoke/`:
+
+```sh
+./target/release/bench gen-cert results/tmp/phone-cert
+./target/release/bench run --transport quic --cond real --path direct --phone-host 127.0.0.1 \
+  --phone-cmd "/usr/bin/env $PWD/target/release/bench" --cert-dir results/tmp/phone-cert \
+  --phone-cert-dir results/tmp/phone-cert --out results/s4/direct-path-smoke
 ```
 
 Physical steps for a person are listed at the top of `scripts/phone-runs.sh` (unlock, cable, same Wi-Fi,

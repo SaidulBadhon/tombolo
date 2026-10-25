@@ -295,6 +295,12 @@ in [`spikes/s04-transport/README.md`](../../spikes/s04-transport/README.md#phone
 2. `./scripts/build-android.sh` cross-compiles the bench for `aarch64-linux-android` (NDK 29, API 26).
    **Verified today:** it builds, `target/android/aarch64-linux-android/release/bench: ELF 64-bit LSB pie
    executable, ARM aarch64`, needing only `libc`, `libm` and `libdl`.
+   **Also verified today, without a phone:** the procedure's code path (`--path direct`, phone side started
+   through a wrapper command as `adb shell` would, relative start, clock-offset estimate, condition `real`)
+   ran on loopback for `quic` and `tcp`: 1 GiB delivered (1 074 003 968 B with chunk headers), 2700/2700
+   frames, offset estimate 0.012 / 0.006 ms
+   ([`results/s4/direct-path-smoke/`](../../spikes/s04-transport/results/s4/direct-path-smoke/); plumbing check
+   only, not a measurement).
 3. `TAG=quiet ./scripts/phone-runs.sh` pushes the binary and a test certificate to `/data/local/tmp`, then
    runs 3 seeds of:
    - **Wi-Fi** `quic` (Cubic, BBRv3) and `tcp`, with the Mac dialling the phone's `wlan0` address
