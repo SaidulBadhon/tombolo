@@ -60,7 +60,8 @@ pub fn build() -> (Vec<(String, String)>, bool, Vec<String>) {
 fn first_difference(a: &str, b: &str) -> String {
     for (i, (la, lb)) in a.lines().zip(b.lines()).enumerate() {
         if la != lb {
-            return format!("line {}:\n    committed: {}\n    generated: {}", i + 1, la.trim(), lb.trim());
+            let cut = |s: &str| s.trim().chars().take(160).collect::<String>();
+            return format!("line {}:\n    committed: {}\n    generated: {}", i + 1, cut(la), cut(lb));
         }
     }
     format!("line counts differ ({} committed vs {} generated)", a.lines().count(), b.lines().count())
