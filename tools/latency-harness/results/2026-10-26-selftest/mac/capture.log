@@ -1,0 +1,21 @@
+capturing display 1 region (composited): "Tombolo Mac reference code" [latency-harness] 420×288 pt → 840×576 px, display max 120 Hz, 30.0 s
+  5 s: 552 frames, 552 decoded
+  10 s: 1133 frames, 1133 decoded
+  15 s: 1733 frames, 1733 decoded
+  20 s: 2305 frames, 2305 decoded
+  25 s: 2869 frames, 2869 decoded
+captured 3431 frames, 3431 decoded → /Users/saidulbadhon/Documents/GitHub/tombolo-wt/04-latency-harness/tools/latency-harness/runs/2026-10-26-selftest/mac/frames.csv
+== software-timestamp mode: render → composited display ==
+frames 3431, decoded 3431 (100.00 %)
+capture interval median 8.33 ms (p99 16.67), SCK delivery delay median 3.65 ms, decode median 6 µs (p99 22)
+
+[mac tag 10]
+  samples (first appearances) 3431, repeats 0, negative 0, outliers excluded 0
+  source frame interval median 8.30 ms, source frames not seen 171
+  latency ms: p50 17.15  p95 17.20  p99 17.21   (min 8.78, max 33.85, mean 16.58 ± sd 2.35, n 3431)
+  95% bootstrap CI: p50 [17.15, 17.16]  p95 [17.20, 17.20]  p99 [17.21, 17.21]
+  systematic uncertainty ±0.05 ms (applies to every percentile):
+    - tick rounding ±0.05 ms
+    - same clock as the capture (no clock sync needed)
+    - capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)
+wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/04-latency-harness/tools/latency-harness/runs/2026-10-26-selftest/mac/{latency.csv,summary.json,summary.txt}

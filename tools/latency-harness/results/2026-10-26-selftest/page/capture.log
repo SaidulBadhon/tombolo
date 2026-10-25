@@ -1,0 +1,25 @@
+capturing display 1 region (composited): "Tombolo latency page selftest-4032" [latency-harness] 480×888 pt → 960×1776 px, display max 120 Hz, 30.0 s
+  5 s: 302 frames, 302 decoded
+  10 s: 603 frames, 603 decoded
+  15 s: 904 frames, 904 decoded
+  20 s: 1205 frames, 1205 decoded
+  25 s: 1506 frames, 1506 decoded
+  30 s: 1805 frames, 1805 decoded
+captured 1805 frames, 1805 decoded → /Users/saidulbadhon/Documents/GitHub/tombolo-wt/04-latency-harness/tools/latency-harness/runs/2026-10-26-selftest/page/frames.csv
+== software-timestamp mode: render → composited display ==
+frames 1805, decoded 1805 (100.00 %)
+capture interval median 16.67 ms (p99 16.67), SCK delivery delay median 2.68 ms, decode median 7 µs (p99 29)
+
+[page tag 9 session 33e38719]
+  samples (first appearances) 1802, repeats 3, negative 0, outliers excluded 0
+  source frame interval median 16.70 ms, source frames not seen 2
+  latency ms: p50 11.80  p95 12.68  p99 12.76   (min 10.49, max 20.95, mean 12.05 ± sd 0.85, n 1802)
+  95% bootstrap CI: p50 [11.78, 11.82]  p95 [12.67, 12.69]  p99 [12.74, 19.80]
+  clock: Mac−page 52688334.879 ms, drift 0.8 ± 0.4 ppm, RTT min 0.879 / median kept 0.919 / median all 1.140 ms, 8 windows over 21.9 s
+  systematic uncertainty ±0.55 ms (applies to every percentile):
+    - tick rounding ±0.05 ms
+    - clock sync ±0.48 ms (max RTT/2 of the 8 lowest-RTT windows used; residual 0.01 ms rms)
+    - clock drift 0.8 ± 0.4 ppm (1 SE) → ±0.01 ms over the run (2 SE × half-span)
+    - page timer resolution 0.020 ms → ±0.010 ms
+    - capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)
+wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/04-latency-harness/tools/latency-harness/runs/2026-10-26-selftest/page/{latency.csv,summary.json,summary.txt}

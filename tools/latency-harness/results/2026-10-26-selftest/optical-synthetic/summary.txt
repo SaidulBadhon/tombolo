@@ -1,0 +1,13 @@
+== optical mode: glass-to-glass (first appearance) ==
+frames 720, nominal fps 240.00, fps used 240.00
+frames with phone symbol 543, mirror symbol 720, Mac reference 720
+camera fps measured against the Mac clock: 239.995 (residual 0.22 ms)
+samples: used 177 (strict 2), all 178; per-sample uncertainty ±4.17 ms
+latency ms (used): p50 45.83  p95 45.83  p99 45.83   (min 41.67, max 45.83, mean 45.79 ± sd 0.44, n 177)
+  95% bootstrap CI: p50 [45.83, 45.83]  p95 [45.83, 45.83]  p99 [45.83, 45.83]
+latency ms (strict): p50 41.67  p95 41.67  p99 41.67  n 2
+latency ms (all, uncorrected): p50 41.67  p95 41.67  p99 41.67  n 178
+displayed-value difference phone − mirror (coarse): p50 50.00  p95 50.00  n 543
+  - tracks separated by position; phone = track showing newer values (543 vs 0 frames)
+  - each sample is quantised to camera frames: ±4.17 ms (one frame at 240.00 fps)
+  - used = strict samples + samples where one undecodable transition frame preceded a first appearance (counted as the appearance); strict = no such frame on either track; all = first decoded frames, uncorrected
