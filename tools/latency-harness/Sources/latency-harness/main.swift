@@ -9,15 +9,20 @@ let usage = """
 usage: latency-harness <command> [options]
 
 Software-timestamp mode (no camera):
-  list-windows                         list capturable on-screen windows
+  list-windows [--all]                 list capturable on-screen windows (--all: include off-screen)
   capture   --run-dir DIR (--window TEXT | --window-id N | --rect X,Y,W,H)
             [--duration S=30] [--source display|window] [--scale F=1] [--expect N=1]
-            [--save-failures N=5] [--no-analyze]
+            [--save-failures N=0] [--no-analyze]
                                        capture a window/region with ScreenCaptureKit, decode every
-                                       frame → DIR/frames.csv, then run `analyze`
+                                       frame → DIR/frames.csv, then run `analyze`. --save-failures
+                                       saves the first frame and N undecodable frames as PNG for
+                                       debugging (off by default: they show whatever is on screen)
   analyze   --run-dir DIR              frames.csv + sync.jsonl → latency.csv, summary.json, report
   mac-code  [--duration S] [--at X,Y] [--size W,H]
                                        window showing the Mac host clock as a TLC1 symbol
+  page-window --url URL [--title T] [--duration S] [--at X,Y] [--size W,H]
+                                       floating WebKit browser window showing the latency page
+                                       (phone-less self-test: this window plays the mirror)
 
 Optical mode (high-speed camera):
   optical   --video FILE [--fps N] [--scale F=1] [--out DIR] [--max-frames N]
@@ -82,7 +87,8 @@ let args = Args(Array(argv.dropFirst()))
 
 switch command {
 case "list-windows":
-    runAsync { try await Capture.listWindows() }
+    let all = args.flag("--all")
+    runAsync { try await Capture.listWindows(all: all) }
 case "capture":
     guard let dir = args.value("--run-dir") else { fail("--run-dir is required") }
     let opts = Capture.Options(
@@ -90,7 +96,7 @@ case "capture":
         windowQuery: args.value("--window"), windowID: args.int("--window-id").map(UInt32.init),
         rect: args.numbers("--rect"), duration: args.double("--duration") ?? 30,
         sourceIsWindow: args.value("--source") == "window", scale: args.double("--scale") ?? 1,
-        expectedSymbols: args.int("--expect") ?? 1, saveFailures: args.int("--save-failures") ?? 5,
+        expectedSymbols: args.int("--expect") ?? 1, saveFailures: args.int("--save-failures") ?? 0,
         analyze: !args.flag("--no-analyze"))
     runAsync { try await Capture.run(opts) }
 case "analyze":
@@ -98,6 +104,10 @@ case "analyze":
     do { try Report.analyzeRun(URL(fileURLWithPath: dir)) } catch { fail("\(error)") }
 case "mac-code":
     MacCodeWindow.run(duration: args.double("--duration"), at: args.numbers("--at"), size: args.numbers("--size"))
+case "page-window":
+    guard let url = args.value("--url").flatMap(URL.init(string:)) else { fail("--url is required") }
+    PageWindow.run(url: url, title: args.value("--title") ?? "Tombolo latency page window", duration: args.double("--duration"),
+                   at: args.numbers("--at"), size: args.numbers("--size"))
 case "optical":
     guard let video = args.value("--video") else { fail("--video is required") }
     do {

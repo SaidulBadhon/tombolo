@@ -8,11 +8,16 @@
 //     rtt    = (t3 − t0) − (T2 − T1)
 //     offset = ((T1 − t0) + (T2 − t3)) / 2          (Mac − phone)
 // and the true offset lies within offset ± rtt/2 for any split of the network delay. We keep the
-// minimum-RTT sample of each time window (the least-queued exchanges), drop windows whose best
-// RTT is abnormal, and fit offset(t) = a + b·(t − t_ref) by weighted least squares when the run
-// is long enough to see drift. The stated bound is the median rtt/2 of the kept samples: an
-// asymmetric path can bias every sample by up to that amount, so it is reported as a
-// systematic ± that applies equally to every latency sample.
+// minimum-RTT sample of each time window (the least-queued exchanges), then fit only the
+// lower-RTT half of those windows: queueing is rarely symmetric, so higher-RTT windows carry
+// larger, load-dependent bias that a drift fit would otherwise mistake for clock drift (seen in
+// the self-test). offset(t) = a + b·(t − t_ref) is fitted by weighted least squares when the run
+// is long enough to see drift.
+//
+// Stated uncertainty (systematic, applies equally to every latency sample):
+//   bound = max rtt/2 over the windows used — every used exchange confines the true offset to
+//           its ± rtt/2, and a weighted mean of them cannot be further off than the worst one;
+//   plus, when drift is fitted, 2 standard errors of the slope over half the span.
 
 import Foundation
 
@@ -43,8 +48,12 @@ public struct ClockModel: Sendable, Codable, Equatable {
     public var offsetMs: Double
     /// Rate difference, parts per million (positive = Mac clock runs faster).
     public var driftPPM: Double
-    /// ± systematic bound from path asymmetry: median rtt/2 of the kept samples.
+    /// ± systematic bound from path asymmetry: max rtt/2 of the windows used in the fit.
     public var boundMs: Double
+    /// Standard error of the fitted drift (0 when drift is not fitted).
+    public var driftSEPPM: Double
+    /// 2 · SE(drift) · span/2: how far a wrong drift can move the mapping inside the run.
+    public var driftContributionMs: Double
     /// RMS residual of the kept samples about the fit.
     public var residualMs: Double
     public var samplesTotal: Int
@@ -90,12 +99,18 @@ public enum ClockSync {
             i = j
         }
         let baseRtt = Stats.median(picks.map(\.rtt))
-        let kept = picks.filter { $0.rtt <= max(2 * baseRtt, baseRtt + 1.0) }
-        guard !kept.isEmpty else { return nil }
+        let plausible = picks.filter { $0.rtt <= max(2 * baseRtt, baseRtt + 1.0) }
+        guard !plausible.isEmpty else { return nil }
+        // Lower-RTT half (all windows when there are fewer than six).
+        var kept = plausible
+        if plausible.count >= 6 {
+            let cut = Stats.median(plausible.map(\.rtt))
+            kept = plausible.filter { $0.rtt <= cut }
+        }
 
         let span = (kept.last!.t - kept.first!.t)
         let ref = (kept.first!.t + kept.last!.t) / 2
-        var a = 0.0, b = 0.0
+        var a = 0.0, b = 0.0, seB = 0.0
         let weights = kept.map { 1 / (($0.rtt + 0.2) * ($0.rtt + 0.2)) }
         let fitDrift = kept.count >= 4 && span >= minSpanForDriftMs
         if fitDrift {
@@ -108,6 +123,15 @@ public enum ClockSync {
             if abs(den) > 1e-12 {
                 b = (sw * sxy - sx * sy) / den
                 a = (sy - b * sx) / sw
+                // SE of the slope with weights treated as relative inverse variances.
+                var swr2 = 0.0
+                for (k, p) in kept.enumerated() {
+                    let r = p.off - (a + b * (p.t - ref))
+                    swr2 += weights[k] * r * r
+                }
+                let xbar = sx / sw
+                let sxxc = sxx - sw * xbar * xbar
+                if kept.count > 2, sxxc > 0 { seB = (swr2 / Double(kept.count - 2) / sxxc).squareRoot() }
             } else {
                 a = sy / sw
             }
@@ -124,7 +148,8 @@ public enum ClockSync {
         let residual = (ss / Double(kept.count)).squareRoot()
         return ClockModel(
             referencePhoneMs: ref, offsetMs: a, driftPPM: b * 1e6,
-            boundMs: Stats.median(kept.map(\.rtt)) / 2, residualMs: residual,
+            boundMs: kept.map(\.rtt).max()! / 2, driftSEPPM: seB * 1e6, driftContributionMs: 2 * seB * span / 2,
+            residualMs: residual,
             samplesTotal: samples.count, windowsUsed: kept.count,
             rttMinMs: kept.map(\.rtt).min()!, rttMedianKeptMs: Stats.median(kept.map(\.rtt)),
             rttMedianAllMs: Stats.median(valid.map { max($0.rttMs, 0) }),

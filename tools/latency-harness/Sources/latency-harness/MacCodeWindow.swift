@@ -90,6 +90,8 @@ enum MacCodeWindow {
                               styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: .buffered, defer: false)
         window.title = "Tombolo Mac reference code"
         window.level = .floating
+        // Visible on every Space, so it stays in shot (optical mode) when the operator switches.
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
         let view = CodeView(frame: NSRect(x: 0, y: 0, width: w, height: h))
         window.contentView = view
         let controller = MacCodeController(view: view)

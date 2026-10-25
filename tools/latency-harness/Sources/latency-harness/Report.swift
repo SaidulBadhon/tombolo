@@ -56,7 +56,7 @@ enum Report {
                 s += "  95% bootstrap CI: p50 [\(f(l.p50CI[0])), \(f(l.p50CI[1]))]  p95 [\(f(l.p95CI[0])), \(f(l.p95CI[1]))]  p99 [\(f(l.p99CI[0])), \(f(l.p99CI[1]))]\n"
             }
             if let c = k.clock {
-                s += "  clock: Mac−page \(f(c.offsetMs, 3)) ms, drift \(f(c.driftPPM, 1)) ppm, RTT min \(f(c.rttMinMs, 3)) / median kept \(f(c.rttMedianKeptMs, 3)) / median all \(f(c.rttMedianAllMs, 3)) ms, \(c.windowsUsed) windows over \(f(c.spanS, 1)) s\n"
+                s += "  clock: Mac−page \(f(c.offsetMs, 3)) ms, drift \(f(c.driftPPM, 1)) ± \(f(c.driftSEPPM, 1)) ppm, RTT min \(f(c.rttMinMs, 3)) / median kept \(f(c.rttMedianKeptMs, 3)) / median all \(f(c.rttMedianAllMs, 3)) ms, \(c.windowsUsed) windows over \(f(c.spanS, 1)) s\n"
             }
             s += "  systematic uncertainty ±\(f(k.systematicUncertaintyMs)) ms (applies to every percentile):\n"
             for n in k.uncertaintyNotes { s += "    - \(n)\n" }

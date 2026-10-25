@@ -93,7 +93,7 @@ final class CaptureSink: NSObject, SCStreamOutput, SCStreamDelegate, @unchecked 
             buffer += FrameRecord(frame: frame, displayNs: displayNs, arrivalNs: arrival, decodeMicros: us, fullDetect: full,
                                   detections: dets.count, symbol: DecodedSymbol(d)).csvLine + "\n"
         }
-        if frame == 0 {
+        if frame == 0, maxSavedFailures > 0 {
             let img = GrayImage(copying: view)
             try? ImageFiles.savePNG(img, to: runDir.appendingPathComponent("first-frame.png").path)
         }
@@ -159,12 +159,14 @@ enum Capture {
         return try await SCShareableContent.excludingDesktopWindows(true, onScreenWindowsOnly: true)
     }
 
-    static func listWindows() async throws {
-        let content = try await shareableContent()
-        for w in content.windows where w.isOnScreen && w.frame.width >= 50 && w.frame.height >= 50 {
-            print(String(format: "%6u  %-28@ %@  (%.0f,%.0f %.0f×%.0f)", w.windowID,
+    static func listWindows(all: Bool = false) async throws {
+        let content = all ? try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: false)
+                          : try await shareableContent()
+        for w in content.windows where all || (w.isOnScreen && w.frame.width >= 50 && w.frame.height >= 50) {
+            print(String(format: "%6u  %-28@ %@  (%.0f,%.0f %.0f×%.0f)%@", w.windowID,
                          (w.owningApplication?.applicationName ?? "?") as NSString, (w.title ?? "") as NSString,
-                         w.frame.minX, w.frame.minY, w.frame.width, w.frame.height))
+                         w.frame.minX, w.frame.minY, w.frame.width, w.frame.height,
+                         (all ? " layer \(w.windowLayer) \(w.isOnScreen ? "on-screen" : "off-screen")" : "") as NSString))
         }
     }
 

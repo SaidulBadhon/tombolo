@@ -265,9 +265,15 @@ public enum SoftwareAnalysis {
             var systematic = 0.05  // tick rounding (100 µs ticks)
             notes.append("tick rounding ±0.05 ms")
             if let m = model {
-                systematic += m.boundMs
-                notes.append(String(format: "clock sync ±%.2f ms (median kept RTT/2; residual %.2f ms rms, drift %.1f ppm%@)",
-                                    m.boundMs, m.residualMs, m.driftPPM, m.fittedDrift ? "" : ", not fitted: run too short"))
+                systematic += m.boundMs + m.driftContributionMs
+                notes.append(String(format: "clock sync ±%.2f ms (max RTT/2 of the %d lowest-RTT windows used; residual %.2f ms rms)",
+                                    m.boundMs, m.windowsUsed, m.residualMs))
+                if m.fittedDrift {
+                    notes.append(String(format: "clock drift %.1f ± %.1f ppm (1 SE) → ±%.2f ms over the run (2 SE × half-span)",
+                                        m.driftPPM, m.driftSEPPM, m.driftContributionMs))
+                } else {
+                    notes.append("clock drift not fitted (sync span shorter than 10 s)")
+                }
                 if let t = timerRes {
                     systematic += t / 2
                     notes.append(String(format: "page timer resolution %.3f ms → ±%.3f ms", t, t / 2))

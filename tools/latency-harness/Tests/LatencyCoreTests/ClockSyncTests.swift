@@ -46,7 +46,7 @@ func simulate(offsetMs: Double, driftPPM: Double, seconds: Double, rateHz: Doubl
         for p in stride(from: 2000.0, through: 60_000, by: 7000) {
             let truth = p * (1 + drift * 1e-6) + offset
             let err = m.macMs(fromPhoneMs: p) - truth
-            #expect(abs(err) <= m.boundMs + m.residualMs, "error \(err) at \(p) exceeds bound \(m.boundMs)")
+            #expect(abs(err) <= m.boundMs + m.driftContributionMs, "error \(err) at \(p) exceeds bound \(m.boundMs) + \(m.driftContributionMs)")
         }
     }
 
@@ -56,6 +56,19 @@ func simulate(offsetMs: Double, driftPPM: Double, seconds: Double, rateHz: Doubl
         let m = try #require(ClockSync.estimate(s))
         let err = m.macMs(fromPhoneMs: 20_000) - (20_000 + 777.25)
         #expect(abs(err) <= m.boundMs + 0.5 + m.residualMs)
+    }
+
+    @Test func loadDependentAsymmetryIsNotMistakenForDrift() throws {
+        // Same clock on both ends (true drift 0). The return path picks up extra queueing in the
+        // middle of the run, as in the browser self-test under load.
+        var s = simulate(offsetMs: 2.5, driftPPM: 0, seconds: 60, rateHz: 4, baseUp: 0.15, baseDown: 0.15, jitterMs: 0.1, seed: 5)
+        for i in s.indices where s[i].phoneSendMs > 6000 && s[i].phoneSendMs < 40_000 { s[i].phoneRecvMs += 1.2 }
+        let m = try #require(ClockSync.estimate(s))
+        for p in stride(from: 2000.0, through: 60_000, by: 5000) {
+            let err = m.macMs(fromPhoneMs: p) - (p + 2.5)
+            #expect(abs(err) <= m.boundMs + m.driftContributionMs, "error \(err) at \(p)")
+        }
+        #expect(abs(m.driftPPM) < 5 + 2 * m.driftSEPPM, "spurious drift \(m.driftPPM) ± \(m.driftSEPPM) ppm")
     }
 
     @Test func shortRunDoesNotFitDrift() throws {
@@ -76,7 +89,8 @@ func simulate(offsetMs: Double, driftPPM: Double, seconds: Double, rateHz: Doubl
     }
 
     @Test func inverse() {
-        let m = ClockModel(referencePhoneMs: 1000, offsetMs: 55, driftPPM: 80, boundMs: 0, residualMs: 0, samplesTotal: 0, windowsUsed: 0,
+        let m = ClockModel(referencePhoneMs: 1000, offsetMs: 55, driftPPM: 80, boundMs: 0, driftSEPPM: 0, driftContributionMs: 0,
+                           residualMs: 0, samplesTotal: 0, windowsUsed: 0,
                            rttMinMs: 0, rttMedianKeptMs: 0, rttMedianAllMs: 0, spanS: 0, fittedDrift: true)
         for p in [0.0, 1000, 123_456.789] {
             #expect(abs(m.phoneMs(fromMacMs: m.macMs(fromPhoneMs: p)) - p) < 1e-6)
