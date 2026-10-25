@@ -1,6 +1,6 @@
 # Phase 0 — task-level execution plan
 
-> Status: **ready for approval — not started.** Parent plan: [implementation plan, Phase 0](../implementation-plan.md#phase-0--foundations-spikes--security-design-1217-ew).
+> Status: **in progress** — approved 2026-10-26; see [Execution notes](#execution-notes-2026-10-26-after-plan-verification). Parent plan: [implementation plan, Phase 0](../implementation-plan.md#phase-0--foundations-spikes--security-design-1217-ew).
 > Budget: the task estimates below sum to 58–85 days ≈ **12–17 engineer-weeks** (≈ 6–9 calendar weeks with two
 > developers). The parent plan was updated to match.
 > Output: measured spike results, a reviewed security design, a re-estimate of Phases 1–4, and a go/no-go for
@@ -142,6 +142,35 @@ p95; impostor tests in both directions fail.
 **P0-18 — exit gate.** `docs/spikes/README.md` indexes every result with pass/fail. The implementation plan's
 estimates and scope are updated from evidence; ADR-0003 moves to *Accepted* with the transport per path; the
 roadmap is adjusted if any feature changed feasibility; a written go/no-go for Phase 1a with any conditions.
+
+## Execution notes (2026-10-26, after plan verification)
+
+Phase 0 was approved on 2026-10-26. A read-only verification pass against the repository and this machine
+produced these adjustments; they override the table above where they conflict.
+
+**Environment.** Mac: Apple silicon, macOS 27.0.1, Swift 6.4 with Command Line Tools only (no Xcode) — Mac
+spikes build with SwiftPM/`swiftc`, assemble `.app` bundles programmatically and compile Metal shaders at
+runtime. Rust 1.98. Android toolchain (Temurin/OpenJDK 21, Android command-line tools, SDK, NDK, `adb`)
+installed via Homebrew/`sdkmanager`; the maintainer accepted the Android SDK licence.
+
+**Devices.** One phone: **Motorola edge 50 pro, Android 16**. Results are recorded as Motorola/Android 16
+evidence only; Pixel, Samsung, Xiaomi, Android 10–12, Android 17 hardware and dual-SIM coverage are marked
+**blocked — needs hardware**, never "passed". No second high-speed camera: S1 ships its software-timestamp
+mode now; optical acceptance numbers stay **open** until a camera is available.
+
+**Ownership fixes.** `NOTICE` → P0-02. Stable self-signed signing identity (private key outside Git) → P0-10.
+P0-01 stages language builds in CI only once there is buildable output. P0-15 exposes an importable Swift
+library target inside `spikes/s02-mac-video/` so P0-16 can depend on it without modifying it. P0-03 agrees the
+lease contract with P0-07 before finalising; P0-03 counts as complete only once the external review closes.
+P0-04 is split into *harness ready* (now) and *validated end-to-end* (after P0-15).
+
+**Phone queue (serialised, one task at a time on the device):** P0-15 → P0-04 validation → P0-05 → P0-16 →
+P0-06 → P0-07 → P0-09 → P0-17 → P0-08 (needs an uninterrupted 24 h slot). P0-11 runs on an Android 17
+(API 37) **emulator** — valid for API semantics, not OEM behaviour. Performance measurements never run while
+other heavy jobs load the Mac.
+
+**Started immediately (no phone, no Android toolchain):** P0-01 + P0-02 (one branch), P0-03, P0-04 (harness),
+P0-10, P0-12 (Rust + Swift half), P0-13, P0-14 (Mac-only half).
 
 ## Verification before execution
 
