@@ -1,0 +1,26 @@
+{
+  "checks" : {
+    "blocking_rust_call_off_main_with_mainactor_callback" : "ok (completed in 0 ms)",
+    "blocking_rust_call_on_main_with_mainactor_callback" : "DEADLOCK (timed out after 1000 ms) — hazard confirmed",
+    "lock_held_across_callback" : "would deadlock (re-entrant try_lock_for(200ms) failed) — anti-pattern confirmed",
+    "lock_released_before_callback" : "ok (re-entrant call took the lock)",
+    "reentrancy_depth_64" : "ok (returned 64)"
+  },
+  "map" : {
+    "process_thread_count" : "5",
+    "rust_async_from_detached_task.first_poll" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_async_from_detached_task.resumed_poll" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_async_from_detached_task.runtime_task" : "tid=2877587 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt",
+    "rust_async_from_main_actor.first_poll" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_async_from_main_actor.resumed_poll" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_async_from_main_actor.runtime_task" : "tid=2877587 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt",
+    "rust_sync_call_from_detached_task" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_sync_call_from_main_actor" : "tid=2877584 main=true queue=com.apple.main-thread",
+    "rust_sync_call_from_swift_Thread" : "tid=2877589 main=false queue=com.apple.root.default-qos.overcommit name=s10-swift-thread",
+    "swift_detached_task" : "tid=2877585 main=false queue=com.apple.root.default-qos.cooperative",
+    "swift_main_actor_after_await" : "tid=2877584 main=true queue=com.apple.main-thread",
+    "swift_main_actor_caller" : "tid=2877584 main=true queue=com.apple.main-thread",
+    "swift_reentrant_callback_at_depth_1" : "tid=2877590 main=false queue=com.apple.root.default-qos.overcommit name=s10-reenter"
+  },
+  "pass" : true
+}

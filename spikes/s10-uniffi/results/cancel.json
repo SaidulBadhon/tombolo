@@ -1,0 +1,97 @@
+{
+  "cases" : [
+    {
+      "cancelRequestedAtMs" : 51.456,
+      "expectation" : "UniFFI 0.32 does NOT propagate: Rust future runs to completion (~1000 ms)",
+      "foreignFutureHandlesLeft" : 0,
+      "name" : "C1 Swift Task.cancel() on a plain UniFFI async call",
+      "pass" : true,
+      "rustEvents" : [
+        "+0.089ms export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+0.151ms runtime_task:started [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+1009.752ms runtime_task:completed [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+1009.753ms runtime_task:dropped_after_completion [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+1009.783ms export_future:completed [tid=2874870 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+1009.785ms export_future:dropped_after_completion [tid=2874870 main=false queue=com.apple.root.default-qos.cooperative]"
+      ],
+      "swiftOutcome" : "returned 53791056876791 (Task.isCancelled=true)",
+      "swiftReturnedAfterMs" : 1009.800334
+    },
+    {
+      "cancelRequestedAtMs" : 52.148833,
+      "expectation" : "Rust drops the work future and the spawned runtime task within ~1 ms; Swift gets CoreError.Cancelled",
+      "foreignFutureHandlesLeft" : 0,
+      "name" : "C2 Swift Task.cancel() -> CancelToken -> Rust drops work future + aborts runtime task",
+      "pass" : true,
+      "rustEvents" : [
+        "+0.023ms export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+0.025ms work_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+0.036ms runtime_task:started [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+52.166ms work_future:dropped_before_completion [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+52.167ms rust_observed_token_cancel [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+52.168ms export_future:completed [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+52.168ms export_future:dropped_after_completion [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+52.175ms runtime_task:dropped_before_completion [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]"
+      ],
+      "swiftOutcome" : "threw Cancelled",
+      "swiftReturnedAfterMs" : 52.311166
+    },
+    {
+      "expectation" : "UniFFI cancels the Swift Task running Signer.sign at ~200 ms; no leaked foreign-future handles",
+      "foreignFutureHandlesLeft" : 0,
+      "name" : "C3 Rust drops a pending foreign async future (sign timeout 200 ms)",
+      "pass" : true,
+      "rustEvents" : [
+        "+0.032ms handshake_export_future:started [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+0.085ms foreign_sign_future:started [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+201.763ms rust_sign_timeout_dropped_foreign_future [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+201.767ms foreign_sign_future:dropped_before_completion [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+201.784ms handshake_export_future:completed [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+201.787ms handshake_export_future:dropped_after_completion [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]"
+      ],
+      "swiftOutcome" : "threw TimedOut(ms: 200)",
+      "swiftReturnedAfterMs" : 201.900833,
+      "swiftSignerObservedCancelAtMs" : 201.770917
+    },
+    {
+      "cancelRequestedAtMs" : 102.784042,
+      "expectation" : "Swift cancel -> Rust drops handshake task -> foreign sign future dropped -> Swift sign Task cancelled",
+      "foreignFutureHandlesLeft" : 0,
+      "name" : "C4 full chain: Swift cancels handshake while Rust awaits the Swift signer",
+      "pass" : true,
+      "rustEvents" : [
+        "+0.022ms handshake_export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+0.056ms foreign_sign_future:started [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]",
+        "+102.799ms rust_observed_token_cancel [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+102.803ms handshake_export_future:completed [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+102.804ms handshake_export_future:dropped_after_completion [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]",
+        "+102.814ms foreign_sign_future:dropped_before_completion [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]"
+      ],
+      "swiftOutcome" : "threw Cancelled",
+      "swiftReturnedAfterMs" : 102.838042,
+      "swiftSignerObservedCancelAtMs" : 102.822417
+    }
+  ],
+  "tokenCancelToRuntimeTaskDropUs" : {
+    "count" : 30,
+    "max" : 65.25,
+    "mean" : 30.5014,
+    "min" : 21.25,
+    "p50" : 28,
+    "p90" : 41.458,
+    "p95" : 46.125,
+    "p99" : 65.25,
+    "p999" : 65.25
+  },
+  "tokenCancelToRustDropUs" : {
+    "count" : 30,
+    "max" : 26.875,
+    "mean" : 18.347266666666666,
+    "min" : 15.375,
+    "p50" : 18.25,
+    "p90" : 20.334,
+    "p95" : 21.417,
+    "p99" : 26.875,
+    "p999" : 26.875
+  }
+}

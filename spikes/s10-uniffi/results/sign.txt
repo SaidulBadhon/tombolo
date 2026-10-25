@@ -1,0 +1,18 @@
+== S10 sign: Secure Enclave signer called from Rust, verified with p256 ==
+SecureEnclave.isAvailable = true
+SE public key (SEC1, 65 bytes): 04dc0ea9fcacf5aa…
+  [PASS] SE key, DER signature (first): verified=true sign=4798µs fmt=der
+  [PASS] 50 repeated handshakes (25 DER + 25 raw): all verified
+  [PASS] SE key, raw r||s signature: verified=true by Rust p256 sign=4524µs fmt=raw
+  [PASS] NEGATIVE: tampered message (must be rejected): threw Verify(reason: "ECDSA verification failed: signature error")
+  SE sign latency over 50 handshakes (Rust-measured, incl. FFI round trip): p50=4535.0µs p95=4626.0µs max=4633.0µs
+  verify_p256 helper: ["other_key": false, "valid_signature": true, "bit_flipped_signature": false]
+  threads:
+    rust_after_foreign_future_completed: tid=2874205 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt
+    rust_export_future_first_poll: tid=2874161 main=false queue=com.apple.root.default-qos.cooperative
+    rust_runtime_task_calls_signer: tid=2874205 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt
+    swift_secure_enclave_worker: tid=2874161 main=false queue=s10.secure-enclave.sign
+    swift_sign_method_entry: tid=2874161 main=false queue=com.apple.root.default-qos.cooperative
+wrote results/sign.json
+SIGN: PASS
+exit=0

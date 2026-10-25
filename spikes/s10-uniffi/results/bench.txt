@@ -1,0 +1,10 @@
+== S10 bench: FFI call overhead ==
+  rust_to_swift_async_callback: 11766.8 ns/call
+  rust_to_swift_sync_callback: 25.4 ns/call
+  swift_to_rust_async_ready_immediately: 213.2 ns/call
+  swift_to_rust_async_with_runtime_wake: 10807.9 ns/call
+  swift_to_rust_object_method: 9.6 ns/call
+  swift_to_rust_sync_echo_u64: 6.9 ns/call
+  swift_to_rust_sync_noop: 5.9 ns/call
+wrote results/bench.json
+exit=0

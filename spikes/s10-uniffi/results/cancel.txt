@@ -1,0 +1,48 @@
+== S10 cancel ==
+  [PASS] C1 Swift Task.cancel() on a plain UniFFI async call
+      expect: UniFFI 0.32 does NOT propagate: Rust future runs to completion (~1000 ms)
+      swift: returned 53791056876791 (Task.isCancelled=true) after 1009.8 ms (cancel at 51.5 ms)
+      rust: +0.089ms export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +0.151ms runtime_task:started [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +1009.752ms runtime_task:completed [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +1009.753ms runtime_task:dropped_after_completion [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +1009.783ms export_future:completed [tid=2874870 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +1009.785ms export_future:dropped_after_completion [tid=2874870 main=false queue=com.apple.root.default-qos.cooperative]
+      foreign-future handles left: 0
+  [PASS] C2 Swift Task.cancel() -> CancelToken -> Rust drops work future + aborts runtime task
+      expect: Rust drops the work future and the spawned runtime task within ~1 ms; Swift gets CoreError.Cancelled
+      swift: threw Cancelled after 52.3 ms (cancel at 52.1 ms)
+      rust: +0.023ms export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +0.025ms work_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +0.036ms runtime_task:started [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +52.166ms work_future:dropped_before_completion [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +52.167ms rust_observed_token_cancel [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +52.168ms export_future:completed [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +52.168ms export_future:dropped_after_completion [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +52.175ms runtime_task:dropped_before_completion [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      foreign-future handles left: 0
+  [PASS] C3 Rust drops a pending foreign async future (sign timeout 200 ms)
+      expect: UniFFI cancels the Swift Task running Signer.sign at ~200 ms; no leaked foreign-future handles
+      swift: threw TimedOut(ms: 200) after 201.9 ms; Swift signer saw cancellation at 201.8 ms
+      rust: +0.032ms handshake_export_future:started [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +0.085ms foreign_sign_future:started [tid=2874874 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +201.763ms rust_sign_timeout_dropped_foreign_future [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +201.767ms foreign_sign_future:dropped_before_completion [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +201.784ms handshake_export_future:completed [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +201.787ms handshake_export_future:dropped_after_completion [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      foreign-future handles left: 0
+  [PASS] C4 full chain: Swift cancels handshake while Rust awaits the Swift signer
+      expect: Swift cancel -> Rust drops handshake task -> foreign sign future dropped -> Swift sign Task cancelled
+      swift: threw Cancelled after 102.8 ms (cancel at 102.8 ms); Swift signer saw cancellation at 102.8 ms
+      rust: +0.022ms handshake_export_future:started [tid=2874871 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +0.056ms foreign_sign_future:started [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      rust: +102.799ms rust_observed_token_cancel [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +102.803ms handshake_export_future:completed [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +102.804ms handshake_export_future:dropped_after_completion [tid=2874872 main=false queue=com.apple.root.default-qos.cooperative]
+      rust: +102.814ms foreign_sign_future:dropped_before_completion [tid=2874873 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt]
+      foreign-future handles left: 0
+  token cancel -> work future dropped (n=30): p50=18.2µs p95=21.4µs max=26.9µs
+  token cancel -> runtime task dropped (n=30): p50=28.0µs p95=46.1µs max=65.2µs
+wrote results/cancel.json
+CANCEL: PASS
+exit=0
