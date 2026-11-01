@@ -18,18 +18,18 @@ login-item status. It is built in several variants: ad-hoc, stable self-signed
 | File | Purpose |
 |---|---|
 | `Sources/main.swift` | The probe app. Steps are listed at the top of the file |
-| `Sources/windows.swift` | Detects new on-screen windows (the alerts) without reading other apps' titles |
+| `Sources/windows.swift` | Detects new on-screen windows (the alerts) without reading other apps' titles; marks only alert-sized system-alert windows for screenshots (never System Settings or Notification Center) |
 | `build.sh [s08\|s15\|all]` | Builds every bundle with `swiftc` (Command Line Tools only) into `build/` (gitignored) |
 | `run-probe.sh <app> <label> <steps> [secs]` | Launches a bundle through LaunchServices and records `results/<label>/` |
 | `lan-target.py` | Prints this Mac's LAN address, the gateway and an **unused on-link address** to use as a target |
 | `lnp-rules.py [substring\|=suffix]` | Read-only dump of the Local Network decision per app |
 | `peer.py` | A LAN peer: TCP server/client, UDP client |
 | `s15-dr-check.sh [--impostor]` | DR comparison across 1.0.0 → 1.0.1 (writes `results/s15-dr/`) |
-| `s15-update.sh <selfsigned\|adhoc> <version> <label> [steps]` | Installs a version in place (as an updater would), runs it |
+| `s15-update.sh <selfsigned\|adhoc\|adhoc2> <version> <label> [steps]` | Installs a version in place (as an updater would), runs it. `adhoc2` (`…spike.s15adhoc2`) is the fresh Local Network identity for M1/M2 |
 | `checklist.sh <step>` | The steps that need a person. Each one tells you what to click and records the evidence |
 | `cleanup.sh [--yes]` | Removes leftovers a user can remove; prints the rest |
 | `excerpt.sh` | Reduces the raw unified log to lines about the probe / Local Network (for committing) |
-| `results/` | Evidence per run: `probe.log`, `windows.log`, `window-<id>.png` (the alert window only), `system-excerpt.log`, `launch.log`. Raw `system.log` files are gitignored |
+| `results/` | Evidence per run: `probe.log`, `windows.log`, `system-excerpt.log`, `launch.log`, and `window-<id>.png` screenshots of alert windows. Raw `system.log` files are gitignored, and so are **all screenshots**: they can show names, account pictures or other apps' notifications, so inspect and crop each one and add it with `git add -f <file>` |
 
 ## Build and run
 
