@@ -23,15 +23,16 @@ not public issues.
 ## Licence of contributions
 
 - Tombolo is licensed under the **GNU General Public License v3.0 or later** ([`LICENSE`](LICENSE)).
-- The protocol specification ([`docs/protocol.md`](docs/protocol.md)) and the schemas in [`proto/`](proto/README.md)
+- The protocol specification ([`docs/protocol.md`](docs/protocol.md)), the security specification in
+  [`docs/security/`](docs/security/pairing-and-session.md) and the schemas in [`proto/`](proto/README.md)
   are licensed under **Apache-2.0** ([`LICENSES/Apache-2.0.txt`](LICENSES/Apache-2.0.txt)), so anyone can
   implement the protocol. See [ADR-0007](docs/decisions/0007-license.md).
 - **Inbound = outbound:** you contribute under the licence of the files you change — GPL-3.0-or-later, or
-  Apache-2.0 for the protocol specification and `proto/`. You keep your copyright.
+  Apache-2.0 for the protocol specification, `docs/security/` and `proto/`. You keep your copyright.
 - **No CLA.** There is no contributor licence agreement to sign.
 - Only contribute work you have the right to contribute. Third-party code must be **GPL-3.0-compatible**, keep
   its own licence file and copyright notices, and be listed in [`NOTICE`](NOTICE). GPL-only code (for example
-  from KDE Connect) may go into the apps but **never** into the Apache-2.0 protocol specification or `proto/`.
+  from KDE Connect) may go into the apps but **never** into the Apache-2.0 protocol specification, `docs/security/` or `proto/`.
   Code from source-available projects with non-free terms can't be used at all.
 
 ## Spike code vs production code
