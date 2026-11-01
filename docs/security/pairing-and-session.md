@@ -108,19 +108,20 @@ each platform provides a cryptographically secure RNG; hardware key stores behav
 
 ## 3. Transport assumptions
 
-This design relies on the following properties of the transport. **A2, A3 and A5 are being verified for
-iroh/noq by spike S5 (P0-14); this specification cannot be final until S5 reports.** If S5 finds a gap, the
+This design relies on the following properties of the transport. **Spike S5 (P0-14) has tested only A2 (the
+exporter; its write-up is not merged yet). A3, A5 and A6 are assigned to S5 but not yet tested; this
+specification cannot be final until they are.** If S5 finds a gap, the
 fallback is the one recorded in [research P2](../research/04-transport-and-security.md#10-open-questions--needs-prototyping)
 (patch, or our own UniFFI crate over quinn/rustls); the security design does not change.
 
 | # | Assumption |
 |---|---|
 | A1 | Every connection is QUIC v1 (RFC 9000) secured by TLS 1.3 (RFC 8446, RFC 9001) via **rustls**, or — on paths where S4 rejects QUIC — TLS 1.3 over TCP via rustls inside `tombolo-core` ([ADR-0003](../decisions/0003-transport.md)). No other TLS version and no plaintext mode exist. |
-| A2 | The TLS **exporter** (RFC 8446 §7.5) is available to `tombolo-core` on every established connection, with an arbitrary label and length 32. *(S5)* |
-| A3 | Authentication is **mutual**, using each device's Ed25519 **transport key** as a raw public key (RFC 7250). The application learns the peer's authenticated transport public key before it processes any application data, and can reject the connection at that point. *(S5)* |
+| A2 | The TLS **exporter** (RFC 8446 §7.5) is available to `tombolo-core` on every established connection, with an arbitrary label and length 32. *(S5 — tested; result not yet merged)* |
+| A3 | Authentication is **mutual**, using each device's Ed25519 **transport key** as a raw public key (RFC 7250). The application learns the peer's authenticated transport public key before it processes any application data, and can reject the connection at that point. *(S5 — not yet tested)* |
 | A4 | ALPN (RFC 7301) is negotiated; the selected protocol is exposed to the application and is covered by the TLS handshake transcript. |
-| A5 | The listener can apply a different peer-key policy per ALPN: accept an unknown client key only for `tombolo-pair/1` while a pairing context is open (§7.1), and only known keys for `tombolo/1`. *(S5)* |
-| A6 | TLS 1.3 early data (0-RTT) can be disabled in both directions, and session resumption can be disabled. |
+| A5 | The listener can apply a different peer-key policy per ALPN: accept an unknown client key only for `tombolo-pair/1` while a pairing context is open (§7.1), and only known keys for `tombolo/1`. *(S5 — not yet tested)* |
+| A6 | TLS 1.3 early data (0-RTT) can be disabled in both directions, and session resumption can be disabled. *(S5 — not yet tested)* |
 | A7 | QUIC datagrams (RFC 9221) are available on QUIC paths; they are protected by the same keys as streams. |
 | A8 | On USB the same QUIC/TLS connection runs through the adb-forwarded socket. The tunnel provides **no** authentication or confidentiality; other processes on the phone can reach it ([threat T5](../research/04-transport-and-security.md#54-threat-model)). |
 
@@ -154,7 +155,8 @@ Rules:
   locked) and therefore MUST NOT be bound to user authentication. The Mac's identity key SHOULD be usable while
   the Mac's screen is locked but the user is logged in. The presence key MUST require user presence for every
   signature: implementations MUST NOT reuse an `LAContext` authentication (`touchIDAuthenticationAllowableReuseDuration`
-  MUST be 0). Exact access-control flags are confirmed by S10.
+  MUST be 0). Exact access-control flags are **to be confirmed by S10**: so far S10 has only shown that a
+  `.userPresence` key refuses to sign without user interaction; reuse duration 0 and a real Touch ID run are untested.
 - Every key used by Tombolo MUST be used only for the purposes in this table. In particular identity and
   presence keys sign only `enc()` transcripts with labels from §5.3.
 
@@ -183,13 +185,15 @@ transport key, the peer's identity key(s) and — on the phone — the scopes.
 | `discovery_key` | 32 bytes, secret | Encrypted at rest |
 | `peer_name` | UTF-8, ≤ 64 bytes | From `PairAccept`; the owner may rename it locally |
 | `generation` | u32 | Incremented on every change of keys, scopes or elevation policy |
+| `peer_max_version` | u32 | Highest protocol major version (ALPN `tombolo/N`) the peer has authenticated with; `1` in v1. Downgrade check (§16) |
 | `pending_rotation` | `{rotation_id, kind, old alias, new alias}` or null | Initiator side of a key rotation (§13.2) |
 | `last_rotation` | `{rotation_id, kind, old_pub, new_pub}` or null | Receipt of the last rotation this side committed as receiver (§13.2) |
 | `created_at`, `last_session_at`, `revoked_at` | timestamps | Session log and UI |
 
 **Mac-side binding**: `pair_id`, `status`, `peer_endpoint_id` (+ pending), `peer_identity_pub` (+ previous),
 `own_identity_key_tag` and `own_presence_key_tag` (Secure Enclave key references), `scopes_hint`,
-`elevation_hint`, `discovery_key`, `peer_name`/`model`/`os`, `generation`, `pending_rotation`, `last_rotation`,
+`elevation_hint`, `discovery_key`, `peer_name`/`model`/`os`, `generation`, `peer_max_version`, `pending_rotation`,
+`last_rotation`,
 cached addresses, timestamps. **`scopes_hint` is a UI hint only and MUST NOT be used for any access decision.**
 
 ### 4.3 Binding invariants and atomic updates
@@ -377,7 +381,7 @@ clock), `attempts_left` (3), `state`, `holder` (connection ID), and for QR the p
 | `ACTIVE` | CODE: `PakeA` received | `attempts_left -= 1` **first**; holder := this connection | `IN_USE` |
 | `IN_USE`, `CONSUMED` | another connection wants the ticket | CODE: reply `BUSY` before reading `PakeA` (no attempt is charged). QR: see the `CONSUMED` (QR) rows below | unchanged |
 | `IN_USE` | valid `cA` | — | `CONSUMED` |
-| `IN_USE` | invalid `cA`, step timeout, or disconnect before a valid `cA` | reply `BAD_CONFIRMATION` if possible, close | `ACTIVE` if `attempts_left > 0` and not expired, else `DEAD(LIMIT)` |
+| `IN_USE` | invalid `cA`, step timeout, or disconnect before a valid `cA` | reply `BAD_CONFIRMATION` if possible, close | `DEAD(LIMIT)` if `attempts_left = 0`; else `DEAD(EXPIRED)` if `now ≥ expires`; else `ACTIVE` |
 | `CONSUMED` | binding committed after a valid `PairComplete` | send `PairDone` | ticket deleted (`DONE`) |
 | `CONSUMED` | any failure, timeout, user decline, disconnect | — | `DEAD(FAILED)` |
 | `CONSUMED` (QR) | **another** connection presents a **valid** `PairRequest` proof | the QR secret is known to two parties: abort both connections, warn the Mac user ("this code was used by more than one device") | `DEAD(COMPROMISED)` |
@@ -438,7 +442,7 @@ tombolo://pair?v=1&id=<b64u(mac endpoint ID)>&a=<addr>,<addr>…&k=<b64u(H(SPKI(
   not decode to exactly 32 bytes. Unknown parameters are ignored. The phone SHOULD warn (not refuse) if `exp`
   is in the past by its own clock; the Mac's monotonic expiry is authoritative.
 - `k` commits to the **fresh, per-binding** Mac identity key created with the ticket.
-- TTL: default 120 s, configurable 60–300 s.
+- TTL: default 120 s, configurable 120–300 s (the 2–5 min of ADR-0005 and architecture §8).
 
 **Message sequence** (shown with the phone dialing; over USB the Mac dials and the phone listens — the messages
 are the same):
@@ -497,7 +501,7 @@ uncompressed point encoding. Cofactor `h = 1`.
 
 **Code:** 6 uniform decimal digits generated by the Mac and **shown on the Mac**; the phone owner types them into
 the phone. The phone SHOULD use an in-app digit pad rather than the system keyboard. TTL: default 120 s,
-configurable 60–300 s. The Mac MAY advertise a pairing-mode DNS-SD record while the code is shown; discovery is
+configurable 120–300 s. The Mac MAY advertise a pairing-mode DNS-SD record while the code is shown; discovery is
 unauthenticated and never affects trust.
 
 **Inputs** (both sides, after `PairHello`):
@@ -644,7 +648,7 @@ Re-pairing is never merged into an existing binding by name.
 
 | Timer | Value | Note |
 |---|---|---|
-| Ticket TTL (QR and code) | 120 s (60–300 s configurable) | Checked on leaving `ACTIVE` |
+| Ticket TTL (QR and code) | 120 s (120–300 s configurable, matching ADR-0005's 2–5 min) | Checked on leaving `ACTIVE` |
 | Handshake + `PairHello` | 5 s | Pre-authentication budget |
 | Each PAKE step, and `PairRequest` after the last automatic message | 10 s | |
 | Mac user confirmation (Touch ID) | 60 s | |
@@ -877,7 +881,7 @@ Tombolo app still cannot produce an elevation without the user passing Touch ID 
 ## 10. Lease (fail-closed control)
 
 > This section is the **lease contract proposed to P0-07 (S7)**. Every number is *(to confirm with P0-07, S7
-> spike)*; the semantics are normative.
+> spike)*; nothing here is final until P0-07 agrees it and the external review closes.
 
 **Lease-gated resources:** every open display and capture, every input-injection path (Standard: Accessibility
 gestures and input method; Enhanced: helper injection/UHID), turning the phone's display off, and any helper action.
@@ -923,10 +927,10 @@ Continuity channels (notifications, SMS, files, clipboard) are **not** lease-gat
      reconnect in a new session; screen access may not.
 5. The Mac MUST stop answering ticks — and SHOULD send `LeaseRelease` — when it sleeps, locks its screen, quits,
    closes the last mirror window, or the user disconnects. Correctness never depends on these messages.
-6. After any release the Mac must send `OpenDisplay` again. Elevation is cleared on every release; the phone MAY
-   keep `session.elevated_scopes` across a release with reason `TIMEOUT` if the same connection resumes within 10 s
-   *(open question Q9)*. Releases for local use, keyguard, Stop or revocation always clear it (and the first two
-   end the session anyway).
+6. After any release the Mac must send `OpenDisplay` again. A release clears `session.elevated_scopes`, with one
+   optional exception: after a release with reason `TIMEOUT` the phone MAY keep them if the same connection resumes
+   within 10 s *(open question Q9)*. Every other release — local use, keyguard, Stop, revocation — always clears
+   them (local use and Stop also end the session, rule 4).
 7. Worst-case time from an event the phone cannot observe (link loss, Mac crash) to completed release is
    `L + release completion` ≈ 1.25 s with the proposed numbers, which is **longer than S7's "within 1 s"
    criterion**. S7 must either accept ~1.25 s for unobservable events or lower `L` (e.g. 750 ms) — flagged for P0-07.
@@ -1122,8 +1126,9 @@ not depend on the peer:
   fallback) is not a downgrade: every path runs the same TLS 1.3 authentication and this specification unchanged.
 - **Future versions:** when `tombolo/2` exists and N−1 support is required (protocol §7), the dialer offers its
   versions in preference order; the TLS handshake transcript protects the offer list, and `T_auth` carries the
-  selected ALPN. The binding records the highest version the peer has authenticated with, and a device MUST refuse a
-  later session with that peer at a lower version unless the user explicitly re-pairs.
+  selected ALPN. The binding's `peer_max_version` (§4.2) records the highest version the peer has authenticated
+  with (updated atomically after `SessionAuth` verifies), and a device MUST refuse a later session with that peer at
+  a lower version unless the user explicitly re-pairs.
 - `Hello.proto_minor` and capabilities MUST NOT switch any security mechanism on or off; everything in this
   document is mandatory in major version 1.
 - **Pairing method:** the method is in `PairHello` and in every pairing transcript. An attacker cannot turn a QR
@@ -1150,7 +1155,7 @@ Threats as defined in [research 04 §5.4](../research/04-transport-and-security.
 | T13 | Downgrade | §16: TLS 1.3 only, single-ALPN offers, no fallback retries, ALPN in `T_auth`, versioned labels, no security switches in `proto_minor` | — |
 | T14 | Relay operator / remote attacker (v2) | v1 pairs only on LAN/USB, never through a relay (§7.1); sessions are end-to-end with pinned keys, so a relay sees ciphertext only | Metadata visible to a relay (v2) |
 | T15 | Sensitive content | Direction-split scopes and E2 data gate (§9); lease-gated capture stops on local use (§10) | Secure-window behaviour in Enhanced mode (to verify) |
-| T16 | Compromised update / supply chain | Out of scope; byte-exact test vectors (§18) make divergent or tampered crypto in either app detectable in CI | Out of scope |
+| T16 | Compromised update / supply chain | Out of scope; byte-exact test vectors (§18) will make divergent or tampered crypto in either app detectable once CI runs `--check` (P0-18 follow-up) | Out of scope |
 
 ## 18. Test vectors
 
@@ -1204,7 +1209,7 @@ owns only `docs/security/**`).
 ## 20. Open questions for the reviewer
 
 1. **Exporter binding.** Is `Exp(label)` with an empty context plus our own transcripts sufficient channel binding
-   for raw-public-key QUIC (A2/A3), given that S5 has not yet confirmed exporter access in iroh/noq?
+   for raw-public-key QUIC (A2/A3), subject to S5's exporter result (A2) and with A3, A5 and A6 not yet tested?
 2. **Labels.** RFC 5705 reserves labels beginning with `EXPERIMENTAL` for private use without registration. Should
    our exporter labels (`tombolo/pair/v1`, `tombolo/session/v1`, `tombolo/channel/v1`) use that prefix, or be
    registered?
