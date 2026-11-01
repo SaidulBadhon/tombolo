@@ -375,7 +375,7 @@ Timing figures in the evidence column are **provisional** (see [Raw numbers](#ra
 |---|---|---|---|
 | 1 | "a Rust → Swift callback that signs with a Secure Enclave key" | **pass** | [Signing](#signing): 51 handshakes, DER and raw, verified by `p256`; tampered message rejected; `verify_p256` negative cases `false`. SE sign round trip p50 4.5 ms |
 | 2 | "… (Touch ID policy)" | **blocked — needs a person at the Mac** | Unattended part done: a `.userPresence` SE key refuses to sign without interaction (`LAError -1004`), so the policy is hardware-enforced. The approved path (`s10-harness touchid`: touch the sensor, plus the leave-it-alone timeout run) has not been run |
-| 3 | "a Rust → Kotlin callback that signs with a Keystore key" (Android instrumented test) | **blocked — needs Android toolchain (scheduled)** | No JDK, Gradle or Kotlin compiler on this Mac (SDK/NDK present in `~/Library/Android/sdk`); phone disconnected |
+| 3 | "a Rust → Kotlin callback that signs with a Keystore key" (Android instrumented test) | **blocked — needs Android toolchain (scheduled)** | A JDK is installed (Homebrew `openjdk@21`, keg-only, so not on `PATH`: `/usr/bin/java` finds no runtime), and the Android SDK/NDK and emulator are in `~/Library/Android/sdk`. The gap is **Gradle and Kotlin** (no `gradle`, no `kotlinc`). Phone disconnected; an emulator would be acceptable |
 | 4 | "async cancellation" | **pass** | [Cancellation](#cancellation) C1–C4. Rust → Swift works natively. Swift → Rust works only through the `CancelToken` pattern, because UniFFI 0.32.2's Swift bindings ignore task cancellation (F1). With the token: cancel → work future dropped in p50 18 µs |
 | 5 | "30-min 1080p60-sized byte stream through the FFI"; §0.C "30 min stable at 1080p60" | **not run — scheduled on a quiet Mac after P0-15** | Required; not waived. Only 2-min runs so far (3 runs × 7 designs, 7 200 frames each), as instructed for this pass. Within those: 0 drops, 0 gaps, 0 integrity failures, no memory growth, no leaked handles. Command: `s10-harness media --design ring-pull --seconds 1800` ([README](../../spikes/s10-uniffi/README.md#required-30-minute-soak-scheduled)) |
 | 6 | "… with zero-copy buffers"; §0.C "without per-frame object conversion" | **pass** | For the ring designs, the chosen media path. Address check: Swift read Rust's own buffer for 7 200 / 7 200 frames (ring and handle designs) vs 0 / 7 200 (Vec designs). Ring designs also have no per-frame object conversion or allocation. The handle design is zero-copy but converts a small record per frame; the Vec designs fail this criterion and are not chosen |
@@ -444,7 +444,7 @@ Numbers quoted here are the provisional timings from [Raw numbers](#raw-numbers)
 - **Threading rules T1–T7** become contributor documentation for `core/`.
 - **Follow-ups:**
   - Manual Touch ID run (`s10-harness touchid`): **maintainer**.
-  - Kotlin/Keystore half of P0-12: **P0-12, once a JDK + Gradle are installed** (emulator acceptable).
+  - Kotlin/Keystore half of P0-12: **P0-12, once Gradle/Kotlin are available**, with `openjdk@21` put on `PATH` / `JAVA_HOME` (emulator acceptable).
   - **Required** 30-min soak of `ring-pull`, plus a quiet re-run of the 2-min set, `stress` and
     `bench`, to replace the provisional timings and settle row 7b: **P0-12, scheduled on a quiet Mac
     after P0-15** (exact commands in the [README](../../spikes/s10-uniffi/README.md#required-30-minute-soak-scheduled)).
