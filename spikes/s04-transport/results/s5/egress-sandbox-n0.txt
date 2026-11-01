@@ -1,0 +1,35 @@
+preset=n0 pid=16214 exit_code=0 hold=20s
+denied_outbound_attempts=51843
+--- denied attempts per destination (reports + duplicates)
+  50209 remote:*:53
+   1621 remote:*:443
+     12 remote:*:1
+      1 remote:*:1900
+--- probe output
+RESULT pid=16214
+RESULT preset=n0
+RESULT bind=any
+RESULT server_bound=[0.0.0.0:57059, [::]:62878]
+RESULT server_id=c0cc01d7b094e176b9bc487f18874a5b9366ed0c2fa5adfe5d45eda3b7248c93
+RESULT connect_ms=2.68
+RESULT remote_id_matches=true
+RESULT alpn=tombolo/1
+RESULT exporter_client_prefix=ff3e525bd5e4541f
+RESULT exporter_match=true
+RESULT stream_priority_roundtrip=true
+RESULT bi_echo_ok=true
+RESULT max_datagram_size=Some(1414)
+RESULT datagram_send_buffer_space=1048544
+RESULT server_saw_reset_code=Some(42)
+RESULT datagram_max_roundtrip_len=FAILED Err(Elapsed(()))
+RESULT datagram_oversize=TooLarge
+RESULT datagram_rtt_samples=50
+RESULT datagram_app_rtt_us_p50=200
+RESULT quic_rtt_path0=Some(205.838µs)
+RESULT stats_sent_packets=230
+RESULT stats_lost_packets=0
+RESULT stats_udp_tx_bytes=134666
+RESULT path=id=PathId(0) remote=Ip(127.0.0.1:57059) selected=true rtt=205.838µs cwnd=60668
+RESULT holding_secs=20
+RESULT path_after_hold=remote=Ip(127.0.0.1:57059) selected=true
+RESULT done=true

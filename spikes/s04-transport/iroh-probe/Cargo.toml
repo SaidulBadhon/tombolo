@@ -1,0 +1,19 @@
+[package]
+name = "iroh-probe"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Spike S5: exercise the iroh 1.x / noq API surface Tombolo needs"
+
+[dependencies]
+# Default features on purpose (incl. portmapper + metrics): this is what an app gets by
+# default, so the "no public infrastructure" check must hold with them compiled in.
+iroh = { version = "=1.4.1", features = ["unstable-custom-transports"] }
+iroh-base = { workspace = true }
+tcp-tunnel = { path = "../tcp-tunnel" }
+tokio = { workspace = true }
+bytes = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }

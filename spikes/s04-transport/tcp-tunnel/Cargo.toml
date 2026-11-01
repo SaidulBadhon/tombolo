@@ -1,0 +1,17 @@
+[package]
+name = "tcp-tunnel"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Spike: iroh custom transport carrying QUIC packets length-prefixed over one TCP stream (adb-forward model)"
+
+[dependencies]
+iroh = { workspace = true }
+iroh-base = { workspace = true }
+noq-udp = { workspace = true }
+n0-watcher = { workspace = true }
+tokio = { workspace = true }
+bytes = { workspace = true }
+tracing = { workspace = true }
+libc = "0.2"

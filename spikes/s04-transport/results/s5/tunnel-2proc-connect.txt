@@ -1,0 +1,20 @@
+RESULT pid=11800
+RESULT mtu=0
+RESULT tcp_peer=127.0.0.1:47123
+RESULT ip_sockets_bound=[]
+RESULT tunnel_connect_ms=0.78
+RESULT tunnel_path=remote=Custom(CustomAddr { id: 1953459554, data: [00] }) selected=true
+RESULT tunnel_exporter_match=true
+RESULT tunnel_max_datagram_size=Some(1351)
+RESULT tunnel_idle_stream_rtt_us=p50=149 p95=271 p99=329 max=445
+RESULT tunnel_idle_datagram_rtt_us=p50=89 p95=173 p99=284 max=865
+RESULT tunnel_loaded_ping_samples=115
+RESULT tunnel_bulk_mb=256
+RESULT tunnel_bulk_secs=0.230
+RESULT tunnel_bulk_mbit_s=9326
+RESULT tunnel_loaded_stream_rtt_us=p50=260 p95=600 p99=1047 max=1104
+RESULT tunnel_quic_lost_packets=0
+RESULT tunnel_quic_sent_packets=189730
+RESULT tunnel_tx_dropped=0
+RESULT tunnel_tx_packets=189729
+RESULT done=true

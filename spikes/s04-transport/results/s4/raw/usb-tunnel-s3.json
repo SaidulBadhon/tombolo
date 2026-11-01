@@ -1,0 +1,367 @@
+{
+  "cc": "cubic",
+  "cond": "usb",
+  "cond_detail": "Cond { name: \"usb\", delay_ms: 0.25, jitter_ms: 0.0, loss: None, rate_mbps: Some(320.0), queue_bytes: 256000, bulk: Window { start: 6.0, end: 14.0 }, secs: 20.0 }",
+  "mac": {
+    "audio": {
+      "expected": 900,
+      "late40_pct": 0.0,
+      "latency_ms": {
+        "all": {
+          "max": 26.821,
+          "mean": 10.041,
+          "n": 900,
+          "p50": 1.173,
+          "p95": 24.462,
+          "p99": 26.419
+        },
+        "load": {
+          "max": 26.821,
+          "mean": 21.554,
+          "n": 403,
+          "p50": 21.946,
+          "p95": 25.862,
+          "p99": 26.746
+        },
+        "noload": {
+          "max": 3.024,
+          "mean": 0.706,
+          "n": 497,
+          "p50": 0.585,
+          "p95": 1.274,
+          "p99": 1.441
+        }
+      },
+      "loss_pct": 0.0,
+      "lost_or_late40_pct": 0.0,
+      "received": 900
+    },
+    "bulk": {
+      "bursts": [
+        {
+          "burst": 0,
+          "bytes": 296753904,
+          "first_send_s": 6.002339125,
+          "last_recv_s": 14.041500125,
+          "mbit_s": 295.58881452792804,
+          "recv_span_s": 8.031532708
+        }
+      ],
+      "bytes": 296753904,
+      "mbit_s": 295.58881452792804,
+      "recv_span_s": 8.031532708
+    },
+    "connect_ms": 10.354792,
+    "control_rtt_ms": {
+      "all": {
+        "max": 46.749,
+        "mean": 10.517,
+        "n": 1800,
+        "p50": 1.713,
+        "p95": 24.927,
+        "p99": 26.883
+      },
+      "load": {
+        "max": 46.749,
+        "mean": 22.037,
+        "n": 804,
+        "p50": 22.348,
+        "p95": 26.351,
+        "p99": 27.145
+      },
+      "noload": {
+        "max": 6.998,
+        "mean": 1.217,
+        "n": 996,
+        "p50": 1.116,
+        "p95": 1.898,
+        "p99": 2.392
+      }
+    },
+    "cpu_samples": [
+      [
+        0.0,
+        11600
+      ],
+      [
+        1.0,
+        61314
+      ],
+      [
+        2.0,
+        117182
+      ],
+      [
+        3.0,
+        177020
+      ],
+      [
+        4.0,
+        236862
+      ],
+      [
+        5.0,
+        296818
+      ],
+      [
+        6.0,
+        352068
+      ],
+      [
+        7.0,
+        639291
+      ],
+      [
+        8.0,
+        920440
+      ],
+      [
+        9.0,
+        1221095
+      ],
+      [
+        10.0,
+        1505611
+      ],
+      [
+        11.0,
+        1800639
+      ],
+      [
+        12.0,
+        2086446
+      ],
+      [
+        13.0,
+        2369572
+      ],
+      [
+        14.0,
+        2706679
+      ],
+      [
+        15.0,
+        2760223
+      ],
+      [
+        16.0,
+        2809211
+      ],
+      [
+        17.0,
+        2858759
+      ],
+      [
+        18.0,
+        2886991
+      ],
+      [
+        19.0,
+        2919817
+      ],
+      [
+        20.0,
+        2949448
+      ],
+      [
+        21.0,
+        2950104
+      ]
+    ],
+    "frame_latency_ms": {
+      "all": {
+        "max": 30.264,
+        "mean": 10.794,
+        "n": 1080,
+        "p50": 1.512,
+        "p95": 25.544,
+        "p99": 27.372
+      },
+      "load": {
+        "max": 30.264,
+        "mean": 22.492,
+        "n": 482,
+        "p50": 22.771,
+        "p95": 26.791,
+        "p99": 27.524
+      },
+      "noload": {
+        "max": 7.947,
+        "mean": 1.365,
+        "n": 598,
+        "p50": 1.303,
+        "p95": 1.61,
+        "p99": 3.041
+      }
+    },
+    "frames_discontinuity_flag": 0,
+    "frames_received": 1200,
+    "pings_sent": 2000,
+    "transport": {
+      "paths": [
+        "Custom(CustomAddr { id: 1953459554, data: [00] }) selected=true rtt=912.895µs cwnd=15889"
+      ],
+      "quic_lost_bytes": 0,
+      "quic_lost_packets": 0,
+      "quic_sent_packets": 117486,
+      "quic_udp_rx_bytes": 346419717,
+      "quic_udp_tx_bytes": 4366568,
+      "tunnel_tx_dropped": 0,
+      "tunnel_tx_packets": 117485
+    }
+  },
+  "phone": {
+    "audio": {
+      "dropped_sender": 0,
+      "send_errors": 0,
+      "sent": 1000
+    },
+    "bulk": [
+      {
+        "burst": 0,
+        "bytes_written": 296681472,
+        "last_write_returned_s": 14.002637917
+      }
+    ],
+    "cpu_samples": [
+      [
+        0.0,
+        11063
+      ],
+      [
+        1.0,
+        53679
+      ],
+      [
+        2.0,
+        102037
+      ],
+      [
+        3.0,
+        149225
+      ],
+      [
+        4.0,
+        196605
+      ],
+      [
+        5.0,
+        240722
+      ],
+      [
+        6.0,
+        281454
+      ],
+      [
+        7.0,
+        416725
+      ],
+      [
+        8.0,
+        548564
+      ],
+      [
+        9.0,
+        692947
+      ],
+      [
+        10.0,
+        828325
+      ],
+      [
+        11.0,
+        965749
+      ],
+      [
+        12.0,
+        1100145
+      ],
+      [
+        13.0,
+        1231685
+      ],
+      [
+        14.0,
+        1382815
+      ],
+      [
+        15.0,
+        1418777
+      ],
+      [
+        16.0,
+        1454276
+      ],
+      [
+        17.0,
+        1489342
+      ],
+      [
+        18.0,
+        1509318
+      ],
+      [
+        19.0,
+        1531634
+      ],
+      [
+        20.0,
+        1552605
+      ],
+      [
+        21.0,
+        1552699
+      ]
+    ],
+    "frames_dropped_sender": 0,
+    "frames_flow_control_waits": 0,
+    "frames_generated": 1200,
+    "frames_sent": 1200,
+    "input_oneway_ms": {
+      "max": 1.556,
+      "mean": 0.465,
+      "n": 1800,
+      "p50": 0.473,
+      "p95": 0.717,
+      "p99": 0.925
+    },
+    "max_inflight_frames": 4,
+    "setup_slack_ms": 1986.418375,
+    "transport": {
+      "paths": [
+        "Custom(CustomAddr { id: 1953459554, data: [01] }) selected=true rtt=1.359477ms cwnd=985201"
+      ],
+      "quic_lost_bytes": 303271,
+      "quic_lost_packets": 210,
+      "quic_sent_packets": 241655,
+      "quic_udp_rx_bytes": 4365329,
+      "quic_udp_tx_bytes": 346722943,
+      "tunnel_tx_dropped": 210,
+      "tunnel_tx_packets": 241444
+    }
+  },
+  "proxy": {
+    "connections": 1,
+    "down_phone_to_mac": {
+      "bytes_in": 346902607,
+      "bytes_out": 346902607,
+      "lost": 0,
+      "pkts_in": 256194,
+      "pkts_out": 255697,
+      "queue_dropped": 0
+    },
+    "up_mac_to_phone": {
+      "bytes_in": 4601538,
+      "bytes_out": 4601538,
+      "lost": 0,
+      "pkts_in": 116065,
+      "pkts_out": 110726,
+      "queue_dropped": 0
+    }
+  },
+  "proxy_cpu_s": 2.715588,
+  "seed": 3,
+  "t0": 421578203377791,
+  "transport": "tunnel",
+  "wall_s": 23.014696041
+}
