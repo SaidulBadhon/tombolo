@@ -1,0 +1,13 @@
+# after — 2026-11-01T17:25:44Z
+mac_loadavg: { 3.56 3.90 3.97 }
+mac_uptime: 23:25  up 11 days, 16:09, 3 users, load averages: 3.56 3.90 3.97
+mac_model: Mac16,8 Apple M4 Pro
+mac_os: 27.0.1 (26A434)
+mac_therm: Note: No thermal warning level has been recorded
+mac_therm: Note: No performance warning level has been recorded
+mac_therm: Note: No CPU power status has been recorded
+mac_batt: Now drawing from 'Battery Power'
+mac_batt:  -InternalBattery-0 (id=24445027)	66%; discharging; 2:53 remaining present: true
+mac_top: Load Avg: 3.56, 3.90, 3.97 
+mac_top: CPU usage: 24.22% user, 21.32% sys, 54.45% idle 
+phone_serial: <serial>

@@ -1,0 +1,13 @@
+== software-timestamp mode: render → composited display ==
+frames 1851, decoded 1791 (96.76 %)
+capture interval median 16.67 ms (p99 25.00), SCK delivery delay median 1.93 ms, decode median 10 µs (p99 4890)
+
+[mac tag 5]
+  samples (first appearances) 1758, repeats 33, negative 0, outliers excluded 0
+  source frame interval median 16.60 ms, source frames not seen 13
+  latency ms: p50 22.57  p95 29.03  p99 29.67   (min 14.92, max 34.78, mean 22.96 ± sd 3.24, n 1758)
+  95% bootstrap CI: p50 [22.37, 22.92]  p95 [28.92, 29.20]  p99 [29.62, 30.12]
+  systematic uncertainty ±0.05 ms (applies to every percentile):
+    - tick rounding ±0.05 ms
+    - same clock as the capture (no clock sync needed)
+    - capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)

@@ -1,0 +1,360 @@
+Processes: 1010 total, 8 running, 1002 sleeping, 8462 threads 
+2026/11/01 23:31:09
+Load Avg: 4.70, 4.09, 4.00 
+CPU usage: 17.21% user, 16.36% sys, 66.41% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 2219723 total, 12G resident, 372M private, 9246M shared.
+PhysMem: 47G used (5404M wired, 14G compressor), 257M unused.
+VM: 634T vsize, 57G framework vsize, 7696159(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346532330/360G in, 331173630/350G out.
+Disks: 123210312/1892G read, 165780190/2620G written.
+
+PID    COMMAND          %CPU POWER #TH
+65678  s02-mirror       0.0  0.0   22 
+65674  s02-loopback-sou 0.0  0.0   8  
+429    WindowServer     0.0  0.0   24 
+Processes: 1010 total, 4 running, 1006 sleeping, 8416 threads 
+2026/11/01 23:31:10
+Load Avg: 4.57, 4.07, 3.99 
+CPU usage: 14.44% user, 10.98% sys, 74.56% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5442M wired, 14G compressor), 268M unused.
+VM: 634T vsize, 57G framework vsize, 7696159(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346532573/360G in, 331173859/350G out.
+Disks: 123210381/1892G read, 165780725/2620G written.
+
+PID    COMMAND          %CPU POWER #TH
+429    WindowServer     48.5 48.8  24 
+65674  s02-loopback-sou 8.4  8.5   7  
+65678  s02-mirror       1.5  1.6   22 
+Processes: 1011 total, 3 running, 1 stuck, 1007 sleeping, 8416 threads 
+2026/11/01 23:31:11
+Load Avg: 4.57, 4.07, 3.99 
+CPU usage: 18.40% user, 12.26% sys, 69.32% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 54 total, 2336K resident, 372M private, 9246M shared.
+PhysMem: 47G used (5355M wired, 14G compressor), 317M unused.
+VM: 634T vsize, 57G framework vsize, 7696159(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346533408/360G in, 331174225/350G out.
+Disks: 123210404/1892G read, 165781801/2620G written.
+
+PID    COMMAND          %CPU POWER #TH
+429    WindowServer     45.1 45.1  24 
+65674  s02-loopback-sou 17.7 17.7  7  
+65678  s02-mirror       3.1  3.1   22 
+Processes: 1011 total, 7 running, 1004 sleeping, 8372 threads 
+2026/11/01 23:31:12
+Load Avg: 4.57, 4.07, 3.99 
+CPU usage: 19.97% user, 10.19% sys, 69.83% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5386M wired, 14G compressor), 277M unused.
+VM: 634T vsize, 57G framework vsize, 7696159(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346533613/360G in, 331174411/350G out.
+Disks: 123210523/1892G read, 165781934/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     46.9 46.9  24/1
+65674  s02-loopback-sou 17.1 17.1  8   
+65678  s02-mirror       3.9  3.9   14  
+Processes: 1011 total, 8 running, 1 stuck, 1002 sleeping, 8306 threads 
+2026/11/01 23:31:14
+Load Avg: 4.57, 4.07, 3.99 
+CPU usage: 31.10% user, 12.70% sys, 56.18% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5325M wired, 14G compressor), 247M unused.
+VM: 634T vsize, 57G framework vsize, 7696159(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346535396/360G in, 331177370/350G out.
+Disks: 123210571/1892G read, 165782649/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.3 47.3  24/1
+65674  s02-loopback-sou 7.4  7.4   8/1 
+65678  s02-mirror       4.6  4.6   14  
+Processes: 1011 total, 6 running, 1005 sleeping, 8299 threads 
+2026/11/01 23:31:15
+Load Avg: 4.68, 4.11, 4.00 
+CPU usage: 24.60% user, 11.5% sys, 64.34% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5251M wired, 14G compressor), 274M unused.
+VM: 634T vsize, 57G framework vsize, 7696163(4) swapins, 9297128(0) swapouts.
+Networks: packets: 346535650/360G in, 331177591/350G out.
+Disks: 123210599/1892G read, 165783778/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     57.8 57.8  24/1
+65674  s02-loopback-sou 6.6  6.6   8   
+65678  s02-mirror       4.8  4.8   14  
+Processes: 1011 total, 6 running, 1 stuck, 1004 sleeping, 8261 threads 
+2026/11/01 23:31:16
+Load Avg: 4.68, 4.11, 4.00 
+CPU usage: 21.27% user, 9.64% sys, 69.8% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5222M wired, 14G compressor), 281M unused.
+VM: 634T vsize, 57G framework vsize, 7696163(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346536370/360G in, 331177933/350G out.
+Disks: 123210606/1892G read, 165784183/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     48.3 48.3  24/1
+65674  s02-loopback-sou 12.0 12.0  8   
+65678  s02-mirror       4.4  4.4   14  
+Processes: 1011 total, 6 running, 1005 sleeping, 8292 threads 
+2026/11/01 23:31:17
+Load Avg: 4.68, 4.11, 4.00 
+CPU usage: 23.1% user, 13.92% sys, 63.5% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5630M wired, 14G compressor), 113M unused.
+VM: 634T vsize, 57G framework vsize, 7696163(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346536653/360G in, 331178195/350G out.
+Disks: 123210976/1892G read, 165784538/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     48.9 48.9  24/1
+65674  s02-loopback-sou 10.0 10.0  8   
+65678  s02-mirror       4.0  4.0   21  
+Processes: 1011 total, 4 running, 1007 sleeping, 8353 threads 
+2026/11/01 23:31:18
+Load Avg: 4.68, 4.11, 4.00 
+CPU usage: 21.6% user, 12.92% sys, 66.0% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5283M wired, 14G compressor), 230M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(128) swapins, 9297128(0) swapouts.
+Networks: packets: 346537318/360G in, 331178854/350G out.
+Disks: 123211350/1892G read, 165784943/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     46.5 46.6  24  
+65674  s02-loopback-sou 16.1 16.1  8   
+65678  s02-mirror       3.0  3.0   21  
+Processes: 1011 total, 2 running, 1009 sleeping, 8356 threads 
+2026/11/01 23:31:20
+Load Avg: 4.68, 4.11, 4.00 
+CPU usage: 16.23% user, 9.57% sys, 74.18% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 372M private, 9246M shared.
+PhysMem: 47G used (5304M wired, 14G compressor), 337M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346538319/360G in, 331180850/350G out.
+Disks: 123211355/1892G read, 165784969/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     46.4 48.0  24  
+65674  s02-loopback-sou 18.5 18.6  8   
+65678  s02-mirror       3.1  3.2   21  
+Processes: 1012 total, 5 running, 1007 sleeping, 8358 threads 
+2026/11/01 23:31:21
+Load Avg: 4.79, 4.14, 4.01 
+CPU usage: 18.55% user, 11.20% sys, 70.24% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 45 total, 1600K resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5286M wired, 14G compressor), 278M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346540205/360G in, 331182996/350G out.
+Disks: 123211634/1892G read, 165785345/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.4 45.8  24/1
+65674  s02-loopback-sou 12.3 12.3  8   
+65678  s02-mirror       2.7  2.7   21  
+Processes: 1012 total, 2 running, 1010 sleeping, 8352 threads 
+2026/11/01 23:31:22
+Load Avg: 4.79, 4.14, 4.01 
+CPU usage: 12.35% user, 9.46% sys, 78.18% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5106M wired, 14G compressor), 357M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346540841/360G in, 331184561/350G out.
+Disks: 123211656/1892G read, 165785364/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.5 46.2  23  
+65674  s02-loopback-sou 18.2 18.2  8   
+65678  s02-mirror       3.1  3.2   15  
+Processes: 1011 total, 2 running, 1009 sleeping, 8267 threads 
+2026/11/01 23:31:23
+Load Avg: 4.79, 4.14, 4.01 
+CPU usage: 12.91% user, 9.73% sys, 77.34% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5127M wired, 14G compressor), 336M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346543627/360G in, 331187339/350G out.
+Disks: 123211675/1892G read, 165785372/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.4 49.1  23  
+65674  s02-loopback-sou 15.8 15.9  8   
+65678  s02-mirror       2.9  3.0   15  
+Processes: 1011 total, 4 running, 1007 sleeping, 8252 threads 
+2026/11/01 23:31:25
+Load Avg: 4.79, 4.14, 4.01 
+CPU usage: 17.26% user, 9.78% sys, 72.94% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5211M wired, 14G compressor), 391M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346545372/360G in, 331189718/350G out.
+Disks: 123211684/1892G read, 165785418/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.5 46.7  23/1
+65674  s02-loopback-sou 17.3 17.4  8   
+65678  s02-mirror       3.1  3.3   15  
+Processes: 1011 total, 3 running, 1008 sleeping, 8250 threads 
+2026/11/01 23:31:26
+Load Avg: 4.80, 4.15, 4.02 
+CPU usage: 16.92% user, 10.67% sys, 72.39% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5285M wired, 14G compressor), 373M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346547992/360G in, 331193317/350G out.
+Disks: 123211722/1892G read, 165787299/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.6 46.1  23  
+65674  s02-loopback-sou 10.7 10.8  8   
+65678  s02-mirror       2.5  2.5   15  
+Processes: 1011 total, 4 running, 1007 sleeping, 8271 threads 
+2026/11/01 23:31:27
+Load Avg: 4.80, 4.15, 4.02 
+CPU usage: 11.82% user, 9.23% sys, 78.94% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5323M wired, 14G compressor), 305M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346548192/360G in, 331193500/350G out.
+Disks: 123211729/1892G read, 165787481/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.1 47.9  23/1
+65674  s02-loopback-sou 17.6 17.7  8   
+65678  s02-mirror       3.2  3.3   15  
+Processes: 1011 total, 3 running, 1008 sleeping, 8260 threads 
+2026/11/01 23:31:28
+Load Avg: 4.80, 4.15, 4.02 
+CPU usage: 10.99% user, 8.81% sys, 80.18% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5086M wired, 14G compressor), 353M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346548523/360G in, 331193813/350G out.
+Disks: 123211730/1892G read, 165787632/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.1 47.8  22/1
+65674  s02-loopback-sou 16.0 16.0  8   
+65678  s02-mirror       3.1  3.1   15  
+Processes: 1011 total, 6 running, 1005 sleeping, 8251 threads 
+2026/11/01 23:31:30
+Load Avg: 4.80, 4.15, 4.02 
+CPU usage: 15.92% user, 9.74% sys, 74.33% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5256M wired, 14G compressor), 358M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346548767/360G in, 331194060/350G out.
+Disks: 123211732/1892G read, 165787636/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.6 46.0  22/1
+65674  s02-loopback-sou 16.9 17.0  8   
+65678  s02-mirror       3.1  3.1   15  
+Processes: 1011 total, 3 running, 1008 sleeping, 8251 threads 
+2026/11/01 23:31:31
+Load Avg: 4.66, 4.13, 4.01 
+CPU usage: 12.57% user, 9.43% sys, 77.99% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5263M wired, 14G compressor), 367M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346549614/360G in, 331194540/350G out.
+Disks: 123211744/1892G read, 165788035/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.4 49.9  22/1
+65674  s02-loopback-sou 13.8 14.0  8   
+65678  s02-mirror       2.7  2.8   15  
+Processes: 1011 total, 4 running, 1007 sleeping, 8232 threads 
+2026/11/01 23:31:32
+Load Avg: 4.66, 4.13, 4.01 
+CPU usage: 14.80% user, 9.78% sys, 75.41% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1104K private, 9246M shared.
+PhysMem: 47G used (5232M wired, 14G compressor), 392M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346550168/360G in, 331195093/350G out.
+Disks: 123211767/1892G read, 165788069/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     45.7 46.8  21  
+65674  s02-loopback-sou 18.0 18.1  8   
+65678  s02-mirror       3.3  3.3   15  
+Processes: 1011 total, 5 running, 1006 sleeping, 8228 threads 
+2026/11/01 23:31:33
+Load Avg: 4.66, 4.13, 4.01 
+CPU usage: 15.63% user, 10.10% sys, 74.26% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 12062 total, 16M resident, 1472K private, 9251M shared.
+PhysMem: 47G used (5364M wired, 14G compressor), 249M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346551564/360G in, 331197897/350G out.
+Disks: 123212270/1892G read, 165789280/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     44.7 45.7  21/1
+65674  s02-loopback-sou 13.4 13.6  8   
+65678  s02-mirror       2.5  2.7   14  
+Processes: 1011 total, 5 running, 1006 sleeping, 8232 threads 
+2026/11/01 23:31:35
+Load Avg: 4.66, 4.13, 4.01 
+CPU usage: 15.10% user, 10.62% sys, 74.27% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1472K private, 9251M shared.
+PhysMem: 47G used (5061M wired, 14G compressor), 333M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346554745/360G in, 331201693/350G out.
+Disks: 123212275/1892G read, 165789619/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     47.2 47.8  21  
+65674  s02-loopback-sou 13.4 13.4  8   
+65678  s02-mirror       2.8  3.0   14  
+Processes: 1011 total, 4 running, 1007 sleeping, 8229 threads 
+2026/11/01 23:31:36
+Load Avg: 4.85, 4.18, 4.03 
+CPU usage: 15.93% user, 9.8% sys, 74.98% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1472K private, 9251M shared.
+PhysMem: 47G used (5283M wired, 14G compressor), 292M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346555599/360G in, 331202300/350G out.
+Disks: 123212284/1892G read, 165789688/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     46.5 47.6  21/1
+65674  s02-loopback-sou 17.6 17.7  8   
+65678  s02-mirror       3.2  3.3   14  
+Processes: 1011 total, 6 running, 1005 sleeping, 8230 threads 
+2026/11/01 23:31:37
+Load Avg: 4.85, 4.18, 4.03 
+CPU usage: 14.44% user, 10.23% sys, 75.32% idle 
+SharedLibs: 1054M resident, 164M data, 122M linkedit.
+MemRegions: 0 total, 0B resident, 1472K private, 9251M shared.
+PhysMem: 47G used (5128M wired, 14G compressor), 339M unused.
+VM: 634T vsize, 57G framework vsize, 7696291(0) swapins, 9297128(0) swapouts.
+Networks: packets: 346557079/360G in, 331204985/350G out.
+Disks: 123212340/1892G read, 165789749/2620G written.
+
+PID    COMMAND          %CPU POWER #TH 
+429    WindowServer     44.9 45.9  21/1
+65674  s02-loopback-sou 10.2 10.2  8/1 
+65678  s02-mirror       2.3  2.3   14  

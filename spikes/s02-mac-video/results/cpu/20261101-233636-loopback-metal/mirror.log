@@ -1,0 +1,19 @@
+metal: CAMetalDisplayLink preferredFrameLatency=1.0 range=60.0-120.0 pref 120.0 maximumDrawableCount=3
+metal: update 1: targetTimestamp +16.03 ms, targetPresentationTimestamp +32.69 ms from now
+s02-mirror: presenter=metal-displaylink server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=1a41cbde log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+metal: update 2: targetTimestamp +16.61 ms, targetPresentationTimestamp +33.28 ms from now
+metal: update 3: targetTimestamp +8.28 ms, targetPresentationTimestamp +41.61 ms from now
+s02-mirror: window occlusion state → visible
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+metal: update 240: targetTimestamp +8.26 ms, targetPresentationTimestamp +41.59 ms from now
+stats: 10s fps 60.0 1.87 Mb/s decoded 579 presented 571 superseded 4 | recv→decoded p50 1.38 p95 2.13 | recv→presented p50 47.46 p95 51.07 ms | jitter p95 5.25 ms | cpu 5.8% ticks 1203
+stats: 20s fps 60.0 1.89 Mb/s decoded 1179 presented 1171 superseded 4 | recv→decoded p50 1.40 p95 2.01 | recv→presented p50 47.91 p95 51.07 ms | jitter p95 5.10 ms | cpu 5.8% ticks 2403
+s02-mirror: window occlusion state → occluded
+s02-mirror: window occlusion state → visible
+stats: 30s fps 60.0 1.88 Mb/s decoded 1779 presented 1717 superseded 51 | recv→decoded p50 1.38 p95 1.97 | recv→presented p50 47.12 p95 51.07 ms | jitter p95 5.04 ms | cpu 5.6% ticks 3509
+stats: 40s fps 60.0 1.88 Mb/s decoded 2379 presented 2317 superseded 51 | recv→decoded p50 1.38 p95 1.95 | recv→presented p50 47.33 p95 51.10 ms | jitter p95 5.02 ms | cpu 5.6% ticks 4709
+stats: 50s fps 60.0 1.87 Mb/s decoded 2979 presented 2917 superseded 51 | recv→decoded p50 1.39 p95 1.96 | recv→presented p50 47.69 p95 51.04 ms | jitter p95 5.03 ms | cpu 5.7% ticks 5909
+stats: 60s fps 60.0 1.87 Mb/s decoded 3579 presented 3517 superseded 51 | recv→decoded p50 1.39 p95 1.95 | recv→presented p50 47.60 p95 51.05 ms | jitter p95 5.00 ms | cpu 5.7% ticks 7109
+stats: 63s fps 60.0 1.87 Mb/s decoded 3762 presented 3699 superseded 51 | recv→decoded p50 1.39 p95 1.95 | recv→presented p50 47.41 p95 51.08 ms | jitter p95 4.99 ms | cpu 5.7% ticks 7475
+s02-mirror: exit (signal 15)

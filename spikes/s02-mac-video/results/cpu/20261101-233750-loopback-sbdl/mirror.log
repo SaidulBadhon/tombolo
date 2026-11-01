@@ -1,0 +1,14 @@
+s02-mirror: presenter=sbdl server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=3c6739a0 log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+s02-mirror: window occlusion state → visible
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+stats: 10s fps 60.0 1.87 Mb/s decoded 581 presented 0 superseded 0 | recv→decoded p50 1.49 p95 2.38 | recv→presented p50 nan p95 nan ms | jitter p95 5.63 ms | cpu 3.4%
+stats: 20s fps 60.0 1.89 Mb/s decoded 1181 presented 0 superseded 0 | recv→decoded p50 1.52 p95 2.20 | recv→presented p50 nan p95 nan ms | jitter p95 5.44 ms | cpu 3.3%
+stats: 30s fps 60.0 1.88 Mb/s decoded 1781 presented 0 superseded 0 | recv→decoded p50 1.52 p95 2.10 | recv→presented p50 nan p95 nan ms | jitter p95 5.40 ms | cpu 3.2%
+stats: 40s fps 60.0 1.88 Mb/s decoded 2381 presented 0 superseded 0 | recv→decoded p50 1.55 p95 2.07 | recv→presented p50 nan p95 nan ms | jitter p95 5.38 ms | cpu 3.3%
+stats: 50s fps 60.0 1.87 Mb/s decoded 2981 presented 0 superseded 0 | recv→decoded p50 1.54 p95 2.07 | recv→presented p50 nan p95 nan ms | jitter p95 5.37 ms | cpu 3.3%
+s02-mirror: window occlusion state → occluded
+s02-mirror: window occlusion state → visible
+stats: 60s fps 60.0 1.87 Mb/s decoded 3581 presented 0 superseded 0 | recv→decoded p50 1.47 p95 2.06 | recv→presented p50 nan p95 nan ms | jitter p95 5.34 ms | cpu 3.2%
+stats: 63s fps 60.0 1.87 Mb/s decoded 3766 presented 0 superseded 0 | recv→decoded p50 1.45 p95 2.05 | recv→presented p50 nan p95 nan ms | jitter p95 5.33 ms | cpu 3.2%
+s02-mirror: exit (signal 15)

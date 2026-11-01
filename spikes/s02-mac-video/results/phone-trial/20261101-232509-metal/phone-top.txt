@@ -1,0 +1,178 @@
+  PID USER         %CPU  RES[NAME]
+ 2004 system       46.4  49M surfaceflinger
+ 1897 mediacodec   21.4  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        71.4 188M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         0.0 205M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      57.1 208M com.android.chrome:privileged_process0
+22251 u0_a235       7.1 390M com.android.chrome
+29009 shell        10.7 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       44.0  49M surfaceflinger
+ 1897 mediacodec   25.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        70.0 188M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         1.0 205M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      54.0 208M com.android.chrome:privileged_process0
+22251 u0_a235      11.0 390M com.android.chrome
+29009 shell        14.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       43.0  49M surfaceflinger
+ 1897 mediacodec   23.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        53.0 189M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         1.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      49.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       4.0 391M com.android.chrome
+29009 shell        14.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       43.0  49M surfaceflinger
+ 1897 mediacodec   23.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        58.0 190M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         1.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      51.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       4.0 391M com.android.chrome
+29009 shell        14.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       41.0  49M surfaceflinger
+ 1897 mediacodec   25.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        48.0 190M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         1.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      46.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       2.0 390M com.android.chrome
+29009 shell        13.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       34.0  49M surfaceflinger
+ 1897 mediacodec   42.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        28.0 191M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         0.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      40.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       4.0 390M com.android.chrome
+29009 shell        16.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       32.0  49M surfaceflinger
+ 1897 mediacodec   44.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        26.0 191M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         2.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      36.0 209M com.android.chrome:privileged_process0
+22251 u0_a235       3.0 390M com.android.chrome
+29009 shell        16.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       34.0  49M surfaceflinger
+ 1897 mediacodec   38.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        26.0 191M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         0.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      38.0 209M com.android.chrome:privileged_process0
+22251 u0_a235       4.0 390M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       33.0  49M surfaceflinger
+ 1897 mediacodec   42.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        28.0 192M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         0.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         2.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      37.0 209M com.android.chrome:privileged_process0
+22251 u0_a235       3.0 390M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       31.0  49M surfaceflinger
+ 1897 mediacodec   40.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        26.0 192M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+28810 u0_i5         1.0 157M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:5
+26311 u0_i4         1.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      36.0 209M com.android.chrome:privileged_process0
+22251 u0_a235       6.0 390M com.android.chrome
+29009 shell        16.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       32.0  49M surfaceflinger
+ 1897 mediacodec   42.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        27.0 192M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+26311 u0_i4         2.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      36.0 209M com.android.chrome:privileged_process0
+22251 u0_a235       5.0 391M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       31.0  49M surfaceflinger
+ 1897 mediacodec   40.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        26.0 192M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+26311 u0_i4         0.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      37.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       7.0 391M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       33.0  49M surfaceflinger
+ 1897 mediacodec   39.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        25.0 193M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+26311 u0_i4         1.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      37.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       7.0 390M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process
+  PID USER         %CPU  RES[NAME]
+ 2004 system       32.0  49M surfaceflinger
+ 1897 mediacodec   38.0  35M media.hwcodec
+25705 u0_a235       0.0  83M com.android.chrome_zygote
+28950 u0_i7        27.0 193M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:7
+26311 u0_i4         2.0 204M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:4
+26139 u0_i2         0.0 180M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:2
+25720 u0_i0         0.0 163M com.android.chrome:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+25746 u0_a235      35.0 208M com.android.chrome:privileged_process0
+22251 u0_a235       9.0 390M com.android.chrome
+29009 shell        15.0 162M app_process
+29022 shell         0.0 148M app_process

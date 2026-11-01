@@ -1,0 +1,8 @@
+s02-mirror: presenter=metal-immediate server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=64ccfd1e log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+stats: 10s fps 60.0 1.87 Mb/s decoded 582 presented 575 superseded 0 | recv→decoded p50 1.36 p95 2.45 | recv→presented p50 24.36 p95 26.59 ms | jitter p95 5.16 ms | cpu 5.0%
+stats: 20s fps 60.0 1.88 Mb/s decoded 1182 presented 1175 superseded 0 | recv→decoded p50 1.33 p95 2.10 | recv→presented p50 23.86 p95 26.46 ms | jitter p95 4.79 ms | cpu 4.8%
+stats: 30s fps 60.0 1.88 Mb/s decoded 1782 presented 1774 superseded 0 | recv→decoded p50 1.35 p95 2.02 | recv→presented p50 23.58 p95 26.66 ms | jitter p95 4.75 ms | cpu 5.0%
+stats: 33s fps 60.0 1.87 Mb/s decoded 1989 presented 1982 superseded 0 | recv→decoded p50 1.34 p95 2.01 | recv→presented p50 23.45 p95 26.89 ms | jitter p95 4.74 ms | cpu 4.9%
+s02-mirror: exit (signal 15)

@@ -1,0 +1,13 @@
+metal: CAMetalDisplayLink preferredFrameLatency=1.0 range=60.0-120.0 pref 120.0 maximumDrawableCount=3
+s02-mirror: presenter=metal-displaylink server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=5493515d log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+metal: update 1: targetTimestamp +15.98 ms, targetPresentationTimestamp +32.65 ms from now
+metal: update 2: targetTimestamp +16.62 ms, targetPresentationTimestamp +33.29 ms from now
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+metal: update 3: targetTimestamp +8.27 ms, targetPresentationTimestamp +41.60 ms from now
+metal: update 240: targetTimestamp +8.28 ms, targetPresentationTimestamp +41.61 ms from now
+stats: 10s fps 60.0 1.87 Mb/s decoded 579 presented 570 superseded 2 | recv→decoded p50 1.39 p95 2.25 | recv→presented p50 45.32 p95 51.01 ms | jitter p95 5.41 ms | cpu 5.5%
+stats: 20s fps 60.0 1.88 Mb/s decoded 1179 presented 1169 superseded 2 | recv→decoded p50 1.36 p95 2.12 | recv→presented p50 45.12 p95 50.93 ms | jitter p95 5.09 ms | cpu 5.3%
+stats: 30s fps 59.9 1.88 Mb/s decoded 1776 presented 1766 superseded 2 | recv→decoded p50 1.32 p95 2.03 | recv→presented p50 45.50 p95 50.99 ms | jitter p95 5.00 ms | cpu 5.3%
+stats: 33s fps 59.9 1.86 Mb/s decoded 1977 presented 1968 superseded 2 | recv→decoded p50 1.31 p95 1.99 | recv→presented p50 46.09 p95 50.94 ms | jitter p95 4.94 ms | cpu 5.3%
+s02-mirror: exit (signal 15)

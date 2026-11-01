@@ -1,0 +1,23 @@
+{
+  "display_id" : 1,
+  "display_max_fps" : 120,
+  "duration_s" : 20,
+  "macos" : "Version 27.0.1 (Build 26A434)",
+  "pixels" : [
+    898,
+    2056
+  ],
+  "point_pixel_scale" : 2,
+  "region_points" : [
+    1330,
+    81,
+    449,
+    1028
+  ],
+  "source" : "display 1 region (composited)",
+  "start_host_ns" : 364476451019916,
+  "user_scale" : 1,
+  "window_app" : "s02-mirror",
+  "window_id" : 20530,
+  "window_title" : "Tombolo S2 mirror (metal-displaylink) — motorola edge 50 pro"
+}

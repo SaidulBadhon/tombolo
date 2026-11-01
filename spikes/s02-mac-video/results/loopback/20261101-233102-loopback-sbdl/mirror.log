@@ -1,0 +1,8 @@
+s02-mirror: presenter=sbdl server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=395e5ecb log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+stats: 10s fps 60.0 1.87 Mb/s decoded 582 presented 0 superseded 0 | recv→decoded p50 1.27 p95 1.94 | recv→presented p50 nan p95 nan ms | jitter p95 5.19 ms | cpu 4.1%
+stats: 20s fps 60.0 1.88 Mb/s decoded 1182 presented 0 superseded 0 | recv→decoded p50 1.28 p95 1.94 | recv→presented p50 nan p95 nan ms | jitter p95 5.06 ms | cpu 3.8%
+stats: 30s fps 60.0 1.88 Mb/s decoded 1782 presented 0 superseded 0 | recv→decoded p50 1.32 p95 1.95 | recv→presented p50 nan p95 nan ms | jitter p95 5.04 ms | cpu 3.5%
+stats: 34s fps 60.0 1.87 Mb/s decoded 1991 presented 0 superseded 0 | recv→decoded p50 1.32 p95 1.96 | recv→presented p50 nan p95 nan ms | jitter p95 5.02 ms | cpu 3.4%
+s02-mirror: exit (signal 15)
