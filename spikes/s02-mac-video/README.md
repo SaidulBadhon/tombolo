@@ -33,6 +33,12 @@ process). Phone settings are not changed (`--stay-awake` is the only option that
 
 Without a phone: `--synthetic 1080x2400` streams a VideoToolbox-encoded test pattern through a local fake server.
 
+**Over Wi-Fi (developers only).** `scripts/pair-wireless.sh` pairs with the phone's Wireless debugging by a QR code
+(adb's QR scheme) and prints the adb serial; then `ANDROID_SERIAL=<serial> spikes/s02-mac-video/run.sh`. This is a
+convenience for running the spike without a cable, not the product path: customers will not need Developer options
+(the first release is Standard mode, decided 2026-11-01). Status: the QR generator round-trips (decoded back to the
+input string); pairing with a phone has not been run end to end yet.
+
 ## The pinned server
 
 `scripts/fetch-server.sh` downloads `scrcpy-server-v5.0.1` from the official
@@ -122,7 +128,7 @@ process. The harness then measures render → encode → TCP → decode → pres
 | `Sources/s02-mirror/` | the AppKit executable |
 | `Tests/MirrorCoreTests/` | swift-testing suite |
 | `loopback/` | phone-less clock-stamping source (depends on `tools/latency-harness` LatencyCore) |
-| `scripts/` | `fetch-server.sh`, `measure.sh`, `measure-all.sh`, `loopback.sh` |
+| `scripts/` | `fetch-server.sh`, `measure.sh`, `measure-all.sh`, `loopback.sh`, `pair-wireless.sh` + `qr.swift` (Wi-Fi pairing for developers) |
 | `results/` | committed raw results referenced by the spike document |
 
 Licence: GPL-3.0-or-later. scrcpy-server (downloaded, not included) is Apache-2.0 © Genymobile and Romain Vimont.
