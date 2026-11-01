@@ -13,6 +13,7 @@
 #   s15/selfsigned-1.0.1/S15 Probe.app   io.github.saidulbadhon.tombolo.spike.s15        self-signed 1.0.1
 #   s15/adhoc-1.0.0/S15 AdHoc Probe.app  io.github.saidulbadhon.tombolo.spike.s15adhoc   ad-hoc 1.0.0
 #   s15/adhoc-1.0.1/S15 AdHoc Probe.app  io.github.saidulbadhon.tombolo.spike.s15adhoc   ad-hoc 1.0.1
+#   s15/adhoc2-1.0.{0,1}/S15 AdHoc2 Probe.app  ….spike.s15adhoc2   ad-hoc, fresh ID for M1/M2
 #
 # Each build compiles the variant name and version into the binary, so every
 # bundle's main executable has its own Mach-O UUID (TN3179: Local Network privacy
@@ -105,5 +106,8 @@ if [[ "$what" == s15 || "$what" == all ]]; then
   for v in 1.0.0 1.0.1; do
     build_app "$out/s15/selfsigned-$v/S15 Probe.app"     "$id_prefix.s15"      s15-selfsigned "$v" selfsigned
     build_app "$out/s15/adhoc-$v/S15 AdHoc Probe.app"    "$id_prefix.s15adhoc" s15-adhoc      "$v" adhoc
+    # Fresh identifier for the Local Network deny/re-allow steps (M1/M2). s15adhoc was
+    # allowed by an accidental click on 2026-10-26 and macOS 27.0.1 cannot reset it.
+    build_app "$out/s15/adhoc2-$v/S15 AdHoc2 Probe.app"  "$id_prefix.s15adhoc2" s15-adhoc2   "$v" adhoc
   done
 fi

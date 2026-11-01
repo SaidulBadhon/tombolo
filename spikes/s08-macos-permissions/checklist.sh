@@ -7,12 +7,12 @@
 # results, is in docs/spikes/s08-macos-local-network.md and s15-update-persistence.md.
 #
 # usage: checklist.sh <step>
-#   m1-lnp-deny             S15 AdHoc Probe asks for Local Network; you click "Don't Allow";
+#   m1-lnp-deny             S15 AdHoc2 Probe asks for Local Network; you click "Don't Allow";
 #                           then records denied failure modes for 1.0.0 and after updating to 1.0.1
-#   m2-lnp-reallow          you turn "S15 AdHoc Probe" ON in System Settings > Local Network while
+#   m2-lnp-reallow          you turn "S15 AdHoc2 Probe" ON in System Settings > Local Network while
 #                           a connection is waiting; records whether it recovers without a relaunch
 #   m3-lnp-allow-s15        S15 Probe (self-signed) asks; you click "Allow"; then records 1.0.1 (no alert expected)
-#   m4-ax-grant <selfsigned|adhoc>   you grant Accessibility to 1.0.0
+#   m4-ax-grant <selfsigned|adhoc>   you grant Accessibility ("Device Control and Data Access" on macOS 27) to 1.0.0
 #   m5-ax-update <selfsigned|adhoc>  installs 1.0.1 in place; records whether Accessibility survived
 #   status                  prints the current Local Network rules and firewall entries
 #
@@ -44,28 +44,35 @@ measure() { # measure <variant> <version> <label>  - Local Network failure modes
 case "${1:-}" in
   m1-lnp-deny)
     lan
-    rules s15adhoc || true
-    ask 'An alert "Allow "S15 AdHoc Probe" to find devices on local networks?" will appear. Click  Don'"'"'t Allow.'
-    WATCH=180 ./s15-update.sh adhoc 1.0.0 m1a-lnp-deny-prompt "browse:_tombolo-test._tcp:5;nwconnect:$UNUSED:9:170;quit" >/dev/null &
+    # Exact suffix match: a plain "s15adhoc" would also match s15adhoc2 and vice versa.
+    if rules =.spike.s15adhoc2 | grep -q -v ': undetermined '; then
+      echo "S15 AdHoc2 Probe already has a Local Network decision; M1 needs a fresh bundle ID (macOS 27.0.1 cannot reset it)."
+      rules =.spike.s15adhoc2; exit 1
+    fi
+    ask 'An alert "Allow "S15 AdHoc2 Probe" to find devices on local networks?" will appear. Click  Don'"'"'t Allow  (the left button).'
+    WATCH=180 ./s15-update.sh adhoc2 1.0.0 m1a-lnp-deny-prompt "browse:_tombolo-test._tcp:5;nwconnect:$UNUSED:9:170;quit" >/dev/null &
     probe=$!
-    wait_rule s15adhoc denied 180 || true
-    pkill -f "installed/adhoc/S15 AdHoc Probe.app/Contents/MacOS/TomboloProbe" 2>/dev/null || true
+    wait_rule =.spike.s15adhoc2 denied 180 || true
+    pkill -f "installed/adhoc2/S15 AdHoc2 Probe.app/Contents/MacOS/TomboloProbe" 2>/dev/null || true
     wait "$probe" || true
-    rules s15adhoc >results/m1a-lnp-deny-prompt/lnp-rules-after.txt
+    rules =.spike.s15adhoc2 >results/m1a-lnp-deny-prompt/lnp-rules-after.txt
+    if ! grep -q ': denied ' results/m1a-lnp-deny-prompt/lnp-rules-after.txt; then
+      echo "Not denied - stopping before m1b/m1c so they don't measure the wrong state."; exit 1
+    fi
     echo "--- m1a (while you answered)"; grep -v -E '^\s' results/m1a-lnp-deny-prompt/probe.log | grep -E 'browse|nwconnect' | cut -c26- | cut -c1-200
-    measure adhoc 1.0.0 m1b-lnp-denied-1.0.0
-    measure adhoc 1.0.1 m1c-lnp-denied-after-update-1.0.1
+    measure adhoc2 1.0.0 m1b-lnp-denied-1.0.0
+    measure adhoc2 1.0.1 m1c-lnp-denied-after-update-1.0.1
     ;;
   m2-lnp-reallow)
     lan
-    ask 'Within 2 minutes: System Settings > Privacy & Security > Local Network > turn ON "S15 AdHoc Probe". Nothing else.'
-    WATCH=130 ./s15-update.sh adhoc 1.0.1 m2-lnp-reallow "nwconnect:$UNUSED:9:120;quit" >/dev/null &
+    ask 'Within 2 minutes: System Settings > Privacy & Security > Local Network > turn ON "S15 AdHoc2 Probe". Nothing else.'
+    WATCH=130 ./s15-update.sh adhoc2 1.0.1 m2-lnp-reallow "nwconnect:$UNUSED:9:120;quit" >/dev/null &
     probe=$!
-    wait_rule s15adhoc allowed 125 || true
+    wait_rule =.spike.s15adhoc2 allowed 125 || true
     sleep 5
-    pkill -f "installed/adhoc/S15 AdHoc Probe.app/Contents/MacOS/TomboloProbe" 2>/dev/null || true
+    pkill -f "installed/adhoc2/S15 AdHoc2 Probe.app/Contents/MacOS/TomboloProbe" 2>/dev/null || true
     wait "$probe" || true
-    rules s15adhoc >results/m2-lnp-reallow/lnp-rules-after.txt
+    rules =.spike.s15adhoc2 >results/m2-lnp-reallow/lnp-rules-after.txt
     grep -v -E '^\s' results/m2-lnp-reallow/probe.log | grep -E 'nwconnect' | cut -c26- | cut -c1-200
     ;;
   m3-lnp-allow-s15)
@@ -82,13 +89,13 @@ case "${1:-}" in
     ;;
   m4-ax-grant)
     v="${2:?selfsigned or adhoc}"; app=$([[ $v == selfsigned ]] && echo "S15 Probe" || echo "S15 AdHoc Probe")
-    ask "A prompt \"$app would like to control this computer using accessibility features\" appears. Click  Open System Settings, then turn ON \"$app\" under Privacy & Security > Accessibility (Touch ID / password). The script stops when access is granted (max 3 min)."
+    ask "A prompt titled \"Device Control and Data Access\" says \"$app\" would like to control this Mac and access your data. Click  Open System Settings.  On the Privacy & Security page that opens (titled \"Device Control and Data Access\" on macOS 27; \"Accessibility\" on older macOS) turn ON \"$app\" and confirm with Touch ID or your password. Keep going until the switch is on: the script waits up to 3 min and stops as soon as access is granted."
     WATCH=190 ./s15-update.sh "$v" 1.0.0 "m4-ax-grant-$v-1.0.0" "ax;ax-prompt;ax-wait:180;quit" >/dev/null
     grep -v -E '^\s' "results/m4-ax-grant-$v-1.0.0/probe.log" | grep -E 'AXIs|ax-wait' | cut -c26- | cut -c1-160
     ;;
   m5-ax-update)
     v="${2:?selfsigned or adhoc}"; app=$([[ $v == selfsigned ]] && echo "S15 Probe" || echo "S15 AdHoc Probe")
-    ask "Installing $app 1.0.1 over 1.0.0. Do not click anything for 20 s. Afterwards look at System Settings > Privacy & Security > Accessibility: is \"$app\" still listed and ON?"
+    ask "Installing $app 1.0.1 over 1.0.0. Do not click anything for 20 s. Afterwards open System Settings > Privacy & Security > Device Control and Data Access (\"Accessibility\" on older macOS): is \"$app\" still listed and ON?"
     WATCH=30 ./s15-update.sh "$v" 1.0.1 "m5-ax-update-$v-1.0.1" "info;ax;ax-wait:20;quit" >/dev/null
     grep -v -E '^\s' "results/m5-ax-update-$v-1.0.1/probe.log" | grep -E 'AXIs|ax-wait' | cut -c26- | cut -c1-160
     grep -E 'AXIsProcessTrusted' "results/m5-ax-update-$v-1.0.1/probe.log" | head -1

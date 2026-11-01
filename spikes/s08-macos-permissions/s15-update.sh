@@ -4,7 +4,7 @@
 # S15: install a probe version at a fixed path, or replace it in place the way an
 # updater does (delete + copy), then launch it and record its grant status.
 #
-# usage: s15-update.sh <selfsigned|adhoc> <1.0.0|1.0.1> <label> [steps]
+# usage: s15-update.sh <selfsigned|adhoc|adhoc2> <1.0.0|1.0.1> <label> [steps]
 #   default steps: "info;login-status;ax;sleep:3"
 #
 # The installed copy lives at build/s15/installed/<variant>/ (gitignored). Results go to
@@ -18,7 +18,8 @@ variant="$1"; version="$2"; label="$3"; steps="${4:-info;login-status;ax;sleep:3
 case "$variant" in
   selfsigned) name="S15 Probe.app" ;;
   adhoc) name="S15 AdHoc Probe.app" ;;
-  *) echo "variant must be selfsigned or adhoc" >&2; exit 2 ;;
+  adhoc2) name="S15 AdHoc2 Probe.app" ;;   # fresh Local Network identity for M1/M2
+  *) echo "variant must be selfsigned, adhoc or adhoc2" >&2; exit 2 ;;
 esac
 src="$here/build/s15/$variant-$version/$name"
 dst_dir="$here/build/s15/installed/$variant"

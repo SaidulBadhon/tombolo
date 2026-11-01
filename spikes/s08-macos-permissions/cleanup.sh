@@ -26,14 +26,15 @@ run() { echo "+ $*"; (( do_it )) && "$@"; return 0; }
 
 ids=(io.github.saidulbadhon.tombolo.spike.s08.adhoc io.github.saidulbadhon.tombolo.spike.s08.selfsigned
      io.github.saidulbadhon.tombolo.spike.s08.unsigned io.github.saidulbadhon.tombolo.spike.s15
-     io.github.saidulbadhon.tombolo.spike.s15adhoc)
+     io.github.saidulbadhon.tombolo.spike.s15adhoc io.github.saidulbadhon.tombolo.spike.s15adhoc2)
 lsreg=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister
 
 echo "== probe processes"
 run pkill -f 'Contents/MacOS/TomboloProbe'
 
 echo "== login items (unregister through each installed S15 probe)"
-for a in "$here/build/s15/installed/selfsigned/S15 Probe.app" "$here/build/s15/installed/adhoc/S15 AdHoc Probe.app"; do
+for a in "$here/build/s15/installed/selfsigned/S15 Probe.app" "$here/build/s15/installed/adhoc/S15 AdHoc Probe.app" \
+         "$here/build/s15/installed/adhoc2/S15 AdHoc2 Probe.app"; do
   [[ -d "$a" ]] || continue
   if (( do_it )); then
     "$here/run-probe.sh" "$a" "cleanup-login-$(basename "$(dirname "$a")")" "login-unregister;quit" 6 >/dev/null 2>&1
