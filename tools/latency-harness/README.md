@@ -41,6 +41,9 @@ S2 come from optical mode once a camera is available ([implementation plan](../.
   each 2 s window the analysis keeps the minimum-RTT exchange, then fits offset + drift through the lower-RTT
   half. The uncertainty it states is **± max RTT/2 of the exchanges used**, plus 2 standard errors of the drift
   over half the run. This holds for any asymmetry in the path.
+- **Capture time** is `SCStreamFrameInfo.displayTime`: the presentation vsync WindowServer scheduled for the
+  composited frame. Frames usually reach the capture callback a few milliseconds *before* it, so the summary's
+  "frame arrival − displayTime" line is a diagnostic, not a delivery or pipeline delay.
 - **Samples**: only the *first* captured frame showing each value counts. Later captures of the same value are
   "repeats": they measure how long a frame stayed on screen, not latency.
 
