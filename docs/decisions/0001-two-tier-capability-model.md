@@ -2,6 +2,7 @@
 
 - **Status:** Proposed
 - **Date:** 2026-10-25
+- **Delivery order:** refined by [ADR-0008](0008-standard-mode-first.md) (2026-11-02) — Standard mode ships first.
 
 ## Context
 Android lets a normal app capture the screen only with a per-session consent dialog (Android 14+), stops

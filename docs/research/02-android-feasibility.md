@@ -67,7 +67,7 @@ exists to turn the risky ones into measured facts.
 | Licence of prior art | — | scrcpy: Apache-2.0 | Shizuku: Apache-2.0 (API: MIT); maintenance slowing (last push 2025-06) [reported] |
 
 **Recommendation.** Build Standard mode as the always-available baseline, Enhanced mode (Path B) as the power
-tier, and Path C as a later convenience. Path C lets the phone restart the helper itself after a reboot
+tier, and Path C as a later convenience. *(Re-plan 2026-11-02: Path C is now how the optional Advanced mode is set up, in 0.3 — see [ADR-0008](../decisions/0008-standard-mode-first.md).)* Path C lets the phone restart the helper itself after a reboot
 without the Mac being present, and Shizuku integration can come for free if the user already runs it.
 
 ---

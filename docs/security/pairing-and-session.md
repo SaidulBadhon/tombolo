@@ -129,7 +129,7 @@ each platform provides a cryptographically secure RNG; hardware key stores behav
 ## 3. Transport assumptions
 
 This design relies on the following properties of the transport. **Spike S5 (P0-14) has tested only A2 (the
-exporter; its write-up is not merged yet). A3, A5 and A6 are assigned to S5 but not yet tested; this
+exporter — passed on the Mac, [S5 write-up](../spikes/s05-iroh-api.md)). A3, A5 and A6 are assigned to S5 but not yet tested; this
 specification cannot be final until they are.** If S5 finds a gap, the
 fallback is the one recorded in [research P2](../research/04-transport-and-security.md#10-open-questions--needs-prototyping)
 (patch, or our own UniFFI crate over quinn/rustls); the security design does not change.
@@ -972,7 +972,7 @@ interval + max answer age  <  L  ≤  1000 ms − C
    - power button;
    - keyguard shown;
    - screen turned off by the user;
-   - **Stop** (notification, Quick Settings tile, status chip, or in the app);
+   - **Stop** (the ongoing notification where notifications are allowed, in the app, or Stop/Revoke on the Mac);
    - revocation;
    - a scope change removing `screen.*`;
    - session end or supersession;
@@ -1039,7 +1039,7 @@ interval + max answer age  <  L  ≤  1000 ms − C
    - **What may change:** the interval and the answer age may be tuned within the constraint above without changing
      the bound. If S7 measures `C` above 250 ms, `L` must shrink so that `L + C ≤ 1000 ms` still holds, or a
      different deadline must be approved separately ([re-plan §3](../plans/standard-first.md#3-phase-0-changes)).
-8. The phone shows the status chip, Quick Settings tile and ongoing notification with **Stop** whenever any
+8. The phone shows Android's capture indicator and the ongoing notification with **Stop** whenever any
    lease-gated resource is active. The notification appears where notifications are allowed; Stop in the app and on
    the Mac remain either way. The phone also logs the session: which Mac, start, end and elevations.
 9. **In-flight work is cancelled, and every action is checked when it executes** *(to be confirmed by S7)*.

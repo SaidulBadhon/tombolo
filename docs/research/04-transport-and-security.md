@@ -302,7 +302,7 @@ Real Android apps with an on-device QUIC listener:
 | Network one-way | USB ≈ 1 ms; Wi-Fi LAN 1–5 ms | phone Wi-Fi power save (≈ a beacon interval, ~100 ms), scans, **macOS AWDL channel hops** | low-latency Wi-Fi lock; steady traffic; 5/6 GHz; prefer USB |
 | Jitter buffer | **0 ms for video** | any fixed buffer adds its full depth | decode on arrival; latest frame wins |
 | HW decode (VideoToolbox) | ≈ 1–5 ms (**unverified**) | software fallback, frame reordering | require the HW decoder; no B-frames upstream |
-| Render → photons | 0–16.7 ms (vsync) + panel response | double/triple buffering | `CAMetalLayer` + `CAMetalDisplayLink(preferredFrameLatency = 1)` |
+| Render → photons | 0–16.7 ms (vsync) + panel response | double/triple buffering | `CAMetalLayer` + `CAMetalDisplayLink(preferredFrameLatency = 1)` *(Re-plan 2026-11-02: S2 measured `AVSampleBufferDisplayLayer` ≈ 24 ms faster on macOS 27, now the default — [S2](../spikes/s02-mac-video.md).)* |
 
 Estimated totals (our arithmetic, **not measurements of Tombolo**):
 - **USB ≈ 30–60 ms** glass-to-glass.

@@ -100,7 +100,7 @@ us if the design is fragile with respect to them:
 
 | Assumption | Prototype ("spike") | Status |
 |---|---|---|
-| TLS exporter available in iroh/noq (A2) | S5 | Tested; write-up not yet published |
+| TLS exporter available in iroh/noq (A2) | S5 | Tested on the Mac: pass ([S5 write-up](https://github.com/SaidulBadhon/tombolo/blob/main/docs/spikes/s05-iroh-api.md)) |
 | Peer key known and rejectable before application data (A3); per-ALPN peer-key policy (A5); 0-RTT and resumption can be disabled (A6) | S5 | Not yet tested |
 | Lease timing: 100 ms ticks, 700 ms lease, 500 ms answer age, ≤ 250 ms release completion, 5 s quiet period; in-flight cancellation; the bound with independently surviving components | S7 | Not started. Revised in draft 0.2: the worst case for events the phone cannot observe is 700 + 250 = 950 ms, within S7's 1 s release deadline (§10 rule 7). Draft 0.1's values gave ~1.25 s |
 | Hardware signing via UniFFI; Secure Enclave access-control flags | S10 | Partly: a `.userPresence` key refuses to sign without interaction; reuse duration 0 and a real Touch ID run are untested |

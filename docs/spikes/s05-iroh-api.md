@@ -198,7 +198,7 @@ phone without Internet and over a real `adb forward` was not done.
 - **`tombolo-core` needs its own UniFFI crate** on iroh's Rust API (not iroh-ffi as-is). It must expose
   `export_keying_material`, own the tunnel transport and set `PortmapperConfig::Disabled` and
   `NetReportConfig::minimal()`. This matches research 04 §2.5 ("otherwise write a thin crate"). Hand it to S10
-  / Phase 1a.
+  / Phase 1a *(Re-plan 2026-11-02: Phase 1)*.
 - **Pin iroh exactly** (`=1.4.x`) while using `unstable-custom-transports`. Each iroh upgrade needs a
   re-run of `iroh-probe tunnel` (add it to CI).
 - **The "no public infrastructure" CI test** ([ADR-0003](../decisions/0003-transport.md)) can be this

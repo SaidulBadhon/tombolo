@@ -1,6 +1,7 @@
 # Architecture
 
-> Status: **proposed** — for review before any implementation starts.
+> Status: **current plan** — the Standard-first re-plan was approved 2026-11-02; Phase 0 results may still change
+> details.
 > Evidence for every claim here is in [`research/`](research/); key decisions are recorded as ADRs in
 > [`decisions/`](decisions/).
 >
@@ -164,8 +165,9 @@ debugging.
    pairs with Wireless debugging **on the phone** and starts the helper itself, without the Mac — the approach
    Shizuku documents for Android 11+ (previously "Path C", planned for 1.0). The same path restarts the helper
    after a reboot. If the user already runs Shizuku, Tombolo can use it.
-2. **From the Mac (Phase 3, optional)** — the Mac's `ADBKit` connects over Wireless or USB debugging, pushes the
-   helper payload, and starts it, as scrcpy does. No Mac-started helper exists before Phase 3.
+2. **From the Mac (developers only)** — the Mac's `ADBKit` connects over Wireless or USB debugging, pushes the
+   helper payload, and starts it, as scrcpy does. This is tooling for spikes and debugging, not a user setup path;
+   users set Advanced mode up from the phone app.
 
 The Advanced setup screen says that, while Wireless debugging is on, any ADB-authorised controller can drive the
 phone whatever Tombolo's scopes say, and offers to turn debugging off when Advanced mode is turned off

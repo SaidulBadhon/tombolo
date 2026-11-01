@@ -38,7 +38,7 @@
 3. **scrcpy is healthy and moving fast, but its protocol is officially unstable.**
    - Releases: 4.0 (2026-05-12, SDL3, `--flex-display`), 4.1 (2026-07-12), and 5.0 / 5.0.1 (2026-10-05 / 10-08, hardware decoding including VideoToolbox) [verified].
    - develop.md says the client/server protocol "must be considered internal: it may (and will) change at any time". The server **refuses to run unless the client version matches exactly**.
-   - Every third-party client (AirSync, droidMirroring, Tango, QtScrcpy, scrcpy-mask) handles this the same way: **bundle and pin a specific `scrcpy-server` build, or maintain a fork of it.** Tombolo must do the same.
+   - Every third-party client (AirSync, droidMirroring, Tango, QtScrcpy, scrcpy-mask) handles this the same way: **bundle and pin a specific `scrcpy-server` build, or maintain a fork of it.** Tombolo must do the same. *(Re-plan 2026-11-02: this applies only to the optional Advanced mode, 0.3; the first release uses no scrcpy-server — [ADR-0008](../decisions/0008-standard-mode-first.md).)*
 4. **Individual app windows on any Android phone without OEM privileges is only practical through ADB shell privileges.** That means scrcpy-style virtual displays (`--new-display` / `--start-app`). Phone Link, Phone Hub and the OEM Mac apps get the same result through system-signed OEM components. So Tombolo's "app windows" feature implies a **USB debugging / Wireless debugging setup step**, unless a no-dev-mode fallback tier is built.
    - **LinkMyMac** (commercial, about €15 one-time) already ships exactly this two-tier model [reported]:
      - "Standard Mirroring" with no dev mode, using MediaProjection plus AccessibilityService
