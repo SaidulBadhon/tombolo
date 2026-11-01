@@ -7,8 +7,8 @@
 | **Pass criteria** | [Implementation plan §0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes), S8: "Documented prompts and failure modes" (else: design onboarding around them). P0-10: a self-signed menu-bar test app that listens/browses on the LAN — when the Local Network prompt appears, failure modes when denied, behaviour of incoming-only connections. Brief: ad-hoc, self-signed and unsigned variants; confirm that unsigned is killed |
 | **Spike code** | [`spikes/s08-macos-permissions/`](../../spikes/s08-macos-permissions/README.md) at `d7802477501176a3e2cb64ec20d21e93bf10106a` (runs T0–T9 used its ancestors from `54d6b8116f2f866412e1f16fdb1700bf5370874e`; the probe only gained steps, see Method) |
 | **Author(s)** | P0-10 agent (Claude), for the maintainer |
-| **Date(s) run** | 2026-10-26 (01:23–04:01 local time, UTC+6) |
-| **Status** | draft — non-interactive part complete; the deny/re-allow steps are waiting on the maintainer ([manual steps](#manual-steps-for-the-maintainer)) |
+| **Date(s) run** | 2026-10-26 (01:23–04:01 local time, UTC+6); maintainer checks M1/M4 on the same day |
+| **Status** | draft — non-interactive part complete. Maintainer checks on 2026-10-26: M1 was answered Allow by mistake (kept as evidence for "pending → allowed"), and the follow-up toggle attempt is unresolved ([observations](#observations-not-findings)). "Denied" rows stay blocked until M1/M2 are rerun on a fresh bundle ID ([manual steps](#manual-steps-for-the-maintainer)) |
 
 ## Question
 
@@ -96,7 +96,7 @@ Evidence for every row is in [`results/`](../../spikes/s08-macos-permissions/res
 | `NWConnection` TCP | `waiting(posix(50 ENETDOWN))`, `currentPath.unsatisfiedReason = localNetworkDenied`, for as long as it waits (8.4 s in T11) | `preparing`/`waiting(posix(65))`, path **satisfied** |
 | BSD UDP `connect()` + `send()` | connect = 0, **send → `EPIPE` (32)** (T11) — and the probe process **died 4 ms later** (log ends; no termination line, no crash report). **Probable SIGPIPE**: `EPIPE` raises SIGPIPE, whose default action kills the process. T14 shows the probe dies the same way on a SIGPIPE it provoked itself. Now logged; confirmation in M1 | connect = 0, send → `EHOSTDOWN` (64) |
 | `NWBrowser` | `ready`, 0 results; **no `waiting(PolicyDenied)`** in 8.4 s (T11 — but nothing was advertising, so "0 results" is not proof of blocking; T12's attempt to fix that was invalid) | `ready`, found the advertisement (T9) |
-| After the user clicks Allow | T8: the waiting `NWConnection` moved to `preparing`, path satisfied, **3.16 s after it started, without a relaunch** | — |
+| After the user clicks Allow | T8: the waiting `NWConnection` moved to `preparing` with a satisfied path **0.72 s after the click** (`nehelper … User responded with local network: 1` at 01:32:22.054; path satisfied at 01:32:22.778), without a relaunch. M1x (maintainer, S15 AdHoc Probe): the same, **0.21 s after the click** (click 04:43:31.559; satisfied 04:43:31.764; [notes](../../spikes/s08-macos-permissions/results/m1x-lnp-prompt-clicked-allow/NOTE.txt)) | — |
 
 **Allowed state and controls** (T9/T10 after a person clicked Allow; T14 needs no network)
 
@@ -130,27 +130,45 @@ are inferred from behaviour, not documented by Apple.
 
 ### Human interaction observed
 
-A person at the Mac answered these alerts during the runs. They were not asked to, and nothing was clicked by
-the agent:
+Nothing was clicked by the agent. During the agent's runs a person at the Mac answered alerts without being
+asked (rows up to 03:47:59); the last two rows are from the maintainer's checklist session:
 
 | Time (local) | Alert | Answer | Evidence |
 |---|---|---|---|
 | 01:23:50.9 / 01:25:40.6 | TCC Documents folder, S08 AdHoc / S08 SelfSigned | Allow | `tccd AUTHREQ_RESULT … authValue=2, authReason=2` in T1/T2 excerpts. Both grants were reset afterwards with `tccutil` |
 | ≈01:29:50 | Firewall, S08 AdHoc | Allow | `socketfilterfw --listapps` → "Allow incoming connections" |
-| 01:32:22.8 | **Local Network, S08 AdHoc** | Allow | T8 probe log: path satisfied at +3265 ms; rule `allowed` |
+| 01:32:22.054 | **Local Network, S08 AdHoc** | Allow | `nehelper … User responded with local network: 1` (T8 `system-excerpt.log`); path satisfied 0.72 s later; rule `allowed` |
 | 03:37:45–03:38:37 | **Local Network, S08 SelfSigned** (left pending by T11) | Allow | rule `allowed` from T12 on |
 | 03:41:40–03:47:59 | Firewall, S08 SelfSigned (left pending by T13) | Allow | `--listapps` |
+| 04:43:31.559 | **Local Network, S15 AdHoc Probe** (checklist M1, which asked for Don't Allow) | Allow, **by mistake** | `results/m1x-lnp-prompt-clicked-allow/` (renamed from `m1a-…`); rule `allowed`. The m1b/m1c runs that followed measured the allowed state and were set aside, not committed |
+| 12:23–12:26 | Accessibility prompt, S15 Probe (checklist M4) | stopped before granting | `results/m4-ax-grant-selfsigned-1.0.0/`: `AXIsProcessTrusted=false` for the whole 180 s wait |
+
+### Observations (not findings)
+
+- **System Settings toggle had no visible effect (M1 redo, 2026-10-26, unresolved).** After the accidental
+  Allow, the maintainer turned "S15 AdHoc Probe" **off** in System Settings › Privacy & Security › Local
+  Network twice, the second time also quitting System Settings. Per the orchestrator's notes, neither attempt
+  changed `/Library/Preferences/com.apple.networkextension.plist` (its mtime stayed at the time of the Allow
+  click), and fresh probes afterwards still saw `path.status=satisfied`. Either the toggle does not take effect
+  on macOS 27.0.1, or a different entry was toggled. These runs are not in the repository. M1/M2 now use a
+  fresh bundle ID (`…spike.s15adhoc2`) so the deny path can be measured cleanly.
+- **macOS 27 names the Accessibility pane differently.** The M4 prompt is titled "Device Control and Data
+  Access" and reads '"S15 Probe" would like to control this Mac and access your data'. "Open System Settings"
+  opened a Privacy & Security page with that title; the window titles are in M4's `windows.log`. The
+  checklist's wording now matches.
 
 ## Verdict
 
 | # | Criterion (as written in the plan) | Verdict | Evidence |
 |---|---|---|---|
-| 1 | Self-signed menu-bar test app that listens/browses on the LAN (plus ad-hoc and unsigned variants) | **pass** | `Sources/main.swift`, `build.sh`; static signature table |
-| 2 | Unsigned variant: expected to be killed on Apple silicon — confirm | **pass** | T0: `open` fails (POSIX 163, "Security policy would not allow process"); direct exec SIGKILL (137); no prompt of any kind |
-| 3 | When the Local Network prompt appears | **pass** | Not at launch (T1, T2). Not for listening/accepting TCP or receiving/replying UDP to this Mac (T5, T6). Not for traffic to the Mac's own IP (T7, `lo0`). **Yes at the first outbound on-link connection (T8) and the first Bonjour browse (T11)**, for ad-hoc **and** self-signed. It is shown while the app is in the background (`LSUIElement`), and it stays up after the process exits |
-| 4 | Failure modes while undetermined / pending | **pass** | Table "What fails while the alert is pending": BSD `EHOSTUNREACH` immediately; `NWConnection` `waiting` + `localNetworkDenied`; UDP `send` `EPIPE`; browser `ready`/empty (no `PolicyDenied` seen — weak, nothing was advertising); the process probably died of SIGPIPE after the UDP `EPIPE` (T11, T14); a waiting `NWConnection` recovers by itself after Allow (T8) |
-| 5 | Failure modes when **denied** (Don't Allow) and after re-allowing in System Settings | **blocked — needs the maintainer** ([M1, M2](#manual-steps-for-the-maintainer)) | Every alert answered so far was answered Allow |
-| 6 | Behaviour of incoming-only connections | **partial: pass for "no Local Network prompt" when the peer is this Mac; blocked — needs a second LAN device** for a remote peer | T5/T6 accepted and replied without a prompt, but the peer's traffic went over `lo0`, so a remote phone was not tested. On this Mac **the Application Firewall prompts on the first inbound flow** for ad-hoc and self-signed apps and holds the connection until answered (T13) |
+| 1 | Self-signed menu-bar test app that listens/browses on the LAN (plus ad-hoc and unsigned variants) | pass | `Sources/main.swift`, `build.sh`; static signature table |
+| 2 | Unsigned variant: expected to be killed on Apple silicon — confirm | pass | T0: `open` fails (POSIX 163, "Security policy would not allow process"); direct exec SIGKILL (137); no prompt of any kind |
+| 3 | When the Local Network prompt appears | pass | Not at launch (T1, T2). Not for listening/accepting TCP or receiving/replying UDP to this Mac (T5, T6). Not for traffic to the Mac's own IP (T7, `lo0`). **Yes at the first outbound on-link connection (T8) and the first Bonjour browse (T11)**, for ad-hoc **and** self-signed. It is shown while the app is in the background (`LSUIElement`), and it stays up after the process exits |
+| 4 | Failure modes while undetermined / pending | pass | Table "What fails while the alert is pending": BSD `EHOSTUNREACH` immediately; `NWConnection` `waiting` + `localNetworkDenied`; UDP `send` `EPIPE`; browser `ready`/empty (no `PolicyDenied` seen — weak, nothing was advertising); the process probably died of SIGPIPE after the UDP `EPIPE` (T11, T14); a waiting `NWConnection` recovers by itself after Allow (T8: 0.72 s; M1x: 0.21 s after the click) |
+| 5a | Failure modes when **denied** (Don't Allow) | blocked — needs a person | M1, rerun on `s15adhoc2` after a build. Every Local Network alert so far was answered Allow, including M1 by mistake. Turning the entry off in System Settings had no observable effect ([observations](#observations-not-findings)) |
+| 5b | Recovery after re-allowing in System Settings | blocked — needs a person | M2, after M1. Recovery after Allow in the **alert** is measured (row 4); recovery after the System Settings switch is not |
+| 6a | Incoming-only connections, peer on this Mac: no Local Network prompt | pass | Ad-hoc T5 (TCP) and T6 (UDP receive + reply) accepted and answered without a prompt; self-signed T13 showed only the firewall prompt. On this Mac **the Application Firewall prompts on the first inbound flow** for ad-hoc and self-signed apps, and holds the connection until answered (T13) |
+| 6b | Incoming-only connections from a remote LAN device | blocked — needs a remote LAN device | The peer's traffic went over `lo0` (T7), so no remote device was tested |
 
 **Coverage:** one Mac, macOS 27.0.1 only. Not covered:
 
@@ -166,7 +184,8 @@ the agent:
   - Trigger the Local Network alert at a moment of intent, for example the pairing screen. A Bonjour browse or an
     on-link UDP connect (TN3179's trick) does it. Keep the process alive until the user answers, because of
     FB16131937.
-  - Detect denial per API:
+  - Detect missing access per API (measured while the alert was pending; the explicitly denied state is not
+    measured yet, see verdict 5a):
     - `NWConnection`: `currentPath.unsatisfiedReason == .localNetworkDenied`.
     - BSD sockets (the Rust core: iroh/tokio): **an immediate `EHOSTUNREACH` on an on-link address means "Local
       Network not allowed"**, not "phone unreachable". The core must surface it as a distinct error.
@@ -184,24 +203,27 @@ the agent:
 - **Testing guidance for later spikes:** never use the Mac's own IP as the "LAN peer" (it is `lo0`). Use
   `lan-target.py` or a second device. Each fresh Local Network test needs a fresh bundle ID until macOS 27.2.
 - Follow-ups:
-  1. M1/M2 by the maintainer — denied failure modes, and recovery after re-allowing.
+  1. M1/M2 by the maintainer on the fresh `s15adhoc2` ID (needs a build) — denied failure modes, and recovery
+     after re-allowing. That also settles whether the System Settings switch takes effect on 27.0.1
+     ([observation](#observations-not-findings)).
   2. Remote-peer incoming test (UDP replies, QUIC) once the phone is available — P0-14 (S4) is the natural owner.
   3. Repeat T8/T11 on macOS 27.2 and the minimum supported macOS 14 before 1.0.
 
 ## Manual steps for the maintainer
 
-Run everything from `spikes/s08-macos-permissions/`. Build first if `build/` is missing: `./build.sh`. Each
-script prints what to click, waits, and writes its evidence to `results/<label>/`. No step needs a keychain
-trust change.
+Run everything from `spikes/s08-macos-permissions/`. **Build first** (`./build.sh`). M1/M2 need the
+`S15 AdHoc2 Probe` bundles added after the 2026-10-26 session. Each script prints what to click, waits, and
+writes its evidence to `results/<label>/`. No step needs a keychain trust change. Status after 2026-10-26: M1
+was answered Allow by mistake (kept as `m1x-…`); M4 was stopped before granting; the rest have not run.
 
 | # | Run | What to click | What to observe | Evidence |
 |---|---|---|---|---|
-| M1 | `./checklist.sh m1-lnp-deny` | In "Allow "S15 AdHoc Probe" to find devices on local networks?" click **Don't Allow** | Script prints `rule for s15adhoc is now denied`. Then, for 1.0.0 and after the update to 1.0.1, expect: `udpconnect-nosigpipe … send() = -1 errno 32`, then `!!! SIGPIPE received` on the plain `udpconnect` (confirms T11's cause), BSD connect `EHOSTUNREACH` immediately, `NWConnection` `waiting` with `localNetworkDenied`, and possibly `browse … waiting(dns(-65570 = kDNSServiceErr_PolicyDenied))`. **1.0.1 should still be denied** (rule keyed by identifier) | `results/m1a-…`, `m1b-lnp-denied-1.0.0`, `m1c-lnp-denied-after-update-1.0.1` |
-| M2 | `./checklist.sh m2-lnp-reallow` | Within 2 min: **System Settings › Privacy & Security › Local Network**, turn **on** "S15 AdHoc Probe" | Script prints `rule … allowed`. The probe log shows the waiting `nwconnect` change from `localNetworkDenied` to a satisfied path **without a relaunch** | `results/m2-lnp-reallow/` |
+| M1 | `./checklist.sh m1-lnp-deny` | In "Allow "S15 AdHoc2 Probe" to find devices on local networks?" click **Don't Allow** (the left button) | Script prints `rule for =.spike.s15adhoc2 is now denied`. It refuses to start if that ID already has a decision, and stops before m1b/m1c unless the rule really is denied. Then, for 1.0.0 and after the update to 1.0.1, expect: `udpconnect-nosigpipe … send() = -1 errno 32`, then `!!! SIGPIPE received` on the plain `udpconnect` (confirms T11's cause), BSD connect `EHOSTUNREACH` immediately, `NWConnection` `waiting` with `localNetworkDenied`, and possibly `browse … waiting(dns(-65570 = kDNSServiceErr_PolicyDenied))`. **1.0.1 should still be denied** (rule keyed by identifier) | `results/m1a-…`, `m1b-lnp-denied-1.0.0`, `m1c-lnp-denied-after-update-1.0.1` |
+| M2 | `./checklist.sh m2-lnp-reallow` | Within 2 min: **System Settings › Privacy & Security › Local Network**, turn **on** "S15 AdHoc2 Probe" | Script prints `rule … allowed`, and the probe log shows the waiting `nwconnect` change from `localNetworkDenied` to a satisfied path **without a relaunch**. If the rule does not change, record it: that matches the [toggle observation](#observations-not-findings) | `results/m2-lnp-reallow/` |
 | M3 | `./checklist.sh m3-lnp-allow-s15` | In "Allow "S15 Probe" …" click **Allow** | Script prints `rule for =.spike.s15 is now allowed`. For 1.0.1, expect no alert window, BSD connect `EINPROGRESS`/timeout (not `EHOSTUNREACH`), and a satisfied path | `results/m3a-…`, `m3b-lnp-allowed-after-update-1.0.1` |
-| M4 | `./checklist.sh m4-ax-grant selfsigned` | In "S15 Probe would like to control this computer using accessibility features" click **Open System Settings**, turn **on** "S15 Probe" under Privacy & Security › Accessibility, then confirm with Touch ID or password | Script prints `ax-wait: AXIsProcessTrusted changed to true` | `results/m4-ax-grant-selfsigned-1.0.0/` |
-| M5 | `./checklist.sh m5-ax-update selfsigned` | Nothing for 20 s; then open Privacy & Security › Accessibility | Expected: `AXIsProcessTrusted=true` for 1.0.1, and "S15 Probe" still listed and on | `results/m5-ax-update-selfsigned-1.0.1/` |
+| M4 | `./checklist.sh m4-ax-grant selfsigned` | The prompt is titled "Device Control and Data Access" ("S15 Probe" would like to control this Mac and access your data). Click **Open System Settings**. On the page that opens ("Device Control and Data Access" on macOS 27; "Accessibility" on older macOS), turn **on** "S15 Probe" and confirm with Touch ID or password. Keep going until the switch is on | Script prints `ax-wait: AXIsProcessTrusted changed to true` and stops (it waits up to 3 min) | `results/m4-ax-grant-selfsigned-1.0.0/` (the 2026-10-26 attempt, not granted, is already there; a rerun overwrites it) |
+| M5 | `./checklist.sh m5-ax-update selfsigned` | Nothing for 20 s; then open Privacy & Security › Device Control and Data Access | Expected: `AXIsProcessTrusted=true` for 1.0.1, and "S15 Probe" still listed and on | `results/m5-ax-update-selfsigned-1.0.1/` |
 | M6 | `./checklist.sh m4-ax-grant adhoc` | As M4, for **"S15 AdHoc Probe"** | `AXIsProcessTrusted changed to true` | `results/m4-ax-grant-adhoc-1.0.0/` |
-| M7 | `./checklist.sh m5-ax-update adhoc` | Nothing for 20 s; then look at the Accessibility list | Expected: `AXIsProcessTrusted=false` for 1.0.1 (the DR is the old cdhash). **Note whether the list still shows "S15 AdHoc Probe" as on** — a stale toggle is the user-visible trap | `results/m5-ax-update-adhoc-1.0.1/` |
-| M8 | `./checklist.sh status`, then commit: `git add spikes/s08-macos-permissions/results && git commit -m "S08/S15: maintainer checklist evidence"` | — | Hand back to an agent to update the verdicts above and in [S15](s15-update-persistence.md) | the commit |
+| M7 | `./checklist.sh m5-ax-update adhoc` | Nothing for 20 s; then look at the Device Control and Data Access list | Expected: `AXIsProcessTrusted=false` for 1.0.1 (the DR is the old cdhash). **Note whether the list still shows "S15 AdHoc Probe" as on** — a stale toggle is the user-visible trap | `results/m5-ax-update-adhoc-1.0.1/` |
+| M8 | `./checklist.sh status`. Then **inspect every new `results/*/window-*.png`**: keep only an alert window, crop out anything else (`sips -c <h> <w> --cropOffset <y> <x>`), and drop any that show a name, account picture or another app. Add **specific** directories (`git add spikes/s08-macos-permissions/results/<dir>`) — screenshots are gitignored, so each kept one needs `git add -f <file>` — then commit | — | Hand back to an agent to update the verdicts above and in [S15](s15-update-persistence.md) | the commit |
 | M9 | `./cleanup.sh --yes` | Then **System Settings › Network › Firewall › Options…**, select "S08 AdHoc" and "S08 SelfSigned" (and any "S15 …"), click **−** — or run the `sudo socketfilterfw --remove …` lines the script prints | The script prints what it removed: login items, TCC records (`tccutil`), LaunchServices registrations, logs. **Local Network entries can't be removed on 27.0.1**; on 27.2+: Privacy & Security › Local Network, select, **−**. Optional: `tools/signing/remove-identity.sh --yes` | script output |
