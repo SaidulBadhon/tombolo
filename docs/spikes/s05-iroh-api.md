@@ -8,7 +8,7 @@
 | **Spike code** | `spikes/s04-transport/` (`iroh-probe/`, `tcp-tunnel/`, `size-*/`, `scripts/s5-egress.sh`): binaries built from `7b73e1b40b3aa1ba5145704401271090f85dd3aa`, egress script and results at `60c0a0d834f339c124f53f6ad1077eb21df4adec` |
 | **Author(s)** | Claude (agent) for the maintainer |
 | **Date(s) run** | 2026-10-26 |
-| **Status** | complete for the Mac; phone-side checks blocked — needs phone |
+| **Status** | draft — Mac rows pass; phone rows blocked — needs phone |
 
 ## Question
 
@@ -98,7 +98,7 @@ iroh **1.4.1** and noq **1.4.0**, both `MIT OR Apache-2.0` (crates.io API, check
 | Tombolo config, sandboxed, 20 s hold | denied outbound attempts (`log show`, reports + "N duplicate reports") | session completed (`exit_code=0`, `exporter_match=true`, `done=true`, final path `127.0.0.1`); **7** denied attempts, **all** `remote:*:1`; none to port 53, 443, 1900 or 3478 | [`egress-sandbox-tombolo.txt`](../../spikes/s04-transport/results/s5/egress-sandbox-tombolo.txt), [`.denials`](../../spikes/s04-transport/results/s5/egress-sandbox-tombolo.txt.denials) |
 | `presets::N0` (control), sandboxed | same | **51 843** denied attempts: 50 209 × `:53` (DNS), 1621 × `:443` (relays, HTTPS probes), 12 × `:1`, 1 × `:1900` (UPnP SSDP) | [`egress-sandbox-n0.txt`](../../spikes/s04-transport/results/s5/egress-sandbox-n0.txt) |
 | Tombolo config, unsandboxed | `lsof -i` / `nettop` at 10 s | 4 UDP sockets (`*:port`), **no TCP connections**, every `nettop` row `lo0 Loop` (e.g. `udp4 *:50403 … lo0, 136081 B in / 133532 B out`); final path `127.0.0.1:50403` | [`egress-observed-tombolo.txt`](../../spikes/s04-transport/results/s5/egress-observed-tombolo.txt) |
-| `presets::N0` (control), unsandboxed | `lsof -i` / `nettop` at 10 s | 26 UDP sockets, 20 TCP connections to the network's resolver `172.20.10.1:53` and UDP rows on `en0` (DNS was failing at that moment, so no relay was reached). In the first run of the same script (01:31, at `8b63874`): 5 TLS connections to n0 relays `49.13.207.244:443` and `5.223.65.62:443` over `en0`, and the connection **migrated** from `127.0.0.1` to the Mac's public IPv6 address | [`egress-observed-n0.txt`](../../spikes/s04-transport/results/s5/egress-observed-n0.txt); first run: `git show 8b63874:spikes/s04-transport/results/s5/egress-observed-n0.txt` |
+| `presets::N0` (control), unsandboxed | `lsof -i` / `nettop` at 10 s | 100 UDP sockets and 20 TCP connections, the TCP ones to the network's resolver `172.20.10.1:53` and UDP rows on `en0` (DNS was failing at that moment, so no relay was reached). In the first run of the same script (01:31, at `8b63874`): 5 TLS connections to n0 relays `49.13.207.244:443` and `5.223.65.62:443` over `en0`, and the connection **migrated** from `127.0.0.1` to the Mac's public IPv6 address | [`egress-observed-n0.txt`](../../spikes/s04-transport/results/s5/egress-observed-n0.txt); first run: `git show 8b63874:spikes/s04-transport/results/s5/egress-observed-n0.txt` |
 | QUIC over the TCP tunnel, sandboxed, 1 GiB | same as row 1 | completed (`exit=0`, `tunnel_exporter_match=true`, 1 073 741 824 B delivered); 1 denied attempt, `remote:*:1` | [`tunnel-sandboxed.txt`](../../spikes/s04-transport/results/s5/tunnel-sandboxed.txt) |
 
 The `remote:*:1` attempts in the Tombolo runs come from `netdev` (via `netwatch`). It finds the default
@@ -148,7 +148,7 @@ limit. Its latency under load depends on the congestion controller and the FIFOs
 | Stream priority | `SendStream::set_priority(i32)` / `priority()`; higher first; equal priorities round-robin when `send_fairness` (default true) (`noq-1.4.0/src/send_stream.rs:230`) | `stream_priority_roundtrip=true`. In S4, priorities keep control/video ahead of bulk on the sender (see the S4 result) |
 | RFC 9221 datagrams | `send_datagram(Bytes)`, `send_datagram_wait`, `read_datagram()`, `max_datagram_size()`, `datagram_send_buffer_space()` (`connection.rs:995–1050`); oversize → `SendDatagramError::TooLarge` | `max_datagram_size=Some(1414)` on loopback after path-MTU discovery (1452 B UDP payload; starts from the 1200 B minimum); over the tunnel 1288–1382 B; a 1414 B datagram round-tripped; 1415 B → `TooLarge`; send buffer 1 MiB (`1048544`). Opus packets (≈ 330 B) fit with room to spare |
 | Per-stream reset / stop | `SendStream::reset(VarInt)`, `RecvStream::stop(VarInt)`, `received_reset()`, `SendStream::stopped()` (`send_stream.rs:213,255`, `recv_stream.rs:288,338`) | client reset with 42 → server `ReadError::Reset(42)` (`server_saw_reset_code=Some(42)`) |
-| Stats / RTT | `Connection::stats()` (packets, bytes, lost packets/bytes, frame counts), `rtt(PathId)`, `paths()` → per path `rtt()`, `stats()` (`cwnd`, `congestion_events`, …), `congestion_state(PathId)` (`connection.rs:1056–1197`) | `quic_rtt_path0=Some(105.686µs)`, `stats_sent_packets=204`, `stats_lost_packets=0`, path `rtt=105.686µs cwnd=61026`; in S4, QUIC's lost-packet count matched the proxy's drop count exactly (e.g. 252 vs 252) |
+| Stats / RTT | `Connection::stats()` (packets, bytes, lost packets/bytes, frame counts), `rtt(PathId)`, `paths()` → per path `rtt()`, `stats()` (`cwnd`, `congestion_events`, …), `congestion_state(PathId)` (`connection.rs:1056–1197`) | `quic_rtt_path0=Some(105.686µs)`, `stats_sent_packets=204`, `stats_lost_packets=0`, path `rtt=105.686µs cwnd=61026`; in S4, QUIC's lost-packet count matched the proxy's drop count exactly, e.g. `loss1 quic` seed 1: proxy lost 220, QUIC lost 220; `clean quic` seed 1: 5311 queue drops, QUIC lost 5311 ([`summary.md`, path checks](../../spikes/s04-transport/results/s4/summary.md#path-checks-quic-runs)) |
 | Congestion controller choice | `QuicTransportConfig::builder().congestion_controller_factory(...)` with noq-proto `CubicConfig` (default), `NewRenoConfig`, `Bbr3Config` | used by S4 (`--cc cubic|bbr3`) |
 
 ### Q6 — binary size (macOS arm64, stripped)
@@ -156,9 +156,9 @@ limit. Its latency under load depends on the congestion controller and the FIFOs
 | Variant | profile `size` (LTO, opt s, strip, abort) | profile `release` + strip |
 |---|---|---|
 | `size-baseline` (tokio UDP echo) | 0.35 MiB (370 464 B) | 0.53 MiB (554 032 B) |
-| `size-min` (iroh, `tls-ring` only) | **3.30 MiB** (3 458 448 B) → **+2.95 MiB** | 8.70 MiB (9 121 824 B) → +8.2 MiB |
+| `size-min` (iroh, `tls-ring` only) | **3.30 MiB** (3 458 448 B) → **+2.94 MiB** | 8.70 MiB (9 121 824 B) → +8.2 MiB |
 | `size-min --features full` (iroh default features) | 3.85 MiB (4 038 752 B) → +3.5 MiB | 10.63 MiB (11 149 376 B) → +10.1 MiB |
-| **Android arm64** (`aarch64-linux-android`, NDK 29, API 26), profile `size`: baseline / min / full | 0.36 MiB (375 568 B) / **4.16 MiB** (4 362 224 B) → **+3.81 MiB** / 4.75 MiB (4 981 880 B) | not measured |
+| **Android arm64** (`aarch64-linux-android`, NDK 29, API 26), profile `size`: baseline / min / full | 0.36 MiB (375 568 B) / **4.16 MiB** (4 362 224 B) → **+3.80 MiB** / 4.75 MiB (4 981 880 B) → +4.39 MiB | not measured |
 
 Raw: [`results/s5/size/sizes.txt`](../../spikes/s04-transport/results/s5/size/sizes.txt),
 [`results/s5/size/android.txt`](../../spikes/s04-transport/results/s5/size/android.txt) (Android binaries need only
@@ -172,15 +172,19 @@ a `.so` with UniFFI scaffolding (what the apps load) is S10's measurement. For c
 
 | # | Criterion (as written in the plan) | Verdict | Evidence |
 |---|---|---|---|
-| 1 | iroh/noq endpoint with default relays and DNS discovery **disabled** (direct addresses only) | **pass** (Mac) | Q2 config + `connect_ms=1.09`, `done=true` with `EndpointAddr` holding only an IP |
-| 2 | Works / verified with **outbound Internet blocked** | **pass** on the Mac (sandbox-exec run completes, no denied attempt towards DNS, relays, STUN/QAD or UPnP; the only denials are two packet-less route lookups to non-routable addresses). Phone side: **blocked — needs phone** (same check from the Android build, phone without Internet) | Q2 table |
-| 3 | TLS exporter available | **pass** in the Rust API. **Not** in iroh-ffi 1.2.0 → needs our own thin UniFFI crate | Q3 |
-| 4 | Custom-transport hooks (QUIC over an adb TCP tunnel) | **pass** on Mac loopback, **with a caveat**: only behind `unstable-custom-transports` (no semver guarantee) → pin the exact iroh version and keep the tunnel in our crate. Over real `adb forward`: **blocked — needs phone** | Q4 |
+| 1a | iroh/noq endpoint with default relays and DNS discovery **disabled** (direct addresses only) — Mac | **pass** | Q2 config; `iroh-probe api` → `connect_ms=1.09`, `done=true`, with an `EndpointAddr` holding only an IP |
+| 1b | Same, Android build on the phone | **blocked — needs phone** | the Android binary builds (Q6); not run on a device |
+| 2a | Works / verified with **outbound Internet blocked** — Mac | **pass** | Q2: under `sandbox-exec` the session completes. The only denied operations are **seven** packet-less route lookups (`remote:*:1`); nothing goes to DNS, relays, STUN/QAD or UPnP. The control run trips the same detector 51 843 times |
+| 2b | Same check from the phone, with the phone offline from the Internet | **blocked — needs phone** | — |
+| 3a | TLS exporter available — Mac | **pass** | Q3: `exporter_match=true` (IP and tunnel). Not in iroh-ffi 1.2.0 → needs our own thin UniFFI crate |
+| 3b | TLS exporter on the phone (Android build) | **blocked — needs phone** | — |
+| 4a | Custom-transport hooks (QUIC over a TCP tunnel) — Mac loopback | **pass** | Q4: one- and two-process runs. Caveat: only behind `unstable-custom-transports` (no semver guarantee) → pin the exact iroh version and keep the tunnel in our crate |
+| 4b | QUIC over a real `adb forward` | **blocked — needs phone** | procedure: S4 `scripts/phone-runs.sh` (USB block) |
 | 5 | Priorities, RFC 9221 datagrams (max size), per-stream reset, stats/RTT | **pass** | Q5 |
-| 6 | Binary size of a minimal endpoint (P3) | **measured**: +2.95 MiB macOS arm64 and +3.81 MiB Android arm64 (stripped, LTO, opt-level s, executable) | Q6 |
+| 6 | Binary size of a minimal endpoint, release + stripped (P3) | **pass** | Q6: macOS arm64 +2.94 MiB (size profile) / +8.2 MiB (plain release + strip); Android arm64 +3.80 MiB (size profile). Executables; a UniFFI `.so` is S10's measurement |
 
-**Overall (§0.C pass criterion "all available or patchable in a thin crate"): pass.** Everything Tombolo
-needs is in iroh's Rust API. Three things are missing from the official FFI: the exporter, custom transports
+**Overall, §0.C pass criterion "all available or patchable in a thin crate": pass on the Mac.** The phone rows
+are still blocked. Everything Tombolo needs is in iroh's Rust API. Three things are missing from the official FFI: the exporter, custom transports
 and the portmapper/net-report switches (`grep portmapper|net_report` over iroh-ffi's `src/` finds only a
 status field). That is the thin crate the ADR anticipated.
 
@@ -208,7 +212,10 @@ phone without Internet and over a real `adb forward` was not done.
   migrated off the dialled address to a public IPv6 address. For Tombolo this is LAN-only traffic to an
   already-paired peer, but it means: (a) bind to the interfaces we intend to use; (b) the S4 harness had to put
   the two sides on different address families so they could not bypass the impairment proxy; (c) the
-  Phase 2 privacy review should note that the peer learns all bound local addresses.
+  Phase 2 privacy review should note that the peer learns all bound local addresses; (d) **untested:** this
+  advertising and probing may itself raise the macOS **Local Network** alert when the endpoint is created or
+  connects, and the peer's probes may raise the Application Firewall prompt. The phone runs record both (S4
+  `scripts/phone-runs.sh`, prerequisites 5–6).
 - Jumbo QUIC packets over the tunnel are **not explored**. A quick try with `initial_mtu(16000)` hung at the
   handshake; the default (path-MTU discovery up to 1452 B) is what S4 measured.
 - When the tunnel's TCP socket closes, noq logs `I/O error: All transports failed to receive`. A production
