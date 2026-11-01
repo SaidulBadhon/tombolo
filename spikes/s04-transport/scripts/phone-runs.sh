@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Spike S4 on the real phone — DEFERRED (needs the phone + Android toolchain session).
 # Runs the same workload as the loopback matrix, phone side as an `adb shell` process
 # (shell uid; no app install needed), Mac side local:

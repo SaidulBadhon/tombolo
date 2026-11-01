@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Cross-compile the S4 bench for the phone (arm64 Android, API 26+), without cargo-ndk.
 #   NDK=~/Library/Android/sdk/ndk/<ver> ./scripts/build-android.sh
 # Output: target/android/aarch64-linux-android/release/bench

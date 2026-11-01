@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Transport setup. Three ways to carry the same four channels (control, video, audio,
 //! bulk) between "phone" (listener, media sender) and "Mac" (connector, controller):
 //!

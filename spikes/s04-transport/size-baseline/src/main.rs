@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Baseline for the size measurement: the same runtime (tokio current-thread) doing a UDP
 //! echo over loopback, without iroh/noq/rustls/ring.
 use tokio::net::UdpSocket;

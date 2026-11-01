@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Synthetic Tombolo session workload and its metrics.
 //!
 //! Phone → Mac: 1080p60-sized video (P-frames 25–40 KB, keyframe 200–300 KB every 2 s) with

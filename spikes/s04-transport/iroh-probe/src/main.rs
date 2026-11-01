@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Spike S5 — iroh 1.4.1 / noq 1.4.0 API probe for Tombolo.
 //!
 //! Subcommands:

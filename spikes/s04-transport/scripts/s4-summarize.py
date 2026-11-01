@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Spike S4 — summarise results/s4/raw/*.json into Markdown tables (stdlib only).
 
 Usage: python3 -I scripts/s4-summarize.py [results/s4/raw] > results/s4/summary.md

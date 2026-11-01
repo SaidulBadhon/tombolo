@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Spike S5 — prove that Tombolo's iroh configuration makes no outbound connections to
 # public infrastructure, using two independent detectors:
 #   1. sandbox-exec with a profile that denies every non-loopback outbound operation;

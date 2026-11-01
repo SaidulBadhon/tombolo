@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Spike: an iroh **custom transport** that carries QUIC packets over one TCP stream.
 //!
 //! This models Tombolo's USB path: `adb forward` only carries TCP, so QUIC packets are

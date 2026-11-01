@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Spike S4 — run the Mac-only loopback matrix.
 #   SEEDS="1 2 3" ./scripts/s4-run-matrix.sh        (≈ 25 s per run, 20 runs per seed)
 #   WIFI_CONDS=burst3 RUN_USB=0 ./scripts/s4-run-matrix.sh   (a subset)

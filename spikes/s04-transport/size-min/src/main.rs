@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Smallest useful Tombolo-style endpoint: no relays, no address lookup, direct address
 //! only; one connection with a bi stream, a datagram and a TLS exporter call, so none of
 //! that code is dead-stripped.

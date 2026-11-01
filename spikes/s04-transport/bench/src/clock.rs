@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! One clock for all three processes (driver/proxy, phone, Mac): CLOCK_MONOTONIC_RAW is
 //! system-wide on macOS, so one-way latencies between processes on this Mac need no
 //! clock-offset estimation.

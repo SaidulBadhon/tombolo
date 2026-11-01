@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Spike S4 benchmark driver.
 //!
 //!   bench run --transport quic|tcp|tunnel --cond clean|jitter|loss1|burst3|cap100|usb

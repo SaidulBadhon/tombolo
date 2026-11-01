@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 //! Network conditions and the shared per-direction link model used by both proxies.
 
 use crate::clock::Rng;
