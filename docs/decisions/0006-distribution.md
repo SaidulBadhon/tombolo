@@ -1,7 +1,7 @@
 # ADR-0006: Distribution without paid services
 
 - **Status:** Proposed
-- **Date:** 2026-10-25
+- **Date:** 2026-10-25 · amended 2026-11-02 ([below](#amendment-2026-11-02-android-distribution-from-01))
 
 ## Context
 - **macOS:** unsigned arm64 code won't run at all; ad-hoc-signed downloads fail Gatekeeper and need *System
@@ -34,3 +34,36 @@ Evidence: [`research/03`](../research/03-macos-feasibility.md#8-distribution-wit
 ## Consequences
 - Install friction on macOS until a Developer ID is funded (documented, illustrated install guide).
 - The webcam feature waits for a Developer ID (camera extensions need notarization).
+
+## Amendment 2026-11-02: Android distribution from 0.1
+This is recorded in [ADR-0008](0008-standard-mode-first.md)
+([re-plan §2](../plans/standard-first.md#2-decision-proposed), [§5](../plans/standard-first.md#5-estimates-provisional-budgeting-ranges-not-commitments),
+[§8](../plans/standard-first.md#8-explicitly-not-doing)). The text above stays as decided. Where it conflicts with
+this amendment, the amendment applies.
+
+- **Android public distribution is needed for 0.1.**
+  - The first release now contains the Android app (previously 0.2), so the `foss` flavour must be publicly
+    installable from **0.1 Mirror**.
+  - Channels: **GitHub Releases and F-Droid first.** The F-Droid build moves from Phase 4 into 0.1's distribution
+    work, together with Android signing and verification.
+  - F-Droid's re-signing conflict with developer verification (*Context*) is still unresolved, and the F-Droid
+    channel depends on resolving it.
+- **Google Play is deferred.** No `play` flavour is decided now, because of the Accessibility policy risk. The
+  *Decision* above scheduled `play` "from 1.0"; it is now deferred with no date.
+- **The funding timing still holds, but it is reached sooner.**
+  - The 2026-10-26 decision is to pay "once there are real users".
+  - 0.1 is now the first release with Android users, so that point comes with 0.1, not 0.2.
+  - Limited distribution (20 devices) cannot carry a public release. Unregistered apps need ADB or the "advanced
+    flow" (*Context*), and a release built to need no developer options should not depend on either.
+  - So the one-time $25 full-distribution registration is needed before 0.1 reaches users in regions where
+    developer verification is enforced, and everywhere once it goes global (2027).
+  - The Mac side is unchanged: the Mac app was already part of 0.1.
+- **Sideloading affects 0.1's onboarding** ([re-plan §2, "What it costs"](../plans/standard-first.md#what-it-costs)):
+  - Sideloaded installs may need *Allow restricted settings* before Accessibility can be enabled. Whether F-Droid
+    installs are exempt is a hypothesis that spike S6 tests.
+  - Android 17 Advanced Protection restricts sideloading and revokes non-tool accessibility services.
+    Distributing through GitHub and F-Droid does not avoid that.
+
+  Onboarding covers both.
+- **Mac: unchanged.** Releases ship as a DMG on GitHub Releases and through our own Homebrew tap. 0.1 adds the Local
+  Network and Application Firewall steps to onboarding.
