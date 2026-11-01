@@ -29,8 +29,9 @@ can never be turned into a paywalled closed fork while keeping the protocol open
 
 ## Decision
 - **Tombolo is licensed under GPL-3.0-or-later** — full text in [`LICENSE`](../../LICENSE).
-- **The protocol specification** ([`docs/protocol.md`](../protocol.md)) **and the schemas in `proto/`** (once
-  they exist) are licensed under **Apache-2.0** — text in [`LICENSES/Apache-2.0.txt`](../../LICENSES/Apache-2.0.txt) —
+- **The protocol specification** ([`docs/protocol.md`](../protocol.md)), **the security specification in
+  `docs/security/`** (added 2026-11-01) **and the schemas in `proto/`** (once they exist) are licensed under
+  **Apache-2.0** — text in [`LICENSES/Apache-2.0.txt`](../../LICENSES/Apache-2.0.txt) —
   so anyone can build a compatible client or server under any licence.
 - Third-party code keeps its own licence and notices (e.g. scrcpy's Apache-2.0 `NOTICE` once the helper is
   forked); every dependency must be GPL-3.0-compatible.

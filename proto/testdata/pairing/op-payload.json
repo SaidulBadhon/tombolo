@@ -1,0 +1,277 @@
+{
+  "description": "Side-effect payload hashes (op_hash) for every op kind, UUIDv7 op_id layout and the acceptance window.",
+  "spec": "docs/security/pairing-and-session.md section 11",
+  "generator": "tools/pairing-vectors (cargo run --release)",
+  "conventions": "Byte strings are lowercase hex. Transcripts list each field and the full enc() encoding. TLS exporter values, endpoint IDs, nonces, secrets and private scalars are fixed stand-ins (no live TLS session exists in the generator). Signatures use RFC 6979 deterministic nonces; real hardware signatures differ and must be tested by verification.",
+  "op_id_format": "UUIDv7 (RFC 9562): first 48 bits = Unix time in ms (op_time)",
+  "acceptance_clock": "acc_now = max(wall clock, last persisted acc_now), never decreases",
+  "op_id_time_ms": 1793000000000,
+  "ops": [
+    {
+      "kind": "send-sms",
+      "op_id": "01a17720-ca00-7f10-8eed-c120aa554184",
+      "payload": {
+        "subscription_id": 2,
+        "address": [
+          "+15551230001",
+          "+15551230002"
+        ],
+        "text": "Running 5 min late 🙂"
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/send-sms",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca007f108eedc120aa554184"
+          },
+          {
+            "name": "subscription_id",
+            "hex": "00000002"
+          },
+          {
+            "name": "addresses",
+            "hex": "000000020000000c2b31353535313233303030310000000c2b3135353531323330303032"
+          },
+          {
+            "name": "text",
+            "hex": "52756e6e696e672035206d696e206c61746520f09f9982"
+          }
+        ],
+        "encoded": "00000016746f6d626f6c6f2f6f702f76312f73656e642d736d73000000040000001001a17720ca007f108eedc120aa554184000000040000000200000024000000020000000c2b31353535313233303030310000000c2b31353535313233303030320000001752756e6e696e672035206d696e206c61746520f09f9982"
+      },
+      "op_hash": "a4dd19995de3a8fca60630aa1b92b08e100856c4ce71bdff5363f89d0517060d"
+    },
+    {
+      "kind": "call-action",
+      "op_id": "01a17720-ca00-72e3-8f13-27c73f8d2294",
+      "payload": {
+        "call_id": "call-7",
+        "action": "END (3)"
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/call-action",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca0072e38f1327c73f8d2294"
+          },
+          {
+            "name": "call_id",
+            "hex": "63616c6c2d37"
+          },
+          {
+            "name": "action",
+            "hex": "03"
+          }
+        ],
+        "encoded": "00000019746f6d626f6c6f2f6f702f76312f63616c6c2d616374696f6e000000030000001001a17720ca0072e38f1327c73f8d22940000000663616c6c2d370000000103"
+      },
+      "op_hash": "b22922bde31d1582eaa70186556cc4ac2b17b46a76eafb1058e9cbd4c76af176"
+    },
+    {
+      "kind": "dial",
+      "op_id": "01a17720-ca00-72c7-86ca-5f7cf6d776f3",
+      "payload": {
+        "number": "+15551230003"
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/dial",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca0072c786ca5f7cf6d776f3"
+          },
+          {
+            "name": "number",
+            "hex": "2b3135353531323330303033"
+          }
+        ],
+        "encoded": "00000012746f6d626f6c6f2f6f702f76312f6469616c000000020000001001a17720ca0072c786ca5f7cf6d776f30000000c2b3135353531323330303033"
+      },
+      "op_hash": "c65f93d68ff98a2e1456ea3c9828e6348940950538d9a69a43e2ac1f81a4bfc5"
+    },
+    {
+      "kind": "notification-action",
+      "op_id": "01a17720-ca00-78c6-9931-0a49eaa12191",
+      "payload": {
+        "key": "0|com.example.chat|42|null|10123",
+        "action_id": "reply",
+        "reply_text": "On my way"
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/notification-action",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca0078c699310a49eaa12191"
+          },
+          {
+            "name": "key",
+            "hex": "307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233"
+          },
+          {
+            "name": "action_id",
+            "hex": "7265706c79"
+          },
+          {
+            "name": "reply_text",
+            "hex": "00000001000000094f6e206d7920776179"
+          }
+        ],
+        "encoded": "00000021746f6d626f6c6f2f6f702f76312f6e6f74696669636174696f6e2d616374696f6e000000040000001001a17720ca0078c699310a49eaa1219100000020307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233000000057265706c790000001100000001000000094f6e206d7920776179"
+      },
+      "op_hash": "4263d046d8d47020d9ab9d8f35999bdafc2111989adc5685564a2c8a2d41e78c"
+    },
+    {
+      "kind": "notification-action",
+      "op_id": "01a17720-ca00-7764-87c3-854c6a90a4c6",
+      "payload": {
+        "key": "0|com.example.chat|42|null|10123",
+        "action_id": "mark_read",
+        "reply_text": null
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/notification-action",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca00776487c3854c6a90a4c6"
+          },
+          {
+            "name": "key",
+            "hex": "307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233"
+          },
+          {
+            "name": "action_id",
+            "hex": "6d61726b5f72656164"
+          },
+          {
+            "name": "reply_text",
+            "hex": "00000000"
+          }
+        ],
+        "encoded": "00000021746f6d626f6c6f2f6f702f76312f6e6f74696669636174696f6e2d616374696f6e000000040000001001a17720ca00776487c3854c6a90a4c600000020307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233000000096d61726b5f726561640000000400000000"
+      },
+      "op_hash": "1c09147e0b4b5d6f1e6dbcfe67f36431188f5ec18e3db7d329faea3336c7dd4d"
+    },
+    {
+      "kind": "notification-action",
+      "op_id": "01a17720-ca00-7b09-9961-b02bb4aae547",
+      "payload": {
+        "key": "0|com.example.chat|42|null|10123",
+        "action_id": "reply",
+        "reply_text": ""
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/notification-action",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca007b099961b02bb4aae547"
+          },
+          {
+            "name": "key",
+            "hex": "307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233"
+          },
+          {
+            "name": "action_id",
+            "hex": "7265706c79"
+          },
+          {
+            "name": "reply_text",
+            "hex": "0000000100000000"
+          }
+        ],
+        "encoded": "00000021746f6d626f6c6f2f6f702f76312f6e6f74696669636174696f6e2d616374696f6e000000040000001001a17720ca007b099961b02bb4aae54700000020307c636f6d2e6578616d706c652e636861747c34327c6e756c6c7c3130313233000000057265706c79000000080000000100000000"
+      },
+      "op_hash": "8e340303eefeccf7f126044ae557aaf1b3811642b277e9c30d5611c74e9f5547"
+    },
+    {
+      "kind": "file-offer",
+      "op_id": "01a17720-ca00-7b4f-b11b-aab7be569712",
+      "payload": {
+        "transfer_id": "23263c07-6bee-7bed-a88e-e2c0de5f8a06",
+        "items": [
+          {
+            "name": "photo.jpg",
+            "size": 2345678,
+            "mime": "image/jpeg",
+            "blake3": "02366a5a19382f70772ed579c7a7f91c057f2ff6fd06507b1d3cd31490022e91"
+          },
+          {
+            "name": "notes.txt",
+            "size": 512,
+            "mime": "text/plain",
+            "blake3": "243a7ee7b4784dcc913eaf8827a18daabc61d9f7442be35d3665b71c269664d6"
+          }
+        ]
+      },
+      "transcript": {
+        "label": "tombolo/op/v1/file-offer",
+        "fields": [
+          {
+            "name": "op_id",
+            "hex": "01a17720ca007b4fb11baab7be569712"
+          },
+          {
+            "name": "transfer_id",
+            "hex": "23263c076bee7beda88ee2c0de5f8a06"
+          },
+          {
+            "name": "items",
+            "hex": "000000020000004f000000040000000970686f746f2e6a706700000008000000000023cace0000000a696d6167652f6a7065670000002002366a5a19382f70772ed579c7a7f91c057f2ff6fd06507b1d3cd31490022e910000004f00000004000000096e6f7465732e7478740000000800000000000002000000000a746578742f706c61696e00000020243a7ee7b4784dcc913eaf8827a18daabc61d9f7442be35d3665b71c269664d6"
+          }
+        ],
+        "encoded": "00000018746f6d626f6c6f2f6f702f76312f66696c652d6f66666572000000030000001001a17720ca007b4fb11baab7be5697120000001023263c076bee7beda88ee2c0de5f8a06000000aa000000020000004f000000040000000970686f746f2e6a706700000008000000000023cace0000000a696d6167652f6a7065670000002002366a5a19382f70772ed579c7a7f91c057f2ff6fd06507b1d3cd31490022e910000004f00000004000000096e6f7465732e7478740000000800000000000002000000000a746578742f706c61696e00000020243a7ee7b4784dcc913eaf8827a18daabc61d9f7442be35d3665b71c269664d6"
+      },
+      "op_hash": "3dcd6ea6ff2ef0d68079717ebf46bc7507cdc7ce4b658f55cc5f07e2eea3fc04"
+    }
+  ],
+  "acceptance_window": [
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793432000000,
+      "case": "5 days old",
+      "execute": true
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793518399999,
+      "case": "6 days - 1 ms old",
+      "execute": true
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793518400000,
+      "case": "exactly 6 days old",
+      "execute": false
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1792913600001,
+      "case": "1 day - 1 ms in the future",
+      "execute": true
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1792913600000,
+      "case": "exactly 1 day in the future",
+      "execute": false
+    }
+  ],
+  "pruning": [
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793604799999,
+      "case": "7 days - 1 ms after op_time",
+      "may_prune": false
+    },
+    {
+      "op_time_ms": 1793000000000,
+      "acc_now_ms": 1793604800000,
+      "case": "exactly 7 days after op_time",
+      "may_prune": true
+    }
+  ]
+}
