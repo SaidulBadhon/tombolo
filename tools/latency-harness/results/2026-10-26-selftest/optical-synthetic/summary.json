@@ -1,0 +1,116 @@
+{
+  "displayedDifferenceMs" : {
+    "max" : 50,
+    "mean" : 44.38287292817677,
+    "min" : 33.3,
+    "n" : 543,
+    "p50" : 50,
+    "p50CI" : [
+      50,
+      50
+    ],
+    "p95" : 50,
+    "p95CI" : [
+      50,
+      50
+    ],
+    "p99" : 50,
+    "p99CI" : [
+      50,
+      50
+    ],
+    "sd" : 7.885746719566376
+  },
+  "fpsUsed" : 240,
+  "frames" : 720,
+  "framesWithMacReference" : 720,
+  "framesWithMirror" : 720,
+  "framesWithPhone" : 543,
+  "latencyAllMs" : {
+    "max" : 41.666666666666664,
+    "mean" : 41.61985018726602,
+    "min" : 33.333333333333336,
+    "n" : 178,
+    "p50" : 41.666666666666664,
+    "p50CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "p95" : 41.666666666666664,
+    "p95CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "p99" : 41.666666666666664,
+    "p99CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "sd" : 0.6246097408298803
+  },
+  "latencyMs" : {
+    "max" : 45.83333333333333,
+    "mean" : 45.78625235404884,
+    "min" : 41.666666666666664,
+    "n" : 177,
+    "p50" : 45.83333333333333,
+    "p50CI" : [
+      45.83333333333333,
+      45.83333333333333
+    ],
+    "p95" : 45.83333333333333,
+    "p95CI" : [
+      45.83333333333333,
+      45.83333333333333
+    ],
+    "p99" : 45.83333333333333,
+    "p99CI" : [
+      45.83333333333333,
+      45.83333333333333
+    ],
+    "sd" : 0.44165160534187164
+  },
+  "latencyStrictMs" : {
+    "max" : 41.666666666666664,
+    "mean" : 41.666666666666664,
+    "min" : 41.666666666666664,
+    "n" : 2,
+    "p50" : 41.666666666666664,
+    "p50CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "p95" : 41.666666666666664,
+    "p95CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "p99" : 41.666666666666664,
+    "p99CI" : [
+      41.666666666666664,
+      41.666666666666664
+    ],
+    "sd" : 0
+  },
+  "macReferenceMeasuredFps" : 239.9945047757882,
+  "macReferenceResidualMs" : 0.22152756723468903,
+  "mirrorTrackCentre" : [
+    425.3159604722699,
+    190.10323460974973
+  ],
+  "mode" : "optical",
+  "nominalFps" : 240,
+  "notes" : [
+    "tracks separated by position; phone = track showing newer values (543 vs 0 frames)",
+    "each sample is quantised to camera frames: ±4.17 ms (one frame at 240.00 fps)",
+    "used = strict samples + samples where one undecodable transition frame preceded a first appearance (counted as the appearance); strict = no such frame on either track; all = first decoded frames, uncorrected"
+  ],
+  "perSampleUncertaintyMs" : 4.166666666666667,
+  "phoneTrackCentre" : [
+    127.11721386943265,
+    155.5140978044534
+  ],
+  "samplesAll" : 178,
+  "samplesStrict" : 2,
+  "samplesUsed" : 177
+}
