@@ -1,0 +1,71 @@
+{
+  "captureIntervalMedianMs" : 16.666583,
+  "captureIntervalP99Ms" : 16.67270998,
+  "decodeMicrosMedian" : 7,
+  "decodeMicrosP99" : 29,
+  "decodeRate" : 1,
+  "deliveryDelayMedianMs" : 2.6814165,
+  "framesDecoded" : 1805,
+  "framesTotal" : 1805,
+  "kinds" : [
+    {
+      "clock" : {
+        "boundMs" : 0.4896249999997817,
+        "driftContributionMs" : 0.00789740253733746,
+        "driftPPM" : 0.46258250628463665,
+        "driftSEPPM" : 0.33677292450169827,
+        "fittedDrift" : true,
+        "offsetMs" : 52688334.877147205,
+        "referencePhoneMs" : 17661.215,
+        "residualMs" : 0.007164405489672581,
+        "rttMedianAllMs" : 1.1397290000000004,
+        "rttMedianKeptMs" : 0.9194579999982537,
+        "rttMinMs" : 0.8791669999991997,
+        "samplesTotal" : 198,
+        "spanS" : 23.450230000000005,
+        "windowsUsed" : 9
+      },
+      "excludedOutliers" : 0,
+      "kind" : "page",
+      "latencyMs" : {
+        "max" : 20.951931312680244,
+        "mean" : 12.052183769841768,
+        "min" : 10.491098456084728,
+        "n" : 1802,
+        "p50" : 11.801397945731878,
+        "p50CI" : [
+          11.784873425215483,
+          11.82109522242099
+        ],
+        "p95" : 12.679189462587237,
+        "p95CI" : [
+          12.66849921158515,
+          12.687946923077106
+        ],
+        "p99" : 12.762776434794068,
+        "p99CI" : [
+          12.739304424345493,
+          19.808169171214104
+        ],
+        "sd" : 0.8540437729651871
+      },
+      "negativeSamples" : 0,
+      "repeats" : 3,
+      "samples" : 1802,
+      "sessionId" : "33e38719",
+      "sessionTag" : 9,
+      "sourceFramesSkipped" : 2,
+      "sourceIntervalMedianMs" : 16.69999999999891,
+      "systematicUncertaintyMs" : 0.5575224025371189,
+      "timerResolutionMs" : 0.019999999999999574,
+      "uncertaintyNotes" : [
+        "tick rounding ±0.05 ms",
+        "clock sync ±0.49 ms (max RTT\/2 of the 9 lowest-RTT windows used; residual 0.01 ms rms)",
+        "clock drift 0.5 ± 0.3 ppm (1 SE) → ±0.01 ms over the run (2 SE × half-span)",
+        "page timer resolution 0.020 ms → ±0.010 ms",
+        "capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)"
+      ]
+    }
+  ],
+  "mode" : "software-timestamp"
+}

@@ -1,0 +1,23 @@
+{
+  "display_id" : 1,
+  "display_max_fps" : 120,
+  "duration_s" : 30,
+  "macos" : "Version 27.0.1 (Build 26A434)",
+  "pixels" : [
+    960,
+    1776
+  ],
+  "point_pixel_scale" : 2,
+  "region_points" : [
+    60,
+    201,
+    480,
+    888
+  ],
+  "source" : "display 1 region (composited)",
+  "start_host_ns" : 52690772910625,
+  "user_scale" : 1,
+  "window_app" : "latency-harness",
+  "window_id" : 5062,
+  "window_title" : "Tombolo latency page selftest-4032"
+}

@@ -1,0 +1,23 @@
+{
+  "display_id" : 1,
+  "display_max_fps" : 120,
+  "duration_s" : 30,
+  "macos" : "Version 27.0.1 (Build 26A434)",
+  "pixels" : [
+    840,
+    576
+  ],
+  "point_pixel_scale" : 2,
+  "region_points" : [
+    1200,
+    581,
+    420,
+    288
+  ],
+  "source" : "display 1 region (composited)",
+  "start_host_ns" : 52725693958083,
+  "user_scale" : 1,
+  "window_app" : "latency-harness",
+  "window_id" : 5070,
+  "window_title" : "Tombolo Mac reference code"
+}
