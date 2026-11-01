@@ -1,0 +1,11 @@
+{
+  "nsPerCall" : {
+    "rust_to_swift_async_callback" : 11766.7729,
+    "rust_to_swift_sync_callback" : 25.410708,
+    "swift_to_rust_async_ready_immediately" : 213.2425,
+    "swift_to_rust_async_with_runtime_wake" : 10807.91665,
+    "swift_to_rust_object_method" : 9.636166,
+    "swift_to_rust_sync_echo_u64" : 6.921875,
+    "swift_to_rust_sync_noop" : 5.925667
+  }
+}

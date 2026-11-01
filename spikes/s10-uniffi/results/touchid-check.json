@@ -1,0 +1,4 @@
+{
+  "handshake" : "refused as expected: Signer(reason: \"signing failed: com.apple.LocalAuthentication -1004: User interaction required.\")",
+  "key_created" : "yes (SE, .privateKeyUsage + .userPresence)"
+}

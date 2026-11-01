@@ -1,0 +1,31 @@
+== S10 media: synthetic 1080p60 stream, 120.0 s per design (P 25–40 KB, key 250 KB every 2 s) ==
+  vec-pull      frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=0/7200
+                latency µs p50=55.0 p95=1380.0 p99=5671.5 p99.9=12867.7 max=17188.5 | >1ms=432 >16.7ms=1
+                cpu=0.48% of a core (0.58 s / 120.0 s) producer=12.3µs/frame mem warm=8.39MB end=7.96MB max=9.63MB growth=-426.0KB handles=0 futures=0
+                consumer: tid=2253843 main=false queue=com.apple.root.default-qos.overcommit name=s10-consumer | load [4.81, 6.69, 7.47] -> [46.87, 20.74, 12.84]
+  vec-async     frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=0/7200
+                latency µs p50=57.6 p95=312.3 p99=4189.5 p99.9=10549.4 max=17196.8 | >1ms=197 >16.7ms=1
+                cpu=0.48% of a core (0.58 s / 120.0 s) producer=18.2µs/frame mem warm=8.21MB end=8.26MB max=8.47MB growth=49.2KB handles=0 futures=0
+                consumer: tid=2270227 main=false queue=com.apple.root.default-qos.cooperative | load [46.87, 20.74, 12.84] -> [60.8, 28.75, 16.69]
+  vec-callback  frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=0/7200
+                latency µs p50=108.5 p95=251.3 p99=2409.5 p99.9=8501.4 max=11069.5 | >1ms=117 >16.7ms=0
+                cpu=0.84% of a core (1.00 s / 120.0 s) producer=16.2µs/frame mem warm=8.39MB end=8.00MB max=8.39MB growth=-393.2KB handles=0 futures=0
+                consumer: tid=2289964 main=false queue=com.apple.root.default-qos.overcommit name=s10-deliver | load [60.8, 28.75, 16.69] -> [19.62, 24.66, 16.73]
+  handle-pull   frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=7200/7200
+                latency µs p50=51.9 p95=99.9 p99=166.2 p99.9=896.9 max=4177.0 | >1ms=7 >16.7ms=0
+                cpu=0.52% of a core (0.63 s / 120.0 s) producer=17.4µs/frame mem warm=8.13MB end=7.80MB max=8.13MB growth=-327.7KB handles=0 futures=0
+                consumer: tid=2296290 main=false queue=com.apple.root.default-qos.overcommit name=s10-consumer | load [19.62, 24.66, 16.73] -> [7.64, 18.82, 15.43]
+  ring-pull     frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=7200/7200
+                latency µs p50=16.5 p95=34.4 p99=64.9 p99.9=267.4 max=530.9 | >1ms=0 >16.7ms=0
+                cpu=0.22% of a core (0.26 s / 120.0 s) producer=10.9µs/frame mem warm=16.32MB end=16.29MB max=16.32MB growth=-32.8KB handles=0 futures=0
+                consumer: tid=2299777 main=false queue=com.apple.root.default-qos.overcommit name=s10-consumer | load [7.64, 18.82, 15.43] -> [2.73, 13.2, 13.64]
+  ring-async    frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=7200/7200
+                latency µs p50=40.6 p95=71.0 p99=104.6 p99.9=393.5 max=1350.0 | >1ms=1 >16.7ms=0
+                cpu=0.41% of a core (0.49 s / 120.0 s) producer=21.6µs/frame mem warm=16.32MB end=16.29MB max=16.32MB growth=-32.8KB handles=0 futures=0
+                consumer: tid=2274273 main=false queue=com.apple.root.default-qos.cooperative | load [2.73, 13.2, 13.64] -> [1.75, 9.38, 12.06]
+  ring-callback frames=7200/7200 drops=0 gaps=0 bad=0 zero-copy=7200/7200
+                latency µs p50=21.3 p95=39.5 p99=65.0 p99.9=296.5 max=4848.9 | >1ms=1 >16.7ms=0
+                cpu=0.27% of a core (0.32 s / 120.0 s) producer=11.6µs/frame mem warm=16.34MB end=16.34MB max=16.34MB growth=0.0KB handles=0 futures=0
+                consumer: tid=2306580 main=false queue=com.apple.root.default-qos.overcommit name=s10-deliver | load [1.75, 9.38, 12.06] -> [2.71, 7.27, 10.87]
+wrote results/media-2min.json
+exit=0

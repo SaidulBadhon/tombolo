@@ -1,0 +1,58 @@
+{
+  "runs" : [
+    {
+      "detail" : "verified=true",
+      "fingerprint" : "0a2ffd9cd68b9ae9fef20b2ee759933e151b0a8cdf37ebe1137aec4cf32fbbb4",
+      "name" : "SE key, DER signature (first)",
+      "ok" : true,
+      "signUs" : 4798,
+      "signatureFormat" : "der",
+      "signatureLen" : 71,
+      "totalUs" : 6153
+    },
+    {
+      "detail" : "all verified",
+      "name" : "50 repeated handshakes (25 DER + 25 raw)",
+      "ok" : true
+    },
+    {
+      "detail" : "verified=true by Rust p256",
+      "fingerprint" : "b90219610af3de867ddc009744cd07765ae1c5a872c6e1fdff95c152bb4e9784",
+      "name" : "SE key, raw r||s signature",
+      "ok" : true,
+      "signUs" : 4524,
+      "signatureFormat" : "raw",
+      "signatureLen" : 64,
+      "totalUs" : 4969
+    },
+    {
+      "detail" : "threw Verify(reason: \"ECDSA verification failed: signature error\")",
+      "name" : "NEGATIVE: tampered message (must be rejected)",
+      "ok" : true
+    }
+  ],
+  "secureEnclaveAvailable" : true,
+  "signUsPercentiles" : {
+    "count" : 50,
+    "max" : 4633,
+    "mean" : 4537.54,
+    "min" : 4474,
+    "p50" : 4535,
+    "p90" : 4587,
+    "p95" : 4626,
+    "p99" : 4633,
+    "p999" : 4633
+  },
+  "threads" : {
+    "rust_after_foreign_future_completed" : "tid=2874205 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt",
+    "rust_export_future_first_poll" : "tid=2874161 main=false queue=com.apple.root.default-qos.cooperative",
+    "rust_runtime_task_calls_signer" : "tid=2874205 main=false queue=com.apple.root.default-qos.overcommit name=s10-core-rt",
+    "swift_secure_enclave_worker" : "tid=2874161 main=false queue=s10.secure-enclave.sign",
+    "swift_sign_method_entry" : "tid=2874161 main=false queue=com.apple.root.default-qos.cooperative"
+  },
+  "verifyHelper" : {
+    "bit_flipped_signature" : false,
+    "other_key" : false,
+    "valid_signature" : true
+  }
+}

@@ -1,0 +1,29 @@
+[package]
+name = "s10-core"
+version = "0.0.0"
+edition = "2024"
+license = "GPL-3.0-or-later"
+publish = false
+description = "Spike S10: UniFFI integration (throwaway spike code)"
+
+[lib]
+name = "s10_core"
+crate-type = ["staticlib", "cdylib", "lib"]
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+
+[dependencies]
+async-trait = "0.1.92"
+getrandom = "0.4.3"
+libc = "0.2.191"
+p256 = { version = "0.14.0", features = ["ecdsa"] }
+parking_lot = "0.13.0"
+sha2 = "0.11.1"
+thiserror = "2.0.21"
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "time", "sync", "macros"] }
+uniffi = { version = "0.32.2", features = ["cli", "tokio"] }
+
+[profile.release]
+debug = 1

@@ -1,0 +1,4 @@
+[bindings.swift]
+module_name = "S10Core"
+ffi_module_name = "S10CoreFFI"
+ffi_module_filename = "S10CoreFFI"

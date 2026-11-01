@@ -1,0 +1,5 @@
+.build/
+.generated/
+rust-lib/
+Sources/S10Core/
+Sources/S10CoreFFI/
