@@ -1,0 +1,6 @@
+launch: 2026-10-26 01:23:18 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 Unsigned.app" --args --run "info;sleep:5"
+The application cannot be opened for an unexpected reason, error=Error Domain=RBSRequestErrorDomain Code=5 "Launch failed." UserInfo={NSLocalizedFailureReason=Launch failed., NSUnderlyingError=0x74b501c750 {Error Domain=NSPOSIXErrorDomain Code=163 "Unknown error: 163" UserInfo={NSLocalizedDescription=Launchd job spawn failed}}}
+open exit: 1
+probe pids after 8s: none
+
+direct exec (from agent shell): "build/s08/S08 Unsigned.app/Contents/MacOS/TomboloProbe" --run "info;quit" -> exit 137 (SIGKILL), no log written

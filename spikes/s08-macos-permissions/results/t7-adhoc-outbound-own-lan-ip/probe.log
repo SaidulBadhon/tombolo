@@ -1,0 +1,27 @@
+2026-10-25T19:31:39.338Z +72.9ms [adhoc 1.0.1 pid 22510] launched; args=["--run", "bsdconnect:10.59.232.41:52100:5;nwconnect:10.59.232.41:52100:8;udpconnect:10.59.232.41:52100;sleep:8", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t7-adhoc-outbound-own-lan-ip/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t7-adhoc-outbound-own-lan-ip/probe.log
+2026-10-25T19:31:39.345Z +80.6ms [adhoc 1.0.1 pid 22510] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:31:39.346Z +80.7ms [adhoc 1.0.1 pid 22510] STEP bsdconnect:10.59.232.41:52100:5
+2026-10-25T19:31:39.346Z +80.9ms [adhoc 1.0.1 pid 22510] bsdconnect 10.59.232.41:52100 connect() returned -1 errno 36 Operation now in progress after 0.1ms
+2026-10-25T19:31:39.346Z +81.1ms [adhoc 1.0.1 pid 22510] bsdconnect 10.59.232.41:52100 completed after 0.3ms: connected
+2026-10-25T19:31:39.346Z +81.2ms [adhoc 1.0.1 pid 22510] bsdconnect 10.59.232.41:52100 send() = 22
+2026-10-25T19:31:39.373Z +107.7ms [adhoc 1.0.1 pid 22510] bsdconnect 10.59.232.41:52100 reply: pong from peer
+2026-10-25T19:31:39.373Z +107.9ms [adhoc 1.0.1 pid 22510] STEP nwconnect:10.59.232.41:52100:8
+2026-10-25T19:31:39.374Z +109.4ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 state=preparing after 1.2ms path.status=satisfied via=lo0 remote=10.59.232.41:52100
+2026-10-25T19:31:39.375Z +109.8ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 state=ready after 1.8ms path.status=satisfied via=lo0 local=10.59.232.41:52281 remote=10.59.232.41:52100
+2026-10-25T19:31:39.375Z +109.9ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 send: ok
+2026-10-25T19:31:39.377Z +112.1ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 reply: pong from peer
+2026-10-25T19:31:39.377Z +112.2ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 end after 4.1ms: state=ready path.status=satisfied via=lo0 local=10.59.232.41:52281 remote=10.59.232.41:52100
+2026-10-25T19:31:39.377Z +112.2ms [adhoc 1.0.1 pid 22510] STEP udpconnect:10.59.232.41:52100
+2026-10-25T19:31:39.377Z +112.3ms [adhoc 1.0.1 pid 22510] nwconnect 10.59.232.41:52100 state=cancelled after 4.3ms path=nil
+2026-10-25T19:31:39.377Z +112.4ms [adhoc 1.0.1 pid 22510] udpconnect 10.59.232.41:52100 connect() = 0
+2026-10-25T19:31:39.377Z +112.5ms [adhoc 1.0.1 pid 22510] udpconnect 10.59.232.41:52100 send() = 19
+2026-10-25T19:31:39.378Z +112.7ms [adhoc 1.0.1 pid 22510] STEP sleep:8
+2026-10-25T19:31:47.665Z +8400.6ms [adhoc 1.0.1 pid 22510] script finished

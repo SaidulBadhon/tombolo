@@ -1,0 +1,4 @@
+launch: 2026-10-26 01:28:46 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app" --args --run "info;docwrite:/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/s15-tcc-documents-adhoc-1.0.1/docwrite.txt;sleep:10"
+open exit: 0
+probe pids after 14s: 20999
+windows 2 s after quitting the probe: (see windows.log; non-alert windows not recorded)

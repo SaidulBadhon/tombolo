@@ -1,0 +1,8 @@
+build/
+results/*/system.log
+results/*/.windows-baseline
+results/*/.windows-raw
+results/*/run.out
+# Screenshots can contain personal data (names, account photos, other apps' notifications).
+# Never add them in bulk: inspect and crop each one, then `git add -f <file>`.
+results/*/*.png

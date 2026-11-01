@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:41:14 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app" --args --run "listen:52031;sleep:20"
+open exit: 0
+probe pids after 20s: 81397
+alert windows 2 s after quitting the probe: NEW owner=UserNotificationCenter pid=73937 layer=8 size=260x282 id=5013 title=

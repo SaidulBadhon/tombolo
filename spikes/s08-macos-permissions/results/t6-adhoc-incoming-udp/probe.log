@@ -1,0 +1,21 @@
+2026-10-25T19:31:02.266Z +91.0ms [adhoc 1.0.1 pid 22094] launched; args=["--run", "udpecho:52012:20;sleep:20", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t6-adhoc-incoming-udp/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t6-adhoc-incoming-udp/probe.log
+2026-10-25T19:31:02.274Z +99.0ms [adhoc 1.0.1 pid 22094] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:31:02.275Z +99.1ms [adhoc 1.0.1 pid 22094] STEP udpecho:52012:20
+2026-10-25T19:31:02.275Z +99.4ms [adhoc 1.0.1 pid 22094] udpecho:52012 bind() = 0
+2026-10-25T19:31:02.275Z +99.4ms [adhoc 1.0.1 pid 22094] STEP sleep:20
+2026-10-25T19:31:06.059Z +3883.7ms [adhoc 1.0.1 pid 22094] udpecho:52012 received 18 bytes from 10.59.232.41:62644: udp ping from peer
+2026-10-25T19:31:06.060Z +3884.3ms [adhoc 1.0.1 pid 22094] udpecho:52012 reply sendto(10.59.232.41:62644) = 19
+2026-10-25T19:31:10.092Z +7916.2ms [adhoc 1.0.1 pid 22094] udpecho:52012 received 18 bytes from 127.0.0.1:55939: udp ping from peer
+2026-10-25T19:31:10.092Z +7916.8ms [adhoc 1.0.1 pid 22094] udpecho:52012 reply sendto(127.0.0.1:55939) = 19
+2026-10-25T19:31:14.760Z +12585.1ms [adhoc 1.0.1 pid 22094] udpecho:52012 received 18 bytes from 10.59.232.41:57675: udp ping from peer
+2026-10-25T19:31:14.761Z +12585.6ms [adhoc 1.0.1 pid 22094] udpecho:52012 reply sendto(10.59.232.41:57675) = 19
+2026-10-25T19:31:22.768Z +20592.2ms [adhoc 1.0.1 pid 22094] udpecho:52012 stopped after 20 s
+2026-10-25T19:31:23.275Z +21099.5ms [adhoc 1.0.1 pid 22094] script finished

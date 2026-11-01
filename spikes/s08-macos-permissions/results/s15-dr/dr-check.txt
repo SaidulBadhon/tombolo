@@ -1,0 +1,52 @@
+S15 DR check - 2026-10-26 04:02:13 +0600 - 27.0.1 (26A434)
+
+Bundles
+  selfsigned-1.0.0/S15 Probe.app
+    Identifier=io.github.saidulbadhon.tombolo.spike.s15
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
+    Authority=Tombolo Development (self-signed)
+    TeamIdentifier=not set
+    CDHash=39fe13dd8483d43049cb4ae4834f7375bb325d78
+    MachO-UUID=6D76B3DD-2AAB-3F98-8290-22AFF046AD0F
+    DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+  selfsigned-1.0.1/S15 Probe.app
+    Identifier=io.github.saidulbadhon.tombolo.spike.s15
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
+    Authority=Tombolo Development (self-signed)
+    TeamIdentifier=not set
+    CDHash=5fae511ecf1a2dd688884141e9e7486afd6a8c4c
+    MachO-UUID=5F0E0085-99B0-396D-9BBB-FC156E93D1C5
+    DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+  adhoc-1.0.0/S15 AdHoc Probe.app
+    Identifier=io.github.saidulbadhon.tombolo.spike.s15adhoc
+    CodeDirectory v=20500 size=718 flags=0x10002(adhoc,runtime) hashes=15+3 location=embedded
+    TeamIdentifier=not set
+    CDHash=02acd9fb8e01692744eae834c0971f0bd2906e1e
+    MachO-UUID=828C71C5-2139-3D61-A6EE-F860A39A481A
+    DR: cdhash H"02acd9fb8e01692744eae834c0971f0bd2906e1e"
+  adhoc-1.0.1/S15 AdHoc Probe.app
+    Identifier=io.github.saidulbadhon.tombolo.spike.s15adhoc
+    CodeDirectory v=20500 size=718 flags=0x10002(adhoc,runtime) hashes=15+3 location=embedded
+    TeamIdentifier=not set
+    CDHash=b7103c10a895e14f9616bb896ff68f34ceee3381
+    MachO-UUID=4BC75631-6D51-3862-8923-C8DD6FFC44DB
+    DR: cdhash H"b7103c10a895e14f9616bb896ff68f34ceee3381"
+
+Does the update satisfy the DR of the version the user granted?
+  self-signed: 1.0.1 against 1.0.0's DR (update)             S15 Probe.app: explicit requirement satisfied
+  self-signed: 1.0.0 against 1.0.1's DR (downgrade)          S15 Probe.app: explicit requirement satisfied
+  ad-hoc:      1.0.1 against 1.0.0's DR (update)             test-requirement: code failed to satisfy specified code requirement(s)
+  ad-hoc:      1.0.0 against 1.0.1's DR (downgrade)          test-requirement: code failed to satisfy specified code requirement(s)
+  cross:       self-signed 1.0.1 against ad-hoc 1.0.0's DR   test-requirement: code failed to satisfy specified code requirement(s)
+
+Impostor: same identifier, different self-signed certificate
+  impostor copy of 1.0.1
+    Identifier=io.github.saidulbadhon.tombolo.spike.s15
+    CodeDirectory v=20500 size=713 flags=0x10000(runtime) hashes=15+3 location=embedded
+    Authority=S15 Impostor (self-signed)
+    TeamIdentifier=not set
+    CDHash=714142511785a570d5f5f595f0537cc22a56dfcb
+    MachO-UUID=5F0E0085-99B0-396D-9BBB-FC156E93D1C5
+    DR: identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"d9806d68fbb82b58a566da1fa888b7aa6ae94e54"
+  impostor 1.0.1 against genuine 1.0.0's DR                  test-requirement: code failed to satisfy specified code requirement(s)
+  (impostor keychain and its login-keychain password item deleted)

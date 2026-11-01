@@ -1,0 +1,4 @@
+launch: 2026-10-26 04:43:25 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/adhoc/S15 AdHoc Probe.app" --args --run "browse:_tombolo-test._tcp:5;nwconnect:10.239.98.254:9:170;quit"
+open exit: 0
+probe exited by t+170s
+probe pids at end of watch: none

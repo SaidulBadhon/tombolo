@@ -1,0 +1,23 @@
+2026-10-25T19:25:39.061Z +88.1ms [selfsigned 1.0.0 pid 18238] launched; args=["--run", "info;sleep:12", "--log", "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/t2-selfsigned-launch-only/probe.log"] log=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/t2-selfsigned-launch-only/probe.log
+2026-10-25T19:25:40.621Z +1648.4ms [selfsigned 1.0.0 pid 18238] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=7070DB81-F71F-3D25-8F5B-C8E776CD6B70
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=a540ddfd95ba6e1c6e4bd8ef16f5ffa5e7afcdfe
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:25:40.622Z +1648.7ms [selfsigned 1.0.0 pid 18238] STEP info
+2026-10-25T19:25:40.628Z +1654.6ms [selfsigned 1.0.0 pid 18238] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=7070DB81-F71F-3D25-8F5B-C8E776CD6B70
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=a540ddfd95ba6e1c6e4bd8ef16f5ffa5e7afcdfe
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:25:40.628Z +1654.7ms [selfsigned 1.0.0 pid 18238] STEP sleep:12

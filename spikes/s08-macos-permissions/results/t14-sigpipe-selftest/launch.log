@@ -1,0 +1,4 @@
+launch: 2026-10-26 04:01:27 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app" --args --run "selftest-sigpipe;sleep:3;quit"
+open exit: 0
+probe exited by t+3s
+probe pids at end of watch: none

@@ -1,0 +1,24 @@
+2026-10-25T19:28:47.292Z +101.2ms [adhoc 1.0.1 pid 20999] launched; args=["--run", "info;docwrite:/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/s15-tcc-documents-adhoc-1.0.1/docwrite.txt;sleep:10", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/s15-tcc-documents-adhoc-1.0.1/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/s15-tcc-documents-adhoc-1.0.1/probe.log
+2026-10-25T19:28:47.300Z +108.7ms [adhoc 1.0.1 pid 20999] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:28:47.300Z +108.8ms [adhoc 1.0.1 pid 20999] STEP info
+2026-10-25T19:28:47.302Z +111.2ms [adhoc 1.0.1 pid 20999] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:28:47.302Z +111.3ms [adhoc 1.0.1 pid 20999] STEP docwrite:/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/s15-tcc-documents-adhoc-1.0.1/docwrite.txt
+2026-10-25T19:28:47.303Z +111.6ms [adhoc 1.0.1 pid 20999] docwrite /Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/s15-tcc-documents-adhoc-1.0.1/docwrite.txt: open ok, write=36, after 0.2ms
+2026-10-25T19:28:47.305Z +114.2ms [adhoc 1.0.1 pid 20999] STEP sleep:10
+2026-10-25T19:28:57.803Z +10612.2ms [adhoc 1.0.1 pid 20999] script finished

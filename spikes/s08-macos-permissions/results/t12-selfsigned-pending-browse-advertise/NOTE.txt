@@ -1,0 +1,8 @@
+T12 (2026-10-26 03:38) - NOT usable as "browse while pending" evidence:
+  - The planned advertiser (t12-adhoc-advertiser) failed: advertise:52013 -> posix(48 Address
+    already in use), so there was nothing to find.
+  - Between 03:37:45 (end of T11, alert still pending) and 03:38:37 a person clicked Allow on the
+    pending "S08 SelfSigned" Local Network alert (lnp-rules-after shows allowed; exact time not captured),
+    so this run was not in the pending state either.
+Usable: self-signed listener + Bonjour advertisement started (state=ready) with no firewall
+prompt, because no inbound flow arrived (see T13: the firewall prompts on the first inbound flow).

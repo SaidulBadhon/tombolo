@@ -1,0 +1,23 @@
+2026-10-25T21:36:30.889Z +73.0ms [adhoc 1.0.1 pid 74049] launched; args=["--run", "bsdconnect:172.20.10.13:9:5;nwconnect:172.20.10.13:9:5;udpconnect:172.20.10.13:9;sleep:2", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t10-adhoc-allowed-lan-control/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t10-adhoc-allowed-lan-control/probe.log
+2026-10-25T21:36:30.896Z +79.8ms [adhoc 1.0.1 pid 74049] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:36:30.896Z +79.9ms [adhoc 1.0.1 pid 74049] STEP bsdconnect:172.20.10.13:9:5
+2026-10-25T21:36:30.896Z +80.2ms [adhoc 1.0.1 pid 74049] bsdconnect 172.20.10.13:9 connect() returned -1 errno 36 Operation now in progress after 0.2ms
+2026-10-25T21:36:35.897Z +5081.3ms [adhoc 1.0.1 pid 74049] bsdconnect 172.20.10.13:9 still connecting after 5001.2ms (timeout)
+2026-10-25T21:36:35.898Z +5081.7ms [adhoc 1.0.1 pid 74049] STEP nwconnect:172.20.10.13:9:5
+2026-10-25T21:36:35.903Z +5087.5ms [adhoc 1.0.1 pid 74049] nwconnect 172.20.10.13:9 state=preparing after 3.3ms path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:36:35.904Z +5088.2ms [adhoc 1.0.1 pid 74049] nwconnect 172.20.10.13:9 state=waiting(posix(65 No route to host)) after 6.0ms path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:36:41.135Z +10319.1ms [adhoc 1.0.1 pid 74049] nwconnect 172.20.10.13:9 end after 5236.9ms: state=waiting(posix(65 No route to host)) path.status=satisfied via=en0 remote=172.20.10.13:9
+2026-10-25T21:36:41.135Z +10319.4ms [adhoc 1.0.1 pid 74049] STEP udpconnect:172.20.10.13:9
+2026-10-25T21:36:41.136Z +10319.8ms [adhoc 1.0.1 pid 74049] udpconnect 172.20.10.13:9 connect() = 0
+2026-10-25T21:36:41.136Z +10319.8ms [adhoc 1.0.1 pid 74049] nwconnect 172.20.10.13:9 state=cancelled after 5237.8ms path=nil
+2026-10-25T21:36:41.136Z +10320.1ms [adhoc 1.0.1 pid 74049] udpconnect 172.20.10.13:9 send() = -1 errno 64 Host is down
+2026-10-25T21:36:41.136Z +10320.3ms [adhoc 1.0.1 pid 74049] STEP sleep:2
+2026-10-25T21:36:43.227Z +12411.4ms [adhoc 1.0.1 pid 74049] script finished

@@ -1,0 +1,13 @@
+M1 (maintainer checklist), 2026-10-26 04:43 local - run as ./checklist.sh m1-lnp-deny, renamed from
+m1a-lnp-deny-prompt by the orchestrator because the maintainer clicked ALLOW by mistake (the step asked
+for Don't Allow). It is still valid evidence for "pending -> allowed without a relaunch":
+  - 04:43:25.654 nehelper: "Local network preference not yet set, prompting for S15 AdHoc Probe"
+    (first operation was the Bonjour browse at +86 ms)
+  - probe +5348 ms (04:43:30.895): nwconnect to the unused on-link address -> waiting(posix 50),
+    unsatisfiedReason=localNetworkDenied
+  - 04:43:31.559 nehelper: "User responded with local network: 1"
+  - probe +6217 ms (04:43:31.764): the same NWConnection -> preparing, path satisfied
+    = 0.21 s after the click (0.87 s after the connection started), no relaunch
+  - lnp-rules-after.txt: s15adhoc allowed
+The m1b/m1c runs that followed measured the allowed state and were set aside (not in the repo).
+window-5329.png (the Local Network alert) is deliberately not committed (see .gitignore).

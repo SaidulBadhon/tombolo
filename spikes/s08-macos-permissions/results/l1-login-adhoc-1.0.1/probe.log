@@ -1,0 +1,14 @@
+2026-10-25T21:49:39.052Z +71.9ms [s15-adhoc 1.0.1 pid 3365] launched; args=["--run", "login-status;sleep:2", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/l1-login-adhoc-1.0.1/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/l1-login-adhoc-1.0.1/probe.log
+2026-10-25T21:49:39.060Z +78.9ms [s15-adhoc 1.0.1 pid 3365] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s15adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/adhoc/S15 AdHoc Probe.app
+    machoUUID=FC2FAADC-56E8-3B8B-B4BF-7727CE3BEB58
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s15adhoc team=none
+    codeFlags=0x10002
+    cdhash=f693bf536d095e14b8196e3d38495ec145a75e73
+    designated=cdhash H"f693bf536d095e14b8196e3d38495ec145a75e73"
+    AXIsProcessTrusted=false loginItem(mainApp)=enabled
+2026-10-25T21:49:39.060Z +79.1ms [s15-adhoc 1.0.1 pid 3365] STEP login-status
+2026-10-25T21:49:39.062Z +81.0ms [s15-adhoc 1.0.1 pid 3365] loginItem(mainApp)=enabled
+2026-10-25T21:49:39.062Z +81.0ms [s15-adhoc 1.0.1 pid 3365] STEP sleep:2
+2026-10-25T21:49:41.159Z +2178.8ms [s15-adhoc 1.0.1 pid 3365] script finished

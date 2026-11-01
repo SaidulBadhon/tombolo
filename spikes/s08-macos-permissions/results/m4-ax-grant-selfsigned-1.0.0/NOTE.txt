@@ -1,0 +1,10 @@
+M4 (maintainer checklist), 2026-10-26 12:23 local - ./checklist.sh m4-ax-grant selfsigned.
+The maintainer stopped before granting access: AXIsProcessTrusted stayed false for the whole
+ax-wait (180 s; probe ended at +187.8 s). Accessibility persistence is therefore NOT measured.
+Observed on macOS 27.0.1 (useful for re-running M4): the prompt is titled "Device Control and Data Access"
+and reads '"S15 Probe" would like to control this Mac and access your data. Grant access to this
+application in Privacy & Security settings'; "Open System Settings" opened a Privacy & Security page
+titled "Device Control and Data Access" (window titles in windows.log), not one labelled "Accessibility".
+Screenshots are deliberately not committed: window-5774.png (System Settings) shows the maintainer's
+name and account photo; window-35.png is a full-screen Notification Center capture with another
+project's notification; window-5765.png (the prompt) is excluded with them.

@@ -1,0 +1,32 @@
+2026-10-25T19:29:47.164Z +78.5ms [adhoc 1.0.1 pid 21316] launched; args=["--run", "listen:52011;sleep:20", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t5-adhoc-incoming-tcp/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t5-adhoc-incoming-tcp/probe.log
+2026-10-25T19:29:47.172Z +86.2ms [adhoc 1.0.1 pid 21316] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E36EA33A-002F-33D5-8EED-8F2F6239DDE6
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=4166a72b7a7b7a5b19c147d88a84e94adf6358db
+    designated=cdhash H"4166a72b7a7b7a5b19c147d88a84e94adf6358db"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:29:47.172Z +86.4ms [adhoc 1.0.1 pid 21316] STEP listen:52011
+2026-10-25T19:29:47.175Z +89.0ms [adhoc 1.0.1 pid 21316] listen:52011 state=ready after 2.5ms
+2026-10-25T19:29:47.175Z +89.1ms [adhoc 1.0.1 pid 21316] STEP sleep:20
+2026-10-25T19:29:53.271Z +6185.9ms [adhoc 1.0.1 pid 21316] listen:52011 incoming connection from 10.59.232.41:51434
+2026-10-25T19:29:53.273Z +6187.5ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51434 state=preparing after 1.1ms path.status=satisfied via=en0 local=10.59.232.41:52011 remote=10.59.232.41:51434
+2026-10-25T19:29:53.279Z +6193.4ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51434 state=ready after 7.3ms path.status=satisfied via=en0 local=10.59.232.41:52011 remote=10.59.232.41:51434
+2026-10-25T19:29:53.279Z +6193.8ms [adhoc 1.0.1 pid 21316] listen:52011 received 15 bytes: ping from peer
+2026-10-25T19:29:53.280Z +6194.2ms [adhoc 1.0.1 pid 21316] listen:52011 reply sent: ok
+2026-10-25T19:29:53.281Z +6195.5ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51434 state=cancelled after 9.6ms path=nil
+2026-10-25T19:29:56.310Z +9224.3ms [adhoc 1.0.1 pid 21316] listen:52011 incoming connection from 127.0.0.1:51484
+2026-10-25T19:29:56.311Z +9225.0ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 127.0.0.1:51484 state=preparing after 0.6ms path.status=satisfied via=lo0 local=127.0.0.1:52011 remote=127.0.0.1:51484
+2026-10-25T19:29:56.311Z +9225.3ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 127.0.0.1:51484 state=ready after 0.9ms path.status=satisfied via=lo0 local=127.0.0.1:52011 remote=127.0.0.1:51484
+2026-10-25T19:29:56.311Z +9225.5ms [adhoc 1.0.1 pid 21316] listen:52011 received 15 bytes: ping from peer
+2026-10-25T19:29:56.311Z +9225.8ms [adhoc 1.0.1 pid 21316] listen:52011 reply sent: ok
+2026-10-25T19:29:56.312Z +9226.5ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 127.0.0.1:51484 state=cancelled after 2.2ms path=nil
+2026-10-25T19:29:59.363Z +12277.5ms [adhoc 1.0.1 pid 21316] listen:52011 incoming connection from 10.59.232.41:51489
+2026-10-25T19:29:59.366Z +12280.0ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51489 state=preparing after 2.2ms path.status=satisfied via=en0 local=10.59.232.41:52011 remote=10.59.232.41:51489
+2026-10-25T19:29:59.370Z +12284.1ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51489 state=ready after 6.3ms path.status=satisfied via=en0 local=10.59.232.41:52011 remote=10.59.232.41:51489
+2026-10-25T19:29:59.370Z +12284.7ms [adhoc 1.0.1 pid 21316] listen:52011 received 15 bytes: ping from peer
+2026-10-25T19:29:59.371Z +12285.1ms [adhoc 1.0.1 pid 21316] listen:52011 reply sent: ok
+2026-10-25T19:29:59.371Z +12285.9ms [adhoc 1.0.1 pid 21316] listen:52011 incoming 10.59.232.41:51489 state=cancelled after 8.5ms path=nil
+2026-10-25T19:30:08.174Z +21088.5ms [adhoc 1.0.1 pid 21316] script finished

@@ -1,0 +1,19 @@
+2026-10-25T21:48:56.721Z +76.0ms [s15-selfsigned 1.0.0 pid 1924] launched; args=["--run", "login-status;login-register;login-status;sleep:3", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/l1-login-selfsigned-1.0.0/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/l1-login-selfsigned-1.0.0/probe.log
+2026-10-25T21:48:56.733Z +87.9ms [s15-selfsigned 1.0.0 pid 1924] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s15 version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/selfsigned/S15 Probe.app
+    machoUUID=86A29B4E-D640-3A6F-9BF4-3110B143C84A
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s15 team=none
+    codeFlags=0x10000
+    cdhash=0fb926d4bb518b1389b0e7845aa07e07fe4093c8
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s15" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:48:56.733Z +88.0ms [s15-selfsigned 1.0.0 pid 1924] STEP login-status
+2026-10-25T21:48:56.736Z +91.7ms [s15-selfsigned 1.0.0 pid 1924] loginItem(mainApp)=notFound
+2026-10-25T21:48:56.736Z +91.8ms [s15-selfsigned 1.0.0 pid 1924] STEP login-register
+2026-10-25T21:48:56.747Z +102.5ms [s15-selfsigned 1.0.0 pid 1924] login-register ok; status=enabled
+2026-10-25T21:48:56.747Z +102.5ms [s15-selfsigned 1.0.0 pid 1924] STEP login-status
+2026-10-25T21:48:56.750Z +105.3ms [s15-selfsigned 1.0.0 pid 1924] loginItem(mainApp)=enabled
+2026-10-25T21:48:56.750Z +105.3ms [s15-selfsigned 1.0.0 pid 1924] STEP sleep:3
+2026-10-25T21:48:59.874Z +3229.0ms [s15-selfsigned 1.0.0 pid 1924] script finished

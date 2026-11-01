@@ -1,0 +1,19 @@
+2026-10-25T21:38:37.953Z +70.3ms [selfsigned 1.0.1 pid 77279] launched; args=["--run", "browse:_tombolo-test._tcp:10;advertise:52023;sleep:12", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t12-selfsigned-pending-browse-advertise/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t12-selfsigned-pending-browse-advertise/probe.log
+2026-10-25T21:38:37.966Z +83.1ms [selfsigned 1.0.1 pid 77279] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=564A7E66-609A-3924-BB9B-EE413770C637
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=f85facf54c273c0ade0290368a5104c52bf478c9
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:38:37.966Z +83.2ms [selfsigned 1.0.1 pid 77279] STEP browse:_tombolo-test._tcp:10
+2026-10-25T21:38:37.977Z +94.2ms [selfsigned 1.0.1 pid 77279] browse _tombolo-test._tcp state=ready after 10.9ms
+2026-10-25T21:38:48.471Z +10588.9ms [selfsigned 1.0.1 pid 77279] browse _tombolo-test._tcp end after 10505.3ms: state=ready results=0
+2026-10-25T21:38:48.472Z +10589.4ms [selfsigned 1.0.1 pid 77279] STEP advertise:52023
+2026-10-25T21:38:48.472Z +10589.8ms [selfsigned 1.0.1 pid 77279] browse _tombolo-test._tcp state=cancelled after 10506.5ms
+2026-10-25T21:38:48.474Z +10591.3ms [selfsigned 1.0.1 pid 77279] advertise:52023 state=ready after 1.7ms
+2026-10-25T21:38:48.474Z +10591.5ms [selfsigned 1.0.1 pid 77279] STEP sleep:12
+2026-10-25T21:39:01.003Z +23120.4ms [selfsigned 1.0.1 pid 77279] script finished

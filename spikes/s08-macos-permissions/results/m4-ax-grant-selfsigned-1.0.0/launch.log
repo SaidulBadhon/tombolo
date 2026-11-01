@@ -1,0 +1,4 @@
+launch: 2026-10-26 12:23:38 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s15/installed/selfsigned/S15 Probe.app" --args --run "ax;ax-prompt;ax-wait:180;quit"
+open exit: 0
+probe exited by t+174s
+probe pids at end of watch: none

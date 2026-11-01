@@ -1,0 +1,19 @@
+2026-10-25T21:47:56.255Z +66.1ms [adhoc 1.0.2 pid 99410] launched; args=["--run", "listen:52041;sleep:16", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u4-firewall-update-adhoc-1.0.2/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/u4-firewall-update-adhoc-1.0.2/probe.log
+2026-10-25T21:47:56.262Z +72.8ms [adhoc 1.0.2 pid 99410] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.2 (1.0.2) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=E1995F60-F7E6-3C8B-8A95-C2E8FE3E6C53
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=8cb82ffd86b747df39c44803ce23dfb210fbba53
+    designated=cdhash H"8cb82ffd86b747df39c44803ce23dfb210fbba53"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:47:56.262Z +72.9ms [adhoc 1.0.2 pid 99410] STEP listen:52041
+2026-10-25T21:47:56.266Z +76.6ms [adhoc 1.0.2 pid 99410] listen:52041 state=ready after 3.6ms
+2026-10-25T21:47:56.266Z +76.7ms [adhoc 1.0.2 pid 99410] STEP sleep:16
+2026-10-25T21:47:59.952Z +3762.9ms [adhoc 1.0.2 pid 99410] listen:52041 incoming connection from 172.20.10.14:58172
+2026-10-25T21:47:59.953Z +3764.4ms [adhoc 1.0.2 pid 99410] listen:52041 incoming 172.20.10.14:58172 state=preparing after 1.1ms path.status=satisfied via=en0 local=172.20.10.14:52041 remote=172.20.10.14:58172
+2026-10-25T21:47:59.956Z +3766.5ms [adhoc 1.0.2 pid 99410] listen:52041 incoming 172.20.10.14:58172 state=ready after 3.4ms path.status=satisfied via=en0 local=172.20.10.14:52041 remote=172.20.10.14:58172
+2026-10-25T21:47:59.956Z +3766.9ms [adhoc 1.0.2 pid 99410] listen:52041 received 15 bytes: ping from peer
+2026-10-25T21:47:59.957Z +3767.7ms [adhoc 1.0.2 pid 99410] listen:52041 reply sent: ok
+2026-10-25T21:47:59.958Z +3768.6ms [adhoc 1.0.2 pid 99410] listen:52041 incoming 172.20.10.14:58172 state=cancelled after 5.7ms path=nil

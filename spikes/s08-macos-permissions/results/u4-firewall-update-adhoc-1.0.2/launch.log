@@ -1,0 +1,4 @@
+launch: 2026-10-26 03:47:55 open -n -g "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app" --args --run "listen:52041;sleep:16"
+open exit: 0
+probe pids after 16s: 99410
+alert windows 2 s after quitting the probe: none

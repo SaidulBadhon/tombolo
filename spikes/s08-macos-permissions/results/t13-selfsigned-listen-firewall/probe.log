@@ -1,0 +1,15 @@
+2026-10-25T21:41:14.710Z +61.4ms [selfsigned 1.0.1 pid 81397] launched; args=["--run", "listen:52031;sleep:20", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t13-selfsigned-listen-firewall/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t13-selfsigned-listen-firewall/probe.log
+2026-10-25T21:41:14.721Z +71.5ms [selfsigned 1.0.1 pid 81397] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=564A7E66-609A-3924-BB9B-EE413770C637
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=f85facf54c273c0ade0290368a5104c52bf478c9
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:41:14.721Z +71.7ms [selfsigned 1.0.1 pid 81397] STEP listen:52031
+2026-10-25T21:41:14.724Z +75.1ms [selfsigned 1.0.1 pid 81397] listen:52031 state=ready after 3.3ms
+2026-10-25T21:41:14.724Z +75.1ms [selfsigned 1.0.1 pid 81397] STEP sleep:20
+2026-10-25T21:41:35.722Z +21073.1ms [selfsigned 1.0.1 pid 81397] script finished

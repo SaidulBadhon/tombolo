@@ -1,0 +1,26 @@
+2026-10-25T21:37:05.467Z +70.6ms [selfsigned 1.0.1 pid 74707] launched; args=["--run", "browse:_tombolo-test._tcp:8;bsdconnect:172.20.10.13:9:3;nwconnect:172.20.10.13:9:8;udpconnect:172.20.10.13:9;sleep:15", "--log", "/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t11-selfsigned-undetermined-browse-first/probe.log"] log=/Users/saidulbadhon/Library/Logs/TomboloSpikeS08/t11-selfsigned-undetermined-browse-first/probe.log
+2026-10-25T21:37:05.482Z +85.7ms [selfsigned 1.0.1 pid 74707] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.selfsigned version=1.0.1 (1.0.1) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 SelfSigned.app
+    machoUUID=564A7E66-609A-3924-BB9B-EE413770C637
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.selfsigned team=none
+    codeFlags=0x10000
+    cdhash=f85facf54c273c0ade0290368a5104c52bf478c9
+    certificates=["Tombolo Development (self-signed)"]
+    designated=identifier "io.github.saidulbadhon.tombolo.spike.s08.selfsigned" and certificate root = H"7dd2be59bd6f516b6bbb0444c2f0316d7eaeec32"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T21:37:05.483Z +85.9ms [selfsigned 1.0.1 pid 74707] STEP browse:_tombolo-test._tcp:8
+2026-10-25T21:37:05.498Z +101.1ms [selfsigned 1.0.1 pid 74707] browse _tombolo-test._tcp state=ready after 15.1ms
+2026-10-25T21:37:13.883Z +8486.7ms [selfsigned 1.0.1 pid 74707] browse _tombolo-test._tcp end after 8400.5ms: state=ready results=0
+2026-10-25T21:37:13.884Z +8487.2ms [selfsigned 1.0.1 pid 74707] STEP bsdconnect:172.20.10.13:9:3
+2026-10-25T21:37:13.884Z +8487.5ms [selfsigned 1.0.1 pid 74707] browse _tombolo-test._tcp state=cancelled after 8401.5ms
+2026-10-25T21:37:13.884Z +8487.7ms [selfsigned 1.0.1 pid 74707] bsdconnect 172.20.10.13:9 connect() returned -1 errno 65 No route to host after 0.2ms
+2026-10-25T21:37:13.885Z +8487.9ms [selfsigned 1.0.1 pid 74707] STEP nwconnect:172.20.10.13:9:8
+2026-10-25T21:37:13.886Z +8489.2ms [selfsigned 1.0.1 pid 74707] nwconnect 172.20.10.13:9 state=waiting(posix(50 Network is down)) after 0.8ms path.status=unsatisfied unsatisfiedReason=localNetworkDenied via=en0 remote=172.20.10.13:9
+2026-10-25T21:37:13.886Z +8489.5ms [selfsigned 1.0.1 pid 74707] nwconnect 172.20.10.13:9 state=preparing after 1.3ms path.status=unsatisfied unsatisfiedReason=localNetworkDenied via=en0 remote=172.20.10.13:9
+2026-10-25T21:37:13.887Z +8490.7ms [selfsigned 1.0.1 pid 74707] nwconnect 172.20.10.13:9 state=waiting(posix(50 Network is down)) after 2.4ms path.status=unsatisfied unsatisfiedReason=localNetworkDenied via=en0 remote=172.20.10.13:9
+2026-10-25T21:37:22.280Z +16883.0ms [selfsigned 1.0.1 pid 74707] nwconnect 172.20.10.13:9 end after 8394.7ms: state=waiting(posix(50 Network is down)) path.status=unsatisfied unsatisfiedReason=localNetworkDenied via=en0 remote=172.20.10.13:9
+2026-10-25T21:37:22.280Z +16883.3ms [selfsigned 1.0.1 pid 74707] STEP udpconnect:172.20.10.13:9
+2026-10-25T21:37:22.280Z +16883.7ms [selfsigned 1.0.1 pid 74707] nwconnect 172.20.10.13:9 state=cancelled after 8395.5ms path=nil
+2026-10-25T21:37:22.281Z +16883.8ms [selfsigned 1.0.1 pid 74707] udpconnect 172.20.10.13:9 connect() = 0
+2026-10-25T21:37:22.281Z +16884.1ms [selfsigned 1.0.1 pid 74707] udpconnect 172.20.10.13:9 send() = -1 errno 32 Broken pipe

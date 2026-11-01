@@ -1,0 +1,21 @@
+2026-10-25T19:23:48.492Z +84.8ms [adhoc 1.0.0 pid 17451] launched; args=["--run", "info;sleep:12", "--log", "/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/t1-adhoc-launch-only/probe.log"] log=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/results/t1-adhoc-launch-only/probe.log
+2026-10-25T19:23:50.955Z +2547.9ms [adhoc 1.0.0 pid 17451] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=EC1A3D54-E01C-3146-8A63-C2AFEA981BD1
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=0ade6c3f5139d20397c3b02bd74dbb872b80e8e7
+    designated=cdhash H"0ade6c3f5139d20397c3b02bd74dbb872b80e8e7"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:23:50.970Z +2563.0ms [adhoc 1.0.0 pid 17451] STEP info
+2026-10-25T19:23:50.976Z +2568.5ms [adhoc 1.0.0 pid 17451] info
+    bundle=io.github.saidulbadhon.tombolo.spike.s08.adhoc version=1.0.0 (1.0.0) path=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/10-macos-permissions/spikes/s08-macos-permissions/build/s08/S08 AdHoc.app
+    machoUUID=EC1A3D54-E01C-3146-8A63-C2AFEA981BD1
+    dynamicValidity=valid
+    identifier=io.github.saidulbadhon.tombolo.spike.s08.adhoc team=none
+    codeFlags=0x10002
+    cdhash=0ade6c3f5139d20397c3b02bd74dbb872b80e8e7
+    designated=cdhash H"0ade6c3f5139d20397c3b02bd74dbb872b80e8e7"
+    AXIsProcessTrusted=false loginItem(mainApp)=notFound
+2026-10-25T19:23:50.976Z +2568.7ms [adhoc 1.0.0 pid 17451] STEP sleep:12

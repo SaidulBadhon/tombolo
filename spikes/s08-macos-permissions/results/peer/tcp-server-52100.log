@@ -1,0 +1,4 @@
+01:29:36 peer: tcp-server listening on 10.59.232.41:52100 for 3600s
+01:29:40 peer: tcp-server accepted 10.59.232.41:51089 got b'ping from peer\n'
+01:31:39 peer: tcp-server accepted 10.59.232.41:52280 got b'ping from adhoc (bsd)\n'
+01:31:39 peer: tcp-server accepted 10.59.232.41:52281 got b'ping from adhoc\n'
