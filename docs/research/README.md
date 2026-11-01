@@ -3,6 +3,10 @@
 Research date: **2026-10-25** (macOS 27.0.1, Android 17, scrcpy 5.0.1 current). Each report marks claims as
 verified, reported or unverified, and lists its sources.
 
+> **2026-11-02:** the plan was re-ordered so the first release needs no developer options
+> ([re-plan](../plans/standard-first.md)). The findings below are unchanged; dated notes mark the recommendations
+> the re-plan superseded.
+
 | Report | Question it answers |
 |---|---|
 | [01 — Existing solutions](01-existing-solutions.md) | What already exists, how it works, what's reusable, where the gap is |
@@ -22,11 +26,22 @@ verified, reported or unverified, and lists its sources.
 2. **scrcpy is the engine everyone builds on.** Apache-2.0, very active (5.0.1 on 2026-10-08), with virtual
    displays, resizable "flex" displays, UHID input, audio and camera. Its protocol is officially internal and
    version-locked → pin it first, fork it later.
+
+   > *Superseded by the 2026-11-02 re-plan ([§2](../plans/standard-first.md#2-decision-proposed)):* there is no
+   > pinned-server phase first. Releases 0.1 and 0.2 use no `scrcpy-server` and no `adb` — the Tombolo app
+   > captures the screen (MediaProjection) and injects input (Accessibility) itself. `scrcpy-server`, as the
+   > `tombolo-helper` fork, arrives only with the optional Advanced mode in 0.3.
+
 3. **Per-app windows need shell privileges on stock phones.** Normal apps cannot put other apps on a separate
    display; Microsoft and Google get this through OEM/system privileges. → Enhanced mode.
 4. **Normal-app mirroring is constrained**: consent every session (Android 14+), capture stops on lock
    (Android 15+), gesture-level input via Accessibility, which Android 17's Advanced Protection revokes. →
    Standard mode is worth building but cannot be the only tier.
+
+   > *Note from the 2026-11-02 re-plan ([§2](../plans/standard-first.md#2-decision-proposed)):* Standard mode is
+   > now the **first** release (0.1) and Enhanced mode the optional Advanced setting (0.3). The re-plan's review
+   > also narrowed the lock boundary to Android 15 QPR1+.
+
 5. **iPhone Mirroring's "phone stays locked" model can't be copied on Android.** Enhanced mode can keep the
    phone's display off while mirroring (device awake), which needs its own security rules (end the session on
    local use).
@@ -64,6 +79,12 @@ spikes in the [implementation plan](../implementation-plan.md#phase-0--foundatio
 path, the iroh API surface, Standard-mode control quality, fail-closed session lifecycle, local-network
 permissions, keyboard modes, UniFFI integration, background survival per OEM, the helper ↔ app relay, app-shim
 viewers, virtual-display app compatibility, and permission persistence across updates.
+
+> *Superseded by the 2026-11-02 re-plan ([§3](../plans/standard-first.md#3-phase-0-changes)):* the spike scope
+> changed. Phase 0 adds **S17** (Standard capture pipeline over Wi-Fi) and **S11a** (active-session survival), and
+> re-scopes S6, S7, S8 and S10 as gates for 0.1. S3, S9, S12, S14 and S2's USB phone path move to the Advanced
+> phase (before 0.3); S11b (idle/background survival) and S16 (calls) run before 0.2; **S18** (USB without
+> debugging) runs before 1.0.
 
 ## A note on method
 
