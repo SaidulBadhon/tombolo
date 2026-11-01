@@ -7,10 +7,10 @@
 
 Tombolo ships without an Apple Developer ID for now ([ADR-0006](../../docs/decisions/0006-distribution.md)).
 Signing every build with **one stable self-signed certificate** gives the app a designated requirement (DR) that
-survives updates, so privacy grants checked against the DR (Accessibility and other TCC permissions) carry over
-from version to version. Ad-hoc signing pins the DR to the exact build (`cdhash`), so those grants reset on
-every update. The measurements behind this are in
-[S15 — update persistence](../../docs/spikes/s15-update-persistence.md).
+stays the same across updates (verified). Privacy grants that TCC checks against the DR, such as Accessibility,
+should therefore carry over from version to version; a live Accessibility check across an update is still
+pending. Ad-hoc signing pins the DR to the exact build (`cdhash`), so such grants are expected to reset on every
+update. The measurements are in [S15 — update persistence](../../docs/spikes/s15-update-persistence.md).
 
 ## Scripts
 

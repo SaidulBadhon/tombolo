@@ -8,7 +8,7 @@
 | **Spike code** | [`spikes/s08-macos-permissions/`](../../spikes/s08-macos-permissions/README.md) and [`tools/signing/`](../../tools/signing/README.md) at `d7802477501176a3e2cb64ec20d21e93bf10106a` |
 | **Author(s)** | P0-10 agent (Claude), for the maintainer |
 | **Date(s) run** | 2026-10-26 |
-| **Status** | draft — DR, Local Network and login-item results complete; Accessibility waits on the maintainer ([M4–M7](s08-macos-local-network.md#manual-steps-for-the-maintainer)) |
+| **Status** | draft — DR, Local Network and login-item *status* results complete; Accessibility and launch-at-login are blocked on a person. M4 was attempted on 2026-10-26 but not granted ([M4–M7](s08-macos-local-network.md#manual-steps-for-the-maintainer)) |
 
 ## Question
 
@@ -85,7 +85,7 @@ The same held for the S8 bundles 1.0.0 → 1.0.1 (self-signed satisfied, ad-hoc 
 | L1 | Login item | ad-hoc 1.0.0: `notFound` → `enabled` | in-place 1.0.1 | **`enabled`** |
 | L2 | (cleanup) | both 1.0.1 | `unregister()` | `notRegistered` |
 | — | TCC Documents folder (incidental, from S8 T1/T2) | allowed by a person for S08 1.0.0 (both variants) | 1.0.1 (both variants) | write succeeded in 0.2 ms with no prompt **for both, ad-hoc included**. `sandboxd` never asked `tccd` (cached decision) → **inconclusive** as a DR test. Both grants were then reset with `tccutil` |
-| M4–M7 | Accessibility | — | — | **not run — needs a person** |
+| M4–M7 | Accessibility | M4 (2026-10-26, maintainer): self-signed 1.0.0 requested access; the maintainer stopped before granting | — | `AXIsProcessTrusted=false` for the whole 180 s wait ([M4 notes](../../spikes/s08-macos-permissions/results/m4-ax-grant-selfsigned-1.0.0/NOTE.txt)). M5–M7 not run. **Persistence not measured** |
 
 **Local Network storage.** Decisions are `NEPathRule`s keyed by `SigningIdentifier`, with
 `DesignatedRequirement = null` and `AllowEmptyDesignatedRequirement = true` (see
@@ -105,12 +105,15 @@ The same held for the S8 bundles 1.0.0 → 1.0.1 (self-signed satisfied, ad-hoc 
 
 | # | Criterion (as written in the plan) | Verdict | Evidence |
 |---|---|---|---|
-| 1 | Build 1.0.0 and 1.0.1 with the stable self-signed identity (and two ad-hoc builds) and show each DR | **pass** | `dr-check.txt` |
-| 2 | 1.0.0's DR is satisfied by 1.0.1 (`codesign --verify -R`) — the TCC mechanism | **pass** for self-signed; **fail** for ad-hoc (as predicted); an impostor certificate is rejected | `dr-check.txt` |
-| 3 | Local Network grant persists across the update | **pass** — measured live on 1.0.1 → 1.0.2 rebuilds of allowed bundles (U1). It persists for ad-hoc too, and even across a change of signer (U3), because macOS 27.0.1 keys it by bundle identifier only. The initial Allow clicks were made by a person during S8, not by the agent. Optional confirmation on the S15 bundles: [M3](s08-macos-local-network.md#manual-steps-for-the-maintainer) | U1, U3, `lnp-rules.py` |
-| 4 | Accessibility grant persists across the update | **blocked — needs the maintainer** (M4–M7). Prediction from criterion 2: persists for self-signed, lost for ad-hoc | — |
-| 5 | Login-item grant persists across the update | **pass** for registration status (`enabled` after an in-place update, self-signed and ad-hoc). **Not tested:** a login item the user *disabled* in System Settings, then update | L1 |
-| 6 | Keys outside Git; scripts to create, sign and remove | **pass** | `tools/signing/`, lifecycle test in `/tmp`; `git ls-files` contains no key material |
+| 1 | Build 1.0.0 and 1.0.1 with the stable self-signed identity (and two ad-hoc builds) and show each DR | pass | `dr-check.txt` |
+| 2a | Self-signed: 1.0.0's DR is satisfied by 1.0.1 (`codesign --verify -R`, the check TCC applies) | pass | `dr-check.txt` |
+| 2b | Ad-hoc, for comparison: 1.0.0's DR is satisfied by 1.0.1 | fail | `dr-check.txt` — expected: an ad-hoc DR is the build's cdhash |
+| 2c | A different self-signed certificate with the same identifier does **not** satisfy 1.0.0's DR | pass | `dr-check.txt` (impostor) |
+| 3 | Local Network grant persists across the update | pass | Measured live on 1.0.1 → 1.0.2 rebuilds of allowed bundles (U1). It persists for ad-hoc too, and even across a change of signer (U3), because macOS 27.0.1 keys it by bundle identifier only (`lnp-rules.py`). The initial Allow clicks were made by people, not by the agent. Optional confirmation on the S15 bundles: [M3](s08-macos-local-network.md#manual-steps-for-the-maintainer) |
+| 4 | Accessibility grant persists across the update | blocked — needs a person | M4–M7. M4 was attempted on 2026-10-26 but stopped before granting. Prediction from 2a/2b, untested: persists for self-signed, lost for ad-hoc |
+| 5a | Login item: registration status persists across the update (`SMAppService.mainApp.status`) | pass | L1: `enabled` after an in-place update, self-signed and ad-hoc |
+| 5b | Login item: the updated app actually launches at login | blocked — needs a person | Needs a log-out/log-in (or restart) with the item registered, then check the app started. Also untested: a login item the user *disabled* in System Settings, then update |
+| 6 | Keys outside Git; scripts to create, sign and remove | pass | `tools/signing/`, lifecycle test in `/tmp`; `git ls-files` contains no key material. Since `3a2524d`, `remove-identity.sh` refuses keychains it did not create (not yet exercised: edit-only window) |
 
 **Coverage:** macOS 27.0.1 only, one Mac.
 
@@ -120,15 +123,19 @@ The same held for the S8 bundles 1.0.0 → 1.0.1 (self-signed satisfied, ad-hoc 
 
 ## Consequences for the plan
 
-- **ADR-0006's premise holds for TCC.** The stable self-signed identity gives a DR that 1.0.1 satisfies and an
-  impostor certificate does not. Keep "sign every build with one stable self-signed identity", hardened runtime
-  on. The Accessibility confirmation (M4–M7) is still needed before marking S15 complete.
-- **Local Network and login items don't depend on the identity** on macOS 27.0.1: ad-hoc keeps them too.
+- **The mechanism ADR-0006 relies on behaves as predicted, but no TCC grant has been confirmed across a live
+  update yet.** The stable self-signed identity gives a DR that 1.0.1 satisfies and an impostor certificate does
+  not, which is the check TCC applies (2a, 2c). But the only live TCC test (Documents folder) was inconclusive,
+  because a cache answered for ad-hoc builds too, and Accessibility (M4–M7) is blocked. Keep "sign every build
+  with one stable self-signed identity", hardened runtime on, as the working assumption. S15 stays open until
+  M4–M7 confirm it.
+- **Local Network grants and login-item registration don't depend on the identity** on macOS 27.0.1: ad-hoc
+  keeps them too. Whether the item still launches at login after an update is not measured (5b).
   - Consequence 1: Local Network is not a security boundary against an app that copies our bundle ID. That is
     fine for a privacy prompt, but don't treat it as one.
-  - Consequence 2: switching to Developer ID later should keep Local Network and login items. It will cost every
-    user **one Accessibility re-grant**, because the DR changes from `certificate root = …` to
-    `anchor apple generic … <TeamID>`. Plan a "permissions need re-granting" screen for that release. Re-test
+  - Consequence 2: switching to Developer ID later should keep Local Network and login-item registration. It
+    will very likely cost every user **one Accessibility re-grant**, because the DR changes from
+    `certificate root = …` to `anchor apple generic … <TeamID>`. Plan a "permissions need re-granting" screen for that release. Re-test
     Local Network then — nehelper's "No team ID found" hints that Team-ID apps may be keyed differently.
 - **The release key is now a single point of failure.** Losing it means every user re-grants Accessibility;
   leaking it lets anyone ship code that inherits those grants. Create the release identity with
