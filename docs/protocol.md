@@ -4,8 +4,10 @@
 > GPL-3.0-or-later).
 >
 > Status: **draft for review**. Nothing here is frozen; field numbers and layouts will change during Phase 0
-> and Phase 2. The design rationale is in [`research/04-transport-and-security.md`](research/04-transport-and-security.md)
-> and [ADR-0003](decisions/0003-transport.md) / [ADR-0005](decisions/0005-pairing-and-identity.md).
+> and Phase 1. The protocol is first implemented in Phase 1 and ships in 0.1 (the
+> [Standard-first re-plan](plans/standard-first.md), 2026-11-02), so protocol evolution and compatibility
+> ([§7](#7-versioning-rules)) start with 0.1. The design rationale is in
+> [`research/04-transport-and-security.md`](research/04-transport-and-security.md) and [ADR-0003](decisions/0003-transport.md) / [ADR-0005](decisions/0005-pairing-and-identity.md).
 
 ## 1. Roles and layering
 
@@ -26,7 +28,7 @@
 │ Session: QUIC + TLS 1.3, ALPN "tombolo/1", pinned keys,      │
 │          exporter-bound identity signatures                  │
 ├──────────────────────────────────────────────────────────────┤
-│ Path: UDP over Wi-Fi  |  length-prefixed QUIC over adb TCP   │
+│ Path: UDP over Wi-Fi  |  USB: only if spike S18 finds a path │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -125,7 +127,10 @@ Only valid on a connection established with the pairing ALPN `tombolo-pair/1`:
 
 > The complete pairing/session state machine (canonical transcript encoding, nonce ownership, atomic
 > secret consumption across connections, concurrent attempts, key rotation, recovery) is specified separately
-> in Phase 0 and **externally reviewed before implementation**. The outline below is non-normative.
+> in Phase 0 ([security draft](security/pairing-and-session.md)). Pairing is **implemented behind a feature
+> flag** from Phase 1, and **nothing that contains it ships until the external review closes** — every finding
+> resolved or explicitly accepted (maintainer decision, 2026-11-02). Pairing ships in 0.1, so the review gates the
+> first release. The outline below is non-normative.
 
 1. **QR path** — QR payload:
    `tombolo://pair?v=1&id=<mac endpoint id>&a=<ip:port,…>&k=<sha256(mac P-256 SPKI)>&s=<256-bit secret>&exp=<unix>`
@@ -137,21 +142,27 @@ Only valid on a connection established with the pairing ALPN `tombolo-pair/1`:
 2. **Code path** — 6-digit code shown on the Mac, typed on the phone; PAKE (SPAKE2, RFC 9382) with
    `password = code ‖ exporter`; then the same `PairRequest`/`PairAccept` exchange inside the PAKE-derived
    channel. Max 3 attempts per code.
-3. **USB** — the same flows run over the adb tunnel; the tunnel itself is never treated as authenticated.
+3. **USB** — not in 0.1. If spike S18 finds a USB path (before 1.0), the same flows run over it; the USB link
+   itself is never treated as authenticated.
 
 ## 7. Versioning rules
+
+These rules apply from 0.1, the first release that speaks this protocol (Phase 1).
 
 - **Major** version = ALPN (`tombolo/1`). Incompatible changes bump it; both apps support N and N−1 for one
   release cycle.
 - **Minor** version and capabilities in `Hello`. Unknown protobuf fields are ignored; unknown messages get
   `Unsupported{id}`.
-- The `tombolo-helper` ↔ app protocol is private and versioned with the APK (they ship together).
+- The `tombolo-helper` ↔ app protocol (Phase 3, Advanced mode) is private and versioned with the APK (they ship
+  together).
 
 ## 8. Robustness rules
 
-These are requirements for both implementations, enforced in `tombolo-core` where possible.
+These are requirements for both implementations, enforced in `tombolo-core` where possible. They apply from
+0.1: every rule that concerns what 0.1 ships (sessions, pairing, screen and input, clipboard) is part of Phase 1;
+the rules for later features (side effects, files) apply from the release that ships them (0.2).
 
-| Area | Rule (initial values, tuned in Phase 2) |
+| Area | Rule (initial values, tuned from Phase 1) |
 |---|---|
 | Message size | Control `Envelope` ≤ 64 KiB; larger payloads (icons, thumbnails, MMS parts) go on bulk streams. Media packet payload ≤ 4 MiB. Oversized → close the stream with an error |
 | Stream quotas | ≤ 8 concurrent video streams, ≤ 4 concurrent file transfers, ≤ 16 bulk streams per session |
@@ -164,3 +175,8 @@ These are requirements for both implementations, enforced in `tombolo-core` wher
 | Files | The receiver chooses the destination; peer-supplied names are sanitised (no path separators, no `..`, no control characters, length-limited), written to an app-owned temp area, verified (BLAKE3), then moved atomically; symlinks never followed; per-transfer and per-day size quotas; partial files deleted on cancel/expiry |
 | Clipboard | Size cap (1 MiB text by default); clips marked sensitive are not sent unless opted in |
 | Unknown input | Unknown protobuf fields ignored; unknown messages → `Unsupported{id}`; malformed frames → stream reset, repeated → session end |
+
+**Baseline parser fuzzing (from 0.1).** The `Envelope` (§3), the media header (§4) and the pairing messages
+(§6) are fuzzed continuously from the day each parser lands; the fuzzers run in CI and 0.1 ships only with no
+open crashes. Replay and downgrade tests are part of the same 0.1 work. Broader fuzzing of the implemented core
+stays a 1.0 item.

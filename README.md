@@ -11,8 +11,9 @@ no cloud and no subscription.
 
 *A **tombolo** is a sandbar that joins an island to the mainland.*
 
-> 🚧 **Status: research & planning.** No application code yet. The plan below is up for review —
-> feedback welcome in [Issues](https://github.com/SaidulBadhon/tombolo/issues).
+> 🚧 **Status: Phase 0 — spikes & security design.** No application code yet. The plan below was re-ordered on
+> 2026-11-02 so the first release needs no developer options — feedback welcome in
+> [Issues](https://github.com/SaidulBadhon/tombolo/issues).
 
 ![Tombolo mirroring concept](docs/design/mockups/img/mac-03-mirroring.jpg)
 
@@ -38,41 +39,46 @@ stays free forever. Full survey: [`docs/research/01-existing-solutions.md`](docs
 | | Feature | Mode |
 |---|---|---|
 | 🪞 | Mirror your phone in a phone-shaped Mac window, with audio | Standard / Enhanced |
-| 🖱️ | Control it with trackpad, mouse and keyboard (any input language) | Standard / Enhanced |
+| 🖱️ | Control it with trackpad, mouse and keyboard (any input language) | Standard (typing: Android 13+) / Enhanced |
 | 🪟 | Open individual phone apps as separate, resizable Mac windows | Enhanced |
 | 🔔 | Phone notifications as native Mac notifications, with inline reply | Standard |
 | 💬 | SMS conversations, caller ID, decline/answer calls from the Mac | Standard |
-| 📋 | Shared clipboard | Standard (Mac→phone) / Enhanced (both ways, automatic) |
+| 📋 | Shared clipboard | Standard (phone→Mac manual) / Enhanced (both ways, automatic) |
 | 📁 | Drag-and-drop files both ways, share-sheet "Send to Mac" | Standard |
 | 🔒 | Encrypted, device-to-device pairing by QR code; the phone decides what the Mac may access; Touch ID before control | — |
 
-**Standard mode** needs only the app. **Enhanced mode** adds a small helper using Android's developer
+**Standard mode** needs only the two apps — no developer options — and is what the first release ships.
+**Enhanced mode**, the optional *Advanced* setting from 0.3, adds a small helper using Android's developer
 ("shell") permissions — the technique scrcpy uses — for per-app windows, a dark-screen mirror and
-full-fidelity input. No root, ever. Details: [`docs/architecture.md`](docs/architecture.md#2-two-capability-tiers-one-protocol).
+full-fidelity input. It is set up from the phone app through Wireless debugging. No root, ever. Details:
+[`docs/architecture.md`](docs/architecture.md#2-two-capability-tiers-one-protocol).
 
 ## How it works
 
 ```mermaid
 flowchart LR
   subgraph Mac["Mac — Swift · AppKit + SwiftUI"]
-    W["Mirror & app windows<br/>VideoToolbox → Metal"] --- I["Input mapping<br/>trackpad · keyboard · IME"]
+    W["Mirror & app windows<br/>VideoToolbox → AVSampleBufferDisplayLayer"] --- I["Input mapping<br/>trackpad · keyboard · IME"]
     N["Notifications · clipboard<br/>files · SMS · calls"] --- C1["tombolo-core<br/>(Rust)"]
   end
   subgraph Phone["Android — Kotlin · Compose"]
     C2["tombolo-core<br/>(Rust)"] --- S["Capture & input<br/>MediaProjection / helper"]
     C2 --- P["Notifications · SMS · calls<br/>clipboard · files"]
   end
-  C1 <== "QUIC + TLS 1.3 · Wi-Fi or USB<br/>pinned hardware-backed keys" ==> C2
+  C1 <== "QUIC + TLS 1.3 · local Wi-Fi<br/>pinned hardware-backed keys" ==> C2
 ```
 
-- **Video:** hardware H.264/HEVC on the phone → hardware decode and Metal presentation on the Mac. Target
-  latency ≈ 30–60 ms on USB, ≈ 40–80 ms on Wi-Fi (to be measured in Phase 0).
+- **Video:** hardware H.264/HEVC on the phone (MediaProjection in Standard mode) → VideoToolbox decode and
+  `AVSampleBufferDisplayLayer` presentation on the Mac — ~24 ms faster than Metal on `CAMetalDisplayLink` on the
+  tested macOS 27 setup ([spike S2](docs/spikes/s02-mac-video.md)). Standard-mode target on 5 GHz Wi-Fi:
+  p50 ≤ 100 ms, p95 ≤ 180 ms glass to glass (optical measurement still to come). Wi-Fi only at first; a USB link
+  without developer options is a spike (S18) before 1.0.
 - **Transport:** QUIC streams per window plus datagrams for audio, from one shared Rust core
   ([ADR-0003](docs/decisions/0003-transport.md)).
 - **Security:** QR bootstrap with a one-time secret, P-256 keys in the Secure Enclave and Android Keystore,
-  phone-authoritative permissions, sessions that fail closed, no trust-on-first-use, no plaintext mode — and the
-  pairing design is externally reviewed before it is implemented
-  ([ADR-0005](docs/decisions/0005-pairing-and-identity.md)).
+  phone-authoritative permissions, sessions that fail closed, no trust-on-first-use, no plaintext mode — and
+  pairing is built behind a flag, with nothing that contains it shipped until the external review of its design
+  closes ([ADR-0005](docs/decisions/0005-pairing-and-identity.md)).
 
 ## Design concepts
 
@@ -90,24 +96,31 @@ All screens and the design principles: [`docs/design/ui-concepts.md`](docs/desig
 
 | Release | Theme | Highlights |
 |---|---|---|
-| **0.1** | Mirror | Native mirroring, control, audio, clipboard over USB/Wireless debugging (developer preview) |
-| 0.1.x | App windows | Phone apps as separate Mac windows (experimental) |
-| **0.2** | Connect | Android app, QR pairing, notifications, SMS, caller ID, clipboard, files |
-| **0.3** | Standard mode | Mirroring and control without developer options |
-| **1.0** | Polish | Per-app Dock icons, Touch ID gate, auto-updates, F-Droid, security review |
-| 1.x | Beyond | Webcam, remote access via self-hosted relay, interop with LocalSend/KDE Connect |
+| **0.1** | Mirror | Install two apps, no developer options: QR pairing, mirroring with audio and control over Wi-Fi (typing on Android 13+), Mac → phone paste |
+| **0.2** | Connect | Notifications, SMS, caller ID, clipboard both ways, files, background reconnection |
+| **0.3** | Advanced (optional) | Per-app windows, dark-screen mirroring, no per-session prompt — via Wireless debugging, set up on the phone |
+| **1.0** | Polish | Per-app Dock icons, Touch ID gate, auto-updates, external review of the implementation, localisation |
+| 1.x | Beyond | Webcam, remote access via self-hosted relay, USB without developer options, interop with LocalSend/KDE Connect |
 
-Estimated effort to 1.0: **≈ 74–106 engineer-weeks** — about 11–14 months with two developers, 18–27 solo —
-after two rounds of independent review. Approval is requested for **Phase 0 only** (spikes + security design),
-which re-estimates everything after it.
+Estimated effort to 1.0: **≈ 85–126 engineer-weeks**. The first usable release (0.1) is **≈ 46–67
+engineer-weeks from project start** (Phase 0 + Phase 1; Phase 0 is partly done) — very roughly 6–9 months with two
+developers — plus however long the external security review takes. Re-planned on 2026-11-02
+([why](docs/plans/standard-first.md)) after two rounds of independent review; Phase 0 (spikes + security design)
+is under way, and its exit gate re-estimates everything after it.
 Full roadmap with feasibility ratings: [`docs/roadmap.md`](docs/roadmap.md) ·
-Phase-by-phase plan: [`docs/implementation-plan.md`](docs/implementation-plan.md).
+Phase-by-phase plan: [`docs/implementation-plan.md`](docs/implementation-plan.md) —
+[Phase 1](docs/implementation-plan.md#phase-1--mirror-no-developer-options-3450-ew--release-01) (0.1) ·
+[Phase 2](docs/implementation-plan.md#phase-2--connect-1420-ew--release-02) (0.2) ·
+[Phase 3](docs/implementation-plan.md#phase-3--advanced-mode-optional-1727-ew--release-03) (0.3) ·
+[Phase 4](docs/implementation-plan.md#phase-4--10-812-ew) (1.0).
 
 ## Requirements (planned)
 
 - **Mac:** macOS 14 Sonoma or later, Apple silicon.
-- **Phone:** Android 10 or later (Enhanced-mode audio needs Android 11+). Any brand.
-- **Connection:** same Wi-Fi network, or a USB cable.
+- **Phone:** Android 10 or later. Any brand. Typing from the Mac needs Android 13+ (Android 10–12: view and
+  gestures); the optional Advanced mode needs Android 11+ and Developer options.
+- **Connection:** same Wi-Fi network (or the phone's hotspot). USB without developer options is not in the first
+  releases.
 
 ## Documentation
 
@@ -117,7 +130,8 @@ Phase-by-phase plan: [`docs/implementation-plan.md`](docs/implementation-plan.md
 | [Architecture](docs/architecture.md) | Components, capability tiers, video/input paths, security model, tech stack |
 | [Protocol draft](docs/protocol.md) | Channels, messages, media framing, pairing, versioning |
 | [Implementation plan](docs/implementation-plan.md) | Phases, spikes and decision gates, acceptance criteria, risks, testing |
-| [Phase 0 task plan](docs/plans/phase-0.md) | The 18 tasks of Phase 0 with file ownership, dependencies and acceptance criteria |
+| [Re-plan: Standard mode first](docs/plans/standard-first.md) | Why the first release needs no developer options (approved 2026-11-02) |
+| [Phase 0 task plan](docs/plans/phase-0.md) | The Phase 0 tasks with file ownership, dependencies and acceptance criteria |
 | [Roadmap](docs/roadmap.md) | Features by release, with feasibility ratings |
 | [Decisions (ADRs)](docs/decisions/README.md) | Why each major technical choice was made |
 | [UI concepts](docs/design/ui-concepts.md) | Mockups for macOS and Android, interaction model |

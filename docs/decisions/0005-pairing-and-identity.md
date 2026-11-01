@@ -1,7 +1,7 @@
 # ADR-0005: Pairing and device identity
 
 - **Status:** Proposed
-- **Date:** 2026-10-25
+- **Date:** 2026-10-25 · amended 2026-11-02 ([below](#amendment-2026-11-02-review-gate-and-phase-references))
 
 ## Context
 Pairing grants full remote control of a phone. Common approaches have known weaknesses: trust-on-first-use
@@ -32,3 +32,30 @@ P-256 keys are hardware-backed on both the Secure Enclave and Android StrongBox.
 - A two-key design is more complex; spike S5 may simplify it to one key plus an app-level Touch ID gate.
 - PAKE availability: implemented once in `tombolo-core` (RustCrypto `spake2`), which needs an external review
   before 1.0.
+
+## Amendment 2026-11-02: review gate and phase references
+This is maintainer decision 1 of [ADR-0008](0008-standard-mode-first.md)
+([re-plan §9](../plans/standard-first.md#9-maintainer-decisions-2026-11-02)). The text above stays as decided on
+2026-10-25. Where it conflicts with this amendment, the amendment applies.
+
+- **Review gate.** This replaces "externally reviewed in Phase 0, before implementation" in the *Process* bullet
+  above:
+  - The state machine and its test vectors are written in Phase 0, in the
+    [pairing and session specification](../security/pairing-and-session.md), and sent for external review with the
+    [review request](../security/review-request.md).
+  - Pairing **may be implemented before the review closes, but only behind a feature flag**.
+  - **Nothing that contains it ships until the review closes**, that is, until every finding is resolved in the
+    specification or explicitly accepted with a written rationale.
+  - The rework risk from late findings is accepted.
+- **Phase references.** Pairing, identity keys, phone-authoritative scopes, revocation on both sides and the session
+  log move from Phase 2 (release 0.2) into **Phase 1, release 0.1 Mirror**. Mirroring and control in 0.1 run only
+  through Tombolo's paired session. As a result:
+  - The external review gates the **first** release. If it has not closed when 0.1 is otherwise ready, 0.1 waits
+    ([re-plan §7](../plans/standard-first.md#7-failure-modes-of-this-plan)).
+  - From 0.1 on, the screen features also depend on scopes. Mirroring and control need a pairing plus
+    phone-granted `screen.view` / `screen.control`, and pairing never grants permanent screen control by itself
+    ([re-plan §4](../plans/standard-first.md#4-security-model-changes)).
+- **Unchanged:**
+  - every mechanism in the *Decision* above;
+  - the external review of the implemented PAKE before 1.0 (*Consequences*), which belongs to 1.0's external review
+    of the implementation.
