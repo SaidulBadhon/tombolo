@@ -5,7 +5,7 @@
 | **Spike** | S10 (Rust + Swift half; the Kotlin / Android Keystore half is deferred) |
 | **Task** | P0-12 — see the [Phase 0 task plan](../plans/phase-0.md#acceptance-criteria-per-task) |
 | **Pass criteria** | [§0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes): "30 min stable at 1080p60 with < 1 frame added latency" (if it fails: "move media framing out of the core"). P0-12: a Rust → Swift callback that signs with a Secure Enclave key (Touch ID policy) and a Rust → Kotlin callback that signs with a Keystore key; async cancellation; 30-min 1080p60-sized byte stream through the FFI with zero-copy buffers; added latency < 1 frame; thread ownership documented |
-| **Spike code** | [`spikes/s10-uniffi/`](../../spikes/s10-uniffi/README.md) at commit `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab` (all numbers except `touchid-check` were measured with the build of `4f5ae1f2339f270ed52f6ff98eea113cb359d243`; `e6c5d6e` only shortened the signer error text) |
+| **Spike code** | [`spikes/s10-uniffi/`](../../spikes/s10-uniffi/README.md) at commit `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab`. Results come from three builds; see [Which build produced which result](#which-build-produced-which-result) |
 | **Author(s)** | Claude Opus 5.5 (agent), for the maintainer |
 | **Date(s) run** | 2026-10-26 – 2026-10-26 |
 | **Status** | draft — Swift half complete; manual Touch ID run and the Kotlin half outstanding |
@@ -33,7 +33,7 @@ both apps" depends on?
 
 | Component | Version / commit | How obtained |
 |---|---|---|
-| Spike code | `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab` (measurements: build of `4f5ae1f2339f270ed52f6ff98eea113cb359d243`) | this repository |
+| Spike code | `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab` (latest); measured builds listed below | this repository |
 | Rust | 1.98.0 (edition 2024) | rustup (preinstalled) |
 | `uniffi` | 0.32.2: current release, proc-macro style, library-mode `uniffi-bindgen` | crates.io, `Cargo.lock` committed |
 | Other crates | `tokio` 1.54.1, `p256` 0.14.0 (`ecdsa`), `sha2` 0.11.1, `async-trait` 0.1.92, `parking_lot` 0.13.0, `getrandom` 0.4.3 | crates.io |
@@ -41,6 +41,17 @@ both apps" depends on?
 | Linking | Rust `staticlib` linked through a SwiftPM `systemLibrary` target (`link "s10_core"` + `-L rust-lib`); harness binary 2.6 MB with the core statically linked (`otool -L` lists no Rust dylib) | `build.sh` |
 | Crypto | CryptoKit `SecureEnclave.P256.Signing.PrivateKey` (non-persistent); verification with `p256::ecdsa::VerifyingKey` | system / crates.io |
 | Swift language modes | harness: Swift 6; generated bindings module: Swift 5 (finding F2) | `Package.swift` |
+
+<a id="which-build-produced-which-result"></a>**Which build produced which result**
+
+| Result files | Run time (2026-10-26, local) | Build | Notes |
+|---|---|---|---|
+| `media-2min-run1-loaded.*` | 01:30–01:44 | working tree built at 01:28, identical to the code later committed as `a93ec9e` (core) + `17631c7` (harness) | no wake/crossing split (no `wakeUs` / `crossingUs` fields) |
+| first `stress.*` (superseded) | 01:30 | same as run 1 | committed in `7309869`, replaced by the 04:08 re-run in `b49c57c` |
+| `media-2min-run2.*` | 03:36–03:50 | `./build.sh` at 03:36 on merge `79b0286`; spike code identical to `17631c7` | no wake/crossing split |
+| `media-2min-run3.*` | 03:53–04:07 | `4f5ae1f2339f270ed52f6ff98eea113cb359d243` (HEAD recorded in `media-2min-run3.env.txt`) | first build with the split |
+| `sign.*`, `cancel.*`, `threads.*`, `bench.*`, `stress.*` | ≈ 04:08 | same `4f5ae1f` build | |
+| `touchid-check.*` | ≈ 04:09 | `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab` | `e6c5d6e` only shortened the signer error text (no BiometryDatabaseHash) |
 
 **Environment:** no network involved; everything is in one process. The Mac was **shared with other
 agents' jobs** throughout: SwiftPM test runs, a virtual machine, another spike's host app. The load
