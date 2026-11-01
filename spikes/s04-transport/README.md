@@ -100,7 +100,9 @@ estimate, 1 GiB transfer) was smoke-tested on loopback; results in `results/s4/d
   --phone-cert-dir results/tmp/phone-cert --out results/s4/direct-path-smoke
 ```
 
-Physical steps for a person are listed at the top of `scripts/phone-runs.sh` (unlock, cable, same Wi-Fi,
-generate congestion). The phone side runs as an `adb shell` process (shell uid), so no APK is needed. Phone
+Physical steps for a person are listed at the top of `scripts/phone-runs.sh`: unlock, cable, same Wi-Fi,
+generate congestion, and answer and record the macOS Local Network alert and Application Firewall prompt (S8
+row 6b). Everything the scripts write under `results/` passes through `scripts/redact.py` (global IPv6/IPv4,
+EUI-64 and MAC addresses → placeholders), and load logs never name other processes. The phone side runs as an `adb shell` process (shell uid), so no APK is needed. Phone
 and Mac clocks differ; the Mac estimates the offset from the lowest-RTT control pings and corrects one-way
 latencies (uncertainty ≈ half the minimum RTT asymmetry; recorded per run as `clock_offset_est_ms`).
