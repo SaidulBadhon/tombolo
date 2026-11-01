@@ -235,14 +235,14 @@ private final class BufferReader {
     @Test func devicesList() {
         let out = """
         List of devices attached
-        TESTSERIAL01             device usb:1-1 product:pdx model:motorola_edge_50_pro device:pdx transport_id:3
+        0123456789ABCDEF       device usb:1-1 product:pdx model:motorola_edge_50_pro device:pdx transport_id:3
         emulator-5554          unauthorized transport_id:1
         * daemon started successfully
 
         """
         let d = ADB.parseDevices(out)
         #expect(d.count == 2)
-        #expect(d[0].serial == "TESTSERIAL01" && d[0].state == "device" && d[0].isUSB && d[0].model == "motorola_edge_50_pro")
+        #expect(d[0].serial == "0123456789ABCDEF" && d[0].state == "device" && d[0].isUSB && d[0].model == "motorola_edge_50_pro")
         #expect(d[1].state == "unauthorized" && !d[1].isUSB)
     }
 }

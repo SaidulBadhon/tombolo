@@ -29,6 +29,8 @@ usage: s02-mirror --server PATH [options]
   --stats-every S      print statistics to stderr every S seconds (default 5, 0 = off)
   --server-log         echo the scrcpy-server output
   --synthetic WxH      no phone: stream a VideoToolbox-encoded test pattern through a local fake server
+  --port N             no adb: connect to a scrcpy-compatible server already listening on 127.0.0.1:N
+  --serve-synthetic WxH  headless: run only the fake server (prints its port), for a second s02-mirror --port
 """
 
 struct Options {
@@ -52,6 +54,8 @@ struct Options {
     var statsEvery: Double = 5
     var serverLog = false
     var synthetic: (Int, Int)?
+    var port: UInt16?
+    var serveSynthetic: (Int, Int)?
 }
 
 func fail(_ msg: String) -> Never {
@@ -105,11 +109,18 @@ func parse() -> Options {
             let p = val(a).lowercased().split(separator: "x").compactMap { Int($0) }
             guard p.count == 2 else { fail("--synthetic WxH") }
             o.synthetic = (p[0], p[1])
+        case "--port":
+            guard let p = UInt16(val(a)) else { fail("--port N") }
+            o.port = p
+        case "--serve-synthetic":
+            let p = val(a).lowercased().split(separator: "x").compactMap { Int($0) }
+            guard p.count == 2 else { fail("--serve-synthetic WxH") }
+            o.serveSynthetic = (p[0], p[1])
         case "-h", "--help": print(usage); exit(0)
         default: fail("unknown option \(a)\n\(usage)")
         }
     }
-    if o.serverPath == nil && o.synthetic == nil { fail("--server PATH is required (run.sh passes it)\n\(usage)") }
+    if o.serverPath == nil && o.synthetic == nil && o.port == nil && o.serveSynthetic == nil { fail("--server PATH is required (run.sh passes it)\n\(usage)") }
     return o
 }
 
@@ -154,7 +165,11 @@ final class AppController: NSObject, NSApplicationDelegate, NSWindowDelegate, @u
         window.delegate = self
         window.isReleasedWhenClosed = false
         window.collectionBehavior = [.managed, .participatesInCycle]
-        if opts.float { window.level = .floating }
+        if opts.float {
+            // Above other windows and on every Space, so a Space switch can't hide it mid-capture.
+            window.level = .floating
+            window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
+        }
         if let at = opts.at { window.setFrameOrigin(at) } else { window.center() }
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -181,6 +196,7 @@ final class AppController: NSObject, NSApplicationDelegate, NSWindowDelegate, @u
         var cfg = MirrorSession.Configuration(serverPath: opts.serverPath ?? "", server: server)
         cfg.serial = opts.serial
         cfg.adbPath = opts.adb
+        if let p = opts.port { cfg.existingTunnelPort = p }
         if let (w, h) = opts.synthetic {
             do {
                 let s = try SyntheticScrcpyServer(width: w, height: h, fps: max(1, opts.maxFps), expectControl: opts.control)
@@ -218,7 +234,7 @@ final class AppController: NSObject, NSApplicationDelegate, NSWindowDelegate, @u
 
     func started() {
         startedAt = Date()
-        let dev = session.device.map { "\($0.serial)\($0.isUSB ? " usb" : "")" } ?? "synthetic"
+        let dev = session.device.map { "\($0.serial)\($0.isUSB ? " usb" : "")" } ?? "no adb"
         log("s02-mirror: streaming from \"\(session.deviceName)\" (\(dev))")
         window.title = "\(opts.title) (\(presenterLabel)) — \(session.deviceName)"
         if opts.statsEvery > 0 {
@@ -245,10 +261,16 @@ final class AppController: NSObject, NSApplicationDelegate, NSWindowDelegate, @u
 
     func printStats() {
         let s = session.stats.snapshot()
+        let ticks = (view as? MetalPresenterView).map { " ticks \($0.ticks)" } ?? ""
+        let occluded = window.occlusionState.contains(.visible) ? "" : " WINDOW-OCCLUDED"
         log(String(format: "stats: %.0fs fps %.1f %.2f Mb/s decoded %d presented %d superseded %d | recv→decoded p50 %.2f p95 %.2f | recv→presented p50 %.2f p95 %.2f ms | jitter p95 %.2f ms | cpu %.1f%%",
                    s.seconds, s.receivedFps, s.megabitsPerSecond, s.decoded, s.presented, s.superseded,
                    s.receiveToDecodedMs.p50, s.receiveToDecodedMs.p95, s.receiveToPresentedMs.p50, s.receiveToPresentedMs.p95,
-                   s.arrivalJitterMs.p95, s.processCPUCores * 100))
+                   s.arrivalJitterMs.p95, s.processCPUCores * 100) + ticks + occluded)
+    }
+
+    func windowDidChangeOcclusionState(_ n: Notification) {
+        log("s02-mirror: window occlusion state → \(window.occlusionState.contains(.visible) ? "visible" : "occluded")")
     }
 
     func finish(code: Int32, reason: String) {
@@ -293,6 +315,24 @@ final class AppController: NSObject, NSApplicationDelegate, NSWindowDelegate, @u
 }
 
 let opts = parse()
+if let (w, h) = opts.serveSynthetic {
+    // Headless fake scrcpy-server: one client session at --max-fps, until SIGTERM/SIGINT.
+    do {
+        let srv = try SyntheticScrcpyServer(width: w, height: h, fps: max(1, opts.maxFps), expectControl: opts.control)
+        print(srv.port)
+        fflush(stdout)
+        srv.serve()
+        var sources: [DispatchSourceSignal] = []
+        for sig in [SIGINT, SIGTERM] {
+            signal(sig, SIG_IGN)
+            let src = DispatchSource.makeSignalSource(signal: sig, queue: .main)
+            src.setEventHandler { srv.stop(); exit(0) }
+            src.resume()
+            sources.append(src)
+        }
+        withExtendedLifetime(sources) { dispatchMain() }
+    } catch { fail("synthetic server: \(error)") }
+}
 let app = NSApplication.shared
 app.setActivationPolicy(.regular)
 let controller = AppController(opts: opts)

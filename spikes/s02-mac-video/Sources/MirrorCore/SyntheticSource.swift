@@ -19,6 +19,9 @@ public final class SyntheticH264Encoder: @unchecked Sendable {
     private var out: [(Data, Int64, Bool, Bool)] = []   // payload, pts, config, key
     private var sentConfig = false
     private var frameNo: Int64 = 0
+    /// Called after the test pattern is drawn, with the frame number and the host time (ns) used as its PTS — e.g. to
+    /// stamp a clock symbol into the frame (spikes/s02-mac-video/loopback).
+    public var overlay: ((CVPixelBuffer, Int64, UInt64) -> Void)?
 
     public init(width: Int, height: Int, bitRate: Int = 8_000_000, fps: Int = 60) throws {
         self.width = width; self.height = height
@@ -76,8 +79,10 @@ public final class SyntheticH264Encoder: @unchecked Sendable {
 
     /// Encodes one frame synchronously; returns the packets Streamer.java would send for it.
     public func encodeNext(forceKeyFrame: Bool = false) throws -> [(payload: Data, pts: Int64, config: Bool, key: Bool)] {
+        let now = hostNanos()
         guard let s = session, let pb = render(frameNo) else { throw MirrorError.decoder("encoder not ready") }
-        let pts = Int64(hostNanos() / 1000)
+        overlay?(pb, frameNo, now)
+        let pts = Int64(now / 1000)
         frameNo += 1
         let props: CFDictionary? = forceKeyFrame ? [kVTEncodeFrameOptionKey_ForceKeyFrame: true] as CFDictionary : nil
         let st = VTCompressionSessionEncodeFrame(s, imageBuffer: pb, presentationTimeStamp: CMTime(value: pts, timescale: 1_000_000),
@@ -146,6 +151,8 @@ public final class SyntheticScrcpyServer: @unchecked Sendable {
     /// Control-socket bytes received from the client (tests check what was sent).
     public private(set) var controlBytes = Data()
     public private(set) var framesSent = 0
+    /// Passed to the encoder (see `SyntheticH264Encoder.overlay`). Set before `serve`.
+    public var overlay: ((CVPixelBuffer, Int64, UInt64) -> Void)?
 
     public init(width: Int = 1080, height: Int = 2400, fps: Int = 60, expectControl: Bool = true, deviceName: String = "Synthetic S2 source") throws {
         self.width = width; self.height = height; self.fps = fps; self.expectControl = expectControl; self.deviceName = deviceName
@@ -222,6 +229,7 @@ public final class SyntheticScrcpyServer: @unchecked Sendable {
                   write(v, ScrcpyFraming.encodeCodec(.h264)),
                   write(v, ScrcpyFraming.encodeSession(width: width, height: height)),
                   let enc = try? SyntheticH264Encoder(width: width, height: height, fps: fps) else { return }
+            enc.overlay = overlay
             let interval = 1_000_000_000 / UInt64(max(1, fps))
             var next = hostNanos()
             var i = 0
