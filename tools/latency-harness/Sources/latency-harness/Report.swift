@@ -46,7 +46,9 @@ enum Report {
         var s = "== software-timestamp mode: render → composited display ==\n"
         s += "frames \(r.framesTotal), decoded \(r.framesDecoded) (\(f(r.decodeRate * 100)) %)\n"
         s += "capture interval median \(f(r.captureIntervalMedianMs)) ms (p99 \(f(r.captureIntervalP99Ms))), "
-        s += "SCK delivery delay median \(f(r.deliveryDelayMedianMs)) ms, decode median \(f(r.decodeMicrosMedian, 0)) µs (p99 \(f(r.decodeMicrosP99, 0)))\n"
+        s += "decode median \(f(r.decodeMicrosMedian, 0)) µs (p99 \(f(r.decodeMicrosP99, 0)))\n"
+        s += "frame arrival − displayTime median \(f(r.arrivalMinusDisplayMedianMs)) ms, \(f(r.arrivedBeforeDisplayFraction * 100)) % of frames arrive before their displayTime "
+        s += "(diagnostic: displayTime is the scheduled presentation vsync, not a delivery time)\n"
         for k in r.kinds {
             s += "\n[\(k.kind) tag \(k.sessionTag)\(k.sessionId.map { " session \($0)" } ?? "")]\n"
             s += "  samples (first appearances) \(k.samples), repeats \(k.repeats), negative \(k.negativeSamples), outliers excluded \(k.excludedOutliers)\n"

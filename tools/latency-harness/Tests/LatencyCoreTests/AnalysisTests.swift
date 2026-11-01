@@ -44,6 +44,23 @@ import Testing
         #expect(abs(k.sourceIntervalMedianMs - 16.667) < 0.1)
         #expect(samples.count == 600)
         #expect(k.systematicUncertaintyMs > 0.1 && k.systematicUncertaintyMs < 1.5)
+        // Every synthetic frame arrives 3 ms after its displayTime.
+        #expect(abs(report.arrivalMinusDisplayMedianMs - 3) < 1e-9)
+        #expect(report.arrivedBeforeDisplayFraction == 0)
+    }
+
+    @Test func arrivalBeforeDisplayTimeIsCountedNotDropped() {
+        // As observed with ScreenCaptureKit: most frames reach the callback before displayTime.
+        let frames = (0..<10).map { j -> FrameRecord in
+            let disp = UInt64(1_000_000_000 + j * 8_333_333)
+            let arrival = j < 9 ? disp - 3_000_000 : disp + 1_000_000
+            return FrameRecord(frame: j, displayNs: disp, arrivalNs: arrival, decodeMicros: 1, fullDetect: false, detections: 1,
+                               symbol: DecodedSymbol(kindRaw: 1, session: 0, ticks: UInt32(10 + j * 83), centreX: 0, centreY: 0,
+                                                     moduleSize: 4, confidence: 0.5))
+        }
+        let (report, _) = SoftwareAnalysis.run(frames: frames, sessions: [:])
+        #expect(abs(report.arrivalMinusDisplayMedianMs - (-3)) < 1e-9)
+        #expect(abs(report.arrivedBeforeDisplayFraction - 0.9) < 1e-12)
     }
 
     @Test func macReferenceNeedsNoSync() throws {

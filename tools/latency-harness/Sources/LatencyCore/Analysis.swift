@@ -169,7 +169,13 @@ public struct SoftwareReport: Sendable, Codable {
     public var decodeRate: Double
     public var captureIntervalMedianMs: Double
     public var captureIntervalP99Ms: Double
-    public var deliveryDelayMedianMs: Double
+    /// Median of (callback arrival − SCStreamFrameInfo.displayTime) over all frames, signed. Usually
+    /// negative: displayTime is the presentation vsync WindowServer scheduled for the composited
+    /// frame, and frames typically reach the callback before it. Diagnostic only — not a delivery
+    /// delay and not used for latency.
+    public var arrivalMinusDisplayMedianMs: Double
+    /// Fraction of frames that reached the callback before their displayTime.
+    public var arrivedBeforeDisplayFraction: Double
     public var decodeMicrosMedian: Double
     public var decodeMicrosP99: Double
     public var kinds: [KindReport]
@@ -187,9 +193,11 @@ public enum SoftwareAnalysis {
         let disp = frameIds.map { byFrame[$0]![0].displayNs }
         var intervals: [Double] = []
         for i in 1..<max(1, disp.count) where disp[i] > disp[i - 1] { intervals.append(Double(disp[i] - disp[i - 1]) / 1e6) }
-        let delivery = frameIds.compactMap { id -> Double? in
+        // Signed, over every frame (an earlier version kept only frames arriving after displayTime,
+        // i.e. a fraction of a percent of them, and called it a delivery delay).
+        let arrivalMinusDisplay = frameIds.map { id -> Double in
             let r = byFrame[id]![0]
-            return r.arrivalNs >= r.displayNs ? Double(r.arrivalNs - r.displayNs) / 1e6 : nil
+            return (Double(r.arrivalNs) - Double(r.displayNs)) / 1e6
         }
         let decodeUs = frameIds.map { Double(byFrame[$0]![0].decodeMicros) }
 
@@ -281,7 +289,7 @@ public enum SoftwareAnalysis {
             } else {
                 notes.append("same clock as the capture (no clock sync needed)")
             }
-            notes.append("capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)")
+            notes.append("capture time = SCStreamFrameInfo.displayTime: the presentation vsync WindowServer scheduled for the composited frame, not the moment the frame was delivered (frames usually arrive before it); a frame skipped by the capture delays first appearance by one capture interval")
             reports.append(KindReport(
                 kind: kind.description, sessionTag: Int(tag), sessionId: sessionId.map { String(format: "%08x", $0) },
                 samples: samples.count, repeats: repeats, negativeSamples: samples.filter { $0.latencyMs < 0 }.count,
@@ -295,7 +303,9 @@ public enum SoftwareAnalysis {
             decodeRate: frameIds.isEmpty ? 0 : Double(decodedFrames) / Double(frameIds.count),
             captureIntervalMedianMs: intervals.isEmpty ? .nan : Stats.median(intervals),
             captureIntervalP99Ms: intervals.isEmpty ? .nan : Stats.percentile(intervals, 99),
-            deliveryDelayMedianMs: delivery.isEmpty ? .nan : Stats.median(delivery),
+            arrivalMinusDisplayMedianMs: arrivalMinusDisplay.isEmpty ? .nan : Stats.median(arrivalMinusDisplay),
+            arrivedBeforeDisplayFraction: arrivalMinusDisplay.isEmpty ? .nan
+                : Double(arrivalMinusDisplay.filter { $0 < 0 }.count) / Double(arrivalMinusDisplay.count),
             decodeMicrosMedian: decodeUs.isEmpty ? .nan : Stats.median(decodeUs),
             decodeMicrosP99: decodeUs.isEmpty ? .nan : Stats.percentile(decodeUs, 99),
             kinds: reports)
