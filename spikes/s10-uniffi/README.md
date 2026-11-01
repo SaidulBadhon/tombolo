@@ -125,8 +125,13 @@ $H touchid --timeout-ms 30000
 ```
 
 Creates a non-persistent Secure Enclave key with `[.privateKeyUsage, .userPresence]`, then runs the
-handshake. A Touch ID sheet ("sign the Tombolo S10 spike handshake") appears; touch the sensor (or
-use the password fallback). Expected: `verified=true` and `TOUCHID: PASS`. Leaving the sheet alone
-for 30 s exercises cancellation instead: Rust's sign timeout drops the foreign future, UniFFI cancels
-the Swift task and the signer's cancellation handler calls `LAContext.invalidate()`. Expected
-`TimedOut` and the sheet closes by itself. Record both outcomes in the result doc.
+handshake. A Touch ID sheet ("sign the Tombolo S10 spike handshake") appears. **Touch the sensor;
+don't use the password.** `.userPresence` also accepts the Mac login password, so a password
+approval proves user presence but not the Touch ID path. Expected: `verified=true` and
+`TOUCHID: PASS`. The harness cannot tell which method satisfied the prompt, so **record it** in the
+result doc (Touch ID or password), with the date and the macOS build.
+
+Second run: leave the sheet alone for 30 s. That exercises cancellation instead: Rust's sign
+timeout drops the foreign future, UniFFI cancels the Swift task, and the signer's cancellation
+handler calls `LAContext.invalidate()`. Expected: `TimedOut`, and the sheet closes by itself (note
+whether it did). Record both outcomes in the result doc.

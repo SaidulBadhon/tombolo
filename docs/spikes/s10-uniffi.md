@@ -125,8 +125,10 @@ comparable — and `Drop` guards record whether a future was dropped before or a
   is reported. Percentiles come from n = 7 200 per design, so p99.9 rests on about 7 samples and the
   maximum on 1.
 
-  **Physical steps needing a person:** only the manual Touch ID run (`s10-harness touchid`): touch the
-  sensor when the sheet appears, then a second run where the sheet is left alone until it times out.
+  **Physical steps needing a person:** only the manual Touch ID run (`s10-harness touchid`). First,
+  touch the sensor when the sheet appears, not the password: `.userPresence` also accepts the Mac
+  password, so record which method was used. Second, a run where the sheet is left alone until it
+  times out (record whether it closes by itself).
 
 ## Raw numbers
 
