@@ -26,7 +26,9 @@
 #      in a private temp dir, imports them into that keychain with an access list
 #      that lets only /usr/bin/codesign use the key without a prompt
 #      (partition list apple-tool:,apple:,codesign:), then deletes the temp files.
-#   4. With --backup: writes the encrypted .p12 where you said.
+#   4. Adds a marker item (service "io.github.saidulbadhon.tombolo.signing-keychain-marker", not
+#      secret) inside that keychain, so remove-identity.sh can tell it apart from any other keychain.
+#   5. With --backup: writes the encrypted .p12 where you said.
 #
 # What it does NOT do: change certificate trust settings, use sudo, touch
 # Gatekeeper/SIP, or write anything inside a git work tree. codesign does not need
@@ -119,6 +121,9 @@ security_stdin "create-keychain -p \"$kc_pw\" \"$TOMBOLO_SIGNING_KEYCHAIN\""
 kc_created=1
 security_stdin "unlock-keychain -p \"$kc_pw\" \"$TOMBOLO_SIGNING_KEYCHAIN\""
 "$SECURITY" set-keychain-settings -l -u -t 3600 "$TOMBOLO_SIGNING_KEYCHAIN"
+# Marker: remove-identity.sh only deletes keychains that carry it (not a secret).
+"$SECURITY" add-generic-password -a "create-identity.sh" -s "$TOMBOLO_MARKER_SERVICE" \
+  -l "Tombolo signing keychain marker" -w "created by tools/signing/create-identity.sh" "$TOMBOLO_SIGNING_KEYCHAIN"
 
 if [[ -z "${TOMBOLO_SIGNING_KEYCHAIN_PASSWORD:-}" ]]; then
   say "storing the keychain password in the login keychain (service $TOMBOLO_PW_SERVICE)"

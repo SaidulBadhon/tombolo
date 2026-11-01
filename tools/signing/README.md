@@ -18,7 +18,7 @@ every update. The measurements behind this are in
 |---|---|
 | `create-identity.sh [--backup <file.p12>] [--import <file.p12>]` | Creates the keychain and identity once (idempotent), smoke-tests signing, prints the DR that signed apps get |
 | `sign.sh [--entitlements <plist>] [--identifier <id>] [--no-runtime] <path>...` | Signs bundles or binaries with the hardened runtime, then verifies and prints the DR |
-| `remove-identity.sh --yes` | Deletes the keychain and the stored keychain password (irreversible unless you made a backup) |
+| `remove-identity.sh --yes` | Deletes the keychain and the stored keychain password (irreversible unless you made a backup). Refuses any keychain `create-identity.sh` did not create |
 | `common.sh` | Shared settings; sourced, not run |
 
 Settings (environment variables, all optional): `TOMBOLO_SIGNING_KEYCHAIN` (keychain path),
@@ -44,14 +44,22 @@ codesign -d -r- build/Tombolo.app                # designated => identifier "…
 3. Generates an RSA-3072 key and a self-signed certificate (EKU codeSigning) in a private temporary directory,
    imports them into the keychain so that only `/usr/bin/codesign` may use the key without a prompt (access list
    plus partition list `apple-tool:,apple:,codesign:`), and deletes the temporary files.
-4. With `--backup`: writes the key and certificate to an encrypted PKCS#12 file where you said.
+4. Adds a marker item (service `io.github.saidulbadhon.tombolo.signing-keychain-marker`, not secret) **inside**
+   that keychain, so `remove-identity.sh` can recognise it.
+5. With `--backup`: writes the key and certificate to an encrypted PKCS#12 file where you said.
 
 It does **not** change certificate trust settings, use `sudo`, or touch Gatekeeper or SIP. Secrets are passed to
 `security` on stdin (`security -i`), never on the command line.
 
 **`sign.sh`** unlocks the signing keychain (it re-locks on sleep or after 1 hour) and signs. Nothing else.
 
-**`remove-identity.sh --yes`** deletes the keychain file and the login-keychain password item. It reports, but
+**`remove-identity.sh --yes`** deletes the keychain file and the login-keychain password item. It first
+refuses, deleting nothing, if `$TOMBOLO_SIGNING_KEYCHAIN` is:
+- a login or System keychain;
+- under `/Library`, `/System` or `/Network`;
+- on your keychain search list, or your default or login keychain;
+- missing the marker. A marker-less keychain from before markers existed is accepted only if the random
+  password `create-identity.sh` stored unlocks it. It reports, but
 does not change, any user trust setting for the certificate. The scripts never create one; if you added one by
 hand, remove it with `security remove-trusted-cert <cert.pem>`, which asks for your password.
 

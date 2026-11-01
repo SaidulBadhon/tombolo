@@ -23,6 +23,9 @@ set -euo pipefail
 : "${TOMBOLO_SIGNING_DAYS:=7300}"
 
 TOMBOLO_PW_SERVICE="io.github.saidulbadhon.tombolo.signing-keychain-password"
+# Item that create-identity.sh writes INSIDE the keychain it creates; remove-identity.sh
+# deletes only keychains that carry it (see assert_removable_keychain).
+TOMBOLO_MARKER_SERVICE="io.github.saidulbadhon.tombolo.signing-keychain-marker"
 LOGIN_KEYCHAIN="$HOME/Library/Keychains/login.keychain-db"
 SIGNING_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SECURITY=/usr/bin/security
@@ -63,6 +66,39 @@ security_stdin() { printf '%s\n' "$1" | "$SECURITY" -i; }
 unlock_keychain() {
   security_stdin "unlock-keychain -p \"$(keychain_password)\" \"$TOMBOLO_SIGNING_KEYCHAIN\"" >/dev/null \
     || die "could not unlock $TOMBOLO_SIGNING_KEYCHAIN"
+}
+
+# Refuse to delete anything create-identity.sh did not create. Dies on refusal.
+#  1. Never a system or login keychain, nothing under /Library, /System or /Network, and never a
+#     keychain on the user's search list or the default/login keychain (create-identity.sh never
+#     puts its keychain there).
+#  2. The keychain must carry the marker item create-identity.sh writes. Keychains created before
+#     the marker existed are accepted only if the random password create-identity.sh stored in the
+#     login keychain unlocks them (a caller-supplied TOMBOLO_SIGNING_KEYCHAIN_PASSWORD is not enough).
+assert_removable_keychain() {
+  local kc="$TOMBOLO_SIGNING_KEYCHAIN" base real listed
+  base="$(basename "$kc")"
+  case "$base" in
+    login.keychain|login.keychain-db|System.keychain|metadata.keychain-db)
+      die "refusing to delete $kc: that is a system/login keychain" ;;
+  esac
+  real="$(cd "$(dirname "$kc")" 2>/dev/null && pwd -P)/$base" || die "cannot resolve $kc"
+  case "$real" in
+    /Library/*|/System/*|/Network/*) die "refusing to delete $kc: not in your user area" ;;
+  esac
+  listed="$("$SECURITY" list-keychains -d user 2>/dev/null; "$SECURITY" default-keychain -d user 2>/dev/null;
+            "$SECURITY" login-keychain -d user 2>/dev/null)"
+  if grep -q -F "\"$real\"" <<<"$listed" || grep -q -F "\"$kc\"" <<<"$listed"; then
+    die "refusing to delete $kc: it is on your keychain search list or is your default/login keychain"
+  fi
+  unlock_keychain   # dies (without a prompt) if the password doesn't unlock it
+  if "$SECURITY" find-generic-password -s "$TOMBOLO_MARKER_SERVICE" "$kc" >/dev/null 2>&1; then
+    return 0
+  fi
+  if [[ -n "${TOMBOLO_SIGNING_KEYCHAIN_PASSWORD:-}" ]]; then
+    die "refusing to delete $kc: it has no create-identity.sh marker"
+  fi
+  say "$kc has no marker (created before markers existed); accepted because the password create-identity.sh stored unlocks it"
 }
 
 # SHA-1 of the signing certificate (what codesign is given, and what the DR pins).

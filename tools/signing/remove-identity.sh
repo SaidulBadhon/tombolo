@@ -10,6 +10,10 @@
 #           followed by an update signed with the same identity, so users of those
 #           builds lose their permission grants on the next update.
 #
+# Safety: it refuses (and deletes nothing) unless $TOMBOLO_SIGNING_KEYCHAIN is a keychain that
+# create-identity.sh created - never the login/System keychain or one on your search list.
+# See assert_removable_keychain in common.sh.
+#
 # What this changes:
 #   1. Deletes the keychain file $TOMBOLO_SIGNING_KEYCHAIN (key + certificate).
 #   2. Deletes the login-keychain generic-password item that held its password.
@@ -23,7 +27,7 @@ yes=0
 while (( $# )); do
   case "$1" in
     --yes) yes=1; shift ;;
-    -h|--help) sed -n '2,19p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
     *) die "unknown argument $1" ;;
   esac
 done
@@ -41,6 +45,7 @@ if (( ! yes )); then
 fi
 
 if [[ -e "$TOMBOLO_SIGNING_KEYCHAIN" ]]; then
+  assert_removable_keychain
   sha1="$(identity_sha1 || true)"
 
   if [[ -n "$sha1" ]] && "$SECURITY" dump-trust-settings 2>/dev/null | grep -q -F "$TOMBOLO_SIGNING_CN"; then
