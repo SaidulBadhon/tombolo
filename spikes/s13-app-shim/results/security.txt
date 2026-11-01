@@ -1,0 +1,11 @@
+=== 1. bare template binary (same code, not the generated bundle) claims to be com.example.chat
+impostor exit code 4 (4 = rejected)
+47630705.544 [host 32008] REJECT hello from pid 32031 package=com.example.chat: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.spike-s13.host.shim-template team=none cdhash=d8dea05feca3cf0d645ac00f17f98e711c7f54f9 status=-67050
+=== 2. copy of Chat.app, Info.plist edited, re-signed ad-hoc with the SAME identifier
+/tmp/s13-evil/Chat.app: replacing existing signature
+evil Identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat CDHash=0b69b9f2a712e83f30f30b8a8eebc3b3ebdb3d0f 
+tampered copy exit code 4 (4 = rejected)
+47631835.152 [host 32008] REJECT hello from pid 32059 package=com.example.chat: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=0b69b9f2a712e83f30f30b8a8eebc3b3ebdb3d0f status=-67050
+=== 3. name squatting while the host is down (any same-user process can claim the name)
+squatter: bootstrap_check_in(io.github.saidulbadhon.Tombolo.spike-s13.ipc) = 0 (Success) port=6659 pid=32098 mach_msg receive = 268451844 value=0 
+(mach_msg receive = 0 means the waiting shim's hello reached the squatter; payload carries only package/version/pid — the shim sends no input until it has verified CONFIG)

@@ -1,0 +1,23 @@
+## m2-perframe-2x60-720x1560: host args: --mode perframe  duration=20s
+uptime:  3:39  up 4 days, 20:23, 2 users, load averages: 26.51 15.01 15.02
+top CPU before run (2nd sample):
+10940  com.apple.Virtua 187.0
+429    WindowServer     39.2 
+78547  BackgroundShortc 37.9 
+1239   siriactionsd     26.1 
+387    mds              23.1 
+497    mds_stores       21.8 
+WindowServer baseline (nothing of ours running, 5 s): 42.4 %
+CPU over 11043.5 ms (100% = one core):
+  pid 78901  TomboloHost              19.1 %
+  pid 78904  TomboloShim               2.4 %
+  pid 78906  TomboloShim               2.4 %
+  pid 429    WindowServer             45.3 %
+  org.example.maps     per-frame 720x1560@60 achieved 60.0 fps sent 1190 acked 1190 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.068  p95 0.102  p99 0.117  max 8.480 ms (n=1070)
+      host→layer commit  p50 0.363  p95 0.488  p99 0.556  max 8.829 ms
+      ack round trip     p50 0.404  p95 0.554  p99 0.641  max 8.897 ms
+  com.example.chat     per-frame 720x1560@60 achieved 60.0 fps sent 1195 acked 1194 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.064  p95 0.088  p99 0.115  max 0.209 ms (n=1074)
+      host→layer commit  p50 0.370  p95 0.466  p99 0.538  max 0.699 ms
+      ack round trip     p50 0.415  p95 0.523  p99 0.676  max 0.892 ms

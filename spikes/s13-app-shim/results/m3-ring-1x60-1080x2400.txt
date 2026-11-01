@@ -1,0 +1,18 @@
+## m3-ring-1x60-1080x2400: host args: --mode ring --size 1080x2400 --apps com.example.chat:Chat  duration=20s
+uptime:  3:40  up 4 days, 20:23, 2 users, load averages: 24.21 15.51 15.20
+top CPU before run (2nd sample):
+10940  com.apple.Virtua 170.8
+79187  BackgroundShortc 40.7 
+1180   mediaanalysisd   33.0 
+1239   siriactionsd     28.7 
+387    mds              28.0 
+0      kernel_task      17.0 
+WindowServer baseline (nothing of ours running, 5 s): 0.8 %
+CPU over 11036.4 ms (100% = one core):
+  pid 79485  TomboloHost              18.8 %
+  pid 79488  TomboloShim               1.4 %
+  pid 429    WindowServer             12.5 %
+  com.example.chat     ring      1080x2400@60 achieved 60.0 fps sent 1195 acked 1194 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.052  p95 0.082  p99 0.093  max 0.608 ms (n=1074)
+      host→layer commit  p50 0.189  p95 0.285  p99 0.322  max 0.754 ms
+      ack round trip     p50 0.230  p95 0.355  p99 0.404  max 0.826 ms

@@ -1,0 +1,94 @@
+[
+  {
+    "achievedFps" : 59.983666739087674,
+    "ackRoundTripMs" : {
+      "count" : 1074,
+      "max" : 4.744917,
+      "mean" : 0.4485003556797022,
+      "p50" : 0.405417,
+      "p95" : 0.667459,
+      "p99" : 0.751959
+    },
+    "commitMs" : {
+      "count" : 1074,
+      "max" : 4.701875,
+      "mean" : 0.39643381657355664,
+      "p50" : 0.357958,
+      "p95" : 0.580833,
+      "p99" : 0.676375
+    },
+    "droppedNoFreeSlot" : 0,
+    "endReason" : "host quit",
+    "events" : 0,
+    "fpsTarget" : 60,
+    "framesAcked" : 1194,
+    "framesSent" : 1195,
+    "height" : 1560,
+    "hostVersion" : "1",
+    "launchToFirstCommitMs" : 150.335875,
+    "launchToHelloMs" : 139.899083,
+    "mode" : "per-frame",
+    "package" : "com.example.chat",
+    "reclaimedSlots" : 0,
+    "recvMs" : {
+      "count" : 1074,
+      "max" : 4.591542,
+      "mean" : 0.06766977560521419,
+      "p50" : 0.057584,
+      "p95" : 0.093708,
+      "p99" : 0.11375
+    },
+    "sendErrors" : 0,
+    "sessionID" : 1,
+    "shimPID" : 22448,
+    "shimVersion" : "1",
+    "width" : 720,
+    "windowSeconds" : 17.904874083
+  },
+  {
+    "achievedFps" : 59.978736697017496,
+    "ackRoundTripMs" : {
+      "count" : 1070,
+      "max" : 4.224583,
+      "mean" : 0.4339526906542056,
+      "p50" : 0.398375,
+      "p95" : 0.664875,
+      "p99" : 0.740417
+    },
+    "commitMs" : {
+      "count" : 1070,
+      "max" : 4.174375,
+      "mean" : 0.3838082588785046,
+      "p50" : 0.352584,
+      "p95" : 0.577875,
+      "p99" : 0.668916
+    },
+    "droppedNoFreeSlot" : 0,
+    "endReason" : "host quit",
+    "events" : 0,
+    "fpsTarget" : 60,
+    "framesAcked" : 1190,
+    "framesSent" : 1191,
+    "height" : 1560,
+    "hostVersion" : "1",
+    "launchToFirstCommitMs" : 216.669625,
+    "launchToHelloMs" : 206.396292,
+    "mode" : "per-frame",
+    "package" : "org.example.maps",
+    "reclaimedSlots" : 0,
+    "recvMs" : {
+      "count" : 1070,
+      "max" : 3.8765,
+      "mean" : 0.06576926915887851,
+      "p50" : 0.056667,
+      "p95" : 0.092209,
+      "p99" : 0.12075
+    },
+    "sendErrors" : 0,
+    "sessionID" : 2,
+    "shimPID" : 22450,
+    "shimVersion" : "1",
+    "width" : 720,
+    "windowSeconds" : 17.8396555
+  }
+]

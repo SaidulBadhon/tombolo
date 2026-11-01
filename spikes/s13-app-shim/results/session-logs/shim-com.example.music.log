@@ -1,0 +1,8 @@
+46679734.835 [shim com.example.music 24052] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Music.app id=io.github.saidulbadhon.Tombolo.shim.com.example.music args=
+46679769.291 [shim com.example.music 24052] window number 4604
+46679790.548 [shim com.example.music 24052] connected: session 3 720x1560@60 mode=ring ring=3/3 host v1 pid 24045 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46699266.421 [shim com.example.music 24052] disconnected: host quit (frames this session: 1169)
+52136756.429 [shim com.example.music 80607] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Music.app id=io.github.saidulbadhon.Tombolo.shim.com.example.music args=
+52136785.314 [shim com.example.music 80607] window number 4985
+52136795.998 [shim com.example.music 80607] connected: session 3 720x1560@60 mode=ring ring=3/3 host v1 pid 80567 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52156206.654 [shim com.example.music 80607] disconnected: host quit (frames this session: 1137)

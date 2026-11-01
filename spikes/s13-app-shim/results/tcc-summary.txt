@@ -1,0 +1,14 @@
+TCC requests in tccd's log 2026-10-26 01:20 → now whose attribution names the spike's host or a shim
+(authValue 0=denied 1=unknown 2=allowed; preflight=yes never shows a prompt)
+    6  host  TCCAccessRequest                                        kTCCServiceDeveloperTool     preflight=yes  authValue=0 authReason=5
+   10  host  TCCAccessRequest                                        kTCCServiceListenEvent       preflight=yes  authValue=0 authReason=4
+   56  host  TCCAccessRequest                                        kTCCServiceListenEvent       preflight=yes  authValue=1 authReason=5
+    1  host  TCCAccessRequest                                        kTCCServicePostEvent         preflight=yes  authValue=0 authReason=4
+    7  host  TCCAccessRequest                                        kTCCServicePostEvent         preflight=yes  authValue=1 authReason=5
+   11  host  TCCAccessRequest                                        kTCCServiceScreenCapture     preflight=yes  authValue=1 authReason=5
+    1  host  TCCAccessRequest                                        kTCCServiceSystemPolicyAllFiles preflight=no   authValue=0 authReason=5
+   12  shim  TCCAccessRequest                                        kTCCServiceDeveloperTool     preflight=yes  authValue=0 authReason=5
+    2  shim  TCCAccessRequest                                        kTCCServiceListenEvent       preflight=yes  authValue=0 authReason=4
+   80  shim  TCCAccessRequest                                        kTCCServiceListenEvent       preflight=yes  authValue=1 authReason=5
+   10  shim  TCCAccessRequest                                        kTCCServicePostEvent         preflight=yes  authValue=1 authReason=5
+   23  shim  TCCAccessRequest                                        kTCCServiceScreenCapture     preflight=yes  authValue=1 authReason=5

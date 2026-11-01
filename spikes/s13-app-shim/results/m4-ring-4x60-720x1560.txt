@@ -1,0 +1,33 @@
+## m4-ring-4x60-720x1560: host args: --mode ring --apps com.example.chat:Chat,org.example.maps:Maps,com.example.music:Music,com.example.notes:Notes  duration=20s
+uptime:  3:40  up 4 days, 20:24, 2 users, load averages: 29.60 17.68 16.00
+top CPU before run (2nd sample):
+10940  com.apple.Virtua 174.8
+80104  BackgroundShortc 36.6 
+1239   siriactionsd     27.4 
+387    mds              21.7 
+429    WindowServer     20.4 
+0      kernel_task      15.3 
+WindowServer baseline (nothing of ours running, 5 s): 0.4 %
+CPU over 11047.4 ms (100% = one core):
+  pid 80567  TomboloHost              41.8 %
+  pid 80601  TomboloShim               1.4 %
+  pid 80603  TomboloShim               1.4 %
+  pid 80607  TomboloShim               1.6 %
+  pid 80616  TomboloShim               1.6 %
+  pid 429    WindowServer             45.0 %
+  com.example.music    ring      720x1560@60 achieved 60.0 fps sent 1137 acked 1136 skipped-at-source 27 sendErr 0
+      host→shim receive  p50 0.057  p95 0.092  p99 0.104  max 0.311 ms (n=1045)
+      host→layer commit  p50 0.210  p95 0.309  p99 0.360  max 0.443 ms
+      ack round trip     p50 0.252  p95 0.387  p99 0.475  max 0.675 ms
+  com.example.notes    ring      720x1560@60 achieved 60.0 fps sent 1114 acked 1114 skipped-at-source 26 sendErr 0
+      host→shim receive  p50 0.056  p95 0.093  p99 0.125  max 11.581 ms (n=1021)
+      host→layer commit  p50 0.223  p95 0.370  p99 0.496  max 11.761 ms
+      ack round trip     p50 0.294  p95 0.535  p99 0.691  max 11.818 ms
+  com.example.chat     ring      720x1560@60 achieved 58.5 fps sent 1187 acked 1187 skipped-at-source 27 sendErr 0
+      host→shim receive  p50 0.051  p95 0.076  p99 0.109  max 245.126 ms (n=1067)
+      host→layer commit  p50 0.189  p95 0.272  p99 0.355  max 253.186 ms
+      ack round trip     p50 0.228  p95 0.371  p99 0.914  max 253.249 ms
+  org.example.maps     ring      720x1560@60 achieved 58.5 fps sent 1183 acked 1183 skipped-at-source 28 sendErr 0
+      host→shim receive  p50 0.049  p95 0.077  p99 0.106  max 255.905 ms (n=1064)
+      host→layer commit  p50 0.181  p95 0.263  p99 0.346  max 255.988 ms
+      ack round trip     p50 0.220  p95 0.348  p99 0.893  max 256.772 ms

@@ -1,0 +1,242 @@
+46244164.841 [shim com.example.chat 18071] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=--selftest-events
+46244197.278 [shim com.example.chat 18071] window number 4503
+46244209.196 [shim com.example.chat 18071] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 18067 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=46a41c81a51630ed302e39fab0172c1287307b94 status=0]
+46245782.913 [shim com.example.chat 18071] selftest: dispatching 5 synthetic events through NSWindow.sendEvent
+46251761.495 [shim com.example.chat 18071] disconnected: host quit (frames this session: 454)
+46252765.654 [shim com.example.chat 18071] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app
+46252917.275 [shim com.example.chat 18071] host-ready notification
+46252917.675 [shim com.example.chat 18071] REJECTED by host: unknown package
+46252918.397 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46253762.679 [shim com.example.chat 18071] REJECTED by host: unknown package
+46253762.791 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46254763.322 [shim com.example.chat 18071] REJECTED by host: unknown package
+46254763.472 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46255762.627 [shim com.example.chat 18071] REJECTED by host: unknown package
+46255762.745 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46256763.047 [shim com.example.chat 18071] REJECTED by host: unknown package
+46256763.151 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46257762.710 [shim com.example.chat 18071] REJECTED by host: unknown package
+46257762.886 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46258763.260 [shim com.example.chat 18071] REJECTED by host: unknown package
+46258763.459 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46259763.268 [shim com.example.chat 18071] REJECTED by host: unknown package
+46259763.420 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46260762.385 [shim com.example.chat 18071] REJECTED by host: unknown package
+46260762.475 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46261762.540 [shim com.example.chat 18071] REJECTED by host: unknown package
+46261762.693 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46262762.421 [shim com.example.chat 18071] REJECTED by host: unknown package
+46262762.521 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46263762.403 [shim com.example.chat 18071] REJECTED by host: unknown package
+46263762.529 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46264762.331 [shim com.example.chat 18071] REJECTED by host: unknown package
+46264762.447 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46265762.874 [shim com.example.chat 18071] REJECTED by host: unknown package
+46265763.048 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46266762.613 [shim com.example.chat 18071] REJECTED by host: unknown package
+46266762.817 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46267762.344 [shim com.example.chat 18071] REJECTED by host: unknown package
+46267762.461 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46268762.343 [shim com.example.chat 18071] REJECTED by host: unknown package
+46268762.448 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46269762.477 [shim com.example.chat 18071] REJECTED by host: unknown package
+46269762.611 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46270762.324 [shim com.example.chat 18071] REJECTED by host: unknown package
+46270762.423 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46271762.366 [shim com.example.chat 18071] REJECTED by host: unknown package
+46271762.470 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46272762.558 [shim com.example.chat 18071] REJECTED by host: unknown package
+46272762.663 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46273762.394 [shim com.example.chat 18071] REJECTED by host: unknown package
+46273762.496 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46274762.319 [shim com.example.chat 18071] REJECTED by host: unknown package
+46274762.434 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46275762.399 [shim com.example.chat 18071] REJECTED by host: unknown package
+46275762.542 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46276762.255 [shim com.example.chat 18071] REJECTED by host: unknown package
+46276762.341 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46277762.272 [shim com.example.chat 18071] REJECTED by host: unknown package
+46277762.681 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46278762.214 [shim com.example.chat 18071] REJECTED by host: unknown package
+46278762.318 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46279762.139 [shim com.example.chat 18071] REJECTED by host: unknown package
+46279762.231 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46280762.991 [shim com.example.chat 18071] REJECTED by host: unknown package
+46280763.175 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46281762.263 [shim com.example.chat 18071] REJECTED by host: unknown package
+46281762.371 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46282762.248 [shim com.example.chat 18071] REJECTED by host: unknown package
+46282762.352 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46283762.462 [shim com.example.chat 18071] REJECTED by host: unknown package
+46283762.628 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46284762.264 [shim com.example.chat 18071] REJECTED by host: unknown package
+46284762.390 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46285762.564 [shim com.example.chat 18071] REJECTED by host: unknown package
+46285762.729 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46286762.238 [shim com.example.chat 18071] REJECTED by host: unknown package
+46286762.372 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46287762.497 [shim com.example.chat 18071] REJECTED by host: unknown package
+46287762.672 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46288762.542 [shim com.example.chat 18071] REJECTED by host: unknown package
+46288762.746 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46289762.181 [shim com.example.chat 18071] REJECTED by host: unknown package
+46289762.291 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46290762.224 [shim com.example.chat 18071] REJECTED by host: unknown package
+46290762.320 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46291762.297 [shim com.example.chat 18071] REJECTED by host: unknown package
+46291762.430 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46292763.378 [shim com.example.chat 18071] REJECTED by host: unknown package
+46292763.532 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46293762.279 [shim com.example.chat 18071] REJECTED by host: unknown package
+46293762.365 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46294762.196 [shim com.example.chat 18071] REJECTED by host: unknown package
+46294762.595 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46295762.335 [shim com.example.chat 18071] REJECTED by host: unknown package
+46295762.446 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46296762.203 [shim com.example.chat 18071] REJECTED by host: unknown package
+46296762.295 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46297762.611 [shim com.example.chat 18071] REJECTED by host: unknown package
+46297762.713 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46298763.370 [shim com.example.chat 18071] REJECTED by host: unknown package
+46298763.533 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46299762.170 [shim com.example.chat 18071] REJECTED by host: unknown package
+46299762.265 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46300763.276 [shim com.example.chat 18071] REJECTED by host: unknown package
+46300763.383 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46301762.377 [shim com.example.chat 18071] REJECTED by host: unknown package
+46301762.468 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46302762.677 [shim com.example.chat 18071] REJECTED by host: unknown package
+46302762.776 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46303762.139 [shim com.example.chat 18071] REJECTED by host: unknown package
+46303762.243 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46304762.147 [shim com.example.chat 18071] REJECTED by host: unknown package
+46304762.240 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46305762.125 [shim com.example.chat 18071] REJECTED by host: unknown package
+46305762.231 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46306763.463 [shim com.example.chat 18071] REJECTED by host: unknown package
+46306763.638 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46307763.410 [shim com.example.chat 18071] REJECTED by host: unknown package
+46307763.638 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46308762.815 [shim com.example.chat 18071] REJECTED by host: unknown package
+46308762.984 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46309763.560 [shim com.example.chat 18071] REJECTED by host: unknown package
+46309763.787 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46310763.406 [shim com.example.chat 18071] REJECTED by host: unknown package
+46310763.607 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46311762.904 [shim com.example.chat 18071] REJECTED by host: unknown package
+46311763.001 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46312763.190 [shim com.example.chat 18071] REJECTED by host: unknown package
+46312763.316 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46313763.397 [shim com.example.chat 18071] REJECTED by host: unknown package
+46313763.570 [shim com.example.chat 18071] disconnected: rejected by host (frames this session: 454)
+46607113.009 [shim com.example.chat 22160] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46607140.219 [shim com.example.chat 22160] window number 4554
+46607153.432 [shim com.example.chat 22160] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 22158 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46626996.775 [shim com.example.chat 22160] disconnected: host quit (frames this session: 1192)
+46630156.502 [shim com.example.chat 22448] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46630185.825 [shim com.example.chat 22448] window number 4571
+46630197.759 [shim com.example.chat 22448] connected: session 1 720x1560@60 mode=per-frame ring=3/0 host v1 pid 22446 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46650094.162 [shim com.example.chat 22448] disconnected: host quit (frames this session: 1195)
+46655854.510 [shim com.example.chat 23322] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46655887.111 [shim com.example.chat 23322] window number 4590
+46655904.646 [shim com.example.chat 23322] connected: session 1 1080x2400@60 mode=ring ring=3/3 host v1 pid 23320 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46675780.388 [shim com.example.chat 23322] disconnected: host quit (frames this session: 1194)
+46679013.956 [shim com.example.chat 24047] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46679041.833 [shim com.example.chat 24047] window number 4600
+46679060.087 [shim com.example.chat 24047] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 24045 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46699267.714 [shim com.example.chat 24047] disconnected: host quit (frames this session: 1214)
+46726350.324 [shim com.example.chat 24788] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46726378.068 [shim com.example.chat 24788] window number 4632
+46726388.535 [shim com.example.chat 24788] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 24781 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46729599.724 [shim com.example.chat 24788] disconnected: host quit (frames this session: 194)
+46730601.392 [shim com.example.chat 24788] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app
+46730752.139 [shim com.example.chat 24788] host-ready notification
+46730758.545 [shim com.example.chat 24788] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 24891 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 1159.6 ms after disconnect
+46765640.055 [shim com.example.chat 24788] disconnected: host went away (frames this session: 2093)
+46765819.318 [shim com.example.chat 24788] host-ready notification
+46765831.299 [shim com.example.chat 24788] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 191.9 ms after disconnect
+46768118.283 [shim com.example.chat 26573] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+46768145.204 [shim com.example.chat 26573] window number 4649
+46768157.457 [shim com.example.chat 26573] connected: session 3 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46771333.071 [shim com.example.chat 26573] disconnected: host quit (frames this session: 192)
+47561219.251 [shim com.example.chat 30688] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+47561241.735 [shim com.example.chat 30688] window number 4741
+47561252.442 [shim com.example.chat 30688] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 30669 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47572767.799 [shim com.example.chat 30688] disconnected: host quit (frames this session: 692)
+47586638.866 [shim com.example.chat 31080] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+47586660.577 [shim com.example.chat 31080] window number 4750
+47586670.476 [shim com.example.chat 31080] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 31074 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47590714.815 [shim com.example.chat 31080] disconnected: host quit (frames this session: 242)
+47592169.775 [shim com.example.chat 31080] host-ready notification
+47592175.896 [shim com.example.chat 31080] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 31262 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0] 1461.9 ms after disconnect
+47594310.836 [shim com.example.chat 31080] disconnected: host went away (frames this session: 129)
+47594499.013 [shim com.example.chat 31080] host-ready notification
+47594504.438 [shim com.example.chat 31080] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 31391 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0] 194.2 ms after disconnect
+47596832.316 [shim com.example.chat 31494] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+47596857.089 [shim com.example.chat 31494] window number 4773
+47596869.435 [shim com.example.chat 31494] connected: session 3 720x1560@60 mode=ring ring=3/3 host v1 pid 31391 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47600200.648 [shim com.example.chat 31494] disconnected: host quit (frames this session: 201)
+47627855.920 [shim com.example.chat 31917] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+47627879.407 [shim com.example.chat 31917] window number 4782
+47627879.751 [shim com.example.chat 31917] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app
+47627980.251 [shim com.example.chat 31917] host-ready notification
+47627985.525 [shim com.example.chat 31917] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 31928 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47629068.237 [shim com.example.chat 31917] disconnected: host quit (frames this session: 65)
+47630513.518 [shim com.example.chat 32014] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+47630534.309 [shim com.example.chat 32014] window number 4793
+47630544.503 [shim com.example.chat 32014] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 32008 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47631884.871 [shim com.example.chat 32014] disconnected: host quit (frames this session: 81)
+47633888.420 [shim com.example.chat 32014] disconnected: host went away (frames this session: 81)
+- args=--package com.example.chat --exit-after 4 --no-launch-host
+47630704.775 [shim com.example.chat 32031] window number 4794
+47630713.574 [shim com.example.chat 32031] REJECTED by host: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.spike-s13.host.shim-template 
+47630713.987 [shim com.example.chat 32031] disconnected: rejected by host (frames this session: 0)
+47631806.923 [shim com.example.chat 32059] shim v1-7fab2eb47a76 starting: bundle=/tmp/s13-evil/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=--exit-after 4 --no-launch-host
+47631834.061 [shim com.example.chat 32059] window number 4803
+47631842.728 [shim com.example.chat 32059] REJECTED by host: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=no
+47631843.056 [shim com.example.chat 32059] disconnected: rejected by host (frames this session: 0)
+51860775.522 [shim com.example.chat 71330] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51860803.687 [shim com.example.chat 71330] window number 4844
+51860814.190 [shim com.example.chat 71330] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 71325 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51863572.969 [shim com.example.chat 71330] disconnected: host quit (frames this session: 166)
+51878249.971 [shim com.example.chat 72521] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51878280.317 [shim com.example.chat 72521] window number 4847
+51878291.133 [shim com.example.chat 72521] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 72510 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51887185.672 [shim com.example.chat 72521] disconnected: host quit (frames this session: 535)
+51930703.308 [shim com.example.chat 74794] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51930730.785 [shim com.example.chat 74794] window number 4853
+51930742.838 [shim com.example.chat 74794] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 74792 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51936638.239 [shim com.example.chat 74794] disconnected: host quit (frames this session: 355)
+51976726.862 [shim com.example.chat 75510] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51976761.031 [shim com.example.chat 75510] window number 4857
+51976774.060 [shim com.example.chat 75510] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 75505 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51979258.433 [shim com.example.chat 75510] disconnected: host quit (frames this session: 150)
+51993112.685 [shim com.example.chat 75886] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51993140.893 [shim com.example.chat 75886] window number 4862
+51993152.266 [shim com.example.chat 75886] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 75880 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51995370.799 [shim com.example.chat 75886] disconnected: host quit (frames this session: 134)
+51998479.161 [shim com.example.chat 75886] host-ready notification
+51998481.016 [shim com.example.chat 75886] host asked us to restart for an update
+51999211.802 [shim com.example.chat 76212] shim v2-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51999240.977 [shim com.example.chat 76212] window number 4865
+51999254.440 [shim com.example.chat 76212] connected: session 1 720x1560@60 mode=ring ring=3/3 host v2 pid 76091 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 status=0]
+52000884.801 [shim com.example.chat 76212] disconnected: host quit (frames this session: 99)
+52008615.987 [shim com.example.chat 76212] host-ready notification
+52008622.368 [shim com.example.chat 76212] connected: session 2 720x1560@60 mode=ring ring=3/3 host v3 pid 76706 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=7859348c794ecdb120ff318a3daaf881f511bb9d status=0] 7739.3 ms after disconnect
+52008755.229 [shim com.example.chat 76212] disconnected: host quit (frames this session: 8)
+52049180.672 [shim com.example.chat 78102] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+52049209.425 [shim com.example.chat 78102] window number 4873
+52049221.831 [shim com.example.chat 78102] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 78095 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52069064.431 [shim com.example.chat 78102] disconnected: host quit (frames this session: 1192)
+52078204.175 [shim com.example.chat 78904] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+52078236.326 [shim com.example.chat 78904] window number 4877
+52078250.940 [shim com.example.chat 78904] connected: session 1 720x1560@60 mode=per-frame ring=3/0 host v1 pid 78901 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52098141.901 [shim com.example.chat 78904] disconnected: host quit (frames this session: 1195)
+52107056.178 [shim com.example.chat 79488] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+52107084.479 [shim com.example.chat 79488] window number 4885
+52107095.037 [shim com.example.chat 79488] connected: session 1 1080x2400@60 mode=ring ring=3/3 host v1 pid 79485 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52126990.803 [shim com.example.chat 79488] disconnected: host quit (frames this session: 1195)
+52135926.121 [shim com.example.chat 80601] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+52135954.887 [shim com.example.chat 80601] window number 4982
+52135965.899 [shim com.example.chat 80601] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 80567 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52156207.145 [shim com.example.chat 80601] disconnected: host quit (frames this session: 1187)

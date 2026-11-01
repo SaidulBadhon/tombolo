@@ -1,0 +1,101 @@
+=== Spotlight: brand-new shim (package never generated before), no mdimport
+mdutil: /: 	Indexing enabled.  
+before: mdfind ''
+generated at +330.3 ms
+mdfind by bundle ID found '/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app' at +4637.6 ms (no mdimport)
+mdls has kMDItemCFBundleIdentifier=io.github.saidulbadhon.Tombolo.shim.com.example.spotlight at +4692.0 ms
+after mdimport: mdfind '/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app'
+by display name (what the Spotlight UI matches): '/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app'
+Chat by bundle ID: '/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app'
+kMDItemCFBundleIdentifier = "io.github.saidulbadhon.Tombolo.shim.com.example.spotlight"
+kMDItemContentType        = "com.apple.application-bundle"
+kMDItemDisplayName        = "S13 Spotlight Test"
+kMDItemKind               = "Application"
+kMDItemVersion            = "1"
+=== running shims: Dock / ⌘-Tab class (lsappinfo), windows (CGWindowList)
+"Chat" ASN:0x0-0x33a33a: 
+    bundleID="io.github.saidulbadhon.Tombolo.shim.com.example.chat"
+    bundle path="/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app"
+    executable path="/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app/Contents/MacOS/TomboloShim"
+    pid = 75510 token=[sess=100028 pid=75510 uid:501,501,501 g:20,20 pV:647177] type="Foreground" flavor=3 Version="1" fileType="APPL" creator="????" Arch=ARM64 
+    coalition: 19323
+    parentASN="Tombolo Host" ASN:0x0-0x339339: 
+    launch time =  1 seconds ago, 2026/10/26 03:37:57 ( 1.3113 seconds ago )
+    checkin time = 1 seconds ago, 2026/10/26 03:37:57 ( 1.25749 seconds ago )
+    launch to checkin time: 0.0538139 seconds
+
+"Maps" ASN:0x0-0x33b33b: 
+    bundleID="io.github.saidulbadhon.Tombolo.shim.org.example.maps"
+    bundle path="/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app"
+    executable path="/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app/Contents/MacOS/TomboloShim"
+    pid = 75516 token=[sess=100028 pid=75516 uid:501,501,501 g:20,20 pV:647190] type="Foreground" flavor=3 Version="1" fileType="APPL" creator="????" Arch=ARM64 
+    coalition: 19324
+    parentASN="Tombolo Host" ASN:0x0-0x339339: 
+    launch time =  1 seconds ago, 2026/10/26 03:37:57 ( 1.25678 seconds ago )
+    checkin time = 1 seconds ago, 2026/10/26 03:37:57 ( 1.1936 seconds ago )
+    launch to checkin time: 0.0631852 seconds
+
+"Tombolo Host" ASN:0x0-0x339339: 
+    bundleID="io.github.saidulbadhon.Tombolo.spike-s13.host"
+    bundle path="/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app"
+    executable path="/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app/Contents/MacOS/TomboloHost"
+    pid = 75505 token=[sess=100028 pid=75505 uid:501,501,501 g:20,20 pV:647167] type="Foreground" flavor=3 Version="1" fileType="APPL" creator="????" Arch=ARM64 
+    childASNs: ASN:0x0-0x33a33a: ASN:0x0-0x33b33b: 
+    coalition: 19322
+    launch time =  1 seconds ago, 2026/10/26 03:37:56 ( 1.42755 seconds ago )
+    checkin time = 1 seconds ago, 2026/10/26 03:37:57 ( 1.36949 seconds ago )
+    launch to checkin time: 0.0580609 seconds
+
+lsappinfo list entries for shims:
+    bundleID="io.github.saidulbadhon.Tombolo.shim.com.example.chat"
+    bundle path="/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app"
+    executable path="/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app/Contents/MacOS/TomboloShim"
+    pid = 75510 token=[sess=100028 pid=75510 uid:501,501,501 g:20,20 pV:647177] type="Foreground" flavor=3 Version="1" fileType="APPL" creator="????" Arch=ARM64 
+--
+    bundleID="io.github.saidulbadhon.Tombolo.shim.org.example.maps"
+    bundle path="/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app"
+    executable path="/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app/Contents/MacOS/TomboloShim"
+    pid = 75516 token=[sess=100028 pid=75516 uid:501,501,501 g:20,20 pV:647190] type="Foreground" flavor=3 Version="1" fileType="APPL" creator="????" Arch=ARM64 
+window 4858 owner=Maps pid=75516 title=Maps layer=0 onscreen=0 bounds=300x678@0,428
+window 4857 owner=Chat pid=75510 title=Chat layer=0 onscreen=0 bounds=300x678@1056,267
+window 4856 owner=Tombolo Host pid=75505 title=Tombolo host (spike S13) v1 layer=0 onscreen=0 bounds=420x188@80,901
+(onscreen=0 = the window is on another Space, e.g. while the user is in a full-screen app)
+captured window 4858 → results/maps-connected.png
+=== Gatekeeper / quarantine / signature
+-- Chat.app
+/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app/Contents/MacOS/TomboloShim: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app: valid on disk
+/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app: satisfies its Designated Requirement
+Identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat
+CodeDirectory v=20500 size=757 flags=0x10002(adhoc,runtime) hashes=16+3 location=embedded
+CDHash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659
+Signature=adhoc
+TeamIdentifier=not set
+Runtime Version=14.0.0
+/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app: rejected
+-- Maps.app
+/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app/Contents/MacOS/TomboloShim: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app: valid on disk
+/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app: satisfies its Designated Requirement
+Identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps
+CodeDirectory v=20500 size=757 flags=0x10002(adhoc,runtime) hashes=16+3 location=embedded
+CDHash=50029577cb2962d56aeb5949a6e9b01a6735ae8d
+Signature=adhoc
+TeamIdentifier=not set
+Runtime Version=14.0.0
+/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app: rejected
+-- S13 Spotlight Test.app
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app/Contents/MacOS/TomboloShim: com.apple.provenance: 
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app: valid on disk
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app: satisfies its Designated Requirement
+Identifier=io.github.saidulbadhon.Tombolo.shim.com.example.spotlight
+CodeDirectory v=20500 size=762 flags=0x10002(adhoc,runtime) hashes=16+3 location=embedded
+CDHash=5ff0a727f72a3dcf645d4d3ad6c4282c7f8edd75
+Signature=adhoc
+TeamIdentifier=not set
+Runtime Version=14.0.0
+/Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app: rejected
+Dock pinned items mentioning Tombolo Apps (read-only): 0

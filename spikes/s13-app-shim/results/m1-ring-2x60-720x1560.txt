@@ -1,0 +1,23 @@
+## m1-ring-2x60-720x1560: host args: --mode ring  duration=20s
+uptime:  3:39  up 4 days, 20:23, 2 users, load averages: 22.68 13.23 14.43
+top CPU before run (2nd sample):
+10940  com.apple.Virtua 178.3
+1180   mediaanalysisd   38.6 
+77787  BackgroundShortc 30.6 
+497    mds_stores       25.1 
+1239   siriactionsd     19.9 
+1061   diagnosticd      17.6 
+WindowServer baseline (nothing of ours running, 5 s): 11.5 %
+CPU over 11035.9 ms (100% = one core):
+  pid 78095  TomboloHost              19.7 %
+  pid 78102  TomboloShim               1.4 %
+  pid 78123  TomboloShim               1.4 %
+  pid 429    WindowServer             46.1 %
+  org.example.maps     ring      720x1560@60 achieved 60.0 fps sent 1180 acked 1180 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.049  p95 0.079  p99 0.093  max 7.643 ms (n=1060)
+      host→layer commit  p50 0.183  p95 0.288  p99 0.389  max 7.766 ms
+      ack round trip     p50 0.223  p95 0.375  p99 0.472  max 7.811 ms
+  com.example.chat     ring      720x1560@60 achieved 60.0 fps sent 1192 acked 1191 skipped-at-source 0 sendErr 0
+      host→shim receive  p50 0.054  p95 0.076  p99 0.089  max 6.122 ms (n=1071)
+      host→layer commit  p50 0.190  p95 0.261  p99 0.318  max 6.247 ms
+      ack round trip     p50 0.234  p95 0.338  p99 0.410  max 6.292 ms

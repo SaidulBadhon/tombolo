@@ -1,0 +1,37 @@
+# Excerpts from results/session-logs/ (all spike runs on 2026-10-26, archived by scripts/cleanup.sh)
+# Lines start with CLOCK_UPTIME_RAW milliseconds, then [process pid].
+
+## Shim generation time (host log: bundle + icon + codesign + LSRegisterURL)
+46243563.045 [host 18067] generated ~/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=f9515860092ea4413129433a91d266817c13c583 LSRegisterURL=0 in 174.5 ms
+46243725.907 [host 18067] generated ~/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 LSRegisterURL=0 in 162.3 ms
+46679066.724 [host 24045] generated ~/Applications/Tombolo Apps/Music.app (io.github.saidulbadhon.Tombolo.shim.com.example.music) cdhash=0d400cec087f9d8de0d4a22799045d2b304a7a98 LSRegisterURL=0 in 176.7 ms
+46679232.830 [host 24045] generated ~/Applications/Tombolo Apps/Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=237e7b19d9081dd1cfceca88f2ffd3ceaa345c2e LSRegisterURL=0 in 165.4 ms
+47560726.340 [host 30669] generated ~/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 LSRegisterURL=0 in 173.9 ms
+47586719.686 [host 31074] generated ~/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d LSRegisterURL=0 in 170.5 ms
+51860329.176 [host 71247] generated ~/Applications/Tombolo Apps/S13 Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=a6e752440692206a50b7de7fa992f60fa9937e6e LSRegisterURL=0 in 176.1 ms
+51971948.490 [host 75381] generated ~/Applications/Tombolo Apps/S13 Spotlight Test.app (io.github.saidulbadhon.Tombolo.shim.com.example.spotlight) cdhash=5ff0a727f72a3dcf645d4d3ad6c4282c7f8edd75 LSRegisterURL=0 in 171.0 ms
+51988855.664 [host 75727] generated ~/Applications/Tombolo Apps/S13 QTest.app (io.github.saidulbadhon.Tombolo.shim.com.example.qtest) cdhash=85a9020327535e1ba70c59b38bc7df02a28c8874 LSRegisterURL=0 in 174.8 ms
+51998676.733 [host 76091] generated ~/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=0789c132112db8405ceed1ba6f08cde8c00904d7 LSRegisterURL=0 in 156.5 ms
+51998835.983 [host 76091] generated ~/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=3fbfdd5b17e9865ad421090f7b596ac74b43273a LSRegisterURL=0 in 158.5 ms
+52048864.397 [host 78095] generated ~/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 LSRegisterURL=0 in 173.1 ms
+52049026.879 [host 78095] generated ~/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d LSRegisterURL=0 in 161.9 ms
+52136003.773 [host 80567] generated ~/Applications/Tombolo Apps/Music.app (io.github.saidulbadhon.Tombolo.shim.com.example.music) cdhash=4772b1aca176751f175fb426d2b35e5a7d97f9d5 LSRegisterURL=0 in 170.5 ms
+52136165.430 [host 80567] generated ~/Applications/Tombolo Apps/Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=b87d75b9f691c5d5fe3e634a0de0e8ae32db23f6 LSRegisterURL=0 in 160.0 ms
+
+n=15 min=156.5 median=170.5 max=176.7 ms
+
+## Input self-test (smoke test, host pid 18067): shims dispatch synthetic events through NSWindow.sendEvent
+46245782.913 [shim com.example.chat 18071] selftest: dispatching 5 synthetic events through NSWindow.sendEvent
+46246297.045 [shim org.example.maps 18075] selftest: dispatching 5 synthetic events through NSWindow.sendEvent
+46245783.673 [host 18067] event session=1 pkg=com.example.chat kind=mouseDown x=0.500 y=0.500 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.066 ms
+46245783.767 [host 18067] event session=1 pkg=com.example.chat kind=mouseDragged x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.170 ms
+46245783.809 [host 18067] event session=1 pkg=com.example.chat kind=mouseUp x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.206 ms
+46245783.851 [host 18067] event session=1 pkg=com.example.chat kind=keyDown x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.203 ms
+46245783.889 [host 18067] event session=1 pkg=com.example.chat kind=keyUp x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.232 ms
+46245783.928 [host 18067] event session=1 pkg=com.example.chat kind=scroll x=0.247 y=-0.415 dx=0.0 dy=-24.0 key=0 mods=0x0 chars="" ipc=0.239 ms
+46246297.803 [host 18067] event session=2 pkg=org.example.maps kind=mouseDown x=0.500 y=0.500 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.054 ms
+46246297.907 [host 18067] event session=2 pkg=org.example.maps kind=mouseDragged x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.143 ms
+46246297.969 [host 18067] event session=2 pkg=org.example.maps kind=mouseUp x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.193 ms
+46246298.027 [host 18067] event session=2 pkg=org.example.maps kind=keyDown x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.197 ms
+46246298.084 [host 18067] event session=2 pkg=org.example.maps kind=keyUp x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.237 ms
+46246298.141 [host 18067] event session=2 pkg=org.example.maps kind=scroll x=0.650 y=0.122 dx=0.0 dy=-24.0 key=0 mods=0x0 chars="" ipc=0.254 ms

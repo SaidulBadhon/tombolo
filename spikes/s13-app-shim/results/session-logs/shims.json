@@ -1,0 +1,62 @@
+{
+  "com.example.chat" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.com.example.chat",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/Chat.app",
+    "cdhash" : "8aa6157ad8fec4319f4c70df3d25b1a4f9159659",
+    "generateMs" : 173.06025,
+    "generatedAt" : "2026-10-25T21:39:09Z",
+    "name" : "Chat",
+    "package" : "com.example.chat",
+    "shimVersion" : "1-7fab2eb47a76"
+  },
+  "com.example.music" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.com.example.music",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/Music.app",
+    "cdhash" : "4772b1aca176751f175fb426d2b35e5a7d97f9d5",
+    "generateMs" : 170.472583,
+    "generatedAt" : "2026-10-25T21:40:36Z",
+    "name" : "Music",
+    "package" : "com.example.music",
+    "shimVersion" : "1-7fab2eb47a76"
+  },
+  "com.example.notes" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.com.example.notes",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/Notes.app",
+    "cdhash" : "b87d75b9f691c5d5fe3e634a0de0e8ae32db23f6",
+    "generateMs" : 159.953167,
+    "generatedAt" : "2026-10-25T21:40:36Z",
+    "name" : "Notes",
+    "package" : "com.example.notes",
+    "shimVersion" : "1-7fab2eb47a76"
+  },
+  "com.example.qtest" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.com.example.qtest",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/S13 QTest.app",
+    "cdhash" : "85a9020327535e1ba70c59b38bc7df02a28c8874",
+    "generateMs" : 174.801792,
+    "generatedAt" : "2026-10-25T21:38:09Z",
+    "name" : "S13 QTest",
+    "package" : "com.example.qtest",
+    "shimVersion" : "1-7fab2eb47a76"
+  },
+  "com.example.spotlight" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.com.example.spotlight",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/S13 Spotlight Test.app",
+    "cdhash" : "5ff0a727f72a3dcf645d4d3ad6c4282c7f8edd75",
+    "generateMs" : 171.02425,
+    "generatedAt" : "2026-10-25T21:37:52Z",
+    "name" : "S13 Spotlight Test",
+    "package" : "com.example.spotlight",
+    "shimVersion" : "1-7fab2eb47a76"
+  },
+  "org.example.maps" : {
+    "bundleID" : "io.github.saidulbadhon.Tombolo.shim.org.example.maps",
+    "bundlePath" : "\/Users\/saidulbadhon\/Applications\/Tombolo Apps\/Maps.app",
+    "cdhash" : "50029577cb2962d56aeb5949a6e9b01a6735ae8d",
+    "generateMs" : 161.895334,
+    "generatedAt" : "2026-10-25T21:39:09Z",
+    "name" : "Maps",
+    "package" : "org.example.maps",
+    "shimVersion" : "1-7fab2eb47a76"
+  }
+}

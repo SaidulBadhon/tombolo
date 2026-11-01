@@ -1,0 +1,29 @@
+=== build v1
+built out/Tombolo Host.app version 1
+CDHash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1
+Chat.app v1 CDHash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659
+Maps.app v1 CDHash=50029577cb2962d56aeb5949a6e9b01a6735ae8d
+51993152.266 [shim com.example.chat 75886] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 75880 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51993207.442 [shim org.example.maps 75892] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 75880 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+=== quit host v1 (an updater quits the app before replacing it)
+51995370.799 [shim com.example.chat 75886] disconnected: host quit (frames this session: 134)
+=== build v2 in place (new Info.plist version → new ad-hoc cdhash)
+built out/Tombolo Host.app version 2
+CDHash=05463abe425ef6dc6c87954bd1c9a54b10b8e420
+51998478.147 [host 76091] host v2 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 args=
+51998481.016 [shim com.example.chat 75886] host asked us to restart for an update
+51998519.629 [host 76091] com.example.chat: old shim pid 75886 exited after ~0 ms; regenerating for v2
+51998676.733 [host 76091] generated /Users/saidulbadhon/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=0789c132112db8405ceed1ba6f08cde8c00904d7 LSRegisterURL=0 in 156.5 ms
+51999211.802 [shim com.example.chat 76212] shim v2-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app id=io.github.saidulbadhon.Tombolo.shim.com.example.chat args=
+51999254.440 [shim com.example.chat 76212] connected: session 1 720x1560@60 mode=ring ring=3/3 host v2 pid 76091 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 status=0]
+51999701.378 [shim org.example.maps 76264] connected: session 2 720x1560@60 mode=ring ring=3/3 host v2 pid 76091 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 status=0]
+Chat.app now v2 CDHash=0789c132112db8405ceed1ba6f08cde8c00904d7 quarantine=none
+Maps.app now v2 CDHash=3fbfdd5b17e9865ad421090f7b596ac74b43273a quarantine=none
+LaunchServices sees:  bundle path="/Users/saidulbadhon/Applications/Tombolo Apps/Chat.app" pid = 76212 token=[sess=100028 pid=76212 uid:501,501,501 g:20,20 pV:648597] type="Foreground" flavor=3 Version="2" fileType="APPL" creator="????" Arch=ARM64 
+=== v3 host with --no-update-shims: v2 shims keep working against a newer host (protocol compatibility)
+built out/Tombolo Host.app version 3
+CDHash=7859348c794ecdb120ff318a3daaf881f511bb9d
+52008622.368 [shim com.example.chat 76212] connected: session 2 720x1560@60 mode=ring ring=3/3 host v3 pid 76706 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=7859348c794ecdb120ff318a3daaf881f511bb9d status=0] 7739.3 ms after disconnect
+=== restore v1 build
+built out/Tombolo Host.app version 1
+CDHash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1
