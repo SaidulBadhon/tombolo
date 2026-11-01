@@ -5,7 +5,7 @@
 | **Spike** | S4 (run together with S5 in P0-14) |
 | **Task** | P0-14 — see the [Phase 0 task plan](../plans/phase-0.md#acceptance-criteria-per-task) |
 | **Pass criteria** | [Implementation plan §0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes): *(a) QUIC on Wi-Fi vs TLS/TCP-per-channel on Wi-Fi, (b) on USB: QUIC-over-one-adb-TCP vs framed TCP channels over adb; both with a concurrent 1 GB file transfer. On congested Wi-Fi, QUIC p95 frame latency ≤ TCP; on USB, chosen option adds ≤ 5 ms p95.* P0-14 adds: *p50/p95 frame latency, throughput, CPU; recommended transport per path.* |
-| **Spike code** | `spikes/s04-transport/` — loopback matrix measured with the bench built from `58814ff777010f0ca2dabc73267db10a88efcc84`; `burst3` re-measured and spot checks run with the bench built from `c8ccaa929fe27d4597303f8b7365906ee097182b` (results committed in `7698ac9`) |
+| **Spike code** | `spikes/s04-transport/` — loopback matrix measured with the bench built from `d6bf2bba5330df7c81a3de208ab0407c2e9b254f`; `burst3` re-measured and spot checks run with the bench built from `7b73e1b40b3aa1ba5145704401271090f85dd3aa` (results committed in `71cbbca`) |
 | **Author(s)** | Claude (agent) for the maintainer |
 | **Date(s) run** | 2026-10-26 |
 | **Status** | draft — Mac-only half complete; every device criterion **blocked — needs phone** |
@@ -38,7 +38,7 @@ ranges below). Per-run snapshots: [`results/s4/load.log`](../../spikes/s04-trans
 
 | Component | Version / commit | How obtained |
 |---|---|---|
-| Spike code | `58814ff` (matrix), `c8ccaa9` (burst3 + spot checks); verified with `cargo build -v` reporting the bench *Fresh* against the committed sources before the runs were committed | this repository |
+| Spike code | `d6bf2bb` (matrix), `7b73e1b` (burst3 + spot checks); verified with `cargo build -v` reporting the bench *Fresh* against the committed sources before the runs were committed | this repository |
 | iroh / noq | 1.4.1 / 1.4.0, default features + `unstable-custom-transports`; congestion control Cubic (noq default) or BBRv3 (`noq_proto::congestion::Bbr3Config`) | crates.io, `Cargo.lock` |
 | TLS for the TCP variants | rustls 0.23.46 + tokio-rustls 0.26, *ring* provider (same as iroh), TLS 1.3 only | crates.io |
 | Rust | 1.98.0, `--release` | rustup |
@@ -78,8 +78,8 @@ fixed seeds. TCP sockets use `TCP_NODELAY` and `TCP_NOTSENT_LOWAT` = 128 KB.
   `TCP_NOTSENT_LOWAT` for this; noq has no per-stream equivalent. This is the protocol's planned
   `ReceiverFeedback`, simplified, and it is applied to every transport alike.
 - **Audio**: 20 ms packets of 4 B seq + 8 B capture time + 320 B payload (Opus at 128 kbit/s).
-- **Control**: ping every 10 ms from the Mac, echoed by the phone (16 bytes at `58814ff`; 24 bytes from
-  `c8ccaa9`, which adds the phone's timestamp for clock-offset estimation). Frame acks share the channel.
+- **Control**: ping every 10 ms from the Mac, echoed by the phone (16 bytes at `d6bf2bb`; 24 bytes from
+  `7b73e1b`, which adds the phone's timestamp for clock-offset estimation). Frame acks share the channel.
 - **Bulk**, phone → Mac, 64 KB chunks: continuously from t = 6 s to 14 s; for `cap100`, four 1 s bursts at
   t = 4, 8, 12 and 16 s. This scales down the plan's 1 GB transfer: 8 s at up to 300 Mbit/s moves about
   280 MB. The phone runs use 1 GiB.
@@ -183,9 +183,9 @@ each cell is the median of 3 seeds, and frame p95 also shows the seed range.
 
 No video frame was lost in any `usb` run, and audio lost-or-late was ≤ 0.11 %.
 
-### Spot checks at the final code (`c8ccaa9`, seed 1)
+### Spot checks at the final code (`7b73e1b`, seed 1)
 
-| Run | Frame p95 (matrix range at `58814ff`) | Clock-offset estimate |
+| Run | Frame p95 (matrix range at `d6bf2bb`) | Clock-offset estimate |
 |---|---|---|
 | clean `quic` | 10.7 (10.6–10.7) | 0.013 ms |
 | clean `tcp` | 13.7 (14.9–15.3) | 0.006 ms |

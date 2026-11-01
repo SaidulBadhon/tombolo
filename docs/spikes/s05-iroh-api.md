@@ -5,7 +5,7 @@
 | **Spike** | S5 (run together with S4 in P0-14) |
 | **Task** | P0-14 — see the [Phase 0 task plan](../plans/phase-0.md#acceptance-criteria-per-task) |
 | **Pass criteria** | [Implementation plan §0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes): *TLS exporter, custom transports, default relays and DNS discovery disabled, works with outbound Internet blocked — all available or patchable in a thin crate.* P0-14: *endpoint with default relays and DNS discovery **disabled**, verified with outbound Internet blocked; TLS exporter and custom-transport hooks confirmed (or patched).* |
-| **Spike code** | `spikes/s04-transport/` (`iroh-probe/`, `tcp-tunnel/`, `size-*/`, `scripts/s5-egress.sh`): binaries built from `c8ccaa929fe27d4597303f8b7365906ee097182b`, egress script and results at `5ce75c8cfb4be98e712af7aa29c6a8aa5b025370` |
+| **Spike code** | `spikes/s04-transport/` (`iroh-probe/`, `tcp-tunnel/`, `size-*/`, `scripts/s5-egress.sh`): binaries built from `7b73e1b40b3aa1ba5145704401271090f85dd3aa`, egress script and results at `60c0a0d834f339c124f53f6ad1077eb21df4adec` |
 | **Author(s)** | Claude (agent) for the maintainer |
 | **Date(s) run** | 2026-10-26 |
 | **Status** | complete for the Mac; phone-side checks blocked — needs phone |
@@ -31,7 +31,7 @@ at what binary-size cost? Open questions P1–P3 in
 
 | Component | Version / commit | How obtained |
 |---|---|---|
-| Spike code | `c8ccaa929fe27d4597303f8b7365906ee097182b` (binaries), `5ce75c8cfb4be98e712af7aa29c6a8aa5b025370` (egress script + results) | this repository |
+| Spike code | `7b73e1b40b3aa1ba5145704401271090f85dd3aa` (binaries), `60c0a0d834f339c124f53f6ad1077eb21df4adec` (egress script + results) | this repository |
 | iroh | 1.4.1 (crates.io, published 2026-10-21), `MIT OR Apache-2.0` | `Cargo.lock`, pinned `=1.4.1` |
 | noq / noq-proto / noq-udp | 1.4.0 (crates.io, 2026-10-20), `MIT OR Apache-2.0` | pulled by iroh |
 | rustls / crypto | rustls 0.23.46 with *ring* (iroh feature `tls-ring`) | `Cargo.lock` |
@@ -98,7 +98,7 @@ iroh **1.4.1** and noq **1.4.0**, both `MIT OR Apache-2.0` (crates.io API, check
 | Tombolo config, sandboxed, 20 s hold | denied outbound attempts (`log show`, reports + "N duplicate reports") | session completed (`exit_code=0`, `exporter_match=true`, `done=true`, final path `127.0.0.1`); **7** denied attempts, **all** `remote:*:1`; none to port 53, 443, 1900 or 3478 | [`egress-sandbox-tombolo.txt`](../../spikes/s04-transport/results/s5/egress-sandbox-tombolo.txt), [`.denials`](../../spikes/s04-transport/results/s5/egress-sandbox-tombolo.txt.denials) |
 | `presets::N0` (control), sandboxed | same | **51 843** denied attempts: 50 209 × `:53` (DNS), 1621 × `:443` (relays, HTTPS probes), 12 × `:1`, 1 × `:1900` (UPnP SSDP) | [`egress-sandbox-n0.txt`](../../spikes/s04-transport/results/s5/egress-sandbox-n0.txt) |
 | Tombolo config, unsandboxed | `lsof -i` / `nettop` at 10 s | 4 UDP sockets (`*:port`), **no TCP connections**, every `nettop` row `lo0 Loop` (e.g. `udp4 *:50403 … lo0, 136081 B in / 133532 B out`); final path `127.0.0.1:50403` | [`egress-observed-tombolo.txt`](../../spikes/s04-transport/results/s5/egress-observed-tombolo.txt) |
-| `presets::N0` (control), unsandboxed | `lsof -i` / `nettop` at 10 s | 26 UDP sockets, 20 TCP connections to the network's resolver `172.20.10.1:53` and UDP rows on `en0` (DNS was failing at that moment, so no relay was reached). In the first run of the same script (01:31, at `b9dfe47`): 5 TLS connections to n0 relays `49.13.207.244:443` and `5.223.65.62:443` over `en0`, and the connection **migrated** from `127.0.0.1` to the Mac's public IPv6 address | [`egress-observed-n0.txt`](../../spikes/s04-transport/results/s5/egress-observed-n0.txt); first run: `git show b9dfe47:spikes/s04-transport/results/s5/egress-observed-n0.txt` |
+| `presets::N0` (control), unsandboxed | `lsof -i` / `nettop` at 10 s | 26 UDP sockets, 20 TCP connections to the network's resolver `172.20.10.1:53` and UDP rows on `en0` (DNS was failing at that moment, so no relay was reached). In the first run of the same script (01:31, at `8b63874`): 5 TLS connections to n0 relays `49.13.207.244:443` and `5.223.65.62:443` over `en0`, and the connection **migrated** from `127.0.0.1` to the Mac's public IPv6 address | [`egress-observed-n0.txt`](../../spikes/s04-transport/results/s5/egress-observed-n0.txt); first run: `git show 8b63874:spikes/s04-transport/results/s5/egress-observed-n0.txt` |
 | QUIC over the TCP tunnel, sandboxed, 1 GiB | same as row 1 | completed (`exit=0`, `tunnel_exporter_match=true`, 1 073 741 824 B delivered); 1 denied attempt, `remote:*:1` | [`tunnel-sandboxed.txt`](../../spikes/s04-transport/results/s5/tunnel-sandboxed.txt) |
 
 The `remote:*:1` attempts in the Tombolo runs come from `netdev` (via `netwatch`). It finds the default
