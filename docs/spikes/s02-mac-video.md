@@ -5,7 +5,7 @@
 | **Spike** | S2 |
 | **Task** | P0-15 — see the [Phase 0 task plan](../plans/phase-0.md#acceptance-criteria-per-task) and its [execution notes](../plans/phase-0.md#execution-notes-2026-10-26-after-plan-verification) |
 | **Pass criteria** | [Implementation plan, §0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes): *1080p60 H.264; p50 ≤ 60 ms / p95 ≤ 90 ms on USB (optical)*; if it fails, *try the `AVSampleBufferDisplayLayer` renderer*. P0-15: Swift prototype that pushes and launches a pinned scrcpy-server via `adb`, decodes with VideoToolbox, presents with Metal on `CAMetalDisplayLink`, plus an `AVSampleBufferDisplayLayer` variant; measured with the S1 harness; CPU and energy impact recorded. Execution notes: no high-speed camera, so the S1 software-timestamp mode is used; an importable Swift library target for P0-16 |
-| **Spike code** | [`spikes/s02-mac-video/`](../../spikes/s02-mac-video/README.md). Pipeline code at `280416c55dfcddbd02544225ff1605402c3a4fff`; scripts, loopback source and window options at `c70d5cae0249e2b2e69f5a9d9167dc9e7cf3f869` (see [Method](#method) for which run used which). Harness: `tools/latency-harness` merged from `p0/04-latency-harness` at `e92fe4660070bb455e26116ca494462c60041993` (harness code `85c546a3d4133dee8adee09ed9e61f53758cb0a2`) |
+| **Spike code** | [`spikes/s02-mac-video/`](../../spikes/s02-mac-video/README.md). Pipeline code at `9475c0355dfcddbd02544225ff1605402c3a4fff`; scripts, loopback source and window options at `45a7399e0249e2b2e69f5a9d9167dc9e7cf3f869` (see [Method](#method) for which run used which). Harness: `tools/latency-harness` merged from `p0/04-latency-harness` at `e92fe4660070bb455e26116ca494462c60041993` (harness code `85c546a3d4133dee8adee09ed9e61f53758cb0a2`) |
 | **Author(s)** | Claude (agent) for the maintainer |
 | **Date(s) run** | 2026-11-01 |
 | **Status** | draft — Mac half measured; **the phone-path acceptance runs are blocked** (the phone dropped off USB during the first trial runs) |
@@ -30,7 +30,7 @@ the answer, and P0-16 builds its keyboard experiments on this prototype.
 
 | Component | Version / commit | How obtained |
 |---|---|---|
-| Spike code | `280416c…` (pipeline), `c70d5ca…` (scripts, loopback, window options) | this repository |
+| Spike code | `9475c03…` (pipeline), `45a7399…` (scripts, loopback, window options) | this repository |
 | scrcpy-server | **v5.0.1**, file `scrcpy-server-v5.0.1`, 733 930 bytes, **SHA-256 `764eb6f79811d5211fe9df341120882ba9994c7a61b897d7bf3fb662e53bc536`** | official release [Genymobile/scrcpy v5.0.1](https://github.com/Genymobile/scrcpy/releases/tag/v5.0.1) (published 2026-10-08). The hash matches both the release's `SHA256SUMS.txt` and the asset digest GitHub reports. Downloaded by `scripts/fetch-server.sh` into its own new directory outside the repository (`~/Library/Caches/tombolo-s02/scrcpy-server-v5.0.1/`); not committed. **Licence: Apache-2.0** (© Genymobile, Romain Vimont) |
 | scrcpy sources read for the protocol | v5.0.1 tag tarball | `app/src/server.c` (launch command, `validate_string`, tunnel-forward connect + dummy byte, device-name read), `app/src/demuxer.c` (codec id, session packet, 12-byte packet header, config/key-frame flags), `app/src/control_msg.{h,c}`, `app/src/device_msg.{h,c}`, `app/src/util/binary.h` (fixed-point), `app/src/util/str.c` (UTF-8 truncation); `server/src/main/java/com/genymobile/scrcpy/Options.java` (argument parsing, defaults), `…/device/DesktopConnection.java` (socket order, dummy byte, 64-byte device name), `…/device/Streamer.java` (stream framing), `…/video/SurfaceEncoder.java` (MediaFormat keys) |
 | Latency harness | `e92fe46` (code `85c546a`), software-timestamp mode | `p0/04-latency-harness`, merged into this branch. The later harness commit `9e9e8f2` (head `8181d1f`), which replaces the "SCK delivery delay" metric, was **not** used; no number below uses that metric |
@@ -76,9 +76,9 @@ during the session (see [phone runs](#phone-runs)).
    the clock back. One clock at both ends, so no sync: the latency is **render → VT encode → TCP → demux → VT decode
    → present → WindowServer composite**. It excludes the phone, USB and adb, and includes ~1–2 ms of Mac-side encode
    that the real path does not have. Two interleaved rounds × {metal (display link), sbdl, metal-immediate} × 30 s,
-   code `280416c` + the loopback source of `c70d5ca` (`s02-mirror` differed from `c70d5ca` only in window Space
+   code `9475c03` + the loopback source of `45a7399` (`s02-mirror` differed from `45a7399` only in window Space
    behaviour and logging).
-2. **CPU and energy, Mac (no harness capture).** `CAPTURE=0 scripts/loopback.sh PRESENTER 60`, code `c70d5ca`:
+2. **CPU and energy, Mac (no harness capture).** `CAPTURE=0 scripts/loopback.sh PRESENTER 60`, code `45a7399`:
    `top -l … -stats pid,command,cpu,power` once per second for the mirror process, the synthetic source and
    WindowServer, plus a 60 s WindowServer baseline with no mirror. `power` is top's energy-impact score (the
    Activity Monitor "Energy Impact" scale). The app also logs its own `getrusage` CPU.
@@ -195,7 +195,7 @@ Samsung, Xiaomi, Android 10–12 and 17: **blocked — needs hardware**); optica
 
 ### Unit-test run
 
-`cd spikes/s02-mac-video && swift test`, run once after the last code change (`c70d5ca`). Output trimmed to the
+`cd spikes/s02-mac-video && swift test`, run once after the last code change (`45a7399`). Output trimmed to the
 result lines, per-test timings removed. The build printed the harmless Command-Line-Tools linker warnings
 `ld: warning: search path '/Library/Developer/CommandLineTools/Developer/…' not found`, as in S1.
 
@@ -221,7 +221,7 @@ loopback 1080x2400 decode: receive→decoded n=120 p50=1.55 p95=2.11 p99=3.37 (m
 ```
 
 The first run of this suite (before the first commit) failed 3 expectations, which were real bugs, fixed in
-`280416c`: a bare `\n` passed the shell-metacharacter check (`"\r\n"` in a Swift `Set<Character>` is one grapheme),
+`9475c03`: a bare `\n` passed the shell-metacharacter check (`"\r\n"` in a Swift `Set<Character>` is one grapheme),
 and `devicePoint` rejected points on the top and right edges of the video (`CGRect.contains` is half-open).
 
 ## Consequences for the plan
