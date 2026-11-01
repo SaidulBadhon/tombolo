@@ -1,0 +1,462 @@
+46243387.066 [host 18067] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=46a41c81a51630ed302e39fab0172c1287307b94 args=--duration 8 --selftest-events --stats /tmp/s13probe/smoke.json
+46243387.927 [host 18067] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 39439); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46243388.054 [host 18067] com.example.chat: generating shim (missing)
+46243563.045 [host 18067] generated /Users/saidulbadhon/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=f9515860092ea4413129433a91d266817c13c583 LSRegisterURL=0 in 174.5 ms
+46243563.213 [host 18067] org.example.maps: generating shim (missing)
+46243725.907 [host 18067] generated /Users/saidulbadhon/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 LSRegisterURL=0 in 162.3 ms
+46244101.702 [host 18067] launch Chat.app → pid 18071 error=nil (538.5 ms)
+46244202.279 [host 18067] session 1 up: com.example.chat pid 18071 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 638.4 ms
+46244631.758 [host 18067] launch Maps.app → pid 18075 error=nil (905.8 ms)
+46244708.948 [host 18067] session 2 up: org.example.maps pid 18075 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0 launch→hello 982.5 ms
+46245783.673 [host 18067] event session=1 pkg=com.example.chat kind=mouseDown x=0.500 y=0.500 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.066 ms
+46245783.767 [host 18067] event session=1 pkg=com.example.chat kind=mouseDragged x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.170 ms
+46245783.809 [host 18067] event session=1 pkg=com.example.chat kind=mouseUp x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.206 ms
+46245783.851 [host 18067] event session=1 pkg=com.example.chat kind=keyDown x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.203 ms
+46245783.889 [host 18067] event session=1 pkg=com.example.chat kind=keyUp x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.232 ms
+46245783.928 [host 18067] event session=1 pkg=com.example.chat kind=scroll x=0.247 y=-0.415 dx=0.0 dy=-24.0 key=0 mods=0x0 chars="" ipc=0.239 ms
+46246297.803 [host 18067] event session=2 pkg=org.example.maps kind=mouseDown x=0.500 y=0.500 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.054 ms
+46246297.907 [host 18067] event session=2 pkg=org.example.maps kind=mouseDragged x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.143 ms
+46246297.969 [host 18067] event session=2 pkg=org.example.maps kind=mouseUp x=0.633 y=0.592 dx=0.0 dy=0.0 key=0 mods=0x0 chars="" ipc=0.193 ms
+46246298.027 [host 18067] event session=2 pkg=org.example.maps kind=keyDown x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.197 ms
+46246298.084 [host 18067] event session=2 pkg=org.example.maps kind=keyUp x=0.000 y=1.000 dx=0.0 dy=0.0 key=0 mods=0x0 chars="a" ipc=0.237 ms
+46246298.141 [host 18067] event session=2 pkg=org.example.maps kind=scroll x=0.650 y=0.122 dx=0.0 dy=-24.0 key=0 mods=0x0 chars="" ipc=0.254 ms
+46251759.594 [host 18067] host quitting: duration elapsed
+46251764.986 [host 18067] summary com.example.chat session 1: fps 60.1 recv n=334 p50=0.056 p95=0.094 p99=0.116 max=0.562 mean=0.063 ms commit n=334 p50=0.233 p95=0.371 p99=0.607 max=1.352 mean=0.254 ms
+46251765.050 [host 18067] summary org.example.maps session 2: fps 59.9 recv n=303 p50=0.062 p95=0.092 p99=0.145 max=0.575 mean=0.065 ms commit n=303 p50=0.247 p95=0.405 p99=0.737 max=1.166 mean=0.267 ms
+46251765.939 [host 18067] wrote /tmp/s13probe/smoke.json
+46252916.305 [host 18115] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=46a41c81a51630ed302e39fab0172c1287307b94 args=--launched-by-shim com.example.chat
+46252917.179 [host 18115] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 43531); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46252917.464 [host 18115] com.example.chat: shim already running; it reconnects by itself
+46252917.598 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46252917.661 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46252917.668 [host 18115] org.example.maps: shim already running; it reconnects by itself
+46253762.499 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46253765.877 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46254763.126 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46254765.874 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46255762.456 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46255765.721 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46256762.900 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46256765.792 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46257762.508 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46257765.979 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46258763.035 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46258765.947 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46259763.033 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46259766.177 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46260762.238 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46260765.875 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46261762.353 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46261766.001 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46262762.268 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46262766.099 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46263762.256 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46263765.823 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46264762.206 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46264765.887 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46265762.654 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46265766.050 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46266762.383 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46266765.926 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46267762.203 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46267765.870 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46268762.196 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46268765.909 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46269762.224 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46269765.934 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46270762.184 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46270765.845 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46271762.193 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46271765.804 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46272762.431 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46272765.800 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46273762.256 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46273765.818 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46274762.169 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46274765.846 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46275762.240 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46275765.801 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46276762.126 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46276765.766 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46277762.132 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46277765.745 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46278762.087 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46278765.746 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46279762.046 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46279765.773 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46280762.768 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46280765.942 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46281762.162 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46281765.765 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46282762.121 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46282765.918 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46283762.256 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46283765.823 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46284762.145 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46284765.736 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46285762.355 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46285765.806 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46286762.073 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46286765.866 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46287762.264 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46287765.850 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46288762.274 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46288765.811 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46289762.030 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46289765.627 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46290762.093 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46290765.718 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46291762.147 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46291765.770 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46292763.162 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46292864.983 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46293762.179 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46293868.236 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46294762.070 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46294864.139 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46295762.201 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46295862.937 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46296762.064 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46296864.165 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46297762.487 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46297863.813 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46298763.191 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46298861.961 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46299762.045 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46299865.069 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46300763.118 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46300864.153 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46301762.234 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46301864.050 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46302762.547 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46302864.002 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46303762.005 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46303864.018 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46304762.017 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46304863.974 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46305762.002 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46305862.070 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46306763.226 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46306862.105 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46307763.172 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46307864.622 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46308762.627 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46308864.148 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46309763.286 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46309862.210 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46310763.198 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46310861.977 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46311762.784 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46311865.221 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46312763.040 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46312865.240 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46313763.176 [host 18115] REJECT hello from pid 18071 package=com.example.chat: unknown package
+46313861.961 [host 18115] REJECT hello from pid 18075 package=org.example.maps: unknown package
+46314701.436 [host 18115] host quitting: signal 15
+46606952.412 [host 22158] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m1-ring-2x60-720x1560.json --mode ring
+46606953.288 [host 22158] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38659); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46606954.067 [host 22158] com.example.chat: shim up to date
+46606954.845 [host 22158] org.example.maps: shim up to date
+46607056.678 [host 22158] launch Chat.app → pid 22160 error=nil (102.6 ms)
+46607129.548 [host 22158] launch Maps.app → pid 22162 error=nil (174.6 ms)
+46607143.914 [host 22158] session 1 up: com.example.chat pid 22160 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 189.6 ms
+46607214.823 [host 22158] session 2 up: org.example.maps pid 22162 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0 launch→hello 259.5 ms
+46626994.435 [host 22158] host quitting: duration elapsed
+46626997.838 [host 22158] summary com.example.chat session 1: fps 60.0 recv n=1071 p50=0.046 p95=0.072 p99=0.109 max=2.463 mean=0.052 ms commit n=1071 p50=0.182 p95=0.291 p99=0.365 max=2.568 mean=0.199 ms
+46626997.950 [host 22158] summary org.example.maps session 2: fps 60.0 recv n=1067 p50=0.047 p95=0.070 p99=0.090 max=10.429 mean=0.060 ms commit n=1067 p50=0.196 p95=0.286 p99=0.363 max=10.537 mean=0.215 ms
+46626998.878 [host 22158] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m1-ring-2x60-720x1560.json
+46630046.712 [host 22446] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m2-perframe-2x60-720x1560.json --mode perframe
+46630047.347 [host 22446] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 36875); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46630047.711 [host 22446] com.example.chat: shim up to date
+46630048.092 [host 22446] org.example.maps: shim up to date
+46630105.509 [host 22446] launch Chat.app → pid 22448 error=nil (57.7 ms)
+46630175.074 [host 22446] launch Maps.app → pid 22450 error=nil (126.9 ms)
+46630187.909 [host 22446] session 1 up: com.example.chat pid 22448 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 139.9 ms
+46630254.895 [host 22446] session 2 up: org.example.maps pid 22450 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0 launch→hello 206.4 ms
+46650089.251 [host 22446] host quitting: duration elapsed
+46650095.659 [host 22446] summary com.example.chat session 1: fps 60.0 recv n=1074 p50=0.058 p95=0.094 p99=0.114 max=4.592 mean=0.068 ms commit n=1074 p50=0.358 p95=0.581 p99=0.676 max=4.702 mean=0.396 ms
+46650095.729 [host 22446] summary org.example.maps session 2: fps 60.0 recv n=1070 p50=0.057 p95=0.092 p99=0.121 max=3.877 mean=0.066 ms commit n=1070 p50=0.353 p95=0.578 p99=0.669 max=4.174 mean=0.384 ms
+46650096.481 [host 22446] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m2-perframe-2x60-720x1560.json
+46655733.118 [host 23320] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m3-ring-1x60-1080x2400.json --mode ring --size 1080x2400 --apps com.example.chat:Chat
+46655734.366 [host 23320] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38707); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46655735.068 [host 23320] com.example.chat: shim up to date
+46655800.015 [host 23320] launch Chat.app → pid 23322 error=nil (64.9 ms)
+46655889.902 [host 23320] session 1 up: com.example.chat pid 23322 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 154.4 ms
+46675773.798 [host 23320] host quitting: duration elapsed
+46675781.461 [host 23320] summary com.example.chat session 1: fps 60.0 recv n=1073 p50=0.046 p95=0.066 p99=0.083 max=0.150 mean=0.048 ms commit n=1073 p50=0.192 p95=0.269 p99=0.326 max=0.490 mean=0.200 ms
+46675782.980 [host 23320] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m3-ring-1x60-1080x2400.json
+46678887.170 [host 24045] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m4-ring-4x60-720x1560.json --mode ring --apps com.example.chat:Chat,org.example.maps:Maps,com.example.music:Music,com.example.notes:Notes
+46678887.976 [host 24045] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 37395); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46678888.400 [host 24045] com.example.chat: shim up to date
+46678889.244 [host 24045] org.example.maps: shim up to date
+46678889.363 [host 24045] com.example.music: generating shim (missing)
+46678943.318 [host 24045] launch Chat.app → pid 24047 error=nil (54.9 ms)
+46679011.139 [host 24045] launch Maps.app → pid 24049 error=nil (121.8 ms)
+46679047.217 [host 24045] session 1 up: com.example.chat pid 24047 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 157.0 ms
+46679066.724 [host 24045] generated /Users/saidulbadhon/Applications/Tombolo Apps/Music.app (io.github.saidulbadhon.Tombolo.shim.com.example.music) cdhash=0d400cec087f9d8de0d4a22799045d2b304a7a98 LSRegisterURL=0 in 176.7 ms
+46679066.934 [host 24045] com.example.notes: generating shim (missing)
+46679120.217 [host 24045] session 2 up: org.example.maps pid 24049 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0 launch→hello 230.7 ms
+46679232.830 [host 24045] generated /Users/saidulbadhon/Applications/Tombolo Apps/Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=237e7b19d9081dd1cfceca88f2ffd3ceaa345c2e LSRegisterURL=0 in 165.4 ms
+46679665.130 [host 24045] launch Music.app → pid 24052 error=nil (598.3 ms)
+46679771.090 [host 24045] session 3 up: com.example.music pid 24052 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.music team=none cdhash=0d400cec087f9d8de0d4a22799045d2b304a7a98 status=0] deadNameReq=0 launch→hello 703.9 ms
+46680120.850 [host 24045] launch Notes.app → pid 24066 error=nil (887.9 ms)
+46680212.286 [host 24045] session 4 up: com.example.notes pid 24066 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.notes team=none cdhash=237e7b19d9081dd1cfceca88f2ffd3ceaa345c2e status=0] deadNameReq=0 launch→hello 979.0 ms
+46699263.786 [host 24045] host quitting: duration elapsed
+46699269.538 [host 24045] summary org.example.maps session 2: fps 60.0 recv n=1089 p50=0.046 p95=0.079 p99=0.115 max=0.680 mean=0.052 ms commit n=1089 p50=0.197 p95=0.324 p99=0.416 max=0.826 mean=0.214 ms
+46699269.637 [host 24045] summary com.example.music session 3: fps 60.0 recv n=1050 p50=0.041 p95=0.065 p99=0.088 max=0.189 mean=0.044 ms commit n=1050 p50=0.167 p95=0.258 p99=0.326 max=0.639 mean=0.179 ms
+46699269.676 [host 24045] summary com.example.chat session 1: fps 60.0 recv n=1093 p50=0.043 p95=0.070 p99=0.097 max=7.414 mean=0.055 ms commit n=1093 p50=0.179 p95=0.280 p99=0.362 max=7.527 mean=0.199 ms
+46699269.710 [host 24045] summary com.example.notes session 4: fps 60.0 recv n=1023 p50=0.043 p95=0.074 p99=0.123 max=2.286 mean=0.051 ms commit n=1023 p50=0.188 p95=0.339 p99=0.466 max=2.451 mean=0.215 ms
+46699270.445 [host 24045] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m4-ring-4x60-720x1560.json
+46726260.500 [host 24781] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=
+46726261.416 [host 24781] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38155); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46726261.902 [host 24781] com.example.chat: shim up to date
+46726262.376 [host 24781] org.example.maps: shim up to date
+46726309.751 [host 24781] launch Chat.app → pid 24788 error=nil (47.8 ms)
+46726368.353 [host 24781] launch Maps.app → pid 24794 error=nil (105.9 ms)
+46726380.254 [host 24781] session 1 up: com.example.chat pid 24788 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0 launch→hello 118.1 ms
+46726446.763 [host 24781] session 2 up: org.example.maps pid 24794 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0 launch→hello 184.2 ms
+46729598.044 [host 24781] host quitting: signal 15
+46729599.875 [host 24781] summary org.example.maps session 2: fps 59.9 recv n=69 p50=0.051 p95=0.076 p99=0.083 max=0.086 mean=0.053 ms commit n=69 p50=0.181 p95=0.260 p99=0.276 max=0.345 mean=0.191 ms
+46729599.944 [host 24781] summary com.example.chat session 1: fps 59.9 recv n=73 p50=0.057 p95=0.071 p99=0.082 max=0.094 mean=0.055 ms commit n=73 p50=0.184 p95=0.265 p99=0.286 max=0.297 mean=0.198 ms
+46730751.212 [host 24891] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=--launched-by-shim com.example.chat
+46730752.052 [host 24891] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 39951); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46730752.277 [host 24891] com.example.chat: shim already running; it reconnects by itself
+46730752.428 [host 24891] org.example.maps: shim already running; it reconnects by itself
+46730756.167 [host 24891] session 1 up: org.example.maps pid 24794 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0
+46730756.941 [host 24891] session 2 up: com.example.chat pid 24788 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0
+46765818.025 [host 26439] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 args=
+46765818.788 [host 26439] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38663); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+46765819.019 [host 26439] com.example.chat: shim already running; it reconnects by itself
+46765819.195 [host 26439] org.example.maps: shim already running; it reconnects by itself
+46765824.087 [host 26439] session 1 up: org.example.maps pid 24794 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=d9c38d4f97a83070aacefbf5d23f2ebf88ba3099 status=0] deadNameReq=0
+46765824.827 [host 26439] session 2 up: com.example.chat pid 24788 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0
+46767963.738 [host 26439] session 2 (com.example.chat) ended: shim process died (dead-name notification); recv n=9 p50=0.038 p95=0.046 p99=0.046 max=0.046 mean=0.038 ms; commit n=9 p50=0.148 p95=0.166 p99=0.166 max=0.166 mean=0.148 ms; fps 64.8
+46768147.088 [host 26439] session 3 up: com.example.chat pid 26573 shim v1 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=f9515860092ea4413129433a91d266817c13c583 status=0] deadNameReq=0
+46771332.329 [host 26439] host quitting: signal 15
+46771333.356 [host 26439] summary com.example.chat session 2: fps 64.8 recv n=9 p50=0.038 p95=0.046 p99=0.046 max=0.046 mean=0.038 ms commit n=9 p50=0.148 p95=0.166 p99=0.166 max=0.166 mean=0.148 ms
+46771333.411 [host 26439] summary org.example.maps session 1: fps 60.1 recv n=211 p50=0.043 p95=0.066 p99=0.079 max=1.100 mean=0.050 ms commit n=211 p50=0.181 p95=0.257 p99=0.334 max=1.178 mean=0.196 ms
+46771333.456 [host 26439] summary com.example.chat session 3: fps 59.9 recv n=71 p50=0.032 p95=0.052 p99=0.059 max=0.059 mean=0.034 ms commit n=71 p50=0.116 p95=0.207 p99=0.231 max=0.283 mean=0.128 ms
+47560550.338 [host 30669] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--apps com.example.chat:Chat --duration 12
+47560551.108 [host 30669] shim build this host installs: 1-7fab2eb47a76
+47560551.686 [host 30669] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 40211); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47560551.798 [host 30669] com.example.chat: generating shim (outdated (1 → 1-7fab2eb47a76))
+47560726.340 [host 30669] generated /Users/saidulbadhon/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 LSRegisterURL=0 in 173.9 ms
+47561176.503 [host 30669] launch Chat.app → pid 30688 error=nil (450.0 ms)
+47561246.323 [host 30669] session 1 up: com.example.chat pid 30688 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 519.3 ms
+47572763.575 [host 30669] host quitting: duration elapsed
+47572767.837 [host 30669] summary com.example.chat session 1: fps 60.0 recv n=571 p50=0.047 p95=0.071 p99=0.079 max=0.137 mean=0.049 ms commit n=571 p50=0.197 p95=0.291 p99=0.319 max=0.399 mean=0.204 ms
+47586546.772 [host 31074] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+47586547.305 [host 31074] shim build this host installs: 1-7fab2eb47a76
+47586547.888 [host 31074] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38927); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47586548.378 [host 31074] com.example.chat: shim up to date
+47586548.526 [host 31074] org.example.maps: generating shim (outdated (1 → 1-7fab2eb47a76))
+47586597.670 [host 31074] launch Chat.app → pid 31080 error=nil (49.2 ms)
+47586664.138 [host 31074] session 1 up: com.example.chat pid 31080 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 113.8 ms
+47586719.686 [host 31074] generated /Users/saidulbadhon/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d LSRegisterURL=0 in 170.5 ms
+47587567.669 [host 31074] launch Maps.app → pid 31100 error=nil (847.9 ms)
+47587645.712 [host 31074] session 2 up: org.example.maps pid 31100 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 925.6 ms
+47590713.666 [host 31074] host quitting: signal 15
+47590715.251 [host 31074] summary com.example.chat session 1: fps 60.0 recv n=123 p50=0.063 p95=0.096 p99=0.111 max=0.141 mean=0.062 ms commit n=123 p50=0.256 p95=0.347 p99=0.425 max=0.474 mean=0.244 ms
+47590715.302 [host 31074] summary org.example.maps session 2: fps 59.9 recv n=64 p50=0.061 p95=0.092 p99=0.106 max=0.107 mean=0.061 ms commit n=64 p50=0.269 p95=0.404 p99=0.426 max=0.432 mean=0.267 ms
+47592168.623 [host 31262] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+47592169.136 [host 31262] shim build this host installs: 1-7fab2eb47a76
+47592169.681 [host 31262] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 37139); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47592169.912 [host 31262] com.example.chat: shim already running; it reconnects by itself
+47592170.072 [host 31262] org.example.maps: shim already running; it reconnects by itself
+47592173.490 [host 31262] session 1 up: org.example.maps pid 31100 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0
+47592174.305 [host 31262] session 2 up: com.example.chat pid 31080 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0
+47594497.914 [host 31391] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+47594498.393 [host 31391] shim build this host installs: 1-7fab2eb47a76
+47594498.918 [host 31391] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38675); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47594499.151 [host 31391] com.example.chat: shim already running; it reconnects by itself
+47594499.297 [host 31391] org.example.maps: shim already running; it reconnects by itself
+47594502.639 [host 31391] session 1 up: org.example.maps pid 31100 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0
+47594503.209 [host 31391] session 2 up: com.example.chat pid 31080 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0
+47596657.909 [host 31391] session 2 (com.example.chat) ended: shim process died (dead-name notification); recv n=10 p50=0.084 p95=0.114 p99=0.114 max=0.114 mean=0.074 ms; commit n=10 p50=0.331 p95=0.469 p99=0.469 max=0.469 mean=0.294 ms; fps 64.6
+47596858.722 [host 31391] session 3 up: com.example.chat pid 31494 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0
+47600199.511 [host 31391] host quitting: signal 15
+47600200.632 [host 31391] summary com.example.chat session 2: fps 64.6 recv n=10 p50=0.084 p95=0.114 p99=0.114 max=0.114 mean=0.074 ms commit n=10 p50=0.331 p95=0.469 p99=0.469 max=0.469 mean=0.294 ms
+47600200.754 [host 31391] summary com.example.chat session 3: fps 60.4 recv n=81 p50=0.057 p95=0.081 p99=0.119 max=0.131 mean=0.059 ms commit n=81 p50=0.237 p95=0.324 p99=0.357 max=0.446 mean=0.233 ms
+47600200.851 [host 31391] summary org.example.maps session 1: fps 60.0 recv n=222 p50=0.064 p95=0.100 p99=0.115 max=0.120 mean=0.065 ms commit n=222 p50=0.256 p95=0.425 p99=0.460 max=0.511 mean=0.270 ms
+47627979.226 [host 31928] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--launched-by-shim com.example.chat
+47627979.672 [host 31928] shim build this host installs: 1-7fab2eb47a76
+47627980.175 [host 31928] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38151); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47627980.399 [host 31928] com.example.chat: shim already running; it reconnects by itself
+47627981.110 [host 31928] org.example.maps: shim up to date
+47627983.591 [host 31928] session 1 up: com.example.chat pid 31917 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0
+47629066.975 [host 31928] host quitting: signal 15
+47629067.898 [host 31928] summary com.example.chat session 1: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+47630409.525 [host 32008] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--apps com.example.chat:Chat
+47630409.949 [host 32008] shim build this host installs: 1-7fab2eb47a76
+47630410.444 [host 32008] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38667); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+47630410.874 [host 32008] com.example.chat: shim up to date
+47630468.920 [host 32008] launch Chat.app → pid 32014 error=nil (58.0 ms)
+47630536.407 [host 32008] session 1 up: com.example.chat pid 32014 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 125.3 ms
+47630705.544 [host 32008] REJECT hello from pid 32031 package=com.example.chat: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.spike-s13.host.shim-template team=none cdhash=d8dea05feca3cf0d645ac00f17f98e711c7f54f9 status=-67050
+47631835.152 [host 32008] REJECT hello from pid 32059 package=com.example.chat: code requirement failed: identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=0b69b9f2a712e83f30f30b8a8eebc3b3ebdb3d0f status=-67050
+47631883.841 [host 32008] host quitting: signal 15
+47631884.477 [host 32008] summary com.example.chat session 1: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+51860149.833 [host 71247] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--generate-only --apps com.example.notes:S13 Notes
+51860152.286 [host 71247] shim build this host installs: 1-7fab2eb47a76
+51860152.374 [host 71247] com.example.notes: generating shim (missing)
+51860329.176 [host 71247] generated /Users/saidulbadhon/Applications/Tombolo Apps/S13 Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=a6e752440692206a50b7de7fa992f60fa9937e6e LSRegisterURL=0 in 176.1 ms
+51860656.333 [host 71325] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+51860656.764 [host 71325] shim build this host installs: 1-7fab2eb47a76
+51860657.280 [host 71325] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 37903); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51860658.513 [host 71325] com.example.chat: shim up to date
+51860659.466 [host 71325] org.example.maps: shim up to date
+51860727.406 [host 71325] launch Chat.app → pid 71330 error=nil (68.8 ms)
+51860790.368 [host 71325] launch Maps.app → pid 71336 error=nil (130.9 ms)
+51860805.773 [host 71325] session 1 up: com.example.chat pid 71330 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 146.9 ms
+51860863.381 [host 71325] session 2 up: org.example.maps pid 71336 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 203.7 ms
+51863571.922 [host 71325] host quitting: signal 15
+51863572.937 [host 71325] summary org.example.maps session 2: fps 60.7 recv n=43 p50=0.048 p95=0.060 p99=0.062 max=0.062 mean=0.049 ms commit n=43 p50=0.165 p95=0.203 p99=0.258 max=0.258 mean=0.168 ms
+51863573.014 [host 71325] summary com.example.chat session 1: fps 60.0 recv n=46 p50=0.052 p95=0.061 p99=0.071 max=0.071 mean=0.051 ms commit n=46 p50=0.171 p95=0.215 p99=0.252 max=0.252 mean=0.172 ms
+51878145.712 [host 72510] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 9
+51878146.191 [host 72510] shim build this host installs: 1-7fab2eb47a76
+51878146.784 [host 72510] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 39695); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51878147.343 [host 72510] com.example.chat: shim up to date
+51878147.819 [host 72510] org.example.maps: shim up to date
+51878211.556 [host 72510] launch Chat.app → pid 72521 error=nil (64.2 ms)
+51878271.488 [host 72510] launch Maps.app → pid 72526 error=nil (123.6 ms)
+51878282.841 [host 72510] session 1 up: com.example.chat pid 72521 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 134.8 ms
+51878343.307 [host 72510] session 2 up: org.example.maps pid 72526 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 195.3 ms
+51887183.417 [host 72510] host quitting: duration elapsed
+51887185.837 [host 72510] summary com.example.chat session 1: fps 60.0 recv n=414 p50=0.050 p95=0.065 p99=0.069 max=0.076 mean=0.050 ms commit n=414 p50=0.175 p95=0.202 p99=0.219 max=0.249 mean=0.177 ms
+51887186.034 [host 72510] summary org.example.maps session 2: fps 60.1 recv n=411 p50=0.050 p95=0.067 p99=0.074 max=0.091 mean=0.051 ms commit n=411 p50=0.178 p95=0.208 p99=0.232 max=0.269 mean=0.180 ms
+51930595.833 [host 74792] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 6 --apps com.example.chat:Chat
+51930596.365 [host 74792] shim build this host installs: 1-7fab2eb47a76
+51930596.881 [host 74792] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38671); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51930597.330 [host 74792] com.example.chat: shim up to date
+51930660.484 [host 74792] launch Chat.app → pid 74794 error=nil (63.1 ms)
+51930733.268 [host 74792] session 1 up: com.example.chat pid 74794 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 135.6 ms
+51936633.847 [host 74792] host quitting: duration elapsed
+51936637.515 [host 74792] summary com.example.chat session 1: fps 59.9 recv n=234 p50=0.067 p95=0.089 p99=0.097 max=0.100 mean=0.065 ms commit n=234 p50=0.233 p95=0.305 p99=0.353 max=0.385 mean=0.231 ms
+51971776.377 [host 75381] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--generate-only --apps com.example.spotlight:S13 Spotlight Test
+51971776.824 [host 75381] shim build this host installs: 1-7fab2eb47a76
+51971776.861 [host 75381] com.example.spotlight: generating shim (missing)
+51971948.490 [host 75381] generated /Users/saidulbadhon/Applications/Tombolo Apps/S13 Spotlight Test.app (io.github.saidulbadhon.Tombolo.shim.com.example.spotlight) cdhash=5ff0a727f72a3dcf645d4d3ad6c4282c7f8edd75 LSRegisterURL=0 in 171.0 ms
+51976617.410 [host 75505] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+51976617.840 [host 75505] shim build this host installs: 1-7fab2eb47a76
+51976618.271 [host 75505] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 40719); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51976618.673 [host 75505] com.example.chat: shim up to date
+51976619.077 [host 75505] org.example.maps: shim up to date
+51976678.599 [host 75505] launch Chat.app → pid 75510 error=nil (59.9 ms)
+51976749.657 [host 75505] launch Maps.app → pid 75516 error=nil (130.5 ms)
+51976763.357 [host 75505] session 1 up: com.example.chat pid 75510 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 144.3 ms
+51976821.096 [host 75505] session 2 up: org.example.maps pid 75516 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 201.8 ms
+51979257.101 [host 75505] host quitting: signal 15
+51979257.845 [host 75505] summary com.example.chat session 1: fps 60.7 recv n=30 p50=0.073 p95=0.090 p99=0.090 max=0.090 mean=0.069 ms commit n=30 p50=0.249 p95=0.303 p99=0.309 max=0.309 mean=0.235 ms
+51979258.084 [host 75505] summary org.example.maps session 2: fps 61.9 recv n=27 p50=0.067 p95=0.091 p99=0.102 max=0.102 mean=0.065 ms commit n=27 p50=0.237 p95=0.282 p99=0.305 max=0.305 mean=0.228 ms
+51988679.603 [host 75727] host v1 starting; bundle=/tmp/s13-quarantine/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--generate-only --apps com.example.qtest:S13 QTest
+51988680.143 [host 75727] shim build this host installs: 1-7fab2eb47a76
+51988680.178 [host 75727] com.example.qtest: generating shim (missing)
+51988855.664 [host 75727] generated /Users/saidulbadhon/Applications/Tombolo Apps/S13 QTest.app (io.github.saidulbadhon.Tombolo.shim.com.example.qtest) cdhash=85a9020327535e1ba70c59b38bc7df02a28c8874 LSRegisterURL=0 in 174.8 ms
+51992858.383 [host 75860] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--generate-only
+51992858.846 [host 75860] shim build this host installs: 1-7fab2eb47a76
+51992859.192 [host 75860] com.example.chat: shim up to date
+51992859.480 [host 75860] org.example.maps: shim up to date
+51993013.874 [host 75880] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=
+51993014.298 [host 75880] shim build this host installs: 1-7fab2eb47a76
+51993014.759 [host 75880] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38151); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51993015.150 [host 75880] com.example.chat: shim up to date
+51993015.527 [host 75880] org.example.maps: shim up to date
+51993070.556 [host 75880] launch Chat.app → pid 75886 error=nil (55.4 ms)
+51993141.418 [host 75880] launch Maps.app → pid 75892 error=nil (125.9 ms)
+51993142.983 [host 75880] session 1 up: com.example.chat pid 75886 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 127.5 ms
+51993195.796 [host 75880] session 2 up: org.example.maps pid 75892 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 180.1 ms
+51995369.317 [host 75880] host quitting: signal 15
+51995370.840 [host 75880] summary com.example.chat session 1: fps 61.7 recv n=14 p50=0.070 p95=0.087 p99=0.100 max=0.100 mean=0.068 ms commit n=14 p50=0.228 p95=0.322 p99=0.324 max=0.324 mean=0.230 ms
+51995370.916 [host 75880] summary org.example.maps session 2: fps 63.3 recv n=11 p50=0.056 p95=0.084 p99=0.084 max=0.084 mean=0.059 ms commit n=11 p50=0.177 p95=0.261 p99=0.261 max=0.261 mean=0.197 ms
+51998478.147 [host 76091] host v2 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 args=
+51998478.597 [host 76091] shim build this host installs: 2-7fab2eb47a76
+51998479.045 [host 76091] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38663); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+51998479.247 [host 76091] com.example.chat: shim already running; it reconnects by itself
+51998479.376 [host 76091] org.example.maps: shim already running; it reconnects by itself
+51998480.957 [host 76091] shim com.example.chat pid 75886 is v1-7fab2eb47a76, host installs v2-7fab2eb47a76: asking it to restart for update
+51998481.297 [host 76091] shim org.example.maps pid 75892 is v1-7fab2eb47a76, host installs v2-7fab2eb47a76: asking it to restart for update
+51998481.317 [host 76091] bye (updating) from pid 75886 without session
+51998481.493 [host 76091] bye (updating) from pid 75892 without session
+51998519.629 [host 76091] com.example.chat: old shim pid 75886 exited after ~0 ms; regenerating for v2
+51998519.669 [host 76091] com.example.chat: generating shim (forced)
+51998676.733 [host 76091] generated /Users/saidulbadhon/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=0789c132112db8405ceed1ba6f08cde8c00904d7 LSRegisterURL=0 in 156.5 ms
+51998676.869 [host 76091] org.example.maps: old shim pid 75892 exited after ~0 ms; regenerating for v2
+51998676.884 [host 76091] org.example.maps: generating shim (forced)
+51998835.983 [host 76091] generated /Users/saidulbadhon/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=3fbfdd5b17e9865ad421090f7b596ac74b43273a LSRegisterURL=0 in 158.5 ms
+51999170.607 [host 76091] launch Chat.app → pid 76212 error=nil (493.8 ms)
+51999243.120 [host 76091] session 1 up: com.example.chat pid 76212 shim v2-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=0789c132112db8405ceed1ba6f08cde8c00904d7 status=0] deadNameReq=0 launch→hello 565.6 ms
+51999607.222 [host 76091] launch Maps.app → pid 76264 error=nil (771.2 ms)
+51999688.213 [host 76091] session 2 up: org.example.maps pid 76264 shim v2-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=3fbfdd5b17e9865ad421090f7b596ac74b43273a status=0] deadNameReq=0 launch→hello 851.8 ms
+52000882.675 [host 76091] host quitting: signal 15
+52000884.667 [host 76091] summary org.example.maps session 2: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+52000884.811 [host 76091] summary com.example.chat session 1: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+52008614.643 [host 76706] host v3 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=7859348c794ecdb120ff318a3daaf881f511bb9d args=--no-update-shims
+52008615.223 [host 76706] shim build this host installs: 3-7fab2eb47a76
+52008615.876 [host 76706] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 37123); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+52008616.124 [host 76706] com.example.chat: shim already running; it reconnects by itself
+52008616.257 [host 76706] org.example.maps: shim already running; it reconnects by itself
+52008620.199 [host 76706] session 1 up: org.example.maps pid 76264 shim v2-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=3fbfdd5b17e9865ad421090f7b596ac74b43273a status=0] deadNameReq=0
+52008620.868 [host 76706] session 2 up: com.example.chat pid 76212 shim v2-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=0789c132112db8405ceed1ba6f08cde8c00904d7 status=0] deadNameReq=0
+52008754.618 [host 76706] host quitting: signal 15
+52008755.066 [host 76706] summary com.example.chat session 2: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+52008755.106 [host 76706] summary org.example.maps session 1: fps 0.0 recv n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms commit n=0 p50=nan p95=nan p99=nan max=nan mean=nan ms
+52048689.514 [host 78095] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m1-ring-2x60-720x1560.json --mode ring
+52048690.026 [host 78095] shim build this host installs: 1-7fab2eb47a76
+52048690.530 [host 78095] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38667); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+52048690.605 [host 78095] com.example.chat: generating shim (outdated (2-7fab2eb47a76 → 1-7fab2eb47a76))
+52048864.397 [host 78095] generated /Users/saidulbadhon/Applications/Tombolo Apps/Chat.app (io.github.saidulbadhon.Tombolo.shim.com.example.chat) cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 LSRegisterURL=0 in 173.1 ms
+52048864.573 [host 78095] org.example.maps: generating shim (outdated (2-7fab2eb47a76 → 1-7fab2eb47a76))
+52049026.879 [host 78095] generated /Users/saidulbadhon/Applications/Tombolo Apps/Maps.app (io.github.saidulbadhon.Tombolo.shim.org.example.maps) cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d LSRegisterURL=0 in 161.9 ms
+52049095.356 [host 78095] launch Chat.app → pid 78102 error=nil (230.9 ms)
+52049211.752 [host 78095] session 1 up: com.example.chat pid 78102 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 347.0 ms
+52049332.474 [host 78095] launch Maps.app → pid 78123 error=nil (305.5 ms)
+52049406.832 [host 78095] session 2 up: org.example.maps pid 78123 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 379.5 ms
+52069061.894 [host 78095] host quitting: duration elapsed
+52069064.436 [host 78095] summary org.example.maps session 2: fps 60.0 recv n=1060 p50=0.049 p95=0.079 p99=0.093 max=7.643 mean=0.060 ms commit n=1060 p50=0.183 p95=0.288 p99=0.389 max=7.766 mean=0.204 ms
+52069064.534 [host 78095] summary com.example.chat session 1: fps 60.0 recv n=1071 p50=0.054 p95=0.076 p99=0.089 max=6.122 mean=0.061 ms commit n=1071 p50=0.190 p95=0.261 p99=0.318 max=6.247 mean=0.202 ms
+52069065.225 [host 78095] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m1-ring-2x60-720x1560.json
+52078091.983 [host 78901] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m2-perframe-2x60-720x1560.json --mode perframe
+52078092.473 [host 78901] shim build this host installs: 1-7fab2eb47a76
+52078093.011 [host 78901] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 39187); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+52078093.496 [host 78901] com.example.chat: shim up to date
+52078093.932 [host 78901] org.example.maps: shim up to date
+52078157.091 [host 78901] launch Chat.app → pid 78904 error=nil (63.5 ms)
+52078225.216 [host 78901] launch Maps.app → pid 78906 error=nil (131.2 ms)
+52078238.475 [host 78901] session 1 up: com.example.chat pid 78904 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 144.7 ms
+52078316.759 [host 78901] session 2 up: org.example.maps pid 78906 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 222.4 ms
+52098139.015 [host 78901] host quitting: duration elapsed
+52098141.873 [host 78901] summary org.example.maps session 2: fps 60.0 recv n=1070 p50=0.068 p95=0.102 p99=0.117 max=8.480 mean=0.079 ms commit n=1070 p50=0.363 p95=0.488 p99=0.556 max=8.829 mean=0.384 ms
+52098141.978 [host 78901] summary com.example.chat session 1: fps 60.0 recv n=1074 p50=0.064 p95=0.088 p99=0.115 max=0.209 mean=0.067 ms commit n=1074 p50=0.370 p95=0.466 p99=0.538 max=0.699 mean=0.378 ms
+52098142.728 [host 78901] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m2-perframe-2x60-720x1560.json
+52106957.881 [host 79485] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m3-ring-1x60-1080x2400.json --mode ring --size 1080x2400 --apps com.example.chat:Chat
+52106958.331 [host 79485] shim build this host installs: 1-7fab2eb47a76
+52106958.831 [host 79485] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 38407); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+52106959.289 [host 79485] com.example.chat: shim up to date
+52107016.072 [host 79485] launch Chat.app → pid 79488 error=nil (56.7 ms)
+52107086.747 [host 79485] session 1 up: com.example.chat pid 79488 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 127.1 ms
+52126987.285 [host 79485] host quitting: duration elapsed
+52126990.784 [host 79485] summary com.example.chat session 1: fps 60.0 recv n=1074 p50=0.052 p95=0.082 p99=0.093 max=0.608 mean=0.056 ms commit n=1074 p50=0.189 p95=0.285 p99=0.322 max=0.754 mean=0.203 ms
+52126991.628 [host 79485] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m3-ring-1x60-1080x2400.json
+52135830.373 [host 80567] host v1 starting; bundle=/Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 args=--duration 20 --stats /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m4-ring-4x60-720x1560.json --mode ring --apps com.example.chat:Chat,org.example.maps:Maps,com.example.music:Music,com.example.notes:Notes
+52135830.844 [host 80567] shim build this host installs: 1-7fab2eb47a76
+52135831.362 [host 80567] claimed dynamic bootstrap name io.github.saidulbadhon.Tombolo.spike-s13.ipc (port 37651); posting io.github.saidulbadhon.Tombolo.spike-s13.host-ready
+52135831.867 [host 80567] com.example.chat: shim up to date
+52135832.552 [host 80567] org.example.maps: shim up to date
+52135832.647 [host 80567] com.example.music: generating shim (outdated (1 → 1-7fab2eb47a76))
+52135885.294 [host 80567] launch Chat.app → pid 80601 error=nil (53.4 ms)
+52135935.136 [host 80567] launch Maps.app → pid 80603 error=nil (102.5 ms)
+52135959.130 [host 80567] session 1 up: com.example.chat pid 80601 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.chat team=none cdhash=8aa6157ad8fec4319f4c70df3d25b1a4f9159659 status=0] deadNameReq=0 launch→hello 124.9 ms
+52136003.773 [host 80567] generated /Users/saidulbadhon/Applications/Tombolo Apps/Music.app (io.github.saidulbadhon.Tombolo.shim.com.example.music) cdhash=4772b1aca176751f175fb426d2b35e5a7d97f9d5 LSRegisterURL=0 in 170.5 ms
+52136005.059 [host 80567] com.example.notes: generating shim (cdhash changed on disk)
+52136010.060 [host 80567] session 2 up: org.example.maps pid 80603 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.org.example.maps team=none cdhash=50029577cb2962d56aeb5949a6e9b01a6735ae8d status=0] deadNameReq=0 launch→hello 177.3 ms
+52136165.430 [host 80567] generated /Users/saidulbadhon/Applications/Tombolo Apps/Notes.app (io.github.saidulbadhon.Tombolo.shim.com.example.notes) cdhash=b87d75b9f691c5d5fe3e634a0de0e8ae32db23f6 LSRegisterURL=0 in 160.0 ms
+52136713.688 [host 80567] launch Music.app → pid 80607 error=nil (709.8 ms)
+52136786.912 [host 80567] session 3 up: com.example.music pid 80607 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.music team=none cdhash=4772b1aca176751f175fb426d2b35e5a7d97f9d5 status=0] deadNameReq=0 launch→hello 782.7 ms
+52137119.755 [host 80567] launch Notes.app → pid 80616 error=nil (954.3 ms)
+52137191.527 [host 80567] session 4 up: com.example.notes pid 80616 shim v1-7fab2eb47a76 peer[identifier=io.github.saidulbadhon.Tombolo.shim.com.example.notes team=none cdhash=b87d75b9f691c5d5fe3e634a0de0e8ae32db23f6 status=0] deadNameReq=0 launch→hello 1025.7 ms
+52156204.143 [host 80567] host quitting: duration elapsed
+52156208.886 [host 80567] summary com.example.music session 3: fps 60.0 recv n=1045 p50=0.057 p95=0.092 p99=0.104 max=0.311 mean=0.061 ms commit n=1045 p50=0.210 p95=0.309 p99=0.360 max=0.443 mean=0.224 ms
+52156208.959 [host 80567] summary com.example.notes session 4: fps 60.0 recv n=1021 p50=0.056 p95=0.093 p99=0.125 max=11.581 mean=0.071 ms commit n=1021 p50=0.223 p95=0.370 p99=0.496 max=11.761 mean=0.252 ms
+52156208.997 [host 80567] summary com.example.chat session 1: fps 58.5 recv n=1067 p50=0.051 p95=0.076 p99=0.109 max=245.126 mean=0.732 ms commit n=1067 p50=0.189 p95=0.272 p99=0.355 max=253.186 mean=1.113 ms
+52156209.031 [host 80567] summary org.example.maps session 2: fps 58.5 recv n=1064 p50=0.049 p95=0.077 p99=0.106 max=255.905 mean=0.523 ms commit n=1064 p50=0.181 p95=0.263 p99=0.346 max=255.988 mean=0.661 ms
+52156209.819 [host 80567] wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/results/m4-ring-4x60-720x1560.json

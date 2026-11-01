@@ -1,0 +1,8 @@
+46680178.284 [shim com.example.notes 24066] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Notes.app id=io.github.saidulbadhon.Tombolo.shim.com.example.notes args=
+46680210.699 [shim com.example.notes 24066] window number 4605
+46680227.826 [shim com.example.notes 24066] connected: session 4 720x1560@60 mode=ring ring=3/3 host v1 pid 24045 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46699267.823 [shim com.example.notes 24066] disconnected: host quit (frames this session: 1143)
+52137159.732 [shim com.example.notes 80616] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Notes.app id=io.github.saidulbadhon.Tombolo.shim.com.example.notes args=
+52137189.858 [shim com.example.notes 80616] window number 4986
+52137201.325 [shim com.example.notes 80616] connected: session 4 720x1560@60 mode=ring ring=3/3 host v1 pid 80567 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52156206.825 [shim com.example.notes 80616] disconnected: host quit (frames this session: 1114)

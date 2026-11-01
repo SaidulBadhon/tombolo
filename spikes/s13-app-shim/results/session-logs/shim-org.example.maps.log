@@ -1,0 +1,201 @@
+46244677.481 [shim org.example.maps 18075] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=--selftest-events
+46244707.304 [shim org.example.maps 18075] window number 4505
+46244722.762 [shim org.example.maps 18075] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 18067 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=46a41c81a51630ed302e39fab0172c1287307b94 status=0]
+46246297.045 [shim org.example.maps 18075] selftest: dispatching 5 synthetic events through NSWindow.sendEvent
+46251764.642 [shim org.example.maps 18075] disconnected: host quit (frames this session: 424)
+46252768.278 [shim org.example.maps 18075] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app
+46252917.285 [shim org.example.maps 18075] host-ready notification
+46252917.813 [shim org.example.maps 18075] REJECTED by host: unknown package
+46252918.397 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46253765.985 [shim org.example.maps 18075] REJECTED by host: unknown package
+46253766.148 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46254765.966 [shim org.example.maps 18075] REJECTED by host: unknown package
+46254766.146 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46255765.823 [shim org.example.maps 18075] REJECTED by host: unknown package
+46255765.959 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46256765.867 [shim org.example.maps 18075] REJECTED by host: unknown package
+46256765.957 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46257766.156 [shim org.example.maps 18075] REJECTED by host: unknown package
+46257766.294 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46258766.094 [shim org.example.maps 18075] REJECTED by host: unknown package
+46258766.289 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46259766.351 [shim org.example.maps 18075] REJECTED by host: unknown package
+46259766.543 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46260765.976 [shim org.example.maps 18075] REJECTED by host: unknown package
+46260766.094 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46261766.173 [shim org.example.maps 18075] REJECTED by host: unknown package
+46261766.305 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46262766.346 [shim org.example.maps 18075] REJECTED by host: unknown package
+46262766.547 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46263765.921 [shim org.example.maps 18075] REJECTED by host: unknown package
+46263766.034 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46264766.056 [shim org.example.maps 18075] REJECTED by host: unknown package
+46264766.216 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46265766.248 [shim org.example.maps 18075] REJECTED by host: unknown package
+46265766.416 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46266766.108 [shim org.example.maps 18075] REJECTED by host: unknown package
+46266766.296 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46267766.009 [shim org.example.maps 18075] REJECTED by host: unknown package
+46267766.123 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46268766.034 [shim org.example.maps 18075] REJECTED by host: unknown package
+46268766.138 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46269766.063 [shim org.example.maps 18075] REJECTED by host: unknown package
+46269766.161 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46270765.982 [shim org.example.maps 18075] REJECTED by host: unknown package
+46270766.097 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46271765.940 [shim org.example.maps 18075] REJECTED by host: unknown package
+46271766.040 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46272765.923 [shim org.example.maps 18075] REJECTED by host: unknown package
+46272766.017 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46273765.969 [shim org.example.maps 18075] REJECTED by host: unknown package
+46273766.085 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46274766.092 [shim org.example.maps 18075] REJECTED by host: unknown package
+46274766.261 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46275765.924 [shim org.example.maps 18075] REJECTED by host: unknown package
+46275766.042 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46276765.861 [shim org.example.maps 18075] REJECTED by host: unknown package
+46276765.949 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46277765.847 [shim org.example.maps 18075] REJECTED by host: unknown package
+46277766.191 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46278765.845 [shim org.example.maps 18075] REJECTED by host: unknown package
+46278765.946 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46279765.873 [shim org.example.maps 18075] REJECTED by host: unknown package
+46279765.968 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46280766.134 [shim org.example.maps 18075] REJECTED by host: unknown package
+46280766.297 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46281765.858 [shim org.example.maps 18075] REJECTED by host: unknown package
+46281765.956 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46282766.055 [shim org.example.maps 18075] REJECTED by host: unknown package
+46282766.177 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46283765.976 [shim org.example.maps 18075] REJECTED by host: unknown package
+46283766.134 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46284765.840 [shim org.example.maps 18075] REJECTED by host: unknown package
+46284765.943 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46285765.965 [shim org.example.maps 18075] REJECTED by host: unknown package
+46285766.132 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46286766.025 [shim org.example.maps 18075] REJECTED by host: unknown package
+46286766.366 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46287766.039 [shim org.example.maps 18075] REJECTED by host: unknown package
+46287766.240 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46288765.887 [shim org.example.maps 18075] REJECTED by host: unknown package
+46288765.978 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46289765.701 [shim org.example.maps 18075] REJECTED by host: unknown package
+46289765.805 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46290765.855 [shim org.example.maps 18075] REJECTED by host: unknown package
+46290765.968 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46291765.905 [shim org.example.maps 18075] REJECTED by host: unknown package
+46291766.026 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46292865.304 [shim org.example.maps 18075] REJECTED by host: unknown package
+46292865.650 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46293870.221 [shim org.example.maps 18075] REJECTED by host: unknown package
+46293870.473 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46294864.259 [shim org.example.maps 18075] REJECTED by host: unknown package
+46294864.658 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46295863.074 [shim org.example.maps 18075] REJECTED by host: unknown package
+46295863.181 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46296864.305 [shim org.example.maps 18075] REJECTED by host: unknown package
+46296864.413 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46297863.932 [shim org.example.maps 18075] REJECTED by host: unknown package
+46297864.036 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46298862.077 [shim org.example.maps 18075] REJECTED by host: unknown package
+46298862.193 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46299865.198 [shim org.example.maps 18075] REJECTED by host: unknown package
+46299865.302 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46300864.380 [shim org.example.maps 18075] REJECTED by host: unknown package
+46300864.492 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46301864.244 [shim org.example.maps 18075] REJECTED by host: unknown package
+46301864.448 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46302864.138 [shim org.example.maps 18075] REJECTED by host: unknown package
+46302864.302 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46303864.151 [shim org.example.maps 18075] REJECTED by host: unknown package
+46303864.263 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46304864.106 [shim org.example.maps 18075] REJECTED by host: unknown package
+46304864.261 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46305862.237 [shim org.example.maps 18075] REJECTED by host: unknown package
+46305862.333 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46306862.348 [shim org.example.maps 18075] REJECTED by host: unknown package
+46306862.544 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46307864.843 [shim org.example.maps 18075] REJECTED by host: unknown package
+46307865.010 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46308864.372 [shim org.example.maps 18075] REJECTED by host: unknown package
+46308864.499 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46309862.508 [shim org.example.maps 18075] REJECTED by host: unknown package
+46309862.834 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46310862.194 [shim org.example.maps 18075] REJECTED by host: unknown package
+46310862.469 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46311865.412 [shim org.example.maps 18075] REJECTED by host: unknown package
+46311865.584 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46312865.443 [shim org.example.maps 18075] REJECTED by host: unknown package
+46312865.650 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46313862.397 [shim org.example.maps 18075] REJECTED by host: unknown package
+46313862.591 [shim org.example.maps 18075] disconnected: rejected by host (frames this session: 424)
+46607181.039 [shim org.example.maps 22162] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+46607213.207 [shim org.example.maps 22162] window number 4555
+46607227.602 [shim org.example.maps 22162] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 22158 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46626996.904 [shim org.example.maps 22162] disconnected: host quit (frames this session: 1187)
+46630225.709 [shim org.example.maps 22450] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+46630253.185 [shim org.example.maps 22450] window number 4572
+46630264.434 [shim org.example.maps 22450] connected: session 2 720x1560@60 mode=per-frame ring=3/0 host v1 pid 22446 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46650095.364 [shim org.example.maps 22450] disconnected: host quit (frames this session: 1191)
+46679081.186 [shim org.example.maps 24049] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+46679119.134 [shim org.example.maps 24049] window number 4601
+46679132.996 [shim org.example.maps 24049] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 24045 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46699265.092 [shim org.example.maps 24049] disconnected: host quit (frames this session: 1208)
+46726416.364 [shim org.example.maps 24794] shim v1 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+46726445.829 [shim org.example.maps 24794] window number 4633
+46726456.841 [shim org.example.maps 24794] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 24781 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0]
+46729599.758 [shim org.example.maps 24794] disconnected: host quit (frames this session: 190)
+46730601.390 [shim org.example.maps 24794] host not running; launching /Users/saidulbadhon/Documents/GitHub/tombolo-wt/13-app-shim/spikes/s13-app-shim/out/Tombolo Host.app
+46730752.135 [shim org.example.maps 24794] host-ready notification
+46730757.980 [shim org.example.maps 24794] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 24891 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 1159.0 ms after disconnect
+46765640.046 [shim org.example.maps 24794] disconnected: host went away (frames this session: 2093)
+46765819.147 [shim org.example.maps 24794] host-ready notification
+46765828.337 [shim org.example.maps 24794] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 26439 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=cbc29113a1a70a6fbcdb5b9a5cd6f95db4228c31 status=0] 188.9 ms after disconnect
+46771332.984 [shim org.example.maps 24794] disconnected: host quit (frames this session: 330)
+47587616.365 [shim org.example.maps 31100] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+47587644.096 [shim org.example.maps 31100] window number 4752
+47587654.412 [shim org.example.maps 31100] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 31074 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+47590715.213 [shim org.example.maps 31100] disconnected: host quit (frames this session: 184)
+47592169.775 [shim org.example.maps 31100] host-ready notification
+47592175.206 [shim org.example.maps 31100] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 31262 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0] 1460.6 ms after disconnect
+47594310.837 [shim org.example.maps 31100] disconnected: host went away (frames this session: 129)
+47594499.012 [shim org.example.maps 31100] host-ready notification
+47594504.155 [shim org.example.maps 31100] connected: session 1 720x1560@60 mode=ring ring=3/3 host v1 pid 31391 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0] 193.9 ms after disconnect
+47600200.250 [shim org.example.maps 31100] disconnected: host quit (frames this session: 342)
+51860835.159 [shim org.example.maps 71336] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+51860862.551 [shim org.example.maps 71336] window number 4845
+51860873.199 [shim org.example.maps 71336] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 71325 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51863572.969 [shim org.example.maps 71336] disconnected: host quit (frames this session: 163)
+51878310.995 [shim org.example.maps 72526] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+51878342.454 [shim org.example.maps 72526] window number 4848
+51878353.549 [shim org.example.maps 72526] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 72510 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51887185.713 [shim org.example.maps 72526] disconnected: host quit (frames this session: 531)
+51976789.768 [shim org.example.maps 75516] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+51976820.157 [shim org.example.maps 75516] window number 4858
+51976832.638 [shim org.example.maps 75516] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 75505 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51979258.338 [shim org.example.maps 75516] disconnected: host quit (frames this session: 147)
+51993166.221 [shim org.example.maps 75892] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+51993194.978 [shim org.example.maps 75892] window number 4863
+51993207.442 [shim org.example.maps 75892] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 75880 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+51995370.770 [shim org.example.maps 75892] disconnected: host quit (frames this session: 131)
+51998479.138 [shim org.example.maps 75892] host-ready notification
+51998481.386 [shim org.example.maps 75892] host asked us to restart for an update
+51999651.141 [shim org.example.maps 76264] shim v2-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+51999686.658 [shim org.example.maps 76264] window number 4866
+51999701.378 [shim org.example.maps 76264] connected: session 2 720x1560@60 mode=ring ring=3/3 host v2 pid 76091 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=05463abe425ef6dc6c87954bd1c9a54b10b8e420 status=0]
+52000884.788 [shim org.example.maps 76264] disconnected: host quit (frames this session: 72)
+52008615.981 [shim org.example.maps 76264] host-ready notification
+52008621.854 [shim org.example.maps 76264] connected: session 1 720x1560@60 mode=ring ring=3/3 host v3 pid 76706 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=7859348c794ecdb120ff318a3daaf881f511bb9d status=0] 7738.8 ms after disconnect
+52008755.229 [shim org.example.maps 76264] disconnected: host quit (frames this session: 9)
+52049371.724 [shim org.example.maps 78123] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+52049404.955 [shim org.example.maps 78123] window number 4874
+52049419.349 [shim org.example.maps 78123] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 78095 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52069062.948 [shim org.example.maps 78123] disconnected: host quit (frames this session: 1180)
+52078281.986 [shim org.example.maps 78906] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+52078314.992 [shim org.example.maps 78906] window number 4878
+52078326.359 [shim org.example.maps 78906] connected: session 2 720x1560@60 mode=per-frame ring=3/0 host v1 pid 78901 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52098140.083 [shim org.example.maps 78906] disconnected: host quit (frames this session: 1190)
+52135978.715 [shim org.example.maps 80603] shim v1-7fab2eb47a76 starting: bundle=/Users/saidulbadhon/Applications/Tombolo Apps/Maps.app id=io.github.saidulbadhon.Tombolo.shim.org.example.maps args=
+52136009.220 [shim org.example.maps 80603] window number 4983
+52136020.435 [shim org.example.maps 80603] connected: session 2 720x1560@60 mode=ring ring=3/3 host v1 pid 80567 peer[identifier=io.github.saidulbadhon.Tombolo.spike-s13.host team=none cdhash=2e5c19eb5cf96270bdb0999ffe6a525eb9da12b1 status=0]
+52156207.966 [shim org.example.maps 80603] disconnected: host quit (frames this session: 1183)
