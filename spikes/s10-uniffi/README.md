@@ -82,12 +82,41 @@ design.
 
 ## Results in `results/`
 
+**All timing numbers in these files are provisional.** Every run overlapped other agents' jobs on
+the Mac (load 2–60 on 12 cores); a quiet re-run is scheduled (see
+[Required 30-minute soak](#required-30-minute-soak-scheduled)). Functional outcomes (signature
+verification, cancellation, zero-copy address checks, integrity counts) do not depend on load.
+
 | File | Run |
 |---|---|
 | `media-2min-run3.{txt,json,load.txt,env.txt}` | headline 2-min paced run with the wake/crossing split (build of `4f5ae1f`) |
 | `media-2min-run2.*`, `media-2min-run1-loaded.*` | earlier 2-min runs without the split; both overlapped heavy load from other jobs |
 | `stress.{txt,json}`, `bench.{txt,json}` | prefilled drain by payload size; FFI call overhead |
 | `sign`, `touchid-check`, `cancel`, `threads` (`.txt`, `.json`) | functional checks (each `.txt` ends with the exit status) |
+
+### Required 30-minute soak (scheduled)
+
+The plan's criterion is "30 min stable at 1080p60". It is **required and not yet run**: the
+2-minute runs above were all the shared Mac allowed. It is scheduled on a quiet Mac after P0-15,
+together with a quiet re-run of the provisional timings. Check that nothing heavy is running
+(`uptime` load well below the core count), then, from `spikes/s10-uniffi/`:
+
+```sh
+H=swift-harness/.build/release/s10-harness
+(uptime; date; git rev-parse HEAD) > results/media-30min-ring-pull.env.txt
+$H media --design ring-pull --seconds 1800 --json results/media-30min-ring-pull.json \
+  > results/media-30min-ring-pull.txt 2>&1; echo "exit=$?" >> results/media-30min-ring-pull.txt
+uptime >> results/media-30min-ring-pull.env.txt
+
+# quiet re-run of the provisional timing numbers
+$H media --seconds 120 --json results/media-2min-quiet.json > results/media-2min-quiet.txt 2>&1
+$H stress --json results/stress-quiet.json > results/stress-quiet.txt 2>&1
+$H bench  --json results/bench-quiet.json  > results/bench-quiet.txt 2>&1
+```
+
+Pass condition: 108 000 / 108 000 frames; 0 drops, gaps and integrity failures; no upward memory
+trend; end-to-end max < 16.7 ms. `--seconds 1800` uses the same code path as the 2-minute runs
+(108 000 frames, about 2.6 MB of latency buffers) but has not been run at that length yet.
 
 ### Manual: Touch ID (needs a person at the Mac)
 

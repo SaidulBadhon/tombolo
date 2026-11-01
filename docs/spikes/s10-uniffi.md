@@ -8,7 +8,7 @@
 | **Spike code** | [`spikes/s10-uniffi/`](../../spikes/s10-uniffi/README.md) at commit `e6c5d6e1b4c66c59e26bb64979967f7370afe9ab`. Results come from three builds; see [Which build produced which result](#which-build-produced-which-result) |
 | **Author(s)** | Claude Opus 5.5 (agent), for the maintainer |
 | **Date(s) run** | 2026-10-26 – 2026-10-26 |
-| **Status** | draft — Swift half complete; manual Touch ID run and the Kotlin half outstanding |
+| **Status** | draft. Swift half measured; **timing numbers provisional** (loaded Mac). Outstanding: quiet re-run + required 30-min soak (scheduled after P0-15), manual Touch ID run, Kotlin half |
 
 ## Question
 
@@ -129,6 +129,12 @@ comparable — and `Drop` guards record whether a future was dropped before or a
   sensor when the sheet appears, then a second run where the sheet is left alone until it times out.
 
 ## Raw numbers
+
+> **All timing numbers in this document are provisional.** Every run overlapped other agents'
+> jobs on this Mac (load average 2–60 on 12 cores). A re-run on a quiet Mac is scheduled after P0-15,
+> together with the required 30-minute soak. Functional results (verified signatures, cancellation
+> behaviour, zero-copy address checks, integrity counts, deadlock demonstrations) do not depend on
+> load and are not provisional.
 
 ### Findings from the generated code (UniFFI 0.32.2)
 
@@ -362,31 +368,41 @@ for threads libdispatch does not own, such as Rust's, it reports the default
 
 ## Verdict
 
-Verdicts use the template's vocabulary. Kotlin-side criteria are marked as instructed.
+Verdicts use the template's vocabulary, one per row. Kotlin-side criteria are marked as instructed.
+Timing figures in the evidence column are **provisional** (see [Raw numbers](#raw-numbers)).
 
 | # | Criterion (as written in the plan) | Verdict | Evidence |
 |---|---|---|---|
 | 1 | "a Rust → Swift callback that signs with a Secure Enclave key" | **pass** | [Signing](#signing): 51 handshakes, DER and raw, verified by `p256`; tampered message rejected; `verify_p256` negative cases `false`. SE sign round trip p50 4.5 ms |
-| 2 | "… (Touch ID policy)" | **blocked — needs a person** (maintainer at the Mac) | Unattended part done: a `.userPresence` SE key refuses to sign without interaction (`LAError -1004`), so the policy is hardware-enforced. The approved path (`s10-harness touchid`: touch the sensor, plus the leave-it-alone timeout run) has not been run |
+| 2 | "… (Touch ID policy)" | **blocked — needs a person at the Mac** | Unattended part done: a `.userPresence` SE key refuses to sign without interaction (`LAError -1004`), so the policy is hardware-enforced. The approved path (`s10-harness touchid`: touch the sensor, plus the leave-it-alone timeout run) has not been run |
 | 3 | "a Rust → Kotlin callback that signs with a Keystore key" (Android instrumented test) | **blocked — needs Android toolchain (scheduled)** | No JDK, Gradle or Kotlin compiler on this Mac (SDK/NDK present in `~/Library/Android/sdk`); phone disconnected |
 | 4 | "async cancellation" | **pass** | [Cancellation](#cancellation) C1–C4. Rust → Swift works natively. Swift → Rust works only through the `CancelToken` pattern, because UniFFI 0.32.2's Swift bindings ignore task cancellation (F1). With the token: cancel → work future dropped in p50 18 µs |
-| 5 | "30-min 1080p60-sized byte stream through the FFI"; §0.C "30 min stable at 1080p60" | **not run** | Deviation as instructed: 3 runs × 7 designs × **2 min** (7 200 frames each). Within those, stable: 0 drops, 0 gaps, 0 integrity failures, no memory growth, no leaked handles |
-| 6 | "… with zero-copy buffers"; §0.C "without per-frame object conversion" | **pass** (ring designs) | Address check: Swift read Rust's buffer for 7 200 / 7 200 frames (ring, handle) vs 0 / 7 200 (Vec). Ring designs also have no per-frame object conversion or allocation; the handle design is zero-copy but converts a small record per frame |
-| 7 | "added latency < 1 frame" | **pass** | Run 3: FFI **crossing max ≤ 1.79 ms over all 50 400 frames**. End-to-end **p99 ≤ 9.8 ms in every design in every run** (ring-pull: p50 9 µs, p99 117 µs). Caveat: ≤ 4 / 7 200 frames per design exceeded 16.7 ms end to end. Each of those spent ≥ 14.9 ms waiting for its thread to be scheduled, while other jobs held the load at 6–60 on 12 cores; the FFI share was ≤ 1.79 ms |
-| 7b | Is the added latency ≪ 1 ms? | (question) | **FFI crossing: yes**: ring-pull p99 1.8 µs, max 120 µs; Vec designs p99 131–223 µs. **End to end on this loaded Mac: at p50 yes (9–92 µs), at p99 not for every design** (0.12–9.8 ms), because of scheduling, not the FFI |
+| 5 | "30-min 1080p60-sized byte stream through the FFI"; §0.C "30 min stable at 1080p60" | **not run — scheduled on a quiet Mac after P0-15** | Required; not waived. Only 2-min runs so far (3 runs × 7 designs, 7 200 frames each), as instructed for this pass. Within those: 0 drops, 0 gaps, 0 integrity failures, no memory growth, no leaked handles. Command: `s10-harness media --design ring-pull --seconds 1800` ([README](../../spikes/s10-uniffi/README.md#required-30-minute-soak-scheduled)) |
+| 6 | "… with zero-copy buffers"; §0.C "without per-frame object conversion" | **pass** | For the ring designs, the chosen media path. Address check: Swift read Rust's own buffer for 7 200 / 7 200 frames (ring and handle designs) vs 0 / 7 200 (Vec designs). Ring designs also have no per-frame object conversion or allocation. The handle design is zero-copy but converts a small record per frame; the Vec designs fail this criterion and are not chosen |
+| 7a | "added latency < 1 frame": the FFI crossing (Rust hand-over → bytes readable in Swift) | **pass** | Run 3 (`4f5ae1f`): crossing max **1.788 ms** (ring-async), the highest over all 50 400 frames; ring-pull crossing p99 1.8 µs, max 0.12 ms. Provisional timing (loaded Mac) |
+| 7b | "added latency < 1 frame": end to end (producer publish → bytes readable in Swift, the definition in [Method](#method)) | **blocked — needs a quiet Mac** | On the loaded Mac (load 2–60 on 12 cores), 4 of 7 designs had frames over 16.7 ms in at least one run: vec-pull (runs 1–3), vec-async (run 1), ring-callback (run 2), ring-async (run 3, worst **29.3 ms**). Each such frame in run 3 spent ≥ 14.9 ms waiting to be scheduled. p99 ≤ 9.8 ms in every design and run; the chosen ring-pull had 0 frames over 16.7 ms in all three runs (max 12.2 ms). Re-run scheduled with the soak (row 5) |
 | 8 | "thread ownership documented" | **pass** | [Thread ownership](#thread-ownership): ownership table, measured call sites, rules T1–T7, two deadlock hazards reproduced |
+
+**Is the added latency ≪ 1 ms?** This was asked in the task brief; it is not a plan criterion, so it
+has no verdict row. Provisionally: the **FFI crossing, yes** (ring-pull p99 1.8 µs and max 120 µs;
+the Vec designs p99 131–223 µs). **End to end on this loaded Mac, at p50 yes (9–92 µs); at p99 not
+for every design** (0.12–9.8 ms), because of scheduling rather than the FFI. The quiet re-run
+decides.
 
 **Coverage:** not covered:
 - Android / Kotlin on any device or emulator;
-- a 30-minute soak;
-- a quiet Mac (load 2–60 throughout);
+- the required 30-minute soak (scheduled on a quiet Mac after P0-15);
+- a quiet Mac: load was 2–60 throughout, so every timing number is provisional (re-run scheduled);
 - macOS versions other than 27.0.1, Intel Macs, Swift other than 6.4;
 - the Touch ID sheet with a person present.
 
 ## Consequences for the plan
 
-- **§0.C fallback ("move media framing out of the core") is not triggered.** The FFI is not a latency
-  or throughput constraint at 1080p60. The rule is to never carry video payloads as UniFFI
+Numbers quoted here are the provisional timings from [Raw numbers](#raw-numbers).
+
+- **§0.C fallback ("move media framing out of the core"): the evidence so far does not trigger it.**
+  The final call waits for the quiet re-run (rows 5 and 7b). The FFI crossing is not a latency or
+  throughput constraint at 1080p60. The rule is to never carry video payloads as UniFFI
   `Vec<u8>` / `Data`. Payloads cross as a Rust-owned shared-memory ring: Swift reads slot descriptors
   and payload in place, and only `u64` scalars cross the FFI. Even the naive Vec path would have met
   the < 1 frame criterion at this bitrate: ≈ 0.4 ns/byte, about 100 µs per 250 KB keyframe and 0.4–0.7 %
@@ -429,8 +445,9 @@ Verdicts use the template's vocabulary. Kotlin-side criteria are marked as instr
 - **Follow-ups:**
   - Manual Touch ID run (`s10-harness touchid`): **maintainer**.
   - Kotlin/Keystore half of P0-12: **P0-12, once a JDK + Gradle are installed** (emulator acceptable).
-  - Optional 30-min soak of `ring-pull` (≈ 0.13 % of a core, so cheap): **maintainer / P0-18**, if the
-    gate requires it.
+  - **Required** 30-min soak of `ring-pull`, plus a quiet re-run of the 2-min set, `stress` and
+    `bench`, to replace the provisional timings and settle row 7b: **P0-12, scheduled on a quiet Mac
+    after P0-15** (exact commands in the [README](../../spikes/s10-uniffi/README.md#required-30-minute-soak-scheduled)).
   - Report F1 (Swift cancellation) and F2 (Swift 6 strict concurrency) upstream to UniFFI:
     **maintainer**, since this task does not open external issues.
   - Feed VideoToolbox from ring memory via `CMBlockBuffer`: **P0-15 (S2)**, for reference only.
