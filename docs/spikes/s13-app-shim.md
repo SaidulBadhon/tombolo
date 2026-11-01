@@ -5,10 +5,10 @@
 | **Spike** | S13 |
 | **Task** | P0-13 — see the [Phase 0 task plan](../plans/phase-0.md#acceptance-criteria-per-task) |
 | **Pass criteria** | [§0.C](../implementation-plan.md#0c-spikes-each-produces-a-short-write-up-in-docsspikes): "one generated `.app` owning an `NSWindow`, frames via IOSurface/XPC from the main app — works across app restarts and an update; acceptable TCC prompts" (if it fails: defer shims, per-app windows stay in the main app). P0-13: "a generated `.app` shim with its own bundle ID and icon that owns an `NSWindow` and displays frames sent by a host app over XPC (IOSurface); survives host restart and a host update; TCC prompts recorded; Dock / ⌘-Tab / Spotlight behaviour verified on macOS 14 and 27" |
-| **Spike code** | [`spikes/s13-app-shim/`](../../spikes/s13-app-shim/README.md); host and shim sources measured at `22f76b4966a8eae715e50da6dfaa9c4ea68c6b91` (measurement run 1 at `88b1af43b39a524fa7d63e1dc18775a292e89475`, identical IPC and render code) |
+| **Spike code** | [`spikes/s13-app-shim/`](../../spikes/s13-app-shim/README.md). Measurement run 2 and every lifecycle, update, integration and security run used host and shim sources at `22f76b4966a8eae715e50da6dfaa9c4ea68c6b91`. **Measurement run 1 predates the first commit:** its host was built from the working tree later committed as `88b1af43b39a524fa7d63e1dc18775a292e89475` (no source edits in between, per the session's edit history), and in m1–m3 the Chat/Maps shims still ran a binary generated during the smoke test from earlier, uncommitted source (source not kept; per the edit history it differed only in when a shim relaunches the host and in first-launch window placement). `git diff 88b1af4 22f76b4 -- spikes/s13-app-shim/Sources` shows CShimIPC, ShimCommon, Renderer and the shim unchanged — identical IPC and render code; only the host's shim-version keying changed |
 | **Author(s)** | Claude (agent), for the maintainer |
 | **Date(s) run** | 2026-10-26 |
-| **Status** | complete for macOS 27.0.1; visual checks and macOS 14 outstanding (see [Manual checks](#manual-checks-needs-a-person)) |
+| **Status** | draft — verdict rows are still blocked (visual checks, macOS 14), the timings are provisional, and re-runs are pending (see [Verdict](#verdict) and [Re-runs pending](#re-runs-pending)) |
 
 ## Question
 
@@ -38,10 +38,15 @@ risk #13 in the [risk register](../research/03-macos-feasibility.md#risk-registe
 | Signing | ad-hoc (`codesign -s -`), hardened runtime, no Team ID | `/usr/bin/codesign` |
 | Icons | rendered with Core Graphics, packed with `/usr/bin/iconutil` | base system |
 
-**Environment:** no network involved. **The Mac was heavily loaded by other work during every measurement**
-(other Phase 0 agents compiling Swift/Rust, a Virtualization.framework VM at 110–170 % CPU, Spotlight indexing):
-1-minute load averages were 10–46 at the start of the measurement runs. During measurement run 2 the user was in a
-full-screen app, so shim windows were on another Space (`onscreen=0`) and not composited on the visible display.
+**Environment:** no network involved. **Every measurement ran on a heavily loaded Mac, which breaks the Phase 0
+execution rule "performance measurements never run while other heavy jobs load the Mac"**
+([execution notes](../plans/phase-0.md#execution-notes-2026-10-26-after-plan-verification)). The load: other Phase 0
+agents compiling Swift and Rust, Spotlight indexing, and a Virtualization.framework VM at 171–187 % CPU in run 2
+(`top`'s second sample in each `results/m*.txt`; run 1 has no valid per-process sample because its `top` call kept
+the first sample, which is all zeros). 1-minute load averages at the start of each run were 10–46 (run 1) and 22–30
+(run 2). **All timing and CPU numbers in this document are therefore provisional;** a re-run on a quiet Mac is
+scheduled ([Re-runs pending](#re-runs-pending)). During measurement run 2 the user was in a full-screen app, so shim
+windows were on another Space (`onscreen=0`) and not composited on the visible display.
 
 ## Method
 
@@ -58,10 +63,14 @@ processes that launchd did *not* start as a job (two ordinary apps):
 | `bootstrap_check_in` of a dynamic name + `bootstrap_look_up` + raw `mach_msg` | **works**; the name disappears when the owner's receive right dies (lookup → 1102 "Unknown service name") |
 | LaunchAgent with `MachServices`, `launchctl bootstrap gui/$UID`, XPC listener in the job | **works** (launchd starts the job on demand); `sfltool dumpbtm` showed no Background Task Management record for a plist outside `~/Library/LaunchAgents`; booted out afterwards |
 
-Chrome on this Mac uses the third mechanism for its PWA shims: `launchctl print gui/501` lists
-`com.google.Chrome.apps.F8F77B…` as an unmanaged (`U A`) dynamic service. Chrome's installed shim
-(`~/Applications/Chrome Apps.localized/YouTube Music.app`) is ad-hoc signed with hardened runtime, carries only
-`com.apple.provenance` (no quarantine) and is `rejected` by `spctl`, yet launches normally.
+Source of this table: terminal output in the agent session, **not kept** (the `/tmp` files were deleted by cleanup).
+The probe's header lists the commands that reproduce it.
+
+Chrome on this Mac uses the third mechanism for its PWA shims: `launchctl print gui/501` listed
+`com.google.Chrome.apps.<hash>` as an unmanaged (`U A`) dynamic service. An installed Chrome web app
+(`~/Applications/Chrome Apps.localized/<name>.app`) is ad-hoc signed with hardened runtime, carries only
+`com.apple.provenance` (no quarantine) and is `rejected` by `spctl`, yet launches normally. (Source not kept:
+terminal output only.)
 
 **Chosen design (Chromium's):** the host claims `io.github.saidulbadhon.Tombolo.spike-s13.ipc` with
 `bootstrap_check_in`; shims look it up; everything else is raw Mach messages. **Frames are IOSurfaces passed as Mach
@@ -75,7 +84,8 @@ recorded at generation>"`; every later message must carry the same audit token. 
 `identifier "io.github.saidulbadhon.Tombolo.spike-s13.host"`. Rejected alternative: a LaunchAgent broker handing out
 XPC endpoints — it works, but adds a persistent launchd job tied to the host's path and signature, a broker process
 and cleanup, for no gain the Mach path lacks (XPC's code-signing-requirement API has an audit-token equivalent).
-This deviates from the plan's wording "over XPC": same IOSurface zero-copy, different transport.
+XPC was therefore **not run** as the frame transport. This deviates from the plan's wording "over XPC" (same
+IOSurface zero-copy, different transport); the deviation goes to P0-18.
 
 **2. Shim generation** (host, at runtime): `~/Applications/Tombolo Apps/<Name>.app` with
 `CFBundleIdentifier = io.github.saidulbadhon.Tombolo.shim.<package>` (`_` → `-`), the shim executable **copied as
@@ -85,7 +95,7 @@ shim build = host version + SHA-256 prefix of the template), a generated `.icns`
 `LSRegisterURL`, and the bundle's cdhash recorded in `shims.json`. The host launches shims with
 `NSWorkspace.openApplication(at:)`.
 
-**3. Measurements** (`experiments.sh measure`, run twice): host launched via `open -g` for 20 s; latency stats cover
+**3. Measurements** (`experiments.sh measure`, run twice, both under heavy load — provisional): host launched via `open -g` for 20 s; latency stats cover
 the 18 s after a 2 s warm-up; CPU = `ps` CPU-time delta over an 11 s window ÷ wall time (100 % = one core).
 Timestamps: `CLOCK_UPTIME_RAW` (shared by all processes). *receive* = host stamp just before `mach_msg` send → shim
 just after receive (main-thread dispatch source); *commit* = host send → shim after `CATransaction.flush()`. Commit
@@ -109,13 +119,13 @@ per request (service, preflight flag, result) — [`results/tcc-summary.txt`](..
 **Physical steps that needed a person:** none were performed. Everything visual or interactive is listed under
 [Manual checks](#manual-checks-needs-a-person).
 
-**Known sources of error:** heavy background load (stated per run); one Mac, one OS version; the synthetic
+**Known sources of error:** heavy background load (stated per run; timings provisional); one Mac, one OS version; the synthetic
 input self-test calls `NSWindow.sendEvent` with constructed `NSEvent`s, which exercises the shim's handlers and the
 IPC but not HID delivery; run-2 windows were not on the visible Space.
 
 ## Raw numbers
 
-### Frame delivery latency (ms), per shim, 60 fps target
+### Frame delivery latency (ms), per shim, 60 fps target — provisional (measured under load)
 
 Files: [`results/m*.txt`](../../spikes/s13-app-shim/results/m1-ring-2x60-720x1560.txt) (run 2, load 22–30) and
 [`results/run1/`](../../spikes/s13-app-shim/results/run1/m1-ring-2x60-720x1560.txt) (run 1, load 10–46). n ≈ 1020–1090
@@ -135,7 +145,7 @@ frames per shim per run.
 The 256 ms outlier (m4 run 2, at load ≈ 30) hit two shims at the same moment; the flow control skipped frames at
 the source instead of queueing them, and the stream continued.
 
-### CPU (% of one core, 11 s window)
+### CPU (% of one core, 11 s window) — provisional (measured under load)
 
 | Condition | Run | Host (renders synthetic frames) | Each shim | WindowServer during / idle baseline |
 |---|---|---|---|---|
@@ -150,10 +160,10 @@ IOSurface memory per 720×1560 ring: 3 × 4.5 MB = 13.5 MB, shared by host, shim
 
 | Measure | Value | Source |
 |---|---|---|
-| Generate one shim (bundle + icon + `codesign` + `LSRegisterURL`) | median 171 ms, 156–177 ms (n = 15) | host log |
+| Generate one shim (bundle + icon + `codesign` + `LSRegisterURL`) | median 171 ms, 156–177 ms (n = 15) | [`results/excerpts.txt`](../../spikes/s13-app-shim/results/excerpts.txt) |
 | Shim bundle size | 620 KB (252 KB executable, 356 KB `.icns`) | `du` |
-| `openApplication` → first frame on the layer, existing bundle | 134–393 ms (n = 14) | `launchToFirstCommitMs` in `results/*.json` |
-| Same, first launch after the bundle was (re)generated, 4 launched at once | 724–1036 ms (n = 4) | idem |
+| `openApplication` → first frame on the layer, bundle generated in an earlier run | 134–273 ms (n = 12) | `launchToFirstCommitMs` in `results/m*.json` and `results/run1/m*.json` |
+| Same, first launch of a bundle (re)generated in the same run | 358–1036 ms (n = 6); the four above 0.7 s were part of a 4-shim batch | idem; generation events in [`results/session-logs/host.log`](../../spikes/s13-app-shim/results/session-logs/host.log) |
 
 ### Host restart and crash — [`results/restart.txt`](../../spikes/s13-app-shim/results/restart.txt), [`results/coldstart.txt`](../../spikes/s13-app-shim/results/coldstart.txt)
 
@@ -188,7 +198,7 @@ same version; the shim build ID now includes a hash of the template executable.
 | Windows (`winlist`) | Chat, Maps and the host each own their own window (separate owner PIDs) |
 | Frames on screen | captures [#195](../../spikes/s13-app-shim/results/chat-connected-1.png) → [#237](../../spikes/s13-app-shim/results/chat-connected-2.png) moments apart; [Maps](../../spikes/s13-app-shim/results/maps-connected.png); also captured from another Space |
 | Spotlight, brand-new shim, **no `mdimport`** | found by `kMDItemCFBundleIdentifier` **4.6 s** after generation, also by `kMDItemDisplayName`; `kMDItemKind = Application`, `kMDItemContentType = com.apple.application-bundle` |
-| Input forwarding (self-test: mouse down/drag/up, key down/up "a", scroll through `NSWindow.sendEvent`) | all six events logged by the host with normalised coordinates; shim→host 0.05–0.25 ms (smoke test, host log) |
+| Input forwarding (self-test: mouse down/drag/up, key down/up "a", scroll through `NSWindow.sendEvent`) | all six events logged by the host with normalised coordinates; shim→host 0.05–0.25 ms (smoke test, [`results/excerpts.txt`](../../spikes/s13-app-shim/results/excerpts.txt)) |
 | Window placement | a shim launched while the user is in a full-screen app opens on a desktop Space (`onscreen=0`) |
 
 ### Gatekeeper, quarantine, signatures — [`results/integration.txt`](../../spikes/s13-app-shim/results/integration.txt), [`results/quarantine.txt`](../../spikes/s13-app-shim/results/quarantine.txt)
@@ -207,7 +217,7 @@ same version; the shim build ID now includes a hash of the template executable.
 |---|---|
 | Bare template binary claims to be `com.example.chat` | rejected (`errSecCSReqFailed` −67050: wrong identifier and cdhash) |
 | Copy of `Chat.app`, Info.plist edited, re-signed ad-hoc **with the same identifier** | rejected (cdhash differs from the pin) |
-| Same-user process claims the name while the host is down | **succeeds**: it received a waiting shim's hello (incl. a send right to the shim's port). The shim sends no input before a CONFIG passes its host check, but that check is an ad-hoc `identifier` match, which anyone can forge |
+| Same-user process claims the name while the host is down | **claimed the name** (`bootstrap_check_in` = 0). A waiting shim's hello arrived but was discarded: the probe's receive buffer was smaller than a hello (`0x10004004` `MACH_RCV_TOO_LARGE`), so receiving the hello — and the send right to the shim's port it carries — is **inferred**, not observed. A re-run with a 4 KB buffer is prepared (`probe_ipc bs-squat`, [Re-runs pending](#re-runs-pending)). The shim sends no input before a CONFIG passes its host check, but that check is an ad-hoc `identifier` match, which anyone can forge |
 
 ### TCC — [`results/tcc-summary.txt`](../../spikes/s13-app-shim/results/tcc-summary.txt)
 
@@ -220,22 +230,29 @@ same version; the shim build ID now includes a hash of the template executable.
 
 ## Verdict
 
-| # | Criterion (as written in the plan) | Verdict | Evidence |
+| # | Criterion (as written in the plan, split into what was measured and what was not) | Verdict | Evidence |
 |---|---|---|---|
-| 1 | A generated `.app` shim with its own bundle ID and icon | **pass** | generation, bundle IDs, `lsappinfo`; icon *appearance* is a manual check (M2) |
-| 2 | …that owns an `NSWindow` and displays frames sent by a host app | **pass** | `winlist` (separate owner PIDs), captures with advancing frame counter, 60 fps in all runs |
-| 3 | …over XPC (IOSurface) | **pass, with a deviation**: IOSurface over **Mach messages** on a dynamic bootstrap name, not XPC | probe table: an XPC listener needs a launchd job; the Mach path is Chromium's; zero-copy kept (receive p95 ≤ 0.10 ms, commit p95 ≤ 0.58 ms) |
-| 4 | Survives host restart | **pass** | graceful quit, crash, relaunch, cold start, shim crash |
-| 5 | Survives a host update | **pass** | v1 → v2 with a new ad-hoc cdhash: shims restart, regenerate, reconnect in 0.8 s; v3 compatibility |
-| 6 | TCC prompts recorded | **pass — none** | only preflight queries; 0 prompt-UI events |
-| 7 | Spotlight behaviour verified on macOS 27 | **pass** (index); UI listing is manual check M3 | indexed by bundle ID and display name in 4.6 s without `mdimport` |
-| 8 | Dock / ⌘-Tab behaviour verified on macOS 27 | **pass programmatically** (`type="Foreground"`, separate ASNs); **visual confirmation blocked — needs a person** (M1, M2) | `lsappinfo` |
-| 9 | Dock / ⌘-Tab / Spotlight behaviour verified on macOS 14 | **blocked — needs a macOS 14 machine** | — |
-| 10 | (brief) input forwarded to the host | **pass** for the path (synthetic events); real mouse/keyboard **blocked — needs a person** (M5) | host log |
-| 11 | (brief) no Gatekeeper / quarantine for locally created shims | **pass** | xattrs, launches without dialog, quarantine-propagation test |
+| 1 | A generated `.app` shim with its own bundle ID and icon: bundle, bundle ID and `.icns` generated and registered with LaunchServices | pass | [`results/excerpts.txt`](../../spikes/s13-app-shim/results/excerpts.txt) (generation), `lsappinfo` and `mdls` in [`results/integration.txt`](../../spikes/s13-app-shim/results/integration.txt) |
+| 2 | The generated icon looks right in the Dock and ⌘-Tab | blocked — needs a person (M1, M2) | nobody looked |
+| 3 | …that owns an `NSWindow` and displays frames sent by a host app | pass | `winlist` (separate owner PIDs), captures with an advancing frame counter, 60 fps in all runs |
+| 4 | …over XPC (IOSurface) | not run | XPC was not used as the frame transport: an XPC listener needs a launchd job (probe), so IOSurface Mach rights over a dynamic bootstrap name were used instead — a deviation for P0-18 |
+| 5 | IOSurface frames delivered zero-copy over the transport actually used (Mach messages) | pass | latency tables (receive p95 ≤ 0.10 ms, commit p95 ≤ 0.58 ms; provisional, measured under load) |
+| 6 | Survives host restart | pass | graceful quit, crash, relaunch, cold start, shim crash ([`restart.txt`](../../spikes/s13-app-shim/results/restart.txt), [`coldstart.txt`](../../spikes/s13-app-shim/results/coldstart.txt)) |
+| 7 | Survives a host update | pass | v1 → v2 with a new ad-hoc cdhash: shims restart, regenerate, reconnect in 0.8 s; v3 compatibility ([`update.txt`](../../spikes/s13-app-shim/results/update.txt)) |
+| 8 | TCC prompts recorded | pass | no prompts: only preflight queries, 0 prompt-UI events ([`tcc-summary.txt`](../../spikes/s13-app-shim/results/tcc-summary.txt)) |
+| 9 | Spotlight indexes the shim on macOS 27 | pass | found by bundle ID and display name 4.6 s after generation, without `mdimport` |
+| 10 | The shim appears in the Spotlight UI and launches from it on macOS 27 | blocked — needs a person (M3) | nobody looked |
+| 11 | LaunchServices registers each running shim as its own foreground app on macOS 27 | pass | `lsappinfo`: separate ASNs, `type="Foreground"` |
+| 12 | Each shim has its own Dock tile and ⌘-Tab entry on macOS 27 | blocked — needs a person (M1, M2) | only inferred from row 11 (`Foreground` is the class that gets a Dock tile and a ⌘-Tab entry); nobody looked |
+| 13 | Dock / ⌘-Tab / Spotlight behaviour on macOS 14 | blocked — needs a macOS 14 machine | — |
+| 14 | (brief) Input forwarding: synthetic events dispatched through `NSWindow.sendEvent` reach the host | pass | [`results/excerpts.txt`](../../spikes/s13-app-shim/results/excerpts.txt) |
+| 15 | (brief) Real mouse, keyboard and trackpad input reaches the host | blocked — needs a person (M5) | — |
+| 16 | (brief) No Gatekeeper or quarantine for locally created shims | pass | xattrs, launches without a dialog, quarantine-propagation test |
 
-**S13 overall (plan §0.C: works across restarts and an update; acceptable TCC prompts): pass on macOS 27.0.1**, with
-the visual Dock/⌘-Tab/Spotlight checks and macOS 14 outstanding. The fallback is not triggered.
+**S13 overall:** the §0.C criteria that could be run on macOS 27.0.1 — works across restarts and an update,
+acceptable TCC prompts (there were none) — **pass**, with provisional timings. The result stays **draft**: the
+visual Dock/⌘-Tab/Spotlight rows and macOS 14 are blocked, "over XPC" was not run (deviation for P0-18), and the
+quiet-Mac and squatting re-runs are pending. Nothing measured so far triggers the fallback.
 
 **Coverage:** macOS 14 (the minimum version) not run. Only one Mac (M4 Pro). Not tested at all: Stage Manager
 grouping, Mission Control, notification attribution per shim, Dock pinning across regeneration, multiple displays,
@@ -269,6 +286,16 @@ with `scripts/cleanup.sh`.
     (`xattr -w com.apple.quarantine "0083;$(printf %x $(date +%s));Safari;" ~/Applications/Tombolo\ Apps/Chat.app`)
     and open it. Expected: Gatekeeper blocks it. This confirms why the generator must never copy extended attributes.
 
+## Re-runs pending
+
+1. **Measurements on a quiet Mac** (no other agents, no VM; windows on the visible Space):
+   `scripts/build.sh && scripts/experiments.sh measure`. Scheduled; it replaces the provisional timing and CPU
+   numbers.
+2. **Squatting with a large buffer:** `scripts/build.sh && scripts/experiments.sh security`. Step 3 now uses
+   `probe_ipc bs-squat` (4 KB buffer), which reports the received message's ID, size and reply right. It is
+   prepared but not yet compiled or run. Expected: `receive = 0`, `msgh_id=1000`, `reply_right=yes`.
+3. **macOS 14:** the whole suite (manual check 9).
+
 ## Consequences for the plan
 
 - **Phase 4 can build `AppShims`; the fallback (per-app windows inside the main app) is not triggered.** Keep it as
@@ -279,7 +306,8 @@ with `scripts/cleanup.sh`.
   pattern); LaunchAgent + XPC broker as fallback". Owner: P0-18 (that file is outside this task's paths).
 - **Security input for P0-03 / P0-10:** the host-side pin (ad-hoc cdhash recorded at generation, checked against
   the audit token of every message) held against impostors. The shim-side check of the host is weak with ad-hoc
-  signing, and a same-user process can claim the name while Tombolo is not running. Production shims must check
+  signing. A same-user process can claim the name while Tombolo is not running (observed), and would then receive
+  a waiting shim's hello (inferred; the re-run is pending). Production shims must check
   the host against a **stable identity** (`certificate leaf = H"…"` from P0-10's self-signed identity, or a Team
   ID once paid). They must send no input until that check passes. Add "name squatting / fake host harvesting input
   from shim windows" to the threat model.

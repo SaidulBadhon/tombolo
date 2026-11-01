@@ -20,7 +20,7 @@ Result write-up: [`docs/spikes/s13-app-shim.md`](../../docs/spikes/s13-app-shim.
 | `scripts/build.sh` | Builds with SwiftPM and assembles `out/Tombolo Host.app` (ad-hoc signed, hardened runtime) |
 | `scripts/experiments.sh` | Every measurement in the result doc; raw output lands in `results/` |
 | `scripts/cleanup.sh` | Removes everything outside the repo and verifies it is gone |
-| `results/` | Raw output of the runs reported in the result doc (`run1/` = first measurement run) |
+| `results/` | Raw output of the runs reported in the result doc: `run1/` = first measurement run, `session-logs/` = every host and shim log from 2026-10-26, `excerpts.txt` = generation timings and the input self-test |
 
 ## IPC design in one paragraph
 
