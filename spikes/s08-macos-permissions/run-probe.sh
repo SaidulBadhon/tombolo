@@ -4,7 +4,8 @@
 # Launch a probe bundle through LaunchServices, run a step script, and record:
 #   results/<label>/probe.log     the probe's own log
 #   results/<label>/windows.log   windows that appeared (the Local Network alert shows up here)
-#   results/<label>/window-<id>.png  screenshot of each new system-alert window (that window only)
+#   results/<label>/window-<id>.png  screenshot of each new alert window (that window only;
+#                                    gitignored - inspect before `git add -f`)
 #   results/<label>/system.log    unified-log lines from the processes involved (raw, gitignored)
 #   results/<label>/system-excerpt.log  the lines of system.log about the probe / Local Network
 #   results/<label>/launch.log    `open` output and process status
@@ -51,8 +52,9 @@ for ((i = 1; i <= watch; i++)); do
   d="$("$here/build/windows" --diff "$dir/.windows-baseline")"
   if [[ "$d" != "no new windows" ]]; then
     printf 't+%02ds %s\n' "$i" "$d" | sed '2,$s/^/       /' >>"$dir/.windows-raw"
-    # Screenshot only the new system-alert window itself (never the screen), once per window.
-    for wid in $(grep -o ' id=[0-9]*' <<<"$d" | cut -d= -f2); do
+    # Screenshot only alert windows: `windows` marks them shot=<id> (system alert process,
+    # alert-sized). Never the screen, System Settings or Notification Center. Once per window.
+    for wid in $(grep -o ' shot=[0-9]*' <<<"$d" | cut -d= -f2); do
       [[ -e "$dir/window-$wid.png" ]] || /usr/sbin/screencapture -x -o -l "$wid" "$dir/window-$wid.png" 2>/dev/null || true
     done
   fi

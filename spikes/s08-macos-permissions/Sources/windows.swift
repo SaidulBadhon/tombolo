@@ -7,15 +7,24 @@
 //
 // Privacy: other apps' window titles are never printed or stored. The baseline holds
 // only owner|pid|layer|size keys, and titles are shown only for system-alert and
-// probe processes (allowlist below). Titles may be empty without Screen Recording
+// probe processes (titleAllowlist). Titles may be empty without Screen Recording
 // permission; owner, pid, layer and bounds are always available.
+//
+// Screenshots: a window is marked "shot=<id>" - the only windows run-probe.sh captures -
+// when its owner is exactly one of the system processes that draw permission alerts
+// (shotOwners) AND it is alert-sized (<= maxShotSize points). Never System Settings
+// (shows the account name and photo), Notification Center (a full-screen layer with
+// other apps' notifications) or any app window.
 
 import CoreGraphics
 import Foundation
 
-let titleAllowlist = ["UserNotificationCenter", "TomboloProbe", "CoreServicesUIAgent", "SystemUIServer",
-                      "nehelper", "NEHelper", "universalAccessAuthWarn", "SecurityAgent", "System Settings",
-                      "System Preferences", "Notification Center", "loginwindow", "Control Center"]
+let titleAllowlist = ["UserNotificationCenter", "TomboloProbe", "CoreServicesUIAgent", "nehelper",
+                      "universalAccessAuthWarn", "SecurityAgent", "System Settings"]
+// Local Network, firewall and TCC alerts: UserNotificationCenter (260x208-282 measured);
+// Accessibility prompt: universalAccessAuthWarn (461x181 measured).
+let shotOwners: Set<String> = ["UserNotificationCenter", "universalAccessAuthWarn", "CoreServicesUIAgent", "SecurityAgent"]
+let maxShotSize = (width: 600.0, height: 450.0)
 
 let args = CommandLine.arguments
 guard args.count == 3, ["--baseline", "--diff"].contains(args[1]) else {
@@ -37,8 +46,12 @@ let wins: [Win] = list.map { w in
     let key = "\(owner)|\(pid)|\(layer)|\(size)"
     var line = "owner=\(owner) pid=\(pid) layer=\(layer) size=\(size)"
     if titleAllowlist.contains(where: { owner.contains($0) }) {
-        // Window id only for allowlisted owners: run-probe.sh screenshots those windows (only).
         line += " id=\(id) title=\(w[kCGWindowName as String] as? String ?? "")"
+    }
+    let width = (b["Width"] as? Double) ?? Double.infinity
+    let height = (b["Height"] as? Double) ?? Double.infinity
+    if shotOwners.contains(owner), width <= maxShotSize.width, height <= maxShotSize.height {
+        line += " shot=\(id)"
     }
     return Win(key: key, line: line)
 }

@@ -92,6 +92,10 @@ EOF
 
 # S08_VERSION lets a rebuild act as an "update" of the S08 bundles in place.
 v8="${S08_VERSION:-1.0.0}"
+# The window-diff tool used by run-probe.sh (only screenshots alert-sized system alerts).
+mkdir -p "$out"
+xcrun swiftc -swift-version 5 -O -o "$out/windows" "$here/Sources/windows.swift"
+
 if [[ "$what" == s08 || "$what" == all ]]; then
   build_app "$out/s08/S08 AdHoc.app"      "$id_prefix.s08.adhoc"      adhoc      "$v8" adhoc
   build_app "$out/s08/S08 SelfSigned.app" "$id_prefix.s08.selfsigned" selfsigned "$v8" selfsigned
