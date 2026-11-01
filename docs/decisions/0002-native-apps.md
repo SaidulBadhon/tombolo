@@ -1,7 +1,7 @@
 # ADR-0002: Native apps on both platforms
 
 - **Status:** Proposed
-- **Date:** 2026-10-25
+- **Date:** 2026-10-25 · amended 2026-11-02 ([below](#amendment-2026-11-02))
 
 ## Context
 The product promise is "feels like Apple built it". The mirror window must decode and present video with the
@@ -21,3 +21,9 @@ lowest possible latency and handle trackpad gestures and IME input precisely. Ev
 ## Consequences
 - Two UI codebases. Shared logic lives in `tombolo-core` (Rust) and `proto/` schemas.
 - Direct VideoToolbox → Metal zero-copy path, `CAMetalDisplayLink` pacing, Liquid Glass materials on 26+.
+
+## Amendment (2026-11-02)
+
+Spike S2 measured `AVSampleBufferDisplayLayer` ≈ 24 ms faster than Metal paced by `CAMetalDisplayLink` on macOS 27
+([S2](../spikes/s02-mac-video.md)); it is now the default presenter, with Metal as the alternative. Native apps on
+both platforms are unchanged.

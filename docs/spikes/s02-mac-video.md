@@ -15,7 +15,7 @@
 Can a native Mac client — pinned scrcpy-server over `adb`, VideoToolbox decode, Metal presentation paced by
 `CAMetalDisplayLink` — show the phone at 1080p60 H.264 over USB within p50 ≤ 60 ms / p95 ≤ 90 ms, at an acceptable
 CPU and energy cost? And is `AVSampleBufferDisplayLayer` a better presenter? Phase 1a's mirror (0.1) is built on
-the answer, and P0-16 builds its keyboard experiments on this prototype.
+the answer *(Re-plan 2026-11-02: 0.1 no longer uses the scrcpy path; the VideoToolbox/presenter findings carry over, the scrcpy/adb path becomes the Advanced mode, 0.3)*, and P0-16 builds its keyboard experiments on this prototype.
 
 ## Setup
 

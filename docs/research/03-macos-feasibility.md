@@ -95,6 +95,13 @@ The shared web-search quota ran out midway. Later checks therefore used direct f
   - It gives cropping, rotation and per-app sub-rects for free.
 - **Recommendation:** Metal as the primary path, with AVSBDL as a fallback behind one renderer protocol. **Ship a renderer toggle from day one.** Moonlight had macOS 26 windowed Metal regressions: frame-time spikes up to 100 ms and "Presentation wait timed out" (#1696). In 6.2.0 it added a user-selectable renderer.
 
+> *Superseded by the 2026-11-02 re-plan ([§3](../plans/standard-first.md#3-phase-0-changes)):* spike S2 measured
+> `AVSampleBufferDisplayLayer` **~24 ms faster** than Metal on `CAMetalDisplayLink` on macOS 27.0.1 — the display
+> link scheduled presentation a fixed 33 ms after its render deadline — with lower CPU (3.1 % vs 5.5 % of a core).
+> So `AVSampleBufferDisplayLayer` is the default presenter, and Metal (presenting on decode) the alternative,
+> still behind one renderer protocol with a toggle. Measured on one macOS 27 setup only, not yet a general result:
+> [S2, consequences for the plan](../spikes/s02-mac-video.md#consequences-for-the-plan).
+
 ### Frame pacing
 - `CVDisplayLink` is deprecated in macOS 15.
 - Use `NSView`/`NSWindow`/`NSScreen.displayLink(target:selector:)` or `CAMetalDisplayLink` (macOS 14+, Verified via Apple doc JSON), with `preferredFrameRateRange`.
@@ -246,6 +253,10 @@ Sourced from TN3179, revised 2026-10-06.
 - AWDL (`includePeerToPeer`) is Apple-to-Apple only.
 - **Plan for infrastructure Wi-Fi plus USB. Treat Wi-Fi Aware as future work.**
 
+> *Superseded in part by the 2026-11-02 re-plan ([§2](../plans/standard-first.md#2-decision-proposed)):* the first
+> releases are Wi-Fi only, with the phone's hotspot as the workaround for client-isolated networks. USB without
+> developer options is spike S18, before 1.0.
+
 **Sources:** TN3179; WWDC25-250; Apple doc JSON for `NetworkConnection`, `NWProtocolQUIC`, `NWMultiplexGroup`, WiFiAware; forum threads 663874, 688508, 715553, 751839, 768961, 787701, 801280, 818807, 834091; transgui PR #1614; Ghostty discussion #13438; macOS 26 release notes.
 
 ---
@@ -253,6 +264,10 @@ Sourced from TN3179, revised 2026-10-06.
 ## 4. USB
 
 **Feasible: yes, with no entitlement when unsandboxed.**
+
+> *Superseded in timing by the 2026-11-02 re-plan ([§2](../plans/standard-first.md#2-decision-proposed)):* releases
+> 0.1 and 0.2 ship no `adb` and no USB path. Options A and B below apply only from the optional Advanced phase
+> (0.3). A USB link without debugging (Android Open Accessory or NCM USB tethering) is spike S18, before 1.0.
 
 ### Option A — bundle `adb`
 - Google's prebuilt platform-tools are under the Android SDK License (dated Apr 28 2026).
@@ -653,6 +668,7 @@ Verified on this machine by downloading each current release and running `spctl 
 
 **Recommendation: Swift 6 with AppKit for the "hot path" and SwiftUI for the "chrome".**
 - **AppKit:** the mirror `NSWindow`/`NSView` hosting a `CAMetalLayer`, `NSTextInputClient`, event handling, drag sources and destinations, shim apps.
+  - *Superseded by the 2026-11-02 re-plan:* the mirror view hosts an `AVSampleBufferDisplayLayer` by default, with `CAMetalLayer` as the alternative (see the note in [§1 Rendering](#rendering)).
 - **SwiftUI:** settings, onboarding/pairing, the device list, `MenuBarExtra`, notification preferences.
 - **Optional:** a Rust core for the ADB client (UniFFI).
 - **Protocol definitions** shared with Android via schema codegen (protobuf, FlatBuffers or similar). Alternatively Kotlin Multiplatform compiled to a macOS framework (Kotlin/Native); KMP-for-Mac maturity is Unverified.
@@ -702,6 +718,13 @@ Verified on this machine by downloading each current release and running `spctl 
 | 18 | Intel users excluded | Low | Low | Intel Macs are capped at macOS 26 and Apple ends Intel software in macOS 28 |
 | 19 | Bluetooth HFP call-audio routing may not work | Medium | Medium (calls feature) | Prototype `IOBluetoothHandsFreeDevice` early; ship call notifications and controls first, audio later |
 | 20 | Universal Control interferes in pointer-capture mode | Low | Low | Document; no API exists |
+
+> *Superseded in part by the 2026-11-02 re-plan ([§2](../plans/standard-first.md#2-decision-proposed)):* risk 8's
+> mitigation now runs the other way round — `AVSampleBufferDisplayLayer` is the default presenter and Metal the
+> alternative, after spike S2 (see [§1 Rendering](#rendering)). Risks 11 and 12, and the `adb` parts of risk 6,
+> apply only from the optional Advanced phase (0.3). Risks 16 and 17's USB mitigations are unavailable until a
+> USB link without developer options exists (spike S18, before 1.0); until then the phone's hotspot is the
+> fallback.
 
 ---
 

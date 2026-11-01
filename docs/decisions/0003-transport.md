@@ -1,7 +1,7 @@
 # ADR-0003: Transport — QUIC via a shared Rust core, with a TLS/TCP fallback
 
 - **Status:** Proposed — final choice made at the Phase 0 gate (spikes S4, S5)
-- **Date:** 2026-10-25
+- **Date:** 2026-10-25 · amended 2026-11-02 ([below](#amendment-2026-11-02))
 
 ## Context
 Tombolo carries several independent flows at once: input (latency-critical, tiny), one video stream per
@@ -34,3 +34,10 @@ macOS 26+ with an open bug, and it can't run over an adb TCP tunnel. Evidence:
 - Costs ≈ 13 MB native per Android ABI and a Rust toolchain in both builds; CI must publish prebuilt bindings so
   app-only contributors don't need Rust.
 - The same core extends to remote access later (iroh NAT traversal + self-hosted relay).
+
+## Amendment (2026-11-02)
+
+Under the Standard-first re-plan ([ADR-0008](0008-standard-mode-first.md)) 0.1 and 0.2 have **no adb, so no USB
+path**: the decision at the Phase 0 exit gate covers Wi-Fi only. USB returns either through the optional Advanced
+mode (adb, Phase 3) or through spike S18 (a no-debugging USB path, before 1.0); the USB options above are decided
+then. Wi-Fi phone runs of S4/S5 are on the Phase 1 critical path.

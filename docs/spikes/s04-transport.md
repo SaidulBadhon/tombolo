@@ -299,7 +299,7 @@ by the phone runs at the Phase 0 gate, P0-18):
 - **Protocol §4 / §8:** add frame-level flow control (frames in flight, from ReceiverFeedback) to the sender
   rules, and keep "bulk yields to media under pressure", which needs an explicit bulk rate cap.
 - **Estimate impact:** the transport layer needs a choice of congestion controller per path and a
-  rate-capped bulk scheduler. Both are small in tombolo-core, but they should be named tasks in Phase 1a/2.
+  rate-capped bulk scheduler. Both are small in tombolo-core, but they should be named tasks in Phase 1a/2 *(Re-plan 2026-11-02: Phase 1)*.
 - **Re-run the loopback matrix on a quiet Mac** (`SEEDS="1 2 3" ./scripts/s4-run-matrix.sh`, ≈ 25 min, nothing
   else running; `load.log` now records `other_cpu_pct`) before P0-18. Until then every timing here is provisional.
 - Fallback triggered by §0.C: none yet. The Wi-Fi fallback (TLS/TCP per channel, rustls in core) stays live

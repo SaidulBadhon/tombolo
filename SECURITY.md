@@ -31,18 +31,23 @@ otherwise.
 **None yet.** Tombolo has no releases and no application code. This section will list the supported versions
 once the first release (0.1) ships.
 
+Pairing is part of 0.1. It may be implemented behind a feature flag while the external review of the pairing and
+session design is open, but **no release that contains it ships until that review closes**, that is, until every
+finding is resolved or explicitly accepted (maintainer decision, 2026-11-02:
+[ADR-0008](docs/decisions/0008-standard-mode-first.md)).
+
 ## Scope
 
 In scope now:
 
 - the security model and threat model — [architecture §8](docs/architecture.md#8-security-model) and the
   [transport and security research, threat model](docs/research/04-transport-and-security.md#54-threat-model);
-- the pairing and session design being written in Phase 0 (task P0-03) and the
-  [protocol draft](docs/protocol.md);
+- the [pairing and session security specification](docs/security/pairing-and-session.md) (Phase 0 task P0-03, a
+  draft under external review) and the [protocol draft](docs/protocol.md);
 - this repository's tooling and CI ([`tools/`](tools/README.md), [`.github/`](.github/)).
 
-In scope once they exist: the Mac app, the Android app, the Enhanced-mode helper, `tombolo-core`, release
-artifacts and update channels (GitHub Releases, the Homebrew tap, update feeds).
+In scope once they exist: the Mac app, the Android app, `tombolo-core`, the Enhanced-mode helper (optional
+Advanced mode, 0.3), release artifacts and update channels (GitHub Releases, the Homebrew tap, update feeds).
 
 Out of scope:
 
@@ -50,5 +55,8 @@ Out of scope:
   Report it only if the flaw would carry over into the design.
 - Vulnerabilities in upstream projects (scrcpy, `adb`, iroh, Android, macOS) — please report those upstream;
   tell us too if Tombolo is affected.
-- The documented ADB trust model of releases 0.1–0.2, where mirroring runs under ADB's own authorisation
-  ([architecture §8](docs/architecture.md#8-security-model)) — unless you find it is weaker than documented.
+- ADB's own authorisation model. Only the optional Advanced mode (from 0.3) uses ADB, to start the Enhanced-mode
+  helper; no earlier release does. Once Wireless debugging is on, any ADB-authorised controller can drive the phone
+  outside Tombolo's scopes. That is a platform authority Tombolo doesn't control
+  ([architecture §8](docs/architecture.md#8-security-model)). Do report it if Tombolo makes this weaker than
+  documented, for example by leaving debugging on after Advanced mode is turned off.
