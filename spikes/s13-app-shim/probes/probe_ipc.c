@@ -1,13 +1,26 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Probe: which Mach/XPC rendezvous mechanisms work between two processes
 // that were NOT launched by launchd as a job (i.e. ordinary apps)?
 //   probe_ipc xpc-listen  NAME   -> xpc_connection_create_mach_service(LISTENER) in an unmanaged process
 //   probe_ipc xpc-connect NAME   -> client connect + send message, wait for reply
-//   probe_ipc bs-checkin  NAME   -> bootstrap_check_in a dynamic name, receive one mach msg
+//   probe_ipc bs-checkin  NAME   -> bootstrap_check_in a dynamic name, receive one small mach msg
 //   probe_ipc bs-lookup   NAME   -> bootstrap_look_up + send one mach msg
+//   probe_ipc bs-squat    NAME   -> like bs-checkin with a 4 KB buffer; reports what arrived (squatting re-run)
+//
+// Reproducing the IPC table in docs/spikes/s13-app-shim.md (its original terminal output was not kept):
+//   clang -o probe_ipc probe_ipc.c && codesign -fs - probe_ipc
+//   N=io.github.saidulbadhon.Tombolo.spike-s13.probe1
+//   ./probe_ipc xpc-listen $N & sleep 1; ./probe_ipc xpc-connect $N          # listener logs "Connection invalid"
+//   N=io.github.saidulbadhon.Tombolo.spike-s13.probe2
+//   ./probe_ipc bs-checkin $N & sleep 1; ./probe_ipc bs-lookup $N           # check_in 0, send 0, receive 0
+//   ./probe_ipc bs-lookup $N                                                 # after the owner exited: 1102
+//   LaunchAgent variant: a plist with MachServices {N: true} running `probe_ipc xpc-listen N`,
+//   `launchctl bootstrap gui/$UID plist`, then `./probe_ipc xpc-connect N`; `launchctl bootout gui/$UID/<label>`.
 #include <xpc/xpc.h>
 #include <servers/bootstrap.h>
 #include <mach/mach.h>
 #include <dispatch/dispatch.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -54,6 +67,21 @@ int main(int argc, char **argv) {
     msg_t m; memset(&m, 0, sizeof m);
     kr = mach_msg(&m.h, MACH_RCV_MSG | MACH_RCV_TIMEOUT, 0, sizeof m, p, 8000, MACH_PORT_NULL);
     printf("mach_msg receive = %d value=%d\n", kr, m.value); return 0;
+  }
+  if (!strcmp(mode, "bs-squat")) {
+    // Squatting re-run: bs-checkin's buffer is smaller than a shim hello (it got MACH_RCV_TOO_LARGE),
+    // so this mode receives into 4 KB and reports the message instead of only inferring that one arrived.
+    mach_port_t p = MACH_PORT_NULL;
+    kern_return_t kr = bootstrap_check_in(bootstrap_port, name, &p);
+    printf("bootstrap_check_in(%s) = %d (%s) pid=%d\n", name, kr, bootstrap_strerror(kr), getpid()); fflush(stdout);
+    if (kr != KERN_SUCCESS) return 1;
+    union { mach_msg_header_t h; uint8_t bytes[4096]; } buf;
+    memset(&buf, 0, sizeof buf);
+    kr = mach_msg(&buf.h, MACH_RCV_MSG | MACH_RCV_TIMEOUT, 0, sizeof buf, p, 8000, MACH_PORT_NULL);
+    printf("mach_msg receive = %#x msgh_id=%d msgh_size=%u complex=%d reply_right=%s\n", kr, buf.h.msgh_id,
+           buf.h.msgh_size, (buf.h.msgh_bits & MACH_MSGH_BITS_COMPLEX) != 0,
+           buf.h.msgh_remote_port != MACH_PORT_NULL ? "yes" : "no");
+    return kr == KERN_SUCCESS ? 0 : 1;
   }
   if (!strcmp(mode, "bs-lookup")) {
     mach_port_t p = MACH_PORT_NULL;

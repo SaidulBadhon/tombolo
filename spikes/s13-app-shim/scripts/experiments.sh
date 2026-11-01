@@ -260,10 +260,10 @@ security() {
   note "tampered copy exit code $? (4 = rejected)"; note "$(wait_log "$HF" "$h" 'REJECT' 3)"
   note "=== 3. name squatting while the host is down (any same-user process can claim the name)"
   c=$(lines "$CF"); kill -TERM "$(host_pid)"; wait_log "$CF" "$c" 'disconnected' 5 >/dev/null
-  "$ROOT/out/probe_ipc" bs-checkin "$SVC" > /tmp/s13-squat.log 2>&1 &
+  "$ROOT/out/probe_ipc" bs-squat "$SVC" > /tmp/s13-squat.log 2>&1 &
   local sq=$!; sleep 3; kill "$sq" 2>/dev/null; wait "$sq" 2>/dev/null
   note "squatter: $(tr '\n' ' ' < /tmp/s13-squat.log)"
-  note "(mach_msg receive 0 or 268451844 = 0x10004004 MACH_RCV_TOO_LARGE means the waiting shim's hello reached the squatter — the probe's buffer is smaller than a hello; 0x10004003 = timed out = nothing arrived. The hello carries package/version/pid and a send right to the shim's port; the shim sends no input until a CONFIG passes its host check)"
+  note "(bs-squat: receive = 0 with msgh_id=1000 means the waiting shim's hello reached the squatter, reply_right=yes means it also holds a send right to the shim's port. results/security.txt from 2026-10-26 used bs-checkin, whose small buffer got 0x10004004 MACH_RCV_TOO_LARGE: a message arrived and was discarded.)"
   stop_all; rm -rf "$E" /tmp/s13-squat.log
 }
 
