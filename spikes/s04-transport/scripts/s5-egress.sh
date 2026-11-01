@@ -6,10 +6,13 @@
 #   2. lsof + nettop snapshots while the connection is held open (unsandboxed run), which
 #      list every socket, its interface (lo0 / en0) and byte counts.
 # A positive control (iroh's public `presets::N0`) must trip both detectors.
+# Results are committed, so every file written here is passed through scripts/redact.py
+# (global IPv6/IPv4, EUI-64 and MAC addresses replaced by placeholders) before the script ends.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 BIN=./target/release/iroh-probe
 OUT=results/s5
+trap 'python3 -I scripts/redact.py "$OUT"/egress-*' EXIT
 HOLD=${HOLD:-20}
 mkdir -p "$OUT"
 cargo build --release -p iroh-probe >/dev/null 2>&1
