@@ -1,0 +1,17 @@
+== software-timestamp mode: render → composited display ==
+frames 714, decoded 307 (43.00 %)
+capture interval median 8.33 ms (p99 83.33), SCK delivery delay median 0.41 ms, decode median 4085 µs (p99 9725)
+
+[page tag 13 session 8620ee8d]
+  samples (first appearances) 218, repeats 89, negative 0, outliers excluded 0
+  source frame interval median 14.00 ms, source frames not seen 2
+  latency ms: p50 95.98  p95 101.31  p99 108.38   (min 87.30, max 117.47, mean 95.81 ± sd 4.59, n 218)
+  95% bootstrap CI: p50 [95.38, 96.48]  p95 [100.87, 104.08]  p99 [101.50, 116.74]
+  clock: Mac−page 364466740.922 ms, drift -3.5 ± 14.0 ppm, RTT min 2.105 / median kept 3.382 / median all 5.244 ms, 6 windows over 15.5 s
+  systematic uncertainty ±2.32 ms (applies to every percentile):
+    - tick rounding ±0.05 ms
+    - clock sync ±2.05 ms (max RTT/2 of the 6 lowest-RTT windows used; residual 0.21 ms rms)
+    - clock drift -3.5 ± 14.0 ppm (1 SE) → ±0.22 ms over the run (2 SE × half-span)
+    - page timer resolution 0.005 ms → ±0.002 ms
+    - capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)
+wrote /tmp/s02-trial/20261101-232509-metal/{latency.csv,summary.json,summary.txt}

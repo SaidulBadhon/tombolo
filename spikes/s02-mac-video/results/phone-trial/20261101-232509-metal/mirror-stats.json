@@ -1,0 +1,106 @@
+{
+  "device" : "motorola edge 50 pro",
+  "metalDisplayLinkTicks" : 1092,
+  "presenter" : "metal-displaylink",
+  "reason" : "protocol error: video stream ended (server stopped or device disconnected)",
+  "serial" : "<serial>",
+  "serverArguments" : [
+    "scid=6b7067f1",
+    "log_level=info",
+    "audio=false",
+    "max_size=2400",
+    "max_fps=60",
+    "tunnel_forward=true",
+    "clipboard_autosync=false"
+  ],
+  "stats" : {
+    "arrivalJitterMs" : {
+      "max" : 46.39300000667572,
+      "mean" : 20.18925654888153,
+      "min" : 0,
+      "n" : 1072,
+      "p50" : 20.56800001859665,
+      "p95" : 24.26670001745224,
+      "p99" : 25.98866999387741
+    },
+    "configPackets" : 1,
+    "decodeErrors" : 0,
+    "decoded" : 1072,
+    "displayLinkTargetToPresentedMs" : {
+      "max" : 8.315041,
+      "mean" : -0.03409529958677674,
+      "min" : -33.335959,
+      "n" : 484,
+      "p50" : -0.016771,
+      "p95" : -0.0013811500000000013,
+      "p99" : -0.00015271999999999866
+    },
+    "displayLinkTickToPresentedMs" : {
+      "max" : 49.941291,
+      "mean" : 41.5535855661157,
+      "min" : 8.293458,
+      "n" : 484,
+      "p50" : 41.587041,
+      "p95" : 41.622716999999994,
+      "p99" : 41.633820889999996
+    },
+    "displayLinkTickToTargetMs" : {
+      "max" : 41.640292,
+      "mean" : 41.587680865702524,
+      "min" : 41.331416,
+      "n" : 484,
+      "p50" : 41.604917,
+      "p95" : 41.63159995,
+      "p99" : 41.63764228
+    },
+    "enqueued" : 1072,
+    "interArrivalMs" : {
+      "max" : 53.985,
+      "mean" : 17.056327575163376,
+      "min" : 1.075625,
+      "n" : 1071,
+      "p50" : 18.038125,
+      "p95" : 21.2792705,
+      "p99" : 26.817249999999987
+    },
+    "keyFrames" : 2,
+    "megabitsPerSecond" : 1.2243271390752808,
+    "packets" : 1073,
+    "presentDropped" : 12,
+    "presented" : 484,
+    "processCPUCores" : 0.04292343722637028,
+    "receiveToDecodedMs" : {
+      "max" : 53.892958,
+      "mean" : 1.2751247975746272,
+      "min" : 0.767834,
+      "n" : 1072,
+      "p50" : 1.0029789999999998,
+      "p95" : 2.12471005,
+      "p99" : 2.43490518
+    },
+    "receiveToEnqueuedMs" : {
+      "max" : 53.894583,
+      "mean" : 1.2771111557835824,
+      "min" : 0.768,
+      "n" : 1072,
+      "p50" : 1.0041045,
+      "p95" : 2.1289061,
+      "p99" : 2.43914439
+    },
+    "receiveToPresentedMs" : {
+      "max" : 56.171291,
+      "mean" : 47.24683109710745,
+      "min" : 9.925208,
+      "n" : 484,
+      "p50" : 47.333895999999996,
+      "p95" : 50.98772495,
+      "p99" : 51.81259728
+    },
+    "receivedFps" : 58.62926797068273,
+    "seconds" : 18.987715166,
+    "superseded" : 575
+  },
+  "streamingSeconds" : 18.38341200351715,
+  "synthetic" : false,
+  "video" : "1078x2400"
+}

@@ -1,0 +1,14 @@
+s02-mirror: presenter=metal-immediate server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=6d7f240e log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+s02-mirror: streaming from "S2 loopback source" (no adb)
+s02-mirror: video 1080x2400
+s02-mirror: window occlusion state → visible
+stats: 10s fps 60.0 1.88 Mb/s decoded 580 presented 507 superseded 0 | recv→decoded p50 1.22 p95 1.89 | recv→presented p50 24.67 p95 25.89 ms | jitter p95 4.64 ms | cpu 7.9% ticks 0
+s02-mirror: window occlusion state → occluded
+stats: 20s fps 60.0 1.89 Mb/s decoded 1180 presented 803 superseded 0 | recv→decoded p50 1.24 p95 1.85 | recv→presented p50 24.64 p95 25.84 ms | jitter p95 4.63 ms | cpu 6.7% ticks 0 WINDOW-OCCLUDED
+s02-mirror: window occlusion state → visible
+stats: 30s fps 60.0 1.88 Mb/s decoded 1779 presented 1002 superseded 0 | recv→decoded p50 1.26 p95 1.84 | recv→presented p50 24.59 p95 25.99 ms | jitter p95 4.62 ms | cpu 6.2% ticks 0
+stats: 40s fps 60.0 1.88 Mb/s decoded 2378 presented 1602 superseded 0 | recv→decoded p50 1.29 p95 1.89 | recv→presented p50 24.58 p95 26.56 ms | jitter p95 4.79 ms | cpu 6.1% ticks 0
+stats: 50s fps 60.0 1.87 Mb/s decoded 2978 presented 2201 superseded 0 | recv→decoded p50 1.31 p95 1.92 | recv→presented p50 24.26 p95 26.64 ms | jitter p95 4.84 ms | cpu 6.1% ticks 0
+stats: 60s fps 60.0 1.87 Mb/s decoded 3578 presented 2802 superseded 0 | recv→decoded p50 1.32 p95 1.93 | recv→presented p50 23.90 p95 26.89 ms | jitter p95 4.86 ms | cpu 6.0% ticks 0
+stats: 63s fps 60.0 1.87 Mb/s decoded 3761 presented 2985 superseded 0 | recv→decoded p50 1.33 p95 1.93 | recv→presented p50 23.84 p95 26.90 ms | jitter p95 4.85 ms | cpu 6.0% ticks 0
+s02-mirror: exit (signal 15)

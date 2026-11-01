@@ -1,0 +1,14 @@
+== software-timestamp mode: render → composited display ==
+frames 1995, decoded 1995 (100.00 %)
+capture interval median 16.67 ms (p99 33.33), SCK delivery delay median 0.61 ms, decode median 9 µs (p99 61)
+
+[mac tag 5]
+  samples (first appearances) 1761, repeats 234, negative 0, outliers excluded 0
+  source frame interval median 16.70 ms, source frames not seen 38
+  latency ms: p50 48.39  p95 54.04  p99 54.55   (min 42.50, max 64.15, mean 48.44 ± sd 3.98, n 1761)
+  95% bootstrap CI: p50 [46.19, 48.55]  p95 [53.94, 54.16]  p99 [54.48, 59.52]
+  systematic uncertainty ±0.05 ms (applies to every percentile):
+    - tick rounding ±0.05 ms
+    - same clock as the capture (no clock sync needed)
+    - capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)
+wrote /Users/saidulbadhon/Documents/GitHub/tombolo-wt/15-mac-video/spikes/s02-mac-video/runs/loopback/20261101-233019-loopback-metal/{latency.csv,summary.json,summary.txt}

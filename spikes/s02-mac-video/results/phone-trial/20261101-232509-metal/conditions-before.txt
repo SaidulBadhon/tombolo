@@ -1,0 +1,35 @@
+# before — 2026-11-01T17:25:09Z
+mac_loadavg: { 2.96 3.86 3.97 }
+mac_uptime: 23:25  up 11 days, 16:09, 3 users, load averages: 2.96 3.86 3.97
+mac_model: Mac16,8 Apple M4 Pro
+mac_os: 27.0.1 (26A434)
+mac_therm: Note: No thermal warning level has been recorded
+mac_therm: Note: No performance warning level has been recorded
+mac_therm: Note: No CPU power status has been recorded
+mac_batt: Now drawing from 'Battery Power'
+mac_batt:  -InternalBattery-0 (id=24445027)	67%; discharging; 3:03 remaining present: true
+mac_top: Load Avg: 2.97, 3.85, 3.96 
+mac_top: CPU usage: 10.7% user, 13.61% sys, 76.30% idle 
+phone_serial: <serial>
+phone_model: motorola edge 50 pro
+phone_build: W1UMS36H.52-73-10-7 android 16 sdk 36 patch 2026-09-01
+phone_battery_AC powered: true
+phone_battery_USB powered: false
+phone_battery_status: 2
+phone_battery_level: 70
+phone_battery_voltage: 4043
+phone_battery_temperature: 320
+phone_Thermal Status: 0
+phone_temp: Temperature{mValue=32.0, mType=2, mName=battery, mStatus=0}
+phone_temp: Temperature{mValue=41.0, mType=0, mName=CPU0, mStatus=0}
+phone_temp: Temperature{mValue=41.0, mType=0, mName=CPU4, mStatus=0}
+phone_temp: Temperature{mValue=38.8, mType=1, mName=GPU0, mStatus=0}
+phone_temp: Temperature{mValue=33.678, mType=3, mName=skin, mStatus=0}
+phone_temp: Temperature{mValue=33.678, mType=3, mName=skin, mStatus=0}
+phone_stay_on_while_plugged_in: 0
+phone_screen_off_timeout_ms: 120000
+phone_peak_refresh_rate: 144.0 min: 60.0
+phone_low_power: 0
+phone_display: mActiveSfDisplayMode=DisplayMode{id=3, width=1220, height=2712, xDpi=449.101, yDpi=447.303, peakRefreshRate=60.000004, vsyncRate=60.000004, appVsyncOffsetNanos=9166666, presentationDeadlineNanos=11500000, supportedHdrTypes=[4, 2, 3], group=0}
+phone_power: mWakefulness=Awake
+usb: <serial> device usb:1048576X product:eqe_g model:motorola_edge_50_pro device:eqe transport_id:27

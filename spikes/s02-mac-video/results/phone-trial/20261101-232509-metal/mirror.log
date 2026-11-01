@@ -1,0 +1,14 @@
+metal: CAMetalDisplayLink preferredFrameLatency=1.0 range=60.0-120.0 pref 120.0 maximumDrawableCount=3
+s02-mirror: presenter=metal-displaylink server args: CLASSPATH=/data/local/tmp/scrcpy-server.jar app_process / com.genymobile.scrcpy.Server 5.0.1 scid=6b7067f1 log_level=info audio=false max_size=2400 max_fps=60 tunnel_forward=true clipboard_autosync=false
+metal: update 1: targetTimestamp +15.73 ms, targetPresentationTimestamp +32.40 ms from now
+metal: update 2: targetTimestamp +16.64 ms, targetPresentationTimestamp +33.30 ms from now
+metal: update 3: targetTimestamp +16.61 ms, targetPresentationTimestamp +33.27 ms from now
+[server] [server] INFO: Device: [motorola] motorola motorola edge 50 pro (Android 16)
+s02-mirror: streaming from "motorola edge 50 pro" (<serial> usb)
+s02-mirror: video 1078x2400
+metal: update 240: targetTimestamp +8.31 ms, targetPresentationTimestamp +41.64 ms from now
+stats: 11s fps 59.1 1.24 Mb/s decoded 586 presented 484 superseded 89 | recv→decoded p50 0.99 p95 2.18 | recv→presented p50 47.33 p95 50.99 ms | jitter p95 24.24 ms | cpu 6.1%
+[server] [adb shell exited with status 255]
+s02-mirror: session ended: protocol error: video stream ended (server stopped or device disconnected)
+stats: 19s fps 58.6 1.22 Mb/s decoded 1072 presented 484 superseded 575 | recv→decoded p50 1.00 p95 2.12 | recv→presented p50 47.33 p95 50.99 ms | jitter p95 24.27 ms | cpu 4.3%
+s02-mirror: exit (protocol error: video stream ended (server stopped or device disconnected))

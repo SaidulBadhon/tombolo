@@ -1,0 +1,5 @@
+capturing display 1 region (composited): "Tombolo S2 mirror (metal-displaylink) — motorola edge 50 pro" [s02-mirror] 449×1028 pt → 898×2056 px, display max 120 Hz, 20.0 s
+  5 s: 443 frames, 307 decoded
+  10 s: 543 frames, 307 decoded
+  15 s: 615 frames, 307 decoded
+captured 714 frames, 307 decoded → /tmp/s02-trial/20261101-232509-metal/frames.csv

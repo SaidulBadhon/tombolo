@@ -1,0 +1,105 @@
+{
+  "device" : "S2 loopback source",
+  "presenter" : "sbdl",
+  "reason" : "signal 15",
+  "sampleBufferFlushes" : 0,
+  "serverArguments" : [
+    "scid=3c6739a0",
+    "log_level=info",
+    "audio=false",
+    "max_size=2400",
+    "max_fps=60",
+    "tunnel_forward=true",
+    "clipboard_autosync=false"
+  ],
+  "stats" : {
+    "arrivalJitterMs" : {
+      "max" : 75.72800000000001,
+      "mean" : 2.6197727031332967,
+      "min" : 0,
+      "n" : 3766,
+      "p50" : 1.9110000000000005,
+      "p95" : 5.32625,
+      "p99" : 6.205199999999998
+    },
+    "configPackets" : 1,
+    "decodeErrors" : 0,
+    "decoded" : 3766,
+    "displayLinkTargetToPresentedMs" : {
+      "max" : "nan",
+      "mean" : "nan",
+      "min" : "nan",
+      "n" : 0,
+      "p50" : "nan",
+      "p95" : "nan",
+      "p99" : "nan"
+    },
+    "displayLinkTickToPresentedMs" : {
+      "max" : "nan",
+      "mean" : "nan",
+      "min" : "nan",
+      "n" : 0,
+      "p50" : "nan",
+      "p95" : "nan",
+      "p99" : "nan"
+    },
+    "displayLinkTickToTargetMs" : {
+      "max" : "nan",
+      "mean" : "nan",
+      "min" : "nan",
+      "n" : 0,
+      "p50" : "nan",
+      "p95" : "nan",
+      "p99" : "nan"
+    },
+    "enqueued" : 3766,
+    "interArrivalMs" : {
+      "max" : 53.386083,
+      "mean" : 16.66820413891101,
+      "min" : 1.427,
+      "n" : 3765,
+      "p50" : 16.646916,
+      "p95" : 18.830075,
+      "p99" : 20.59285012
+    },
+    "keyFrames" : 7,
+    "megabitsPerSecond" : 1.874386580999232,
+    "packets" : 3767,
+    "presentDropped" : 0,
+    "presented" : 0,
+    "processCPUCores" : 0.03208897790323044,
+    "receiveToDecodedMs" : {
+      "max" : 52.585625,
+      "mean" : 1.556757872543814,
+      "min" : 1.049625,
+      "n" : 3766,
+      "p50" : 1.4475415,
+      "p95" : 2.05236425,
+      "p99" : 2.36801865
+    },
+    "receiveToEnqueuedMs" : {
+      "max" : 53.295167,
+      "mean" : 1.6698890454062658,
+      "min" : 1.08625,
+      "n" : 3766,
+      "p50" : 1.550146,
+      "p95" : 2.238511,
+      "p99" : 2.5790516499999994
+    },
+    "receiveToPresentedMs" : {
+      "max" : "nan",
+      "mean" : "nan",
+      "min" : "nan",
+      "n" : 0,
+      "p50" : "nan",
+      "p95" : "nan",
+      "p99" : "nan"
+    },
+    "receivedFps" : 59.99446561045854,
+    "seconds" : 63.124946083,
+    "superseded" : 0
+  },
+  "streamingSeconds" : 63.08759796619415,
+  "synthetic" : false,
+  "video" : "1080x2400"
+}

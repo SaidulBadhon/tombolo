@@ -1,0 +1,11 @@
+# before — 2026-11-01T17:33:10Z
+mac_loadavg: { 5.39 4.48 4.16 }
+mac_model: Mac16,8 Apple M4 Pro
+mac_os: 27.0.1 (26A434)
+mac_therm: Note: No thermal warning level has been recorded
+mac_therm: Note: No performance warning level has been recorded
+mac_therm: Note: No CPU power status has been recorded
+mac_batt: Now drawing from 'Battery Power'
+mac_batt:  -InternalBattery-0 (id=24445027)	62%; discharging; 1:50 remaining present: true
+mac_top: CPU usage: 7.50% user, 11.28% sys, 81.21% idle 
+# after — loadavg { 5.12 4.52 4.19 }

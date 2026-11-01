@@ -1,0 +1,105 @@
+{
+  "device" : "Synthetic S2 source",
+  "metalDisplayLinkTicks" : 603,
+  "presenter" : "metal-displaylink",
+  "reason" : "duration reached",
+  "serverArguments" : [
+    "scid=2b9de589",
+    "log_level=info",
+    "audio=false",
+    "max_size=2400",
+    "max_fps=60",
+    "tunnel_forward=true",
+    "clipboard_autosync=false"
+  ],
+  "stats" : {
+    "arrivalJitterMs" : {
+      "max" : 46.813,
+      "mean" : 0.8831382978723409,
+      "min" : 0,
+      "n" : 282,
+      "p50" : 0.2355000000000005,
+      "p95" : 1.1874499999999997,
+      "p99" : 19.320759999999968
+    },
+    "configPackets" : 1,
+    "decodeErrors" : 0,
+    "decoded" : 282,
+    "displayLinkTargetToPresentedMs" : {
+      "max" : -0.00175,
+      "mean" : -0.010406047970479712,
+      "min" : -0.019042,
+      "n" : 271,
+      "p50" : -0.010416,
+      "p95" : -0.0026045,
+      "p99" : -0.0019463999999999994
+    },
+    "displayLinkTickToPresentedMs" : {
+      "max" : 41.631459,
+      "mean" : 41.595920690036884,
+      "min" : 41.500917,
+      "n" : 271,
+      "p50" : 41.602625,
+      "p95" : 41.621646,
+      "p99" : 41.6263625
+    },
+    "displayLinkTickToTargetMs" : {
+      "max" : 41.633875,
+      "mean" : 41.6063267380074,
+      "min" : 41.512625,
+      "n" : 271,
+      "p50" : 41.612583,
+      "p95" : 41.627792,
+      "p99" : 41.6301625
+    },
+    "enqueued" : 282,
+    "interArrivalMs" : {
+      "max" : 54.24375,
+      "mean" : 16.652513046263344,
+      "min" : 1.615208,
+      "n" : 281,
+      "p50" : 16.623291,
+      "p95" : 18.696042,
+      "p99" : 21.825274799999995
+    },
+    "keyFrames" : 1,
+    "megabitsPerSecond" : 2.2129334961163547,
+    "packets" : 283,
+    "presentDropped" : 4,
+    "presented" : 271,
+    "processCPUCores" : 0.17842508728340106,
+    "receiveToDecodedMs" : {
+      "max" : 54.1165,
+      "mean" : 1.6229762659574465,
+      "min" : 1.171875,
+      "n" : 282,
+      "p50" : 1.2998745,
+      "p95" : 1.9112273999999998,
+      "p99" : 2.1958315199999996
+    },
+    "receiveToEnqueuedMs" : {
+      "max" : 54.118416,
+      "mean" : 1.6249313156028373,
+      "min" : 1.173375,
+      "n" : 282,
+      "p50" : 1.301729,
+      "p95" : 1.9139875,
+      "p99" : 2.1978664599999997
+    },
+    "receiveToPresentedMs" : {
+      "max" : 51.871334,
+      "mean" : 45.49838765313655,
+      "min" : 43.004208,
+      "n" : 271,
+      "p50" : 44.587042,
+      "p95" : 49.994749999999996,
+      "p99" : 51.2077206
+    },
+    "receivedFps" : 60.050996340422614,
+    "seconds" : 5.051324417,
+    "superseded" : 4
+  },
+  "streamingSeconds" : 5.007670044898987,
+  "synthetic" : true,
+  "video" : "1080x2400"
+}

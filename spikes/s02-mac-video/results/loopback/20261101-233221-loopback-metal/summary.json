@@ -1,0 +1,51 @@
+{
+  "captureIntervalMedianMs" : 16.666584,
+  "captureIntervalP99Ms" : 33.33325,
+  "decodeMicrosMedian" : 11,
+  "decodeMicrosP99" : 5735.120000000003,
+  "decodeRate" : 0.8767720828789531,
+  "deliveryDelayMedianMs" : 0.46087500000000003,
+  "framesDecoded" : 1608,
+  "framesTotal" : 1834,
+  "kinds" : [
+    {
+      "excludedOutliers" : 0,
+      "kind" : "mac",
+      "latencyMs" : {
+        "max" : 65.58320796489716,
+        "mean" : 48.30302375340281,
+        "min" : 42.6399160027504,
+        "n" : 1582,
+        "p50" : 48.11854147911072,
+        "p50CI" : [
+          48.091499507427216,
+          48.148939587175846
+        ],
+        "p95" : 52.34811452925205,
+        "p95CI" : [
+          52.27108299732208,
+          52.57420802116394
+        ],
+        "p99" : 56.564607236981395,
+        "p99CI" : [
+          56.228465698361404,
+          57.1665155313313
+        ],
+        "sd" : 2.502201556470628
+      },
+      "negativeSamples" : 0,
+      "repeats" : 26,
+      "samples" : 1582,
+      "sessionTag" : 5,
+      "sourceFramesSkipped" : 37,
+      "sourceIntervalMedianMs" : 16.69999998807907,
+      "systematicUncertaintyMs" : 0.05,
+      "uncertaintyNotes" : [
+        "tick rounding ±0.05 ms",
+        "same clock as the capture (no clock sync needed)",
+        "capture time = ScreenCaptureKit display time of the composited frame (vsync-quantised; a frame skipped by the capture delays first appearance by one capture interval)"
+      ]
+    }
+  ],
+  "mode" : "software-timestamp"
+}
