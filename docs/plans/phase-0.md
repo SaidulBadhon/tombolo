@@ -105,7 +105,7 @@ Merged to `main` on 2026-11-02. Tasks not listed here have not started.
 | Task | PR | Status | Result |
 |---|---|---|---|
 | P0-01, P0-02 | [#1](https://github.com/SaidulBadhon/tombolo/pull/1) | done | [`spikes/README.md`](../../spikes/README.md), [spike template](../spikes/TEMPLATE.md), governance files |
-| P0-03 | [#2](https://github.com/SaidulBadhon/tombolo/pull/2) | **draft, awaiting external review** (M4); complete only once the review closes | [pairing & session design](../security/pairing-and-session.md) |
+| P0-03 | [#2](https://github.com/SaidulBadhon/tombolo/pull/2) | **draft, awaiting external review** (M4: request posted as [issue #10](https://github.com/SaidulBadhon/tombolo/issues/10), 2026-11-02); complete only once the review closes | [pairing & session design](../security/pairing-and-session.md) |
 | P0-04 | [#3](https://github.com/SaidulBadhon/tombolo/pull/3) | **harness ready** (software-timestamp mode); end-to-end validation pending, now on S17 (P0-19); optical acceptance open (no camera) | [S1](../spikes/s01-latency-harness.md) |
 | P0-10 | [#4](https://github.com/SaidulBadhon/tombolo/pull/4) | done, with **blocked rows**: denied-state behaviour, Accessibility and launch-at-login persistence | [S8 Mac](../spikes/s08-macos-local-network.md), [S15](../spikes/s15-update-persistence.md) |
 | P0-12 | [#5](https://github.com/SaidulBadhon/tombolo/pull/5) | **Swift half** done (timings provisional, loaded Mac); Keystore half, 30-minute soak, quiet re-run and Touch ID run outstanding | [S10](../spikes/s10-uniffi.md) |

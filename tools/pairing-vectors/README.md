@@ -5,7 +5,7 @@ Deterministic generator for the pairing and session test vectors in
 [`docs/security/pairing-and-session.md`](../../docs/security/pairing-and-session.md) from fixed inputs, so both
 apps (and `tombolo-core`) can be tested byte-for-byte against the same expectations.
 
-**Status:** Phase 0 (task P0-03). The specification is a draft, awaiting external review (request not sent, M4);
+**Status:** Phase 0 (task P0-03). The specification is a draft, awaiting external review ([issue #10](https://github.com/SaidulBadhon/tombolo/issues/10), M4);
 the vectors change whenever the specification does.
 
 ## Commands

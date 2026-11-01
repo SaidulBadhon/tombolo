@@ -1,10 +1,9 @@
 # External review request — pairing and session design
 
-> **Status: not yet sent.** Prerequisite M4 of the Phase 0 plan: the maintainer chose a **public** review
-> request. After this file is merged, post everything below the line as a new GitHub issue titled
-> **"Request for review: pairing and session security design"** (label `security-design`), then change this
-> status line to the issue's URL. The issue body uses absolute links, because relative links do not resolve in
-> issues.
+> **Status: sent 2026-11-02** as [issue #10](https://github.com/SaidulBadhon/tombolo/issues/10) (label
+> `security-design`). Prerequisite M4 of the Phase 0 plan: the maintainer chose a **public** review request. The issue
+> body is everything below the line; it uses absolute links, because relative links do not resolve in issues. Later
+> revisions of the specification are linked from the issue.
 
 ---
 
